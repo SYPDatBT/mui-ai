@@ -11,10 +11,11 @@ user_invocable: true
 
 # 3-step-review — Review 3 vòng tài liệu knowledge base
 
-Bốn tiêu chí xuyên suốt (user đặt ra, không thương lượng): **① chi tiết của dẫn chứng ・ ② chính xác
-・ ③ xác thực ・ ④ dễ hiểu cho người mới vào dự án đọc lần đầu.** Quy trình kế thừa tinh thần checklist
-`requirements/README.md` §8 và tổng quát hóa cho mọi tài liệu KB; đúc kết từ các lần review báo cáo
-batch 2026-08-04.
+Năm tiêu chí xuyên suốt (user đặt ra, không thương lượng): **① chi tiết của dẫn chứng ・ ② chính xác
+・ ③ xác thực ・ ④ dễ hiểu cho người mới vào dự án đọc lần đầu ・ ⑤ TỰ CHỨA — tuyệt đối không bắt
+người đọc tra ngược nội dung** (checklist 10 điểm ở Vòng 3; quy tắc gốc = ⛔#10 trong `memory/00_INDEX.md`).
+Quy trình kế thừa tinh thần checklist `requirements/README.md` §8 và tổng quát hóa cho mọi tài liệu KB;
+đúc kết từ các lần review báo cáo batch 2026-08-04 và chỉ đạo tự-chứa 2026-08-06.
 
 **Quy ước chung**: mọi đường dẫn trong skill này tính từ **gốc workspace `eminel_gw_onboarding/`**
 (thư mục chứa `AGENTS.md`), không tính từ thư mục skill. Mọi trao đổi với user và findings viết bằng
@@ -65,6 +66,9 @@ batch 2026-08-04.
    rõ khi báo user. Tối đa 2 lượt sửa-rồi-review-lại; sau đó còn finding [cao] chưa xử được → dừng,
    nêu cho user quyết.
 5. KHÔNG sửa bất kỳ file nào trong `../sources/` khi review. KHÔNG push git khi user chưa yêu cầu.
+6. **Findings lặp lại cùng loại hoặc mang tính hệ thống** (lỗ hổng của template/quy trình chứ không phải
+   của riêng tài liệu) → KHÔNG vá lẻ: chuyển qua skill `analyze-change-request` để phân tích và đề xuất
+   sửa GỐC (TEMPLATE/skill/⛔) rồi mới áp xuống tài liệu (⛔#11).
 
 ## 2. Ba vòng — nội dung từng vòng
 
@@ -102,6 +106,9 @@ chữ thay thế cụ thể** (không chỉ "nên sửa").
 - **Cơ học markdown**: đếm cặp ``` (fence đóng đủ), khối code không nằm trong ô bảng, bảng meta/HEAD
   đầu file khớp mục Nguồn cuối file.
 - Mục "Cách đọc"/mục lục mô tả cấu trúc có khớp cấu trúc thật không.
+- Tài liệu thuộc loại **báo cáo điều tra** → kiểm tuân thủ cấu trúc `skillAI/create-investigation-report/TEMPLATE.md`
+  (2 PHẦN, đúng thứ tự mục, KẾT LUẬN blockquote đầu file, đủ các mục bắt buộc §1–§11, mục lục anchor,
+  JP↔VN khớp 1-1) — thiếu mục hoặc đảo thứ tự = finding [cao].
 - Riêng tài liệu đích là `requirements/onboarding_guide.md` → chạy KÈM nguyên checklist §8-Vòng-2
   của `requirements/README.md` (đối chiếu bộ khung: đủ chương/phụ lục, 6 nguyên tắc, 6 loại box,
   bảng ảnh, mục Kiểm tra nhanh).
@@ -119,6 +126,27 @@ chữ thay thế cụ thể** (không chỉ "nên sửa").
   ✅=劣後…) — đã có câu chặn chưa.
 - Nêu finding CÓ CHỌN LỌC — chỉ cái thật sự cản trở hiểu; ưu tiên gloss tại chỗ 3–7 chữ thay vì
   phình mục chú giải.
+- **Checklist TỰ CHỨA (⛔#10 — user chốt 2026-08-06, kiểm TỪNG điểm, không thương lượng)**:
+  1. Mã hiệu (CLD-xx, IF-NN, IF 4 số, SVC-xx, F-ES-xx, spec [G]/[I], mã 契約種別, tên QA…) có chú giải
+     tại chỗ ở **MỖI lần xuất hiện**, nội dung gloss theo ngữ cảnh lần đó?
+  2. Mọi con trỏ tham chiếu (§x, #N, "việc ngay #N", 付録, cột 関連/Liên quan) có kèm tóm tắt nội dung
+     đích ngay tại chỗ?
+  3. Bước làm có ghi code đến **từng layer/từng file** (đường dẫn thật, đã kiểm tồn tại)?
+  4. Mỗi bước có dòng "*Vì sao*/理由" giải thích lý do chọn cách đó?
+  5. Phán định có nói rõ **BỎ gì – GIỮ gì – THAY bằng gì** cho người thường hiểu ngay (cấm nhãn cụt)?
+  6. Luồng xử lý có đi từ code xuống **tận database** (bảng đích: `TABLE_*` e-smart / bảng PostgreSQL hệ cũ,
+     xác minh bằng grep)? Kênh dữ liệu/IF được nhắc đến có **bảng chi tiết**: nguồn gốc → trường chính
+     (lấy từ interface/schema trong code — nguồn 一次, đối chiếu tài liệu khảo sát) → bảng đích → tác dụng
+     nghiệp vụ 1 câu?
+  7. Có **bảng đối chiếu tương quan hệ cũ ↔ hệ mới**?
+  8. Luồng chính VÀ **từng batch trong phần chi tiết** có **sơ đồ ASCII trong code block** (sơ đồ luồng
+     HỆ CŨ + sơ đồ luồng HỆ MỚI đề xuất), kèm **trích code then chốt 3–8 dòng** đã kiểm nguyên văn?
+     (Không viết luồng thành đoạn văn đặc.)
+  9. Mỗi batch/chức năng trong phần chi tiết theo **template chuẩn (kết luận trước)**: Mục đích (1–2 câu
+     tiếng người thường) → **Đề xuất BỎ–GIỮ–THAY đặt ngay đầu mục + khối "Vì sao đề xuất vậy" (3–4 gạch
+     lý do)** → sơ đồ luồng CŨ + trích code → chi tiết hệ cũ (bullet) → e-smart/E-GW yêu cầu → sơ đồ luồng
+     MỚI → cách làm từng bước (code + Vì sao) → kiểm thử?
+  10. Bố cục khoa học: heading con/bullet/bảng, đoạn ≤ ~5 dòng — viết cho NGƯỜI đọc, không phải cho máy?
 
 ### 2.4 Trình findings & duyệt
 
@@ -148,26 +176,21 @@ chữ thay thế cụ thể** (không chỉ "nên sửa").
 ⚠️ Các bảng dưới là **snapshot** để nhận diện nhanh — nếu lệch với bảng 「Repo đối chiếu」
 trong chính tài liệu thì **tin tài liệu**; review xong phải cập nhật lại bảng này (mục 3).
 
-### 4a. Bản tiếng Nhật báo cáo batch (review gần nhất: 2026-08-05)
+### 4a. Bộ báo cáo batch tách 3 tập — thế hệ v4 (review gần nhất: 2026-08-06)
 
 | | |
 |---|---|
-| File | `submit_folder/2026_08_05/旧EMINELバッチ移行判定報告書_3グループ11本.md` — bản JP cho mui của báo cáo batch: cùng nội dung phán định với bản VN, bố cục 結論先出し, không dán khối code (chỉ 🔍 ref), 対応ステップ đánh số khớp bản VN |
-| Cần repo | như bản VN (bảng 4b) — cùng 5 nguồn, cùng HEAD kỳ vọng |
-| Trạng thái lần review cuối (2026-08-05) | Lượt 1: workflow 8 agent (5 xác thực + 2 nhất quán/fidelity-VN + 1 văn phong JP) → 33 findings sau dedup, vá hết (2 [cao]: ゆ抜く→「ゆーぬっく」 theo `backend constants.ts:1065`; bỏ vế 「共通デプロイ」 vượt nguồn khỏi 要旨 QA 管理画面). Lượt 2 thu hẹp: 3 agent → 13 findings nhỏ, vá hết; grep tàn dư 0 hit. Fidelity với bản VN: 11 phán định + toàn bộ con số khớp 100% |
-| Điểm kiểm đặc thù nếu review lại | ① 4 điểm của bảng 4b áp dụng y nguyên; ② JP đã sửa 6 điểm nội dung mà **bản VN còn dính** (ゆ抜く→ゆーぬっく ・ Node 20→nodejs24.x + 付録A=6点 ・ 4/19 cron advice thông năm ・ DR start/end schedule đăng ký lúc 配信完了 chứ không phải lúc admin tạo ・ #6 chỉ nạp lại 7 loại 契約種別 ・ emn_confirm append-only) — so JP↔VN thấy lệch các chỗ này thì **JP đúng**; ③ 質問表 đang 送付前 — khi đã gửi khách, sửa các chỗ 「（送付前）」; ④ F-ES-10 tên chính thức = 「Xzilla連携」 (v1.2:415) |
-
-### 4b. Báo cáo batch bản VN (review gần nhất: 2026-08-04)
-
-| | |
-|---|---|
-| File | `submit_folder/2026_08_04/report_batch_3nhom_doichieu_esmart_egw.md` |
-| Cần repo | đủ 5 nguồn ở mục 0-3a; HEAD kỳ vọng: `eminel_gw_project@788b438` (main) ・ `legacy_eminel_docs@ccd8f56` (main) ・ backend@`dc39aa39` (`gw-syp-dev`) ・ web-admin@`e550326` (`gw-syp-dev`) ・ app = snapshot không mốc |
-| Trạng thái lần review cuối (2026-08-04) | Vòng 1: 16/16 khối code khớp nguyên văn (kiểm tới shell trong `10_バッチ処理/…tgz`); vòng 2–3: findings đã vá hết. Các grep-0-hit lần đó tái hiện được nhưng **không lưu vết lệnh** — lần review sau tự chạy lại từ đầu |
-| Điểm kiểm đặc thù nếu review lại | ① 3 trang QA Notion trích trong §7 đang 回答中 — mở trang gốc xem đã 回答済 chưa, nội dung đổi → sửa §1/§2 liên quan; ② branch `gw-syp-dev` 2 repo e-smart lúc đó CHƯA có commit E-GW — có commit mới thì §2 "bắt đầu từ 0" phải viết lại; ③ các điểm treo CLD-06/CLD-07/[I]/SVC-03 — chốt cái nào thì mục tương ứng cập nhật theo; ④ 5 điểm tài-liệu-khảo-sát-lệch-code ở mục Giới hạn — nếu `docs/eminel-smart/` được sửa thì bảng đổi theo |
+| File | **`submit_folder/2026_08_06/new/` — 6 file v4 theo `create-investigation-report/TEMPLATE.md`** (bản chuẩn hiện hành, chờ Codex review ngoài): cặp JP+VN × 3 nhóm theo 3 task Notion (外部連携・受信系（Xzilla取込） 3本 #5–#7 ・ 配信・通知系 4本 #1–#4 ・ CSV・ZIPエクスポート系 4本 #8–#11). Thế hệ trước nằm ở `submit_folder/2026_08_06/` (gốc dữ kiện đã kiểm — không sửa ngược); 2 báo cáo gộp 08-04/08-05 cũng giữ nguyên. Số batch #1–#11 xuyên suốt. LƯU Ý chủ ý (để reviewer sau khỏi báo nhầm): ① JP v4 trích query #1 theo range `:83-104` đồng bộ VN (JP thế hệ trước dùng `:89-100` — cả 2 đều đúng repo); ② câu hỏi /EST bản đầy đủ chỉ nằm ở tập Xzilla §3, 2 tập kia trỏ về ("hỏi 1 lần chung"); ③ 配信 §9 bỏ mục có ghi chú, CSV §6 viết gộp 4 batch — đều hợp lệ template |
+| Cần repo | đủ 5 nguồn mục 0-3a; HEAD kỳ vọng: `eminel_gw_project@fbc0af0` (main — điều tra gốc tại `788b438`; file nhóm Xzilla/CSV trích không đổi giữa 2 commit, nhóm 配信 đã cập nhật số dòng B05/D03 theo fbc0af0) ・ `legacy_eminel_docs@ccd8f56` (main) ・ backend@`dc39aa39` (`gw-syp-dev`) ・ web-admin@`e550326` (`gw-syp-dev`) ・ app = snapshot không mốc |
+| Trạng thái lần review cuối (2026-08-06, bộ v4) | 3 reviewer độc lập (1/cặp) chạy đủ 3 vòng + tuân thủ TEMPLATE v4: **Xzilla** 28 điểm spot-check + grep phủ định tái hiện 100% — 1 [cao] (path v1.2 ghi nhầm `1_product/`) + 2 [vừa] + 6 [thấp], vá hết; **配信・通知系** 25+ spot-check + 3 con số tự đếm (105/81/3) xác nhận — 2 [vừa] ("still" sót trong heading JP; rơi kết luận 集計・計算系) + 5 [thấp], vá hết; **CSV/ZIP** 22 spot-check — 4 [vừa] (rơi mục 使い続け; mã nội bộ lọt blockquote gửi khách; "still"; trỏ chéo §7→§7.6) + 4 [thấp], vá hết. Quét cuối toàn bộ 6 file: fence chẵn (16/34/46 ×2), tàn dư (`1_product/00_integrated`, " still ", mã nội bộ trong blockquote khách) = 0. Thế hệ trước (2026_08_06 gốc) từng qua: Xzilla 4-agent + 3 vòng kiểm tuân-thủ; CSV bắt 1 [cao] 前月→**前々月** |
+| Điểm kiểm đặc thù nếu review lại | ① 3 trang QA Notion vẫn 回答中 (tham chiếu 08-04) — mở trang gốc trước khi trích lại; ② baseline số bước 対応ステップ mới (kiểm thử = bước cuối theo template): #1=5・#2=6・#3=5・#4=6・#5=4・#6=4・#7=6; ③ `handleControlDevice` là hàm local của `batch-start-dr/app.ts:81`, lõi thật là `business-logic/control-device.ts` (4 nhánh SERVER_TYPE) — đừng sửa ngược theo cách viết cũ; ④ các điểm treo CLD-06/CLD-07/spec [G]/[I]/SVC-03 — chốt cái nào thì mục tương ứng cập nhật; ⑤ 6 điểm lệch tài liệu khảo sát ESTA phân bổ theo tập (Xzilla 5 ・ 配信 3 ・ CSV 3 — có trùng nhau); ⑥ 質問表 đang 送付前 — khi gửi khách rồi, sửa các chỗ 「（送付前）」 |
 
 ## Liên hệ skill khác
 
+- `create-investigation-report` — nơi sống của TEMPLATE.md v4 (nguồn sự thật duy nhất về cấu trúc báo cáo
+  điều tra); Vòng 2 kiểm tuân thủ theo file đó.
+- `analyze-change-request` — findings hệ thống/lặp lại đi qua đây để sửa gốc thay vì vá lẻ (⛔#11);
+  yêu cầu sửa của user trong lúc review cũng vậy.
 - `update-memory` — chốt phiên sau khi review/sửa xong.
 - `notion-connect` — khi cần mở lại trang QA Notion kiểm trạng thái 回答中/回答済.
 - `../sources/eminel_gw_project/.claude/skills/fact-check` — kiểm chứng một khẳng định đơn lẻ

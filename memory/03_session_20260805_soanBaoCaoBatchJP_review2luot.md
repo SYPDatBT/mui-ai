@@ -1,5 +1,6 @@
 # SESSION 2026-08-05 (sáng→trưa) — Soạn bản tiếng Nhật báo cáo batch cho mui + review 2 lượt
-> Đọc SAU `00_INDEX.md`. ⭐ TRẠNG THÁI MỚI NHẤT (chưa có file nào thay).
+> ⛔ TRẠNG THÁI ĐÃ LỖI THỜI (2026-08-06) — xem `04_session_20260806_tach3tap_templateV4_boSkillMoi.md`
+> (báo cáo gộp 11 batch đã được tách thành 3 tập; repo dự án đã lên `fbc0af0`).
 
 ## 1. Bối cảnh & mục tiêu phiên
 
