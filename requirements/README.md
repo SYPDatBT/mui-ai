@@ -6,8 +6,8 @@
 | | |
 |---|---|
 | Ngày lập | 2026-08-03 |
-| Đối chiếu với repo | `eminel_gw_project` bản ngày 2026-08-03 — commit `788b438` |
-| Cập nhật gần nhất | 2026-08-04 — sửa lỗi theo review + cập nhật section B6 mới |
+| Đối chiếu với repo | `eminel_gw_project` commit `460c671` (2026-08-06) |
+| Cập nhật gần nhất | 2026-08-12 |
 | Người dùng cuối của tài liệu | Người **mới vào dự án**, có thể **mới học IT**, phía SYP hoặc mui Lab |
 | Vị trí | thư mục `eminel_gw_onboarding\` đặt **cạnh** (ngoài) repo dự án. Bản gốc soạn tại `D:\SYP_Home\mui\eminelGW\`, hiện tại: `c:\Users\BuiTrongDat.AzureAD\Documents\mui\eminel\` |
 
@@ -38,7 +38,8 @@ requirements/                  ← bộ tài liệu mà khung này quản
     ├── 01_architecture/       ← ảnh copy từ docs/eminel/3_requirements/images/
     ├── 02_business_flow/      ← ảnh copy từ docs/eminel/1_product/11_business_process/captures/
     ├── 03_legacy_app/         ← ảnh copy từ docs/old_eminel/app/screens/
-    └── 04_diagrams/           ← (HIỆN TRỐNG) dành cho sơ đồ tự vẽ dạng ảnh
+    └── 04_diagrams/           ← (CHƯA TẠO) chỗ dành sẵn cho sơ đồ tự vẽ dạng ảnh,
+                                  nếu sau này cần; hiện guide vẽ sơ đồ bằng ASCII trong code block
 ```
 
 > Phạm vi file này chỉ là `requirements/`. **Cấu trúc toàn workspace** (memory/, skillAI/, sources/…):

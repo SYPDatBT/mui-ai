@@ -16,7 +16,8 @@
 5. **Sửa tài liệu xong PHẢI chạy review theo `requirements/README.md` §8 (3 vòng)** — kể cả "sửa nhỏ". Đợt 08-04 vòng review
    sau-sửa bắt được 13 lỗi do chính đợt sửa để sót (tàn dư "22 section", câu dẫn "Hai câu" khi đã 4 câu…).
 6. **Đường dẫn khi fact-check**: `eminel_gw_project/...` trong tài liệu = `<SOURCES>/eminel_gw_project/...`
-   (mặc định `../sources/`). Số dòng ứng với commit ghi ở đầu guide — hiện `788b438` (2026-08-03).
+   (mặc định `../sources/`). Số dòng ứng với **commit ghi ở bảng meta đầu guide** (dòng 10) — đọc ở đó,
+   đừng nhớ theo memory. Tài liệu khác (báo cáo điều tra) khai mốc riêng ở bảng 「Repo đối chiếu」 của chính nó.
 7. **CẤM ghi token** (Notion/Slack/API) vào memory, log, output — hỏi user mỗi lần.
 8. **Trích QA/Notion phải bám NGUYÊN VĂN + đủ định danh.** (Lỗi đã mắc 08-04: biến 「基本的には独立…方向」+vế ただし
    thành "không chung component" — diễn giải vượt nguồn; ghi "takahashi" trần gây nhầm với 高橋 phía 北ガス.)
@@ -48,13 +49,17 @@
 ---
 
 ## 🎯 TIẾN ĐỘ — HỎI "LÀM ĐẾN ĐÂU / HÔM NAY LÀM GÌ" LÀ ĐỌC Ở ĐÂY
-> Cập nhật lần cuối: **2026-08-06 (tách báo cáo 3 tập + template v4 + bộ skill mới)** (chi tiết + việc dở dang: file ⭐ dưới bảng).
+> Cập nhật lần cuối: **2026-08-12 (guide v1.2 theo `460c671` + review 6 agent)** (chi tiết + việc dở dang: file ⭐ dưới bảng).
 
-**[08-06] Trạng thái mới nhất:**
-- Khách break task Notion thành **3 task riêng** → báo cáo batch tách thành **3 tập × JP+VN**. **Bản DÙNG = `submit_folder/2026_08_06/new_2/`** (bản ngắn, trích dẫn full path, sơ đồ luồng + đối chiếu cũ↔mới). `new/` (bản v4 đầy đủ, đã review độc lập) và `2026_08_06/` gốc giữ làm vết — không sửa ngược.
-- `eminel_gw_project` pull **`788b438` → `fbc0af0`** (6 commit, chỉ đụng `3_requirements/app/` 13 file + 1 dòng skill). Nhóm Xzilla/CSV không ảnh hưởng; nhóm 配信 đã cập nhật số dòng B05/D03. **C1–C5 nay đều 「レビュー済」**; B02 bỏ 設定値運転 → 室温制御の有無 + 温度レベル; B06 viết lại đầy đủ.
-- **Bộ skill mới**: `create-investigation-report` (TEMPLATE v4 — nguồn sự thật về cấu trúc báo cáo điều tra) ・ `analyze-change-request` (⛔#11) ・ `3-step-review` cập nhật (tiêu chí ⑤ tự chứa + checklist 10 điểm + baseline v4).
-- `requirements/self_study_plan.md` (MỚI): kế hoạch tự học 4 hạng mục SYP đối ứng (server E-GW ・ batch+liên kết ngoài ・ 管理画面 ・ app).
+**[08-12] Trạng thái mới nhất:**
+- **3 tập báo cáo batch ĐÃ NỘP cả 3** (hạn 14/08). Bản dùng = `submit_folder/2026_08_06/new_2/`. ⚠️ Thư mục `new/` (thế hệ 2 v4) **không còn trên đĩa** — chưa rõ cố ý hay nhầm; baseline mục 4 của skill `3-step-review` vẫn đang trỏ vào đó.
+- `eminel_gw_project` pull **`fbc0af0` → `460c671`** (chỉ E02/E03 của app). **`onboarding_guide.md` → v1.2**, đối chiếu `460c671`: viết lại §5.5 (設定値運転 bị gỡ → 室温制御の有無 + 温度レベル), §5.6 (基本制御 → 冷房スケジュール中), §7.3 (bảng 23 section theo ステータス/劣後 đối khách, C1–C5 レビュー済, thêm mục B6), Phụ lục B.3/B.4, §0.3 (hai mốc kiểm).
+- **Review 6 agent (⛔#5): 142 findings.** Guide đã vá hết (fence chẵn, 94 anchor/0 hỏng, 0 tàn dư). **`new_2/` còn 78 findings CHƯA vá — chờ user quyết** (4 [cao], đã có sẵn câu chữ thay thế).
+- **3 phát hiện lật giả định** (chi tiết file ⭐): ① hệ cũ CÓ chiều gửi SFTP Xzilla (`PutLogFileCommand`, cron 00:00) → củng cố giả thuyết đích `/EST` ② spec [I] còn giữ 4 bảng của batch #5–#7 làm loại download nội bộ ③ **e-smart CÓ bảng tích luỹ `TABLE_DEVICE_*_HISTORY`** → kết luận "集計・計算系 không có gì dùng lại" phải xem lại trước khi điều tra.
+- Bộ skill: `create-investigation-report` (TEMPLATE v4) ・ `analyze-change-request` (⛔#11) ・ `3-step-review` ・ `notion-connect` ・ `slack-connect` ・ `update-memory`.
+- **[08-12 đợt 2] Bộ 4 batch `CSV/ZIPエクスポート系` theo FORMAT MỚI** → `submit_folder/2026_08_12/` (8 file: 4 batch × JP+VN). Format do user chỉ đạo, khác TEMPLATE v4: **1 batch = 1 file, chỉ điều tra hệ CŨ**, phán định để ở `requirements/summary_batch_migration_ja.md` (đã điền 4 dòng, chừa cột link Notion). Mẫu tham chiếu: `legacy-batch_CalcTenMinutesSensor_ja.md` của thành viên khác.
+- **Bài học quy trình lớn nhất phiên này**: vá findings **theo FILE** làm vỡ tính nhất quán (lượt review 2 sinh thêm 50 findings, 14 [cao], trong đó 3 lỗi sai sự thật MỚI). Cách đúng = **vá theo KHỐI** (1 bản chuẩn/khối → viết lại toàn bộ file → `grep -c` + `diff` chứng minh đồng nhất). Chi tiết file ⭐ mục 8.3.
+- `requirements/self_study_plan.md`: kế hoạch tự học 4 hạng mục — **hạng mục 1 mới xong bước 1** (§8-3 F-ES của v1.2).
 
 **Đã xong (tích lũy):** bộ tài liệu học v1.1 (10 chương + 7 phụ lục, đối chiếu `788b438`, đã qua review nhiều vòng)
 ・ `qa_kitagas.md` (8+4 câu; **câu 1 đã đăng QAデータベース Notion, có trả lời tạm của mui: badge ngoài scope 2026, 回答中**)
@@ -72,10 +77,10 @@ và viết lại; CLAUDE.md mục SOURCES đã cập nhật 4 repo git + 1 snaps
 ・ **[08-05] Bản tiếng Nhật báo cáo batch cho mui**: `submit_folder/2026_08_05/旧EMINELバッチ移行判定報告書_3グループ11本.md` — bố cục 結論先出し, bỏ khối code (thay 🔍 ref), 対応ステップ đánh số khớp bản VN để đọc song song; review 2 lượt `3-step-review` (8+3 agent), vá 46 findings; **phát hiện 6 điểm nội dung bản VN còn dính** (ゆ抜く→ゆーぬっく, Node 20→24, 4/19 cron thông năm, DR schedule lúc 配信完了, #6 chỉ 7 loại 契約種別, emn_confirm append-only — chi tiết session 03 mục 3); 付録A = 6 điểm lệch tài liệu khảo sát.
 
 **Việc tiếp theo (theo thứ tự):**
-0. **Nộp + trình bày tập Xzilla** (`new_2/`), rồi 2 tập còn lại trước hạn **14/08**; kiểm 3 trang QA Notion xem đã 回答済 chưa trước khi trích lại.
-0b. **Điều tra tiếp ~35/46 batch còn lại** — ưu tiên nhóm **集計・計算系** (dự kiến nặng nhất; e-smart không có gì dùng lại). Dùng skill `create-investigation-report`.
-0c. **Cập nhật `onboarding_guide.md` theo `fbc0af0`**: guide 7.3 theo B06 mới, rà mục trích B02/B05/D03/A01/B01, sửa chỗ ghi "23/23 section chưa chốt" (nay C1–C5 đã レビュー済).
-0d. Bắt đầu **`requirements/self_study_plan.md`** (thứ tự hạng mục 1 → 2 → 3 → 4).
+0. **Quyết định về 78 findings của `new_2/`**: vá vào bản đã nộp hay chỉ áp bài học cho tập sau. Kèm: xác nhận số phận thư mục `new/` → sửa baseline `3-step-review` mục 4.
+0b. **Điều tra tiếp ~35/46 batch còn lại** — nhóm **集計・計算系**. ⚠️ **Trước khi bắt đầu phải kiểm lại 3 bảng `TABLE_DEVICE_{MONTHLY,DAILY,ACCUMULATED}_*_HISTORY`** (`template-dynamodb.yaml:105-111`): giả định cũ "e-smart không có gì dùng lại" đã bị code bác bỏ. Dùng skill `create-investigation-report`.
+0c. ✅ Xong 08-12: guide v1.2 theo `460c671` (đã review 3 vòng + vá findings).
+0d. **`requirements/self_study_plan.md`** — hạng mục 1 tiếp bước 2–6; đồng thời sửa mục "集計・計算系 e-smart không có gì dùng lại" theo phát hiện 08-12.
 1. **Trả lời vế ただし của QA 独立デプロイ trên Notion** — danh sách "chức năng nên dùng tiếp": hệ cũ = không có;
    ESTA = push/point-PI/Xzilla-import/data-export (xem báo cáo batch §1; xác nhận trước nghĩa 「既存システム」).
 2. Chốt nội bộ với **kihara** về Q5 (GW giữ trạng thái DR — báo cáo batch #4 cũng treo vào đây) → gửi `qa_kitagas.md`
@@ -100,4 +105,5 @@ và viết lại; CLAUDE.md mục SOURCES đã cập nhật 4 repo git + 1 snaps
 | `01_session_20260803_04_soanTaiLieu_review_fix_reorg.md` | [2026-08-03→04 sáng] Soạn guide v1.0 → review 13 agent → phát hiện repo local cũ & pull `788b438` → sửa toàn diện v1.1 → qa 8+4 câu → skill notion/slack → tái tổ chức AGENTS folder |
 | `02_session_20260804_qaNotion_capNhatTaiLieu_baoCaoBatch.md` | [2026-08-04 chiều→tối] 5 QA Notion đầu → cập nhật guide/qa_kitagas + review §8 (21 findings) → báo cáo phán định 11 batch (điều tra cả code backend/web-admin e-smart, viết lại nhiều lượt theo chuẩn: trích code + cách làm từng bước + tóm tắt 3 nhóm) → skill `3-step-review` → quy tắc ⛔#8, ⛔#9 |
 | `03_session_20260805_soanBaoCaoBatchJP_review2luot.md` | [2026-08-05 sáng→trưa] Soạn bản tiếng Nhật báo cáo batch cho mui (`submit_folder/2026_08_05/`) → review 2 lượt 3-step-review (8+3 agent, 46 findings vá hết) → 6 điểm nội dung bản VN còn dính + F-ES-10=Xzilla連携 + B06 đã được viết ở `788b438` |
-| ⭐ `04_session_20260806_tach3tap_templateV4_boSkillMoi.md` | [2026-08-06] Pull `fbc0af0` + phân tích 6 commit (app 13 file) → tách báo cáo thành **3 tập × JP+VN**, 3 thế hệ (`2026_08_06/` → `new/` v4 → **`new_2/` bản dùng**) → review độc lập bắt 2 lỗi [cao] (前々月, path bịa) → **bộ skill mới** `create-investigation-report` (TEMPLATE v4) + `analyze-change-request` (⛔#11) + sửa `3-step-review` → `requirements/self_study_plan.md` |
+| `04_session_20260806_tach3tap_templateV4_boSkillMoi.md` | [2026-08-06] Pull `fbc0af0` + phân tích 6 commit (app 13 file) → tách báo cáo thành **3 tập × JP+VN**, 3 thế hệ (`2026_08_06/` → `new/` v4 → **`new_2/` bản dùng**) → review độc lập bắt 2 lỗi [cao] (前々月, path bịa) → **bộ skill mới** `create-investigation-report` (TEMPLATE v4) + `analyze-change-request` (⛔#11) + sửa `3-step-review` → `requirements/self_study_plan.md` |
+| ⭐ `05_session_20260812_guideV12_review6agent.md` | [2026-08-12] Pull `460c671` → **guide v1.2** (viết lại §5.5 mô hình sưởi mới, §5.6, §7.3 + mục B6, Phụ lục B.3/B.4) → **review 6 agent** (3 vòng guide + 3 cặp `new_2/`) = 142 findings, guide vá hết / `new_2/` chờ quyết → **3 phát hiện lật giả định**: hệ cũ có chiều gửi SFTP Xzilla ・ spec [I] giữ 4 bảng batch #5–#7 ・ e-smart CÓ bảng tích luỹ `TABLE_DEVICE_*_HISTORY` |

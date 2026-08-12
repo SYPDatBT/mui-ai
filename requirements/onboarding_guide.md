@@ -5,12 +5,12 @@
 
 | | |
 |---|---|
-| Phiên bản | 1.1 |
-| Ngày lập | 2026-08-03 · sửa lỗi theo review + cập nhật B6: 2026-08-04 · bổ sung 5 câu trả lời từ QAデータベース Notion (phạm vi app · deploy server/màn hình quản trị · điều tra hệ cũ · huy hiệu): 2026-08-04 |
-| **Đối chiếu với repo** | `eminel_gw_project` **bản ngày 2026-08-03 — commit `788b438`** |
+| Phiên bản | 1.2 |
+| Ngày cập nhật | 2026-08-12 |
+| **Đối chiếu với repo** | `eminel_gw_project` **commit `460c671` (2026-08-06)** |
 | Bộ khung & tiêu chuẩn | xem [README.md](README.md) — cùng thư mục (workspace: đọc `../CLAUDE.md` + `../memory/00_INDEX.md` trước) |
 
-⚠️ **Số dòng trong mọi trích dẫn ứng với bản repo commit `788b438` (2026-08-03).** Trước khi tra, hãy `git pull` để repo local ở đúng bản này. Nếu file gốc đã bị sửa sau đó, số dòng sẽ trôi — khi đó hãy tìm theo **tên mục** (mỗi trích dẫn đều ghi kèm tên mục để phòng trường hợp này).
+⚠️ **Số dòng trong mọi trích dẫn ứng với bản repo commit `460c671` (2026-08-06).** Trước khi tra, hãy `git fetch` + `git pull` để repo local ở đúng bản này. Nếu file gốc đã bị sửa sau đó, số dòng sẽ trôi — khi đó hãy tìm theo **tên mục** (mỗi trích dẫn đều ghi kèm tên mục để phòng trường hợp này).
 
 ---
 
@@ -194,6 +194,13 @@ Mỗi khẳng định trong tài liệu này đều kèm nguồn theo định d�
 
 ⚠️ **Ảnh trong tài liệu này là bản copy** nằm ở `assets/`, nhưng **dòng dẫn chứng luôn trỏ về file gốc trong repo**. Bảng đối chiếu ảnh copy ↔ ảnh gốc nằm ở [README.md](README.md) mục 7.
 
+⚠️ **Hai mốc kiểm khác nhau — đừng gộp làm một:**
+
+| Loại nguồn | Mốc | Nghĩa |
+|---|---|---|
+| Repo (`docs/`, code) | commit `460c671`, kiểm **2026-08-12** | Số dòng và nội dung đúng tại mốc này |
+| QAデータベース Notion | lần đọc **2026-08-04**, **chưa kiểm lại** | Notion là dữ liệu sống — mọi trạng thái 回答中 trong tài liệu này ứng với ngày đó, **phải mở trang gốc trước khi trích lại** |
+
 ---
 
 ## 0.4 ⭐ Tóm tắt một trang
@@ -246,13 +253,16 @@ Diễn giải bằng chữ:
 | Hạng mục | Trạng thái |
 |---|---|
 | Định nghĩa yêu cầu & thiết kế cơ bản | ✅ **Đã xong, đã bàn giao** (bản v1.2, ngày 2026-04-07) |
-| Requirement cho mobile app | 🔵 Đang viết — 23 section, phần lớn đang review (B6 mới lập 2026-07-30, chưa viết) |
+| Requirement cho mobile app | 🔵 Đang viết — 23 section đều đã có nội dung; **5 section nhóm C đã qua review của khách**, còn lại chưa |
 | Spec màn hình quản trị | 🔵 Đang viết — 10 chức năng, tất cả ở trạng thái DRAFT |
 | Bản thiết kế giao diện | 🔵 Bản nháp HTML đã có đủ 10 chức năng |
 | Code | ⬜ **Chưa bắt đầu phần chính** — còn chờ spec API |
 
-🔍 Nguồn: `eminel_gw_project/docs/eminel/0_foundation/01_overview.md`
-→ mục 「現フェーズ」, dòng 6
+🔍 Nguồn (a) — trạng thái pha: `eminel_gw_project/docs/eminel/0_foundation/01_overview.md`
+→ mục 「現フェーズ」, dòng 6 *(lưu ý: file này ghi 最終更新 2026-07-16, cũ hơn mốc đối chiếu của guide)*
+
+🔍 Nguồn (b) — con số 23 section và mức review: `eminel_gw_project/docs/eminel/3_requirements/app/README.md`
+→ mục 「セクション一覧」, dòng 24–74 (23 hàng: A1–A4 · B1–B6 · C1–C5 · D1–D4 · E1–E4); riêng C1–C5 ở dòng 52–56 đều ghi ステータス = 「レビュー済」
 
 ### Giờ phải làm gì tiếp?
 
@@ -383,9 +393,11 @@ Muốn truy về code và spec gốc, bạn cần thêm quyền truy cập:
 🔍 Nguồn: `eminel_gw_project/CLAUDE.md`
 → mục 「必須セットアップ」, dòng 5
 
-### ④ Tài liệu này chụp lại thời điểm 2026-08-03
+### ④ Tài liệu này chụp lại thời điểm 2026-08-06 (commit `460c671`)
 
-Dự án đang chuyển động nhanh. Riêng trong tháng 7/2026 đã có 3 lần cấu trúc requirement bị đổi. Nếu bạn đọc tài liệu này sau nhiều tháng, hãy đối chiếu lại `最終更新` của các file gốc.
+Dự án đang chuyển động nhanh: tháng 7/2026 có 4 lần **cấu trúc** requirement bị đổi, đầu tháng 8 lại có **ba đợt sửa nội dung liên tiếp** — 08-03: **B2** (section điều khiển sưởi) bỏ hẳn khái niệm 設定値運転 (*"chạy theo giá trị đặt sẵn"*, nay gọi là lịch tuần không có 室温制御 — [§5.5](#55-điều-khiển-sưởi--phần-khó-nhất)); 08-05: **B6** (điều khiển phát điện tại nhà) lần đầu được viết nội dung + **bảng index 23 section** chuyển sang lấy trạng thái thẳng từ slide gửi khách ([§7.3](#73-requirement-app-23-section)); 08-06: E2/E3 đổi trạng thái.
+
+Nếu bạn đọc tài liệu này sau nhiều tuần, hãy `git fetch` rồi đối chiếu lại dòng `経緯` (*lịch sử sửa đổi*, ở bảng đầu mỗi file requirement) — và cả `git log`, vì có file quên cập nhật `経緯`.
 
 ---
 ---
@@ -586,7 +598,7 @@ Trong bảng chức năng, đây chính là cột **負担** (futan — *gánh c
 Câu đó chỉ đúng **với riêng tài liệu v1.2**. Thực tế:
 
 - Trong bảng chức năng, riêng mobile app cộng lại **≈ 11 người-tháng** công số (các dòng F-AP). ⚠️ Con số **2.75 người-tháng** hay gặp ở bảng サマリ đầu file là **phần có thể lùi sang 2027** (劣後可能工数), *không phải* tổng công số app
-- Bộ requirement app riêng gồm **23 section (A1–E4)** đang được viết **ngay lúc này** (B6 マイホーム発電制御 mới tách từ B4 ngày 2026-07-30)
+- Bộ requirement app riêng gồm **23 section (A1–E4)** đang được viết **ngay lúc này** (B6 マイホーム発電制御 tách từ B4 ngày 2026-07-30, nội dung đã được viết đầy đủ)
 
 🔍 Nguồn: `eminel_gw_project/docs/eminel/1_product/10_feature_list.md`
 → mục 「モバイルアプリ開発（Stream3｜主担当 oi）」, dòng 119–138 (bảng công số) và dòng 16–23 (bảng サマリ（劣後可能工数）)
@@ -597,7 +609,7 @@ Câu đó chỉ đúng **với riêng tài liệu v1.2**. Thực tế:
 
 Nghĩa là: tài liệu v1.2 nói "chưa định nghĩa app", còn công việc định nghĩa app **đang diễn ra trong một bộ tài liệu khác**.
 
-**Cập nhật 2026-08-03 — phía mui xác nhận trực tiếp cách đọc này.** Khi SYP hỏi trên QAデータベース của dự án (Notion) rằng *"mobile app (EMINEL-smart) nằm ngoài phạm vi đảm nhận, đúng không?"*, câu trả lời là ngược lại:
+**Phía mui đã xác nhận trực tiếp cách đọc này.** Khi SYP hỏi trên QAデータベース của dự án (Notion) rằng *"mobile app (EMINEL-smart) nằm ngoài phạm vi đảm nhận, đúng không?"*, câu trả lời là ngược lại:
 
 🔍 Nguồn: Notion — QAデータベース dự án, trang 「担当範囲（サーバー／管理画面）とアプリ対象外の確認」
 → 質問者 (*người hỏi*) Bui Trong Dat (SYP, 起票/*tạo phiếu* 2026-08-03) · 回答者 (*người trả lời*) masao takahashi (mui, 2026-08-03)
@@ -622,7 +634,7 @@ Nghĩa là: tài liệu v1.2 nói "chưa định nghĩa app", còn công việc 
 | **2026-06-03/04** | Họp tại Sapporo. Chốt lịch, chốt giá. Chuyển hợp đồng bảo trì **Maxell → mui** (từ tháng 5, cơ bản 10万円/tháng). Thống nhất **việc app gộp hay tách do 北ガス quyết** |
 | **2026-06-10** | ✅ **Chốt lịch tổng thể** và **chốt phạm vi bắt buộc cuối 2026**: trục chính là **sưởi** (暖房機能・暖房制御), kèm 照明アドバイス※, liên kết điểm thưởng, gom nhóm & report. *※nguyên văn ghi 「照明アドバイス」 (tư vấn chiếu sáng) — nghi là lỗi gõ của 「省エネアドバイス」, xem [Phụ lục B.2](#b2-điểm-thưởng-và-tư-vấn-tiết-kiệm)* |
 | **2026-06-23~25** | Trại tập trung 3 ngày của mui — nhiều tiền đề mới xuất hiện |
-| **2026-08-03** | *(thời điểm lập tài liệu này — đối chiếu repo commit `788b438`)* |
+| **2026-08-06** | *(mốc repo mà tài liệu này đối chiếu — commit `460c671`)* |
 
 🔍 Nguồn: `eminel_gw_project/docs/eminel/2_management/22_decisions.md`
 → bảng 「意思決定ログ」, dòng 11–31
@@ -1844,6 +1856,14 @@ Hai chiều ngược nhau:
 
 Đây là **trung tâm của cả dự án**. Trục chính của phạm vi bắt buộc cuối 2026 là **nhóm chức năng sưởi** (xem [mục 1.7](#17-dòng-thời-gian-từ-2022-đến-nay)).
 
+**Mô hình hiện hành, gọn trong ba câu:**
+
+1. Toàn bộ việc sưởi tự động gọi là **暖房自動制御**, gồm ba phần: lịch tuần (スケジュール運転) + đặt trước (予約運転) + chế độ tiết kiệm (省エネモード).
+2. Chỉ có **một trục phân nhánh duy nhất**: nhà đó **có 室温制御 hay không** — tức có đo được nhiệt độ phòng để so với nhiệt độ mục tiêu hay không.
+3. Có 室温制御 → cài bằng **nhiệt độ** và bật được 省エネモード. Không có → cài bằng **温度レベル** (mức nhiệt) và không bật được.
+
+Mục này nói **cài đặt cái gì**; còn **ai chạy** thì đã kể ở [mục 3.2](#32-chiều-xuống-từ-nút-bấm-đến-máy-sưởi) — server lưu và giao cả kế hoạch xuống, **gateway tự chạy** (mất mạng vẫn sưởi), riêng nhà コレモ thì vòng lặp so nhiệt độ chạy trên スマリモ.
+
 ### Cây khái niệm
 
 ```
@@ -1851,40 +1871,61 @@ Hai chiều ngược nhau:
 │
 ├─ スケジュール運転 (chạy theo lịch) ── lịch tuần, 3 chế độ: 在宅 / 外出 / 就寝
 │     │                                    (ở nhà / ra ngoài / đi ngủ)
-│     ├─ 室温制御 (điều khiển theo nhiệt độ phòng)  ◀━━ 省エネモード bám vào ĐÂY
-│     │     └─ dùng khi nhà ĐỌC ĐƯỢC nhiệt độ phòng
-│     │
-│     └─ 設定値運転 (chạy theo giá trị đặt sẵn) 【新規】
-│           └─ dùng khi nhà KHÔNG đọc được nhiệt độ
+│     └─ 室温制御の有無 (CÓ hay KHÔNG điều khiển theo nhiệt độ phòng)
+│           ├─ CÓ  → mỗi chế độ đặt 温度 (nhiệt độ)      ◀━━ 省エネモード bám vào ĐÂY
+│           └─ KHÔNG → mỗi chế độ đặt 温度レベル (mức nhiệt)
 │
 ├─ 予約運転 (chạy theo đặt trước) 【新規】
-│     └─ giờ bắt đầu + giờ kết thúc + nhiệt độ. ƯU TIÊN hơn lịch tuần
+│     └─ giờ bắt đầu + giờ kết thúc + nhiệt độ (hoặc 温度レベル nếu không có 室温制御)
+│        ƯU TIÊN hơn lịch tuần
 │
-└─ 省エネモード (chế độ tiết kiệm) 【新規】── 3 loại
-      │  ⚠️ tài liệu gốc liệt kê nó là 1 trong 3 thành phần (nên cây vẽ vậy),
-      │     nhưng nó KHÔNG phải "chế độ chạy" thứ ba — nó là LỚP HIỆU CHỈNH
-      │     áp lên nhiệt độ điều khiển của 室温制御 (mũi tên ◀━━ ở trên),
-      │     và chỉ hoạt động ở chế độ 在宅
+└─ 省エネモード (chế độ tiết kiệm) 【新規】── 3 loại, chỉ chạy ở chế độ 在宅
+      │                              ──▶ hiệu chỉnh nhiệt độ mà 室温制御 đang điều khiển
       ├─ 不在時エコモード (eco khi vắng nhà) — bắt buộc có cảm biến người
       ├─ 外気温補正 (hiệu chỉnh theo nhiệt độ ngoài trời)
-      └─ 就寝補正 (hiệu chỉnh trước giờ ngủ) — đặt được giờ đi ngủ
+      └─ 就寝補正 (hiệu chỉnh trước giờ ngủ)
 ```
 
+💡 **Vì sao 省エネモード đứng ngang hàng trong cây?** Vì tài liệu gốc liệt kê nó là 1 trong 3 thành phần. Nhưng nó **không phải "chế độ chạy" thứ ba** — nó là **lớp hiệu chỉnh** cộng thêm vào nhiệt độ mà 室温制御 đang điều khiển (mũi tên ◀━━).
+
 🔍 Nguồn: `eminel_gw_project/docs/eminel/3_requirements/app/B02_heating_control.md`
-→ mục 「用語集」, dòng 33–48
+→ khung cây: mục 「用語集」, dòng 30–36 · bảng định nghĩa: dòng 38–44
+→ ba chế độ 在宅/外出/就寝 và hai nhánh 温度 / 温度レベル: mục 「スケジュール運転」, dòng 132 và 135–137
 
 ### Định nghĩa từng khái niệm
 
-🔍 cùng file, dòng 43–48
+🔍 cùng file, bảng 用語集, dòng 38–44 — **năm** thuật ngữ dưới đây là nguyên văn của bảng đó
 
 | Thuật ngữ | Định nghĩa |
 |---|---|
 | **暖房自動制御** | Tên gọi chung của toàn bộ việc vận hành sưởi tự động, đối tượng là hệ sưởi trung tâm. **Khác với việc bật/tắt máy sưởi bằng remote treo tường** |
-| **スケジュール運転** | Đặt lịch theo thứ trong tuần và khung giờ, hệ thống chạy tự động theo đó |
-| **室温制御** | Liên tục đọc nhiệt độ phòng, so với nhiệt độ cài đặt rồi quyết định thao tác. **Chỉ thành lập khi cấu hình thiết bị đọc được nhiệt độ phòng** |
-| **設定値運転** | Chạy đúng nội dung đã đặt (bật/tắt, nhiệt độ), **không hiệu chỉnh theo nhiệt độ thực tế** |
-| **予約運転** | Chạy tạm thời với giờ bắt đầu, giờ kết thúc, nhiệt độ chỉ định |
+| **スケジュール運転** | Đặt lịch theo thứ trong tuần và khung giờ, hệ thống chạy tự động theo đó. **Nội dung cài đặt khác nhau tuỳ có 室温制御 hay không.** ⚠️ Không phải cùng một thứ với 「スケジュール運転」 của E-Smart *(tài liệu gốc ghi rõ: 「※E-Smartのスケジュール運転とは違う機能」)* |
+| **室温制御** | So **nhiệt độ phòng thực tế** với nhiệt độ (mục tiêu) đã đặt, rồi liên tục quyết định thao tác điều khiển. Tuỳ cấu hình thiết bị mà có nhà chạy lịch tuần **không kèm** 室温制御 |
+| **予約運転** | Chạy tạm thời với giờ bắt đầu, giờ kết thúc, nhiệt độ chỉ định. **Là bản mở rộng của 優先運転 hệ cũ** — hệ cũ chỉ bắt đầu ngay được, nay chỉ định được cả giờ bắt đầu |
 | **省エネモード** | Tên gọi chung của các hiệu chỉnh tự động **áp lên nhiệt độ điều khiển của 室温制御** |
+
+⚠️ **温度レベル (mức nhiệt) — từ mới, nhưng KHÔNG nằm trong 用語集.** Nó chỉ xuất hiện đúng ba lần trong cả file B02: hai lần trong requirement (dòng 137 「室温制御なしの場合、モードごとに温度レベルを設定できる」 và dòng 166), một lần trong 要確認事項 — *danh sách "phải hỏi 北ガス" đặt cuối mỗi file requirement* — ở dòng 239: 「室温制御時の設定値イメージは床暖の温度レベルであっているか」 (*hình dung giá trị cài đặt là mức nhiệt kiểu sàn sưởi, đúng không?*).
+
+Nghĩa là: **đơn vị đặt nhiệt dùng thay nhiệt độ cụ thể ở nhà không có 室温制御 — còn gồm những nấc nào thì tài liệu chưa nói, và chính người viết requirement cũng đang hỏi ngược lại 北ガス.**
+
+⚠️ **Từ 設定値運転 không còn là khái niệm sống.** Bản trước dựng cây khái niệm theo trục *"lịch tuần chạy bằng 室温制御 hay bằng 設定値運転"*; bản hiện hành đổi sang trục **「室温制御の有無」** và đưa vào khái niệm mới 温度レベル. Trong cả repo, chữ 設定値運転 nay chỉ còn **đúng một chỗ**. Nhưng **khái niệm** đó thì bạn vẫn gặp ở hai nơi dưới tên khác — đừng tưởng nó còn hiệu lực:
+
+| Gặp khái niệm ở đâu | Nó mang tên gì ở đó | Thực tế |
+|---|---|---|
+| `00_integrated_requirements_v1.2.md` (UC-05 01-2) | 「スケジュール運転」 | Tài liệu yêu cầu tích hợp **chưa** cập nhật theo cách gọi mới của B2 |
+| Bảng 「統合要件v1.2との呼び方の対応」 trong chính B02, dòng 54–60 | 「設定値運転」 — **chỗ duy nhất còn chữ này trong repo** | Tàn dư của lần sửa 08-03: commit `9dc5e34` sửa mục 用語集 phía trên nhưng **bỏ quên bảng đối chiếu tên gọi** này |
+
+**Bảng đối chiếu cũ ↔ mới** — nếu bạn từng đọc bản requirement trước 08-03:
+
+| | Bản trước 2026-08-03 | Bản hiện hành |
+|---|---|---|
+| Trục phân nhánh của lịch tuần | 室温制御 **hay** 設定値運転 (hai "kiểu chạy") | **室温制御の有無** (có / không) |
+| Nhánh không đo được nhiệt độ phòng | gọi là 設定値運転 | gọi là *lịch tuần không có 室温制御* |
+| Đơn vị đặt nhiệt ở nhánh đó | 設定値 (giá trị đặt) | **温度レベル** (khái niệm MỚI, nấc chưa định nghĩa) |
+| Section 「機器構成とできること」 | có, 5 quy tắc | **đã xoá** |
+
+🔍 Nguồn cách gọi mới: cùng file, mục 「本章での語の扱い」, dòng 51
+→ nguyên văn: 「別資料では室温制御ではないものを「タイマー運転」と呼んでいたが、紛らわしいため室温制御あり/なしのスケジュール運転と呼ぶ」
 
 ### ⚠️ Quan hệ MỘT CHIỀU giữa 省エネモード và 室温制御
 
@@ -1898,51 +1939,44 @@ Không có 室温制御 →  không có gì để hiệu chỉnh                
 Nhưng **chiều ngược lại thì không đúng**:
 
 🔍 Nguồn: `eminel_gw_project/docs/eminel/3_requirements/app/B02_heating_control.md`
-→ mục 「用語集」, dòng 48
+→ mục 「用語集」, dòng 44
 → nguyên văn: 「省エネモードがOFFでも、室温制御自体は動く」
 
 Tức là: **tắt chế độ tiết kiệm thì việc điều khiển theo nhiệt độ phòng vẫn chạy bình thường.**
 
-Và hệ quả về mặt cài đặt:
+### Cấu hình thiết bị quyết định cái gì
 
-🔍 cùng file, mục 「機器構成とできること」, dòng 203
-→ nguyên văn: 「【新規】室温制御が成立しない機器構成では、省エネモードを設定できない」
+Requirement hiện hành chỉ còn **một trục duy nhất**: nhà đó có 室温制御 hay không. Trục này quyết định **nội dung cài đặt** ở hai chỗ:
 
-### Năm quy tắc phụ thuộc cấu hình thiết bị
+🔍 cùng file, mục 「スケジュール運転」 requirement #4, dòng 135–137
+→ nguyên văn: 「室温制御の有無でモードごとの制御設定項目が変わる / 室温制御ありの場合、モードごとに温度を設定できる / 室温制御なしの場合、モードごとに温度レベルを設定できる」
 
-🔍 cùng file, mục 「機器構成とできること」, dòng 201–205
+🔍 cùng file, mục 「予約運転」 requirement #6, dòng 164–166
+→ nguyên văn: 「室温制御の有無で予約運転設定項目が変わる / 室温制御ありの場合、温度を設定できる / 室温制御なしの場合、温度レベルを設定できる」
 
-| # | Quy tắc |
-|---|---|
-| 1 | Cấu hình **đọc được** nhiệt độ phòng → lịch tuần chạy bằng **室温制御** |
-| 2 | Cấu hình **không đọc được** → lịch tuần chạy bằng **設定値運転** 【新規】 |
-| 3 | ⚠️ **室温制御 không thành lập → KHÔNG cài được 省エネモード** 【新規】 |
-| 4 | Người dùng phải xem được **nhà mình dùng được những chức năng gì** 【新規】 |
-| 5 | ⚠️ Nhà **chỉ giao tiếp qua bộ điều khiển Wi-Fi** → **không cung cấp điều khiển tự động** 【新規】 |
-
-**Ghép 5 quy tắc + slide 38 lại thành một bảng tra** — đây chính là thứ quy tắc 4 yêu cầu app phải hiển thị được cho người dùng *(bảng do tài liệu này tự tổng hợp)*:
-
-| Nhà bạn có gì | Lịch tuần chạy bằng | Cài được 省エネモード? |
+| Nhà bạn có gì | Lịch tuần & đặt trước cài bằng | Cài được 省エネモード? |
 |---|---|---|
-| Đọc được nhiệt độ phòng — có スマリモ hoặc cảm biến | **室温制御** (nhà スマリモ *chỉ* dùng được cách này, không dùng 設定値運転) | ✅ |
-| Không đọc được nhiệt độ phòng | **設定値運転** 【新規】 | ❌ (không có gì để hiệu chỉnh) |
-| Chỉ giao tiếp qua bộ điều khiển Wi-Fi | 🔴 **Không cung cấp điều khiển tự động** (phương án tạm, chưa chốt) | — |
+| **Đọc được** nhiệt độ phòng (có スマリモ hoặc cảm biến) | **温度** — nhiệt độ cụ thể, kèm 室温制御 | ✅ |
+| **Không đọc được** nhiệt độ phòng | **温度レベル** — mức nhiệt, không có 室温制御 | ❌ (không có nhiệt độ điều khiển để hiệu chỉnh) |
 
-Về quy tắc 5 — lý do và mức độ chắc chắn:
+⚠️ **Cả bảng trên là SUY LUẬN, không phải trích.** B02 bản hiện hành chỉ nói *"nội dung cài đặt đổi theo có/không 室温制御"* — nó **không** còn nói nhà nào thì có 室温制御. Cả ánh xạ ở cột 1 (đọc được nhiệt độ phòng → có 室温制御) lẫn cột 3 (có 室温制御 → cài được 省エネモード) đều là quy tắc cũ đã bị xoá ngày 2026-08-03 cùng section 「機器構成とできること」; cột 3 nay chỉ còn suy được từ định nghĩa 省エネモード ở dòng 44. Chính B02 cũng đang hỏi ngược lại 北ガス — 要確認事項 dòng 238: 「室温制御が適さない機器構成の具体例」 (*cho ví dụ cụ thể cấu hình thiết bị nào thì không hợp với 室温制御*). **Dùng bảng này để hiểu, đừng dùng để chốt spec.**
 
-🔍 cùng file, dòng 216
-→ nguyên văn: 「扱いは未決（懸念参照）。暫定案＝自動制御しない」
+⚠️ **Ba nhóm quy tắc từng có trong requirement, nay đã bị xoá** — nêu ra để bạn không hoang mang khi thấy tài liệu/slide cũ vẫn nói:
 
-🔍 Lý do kỹ thuật: `eminel_gw_project/docs/eminel/2_management/minutes/20260623_egw_camp_day1.md`
-→ mục 「暖房制御の系統問題」, dòng 209–212
-→ nguyên văn: 「Wi-Fiリモコン経由だと暖房の自動制御が効かせられない」「理由：Noritzは現状1日1回のデータ取得のみで、GWから能動的に制御できない」
+| Thứ bị xoá khỏi B2 | Trạng thái thực tế |
+|---|---|
+| Section 「機器構成とできること」 (5 quy tắc, gồm *"người dùng phải xem được nhà mình dùng được gì"*) | Không còn trong requirement app |
+| Quy tắc *"nhà chỉ giao tiếp qua bộ điều khiển Wi-Fi thì không cung cấp điều khiển tự động"* | Không còn trong requirement app. **Nhưng hạn chế kỹ thuật thì vẫn còn** — lý do nằm ở biên bản trại tập trung `2_management/minutes/20260623_egw_camp_day1.md` mục 「暖房制御の系統問題」 dòng 209–212: *"đi qua bộ điều khiển Wi-Fi thì không bật được điều khiển sưởi tự động — vì máy của **Noritz** (ノーリツ, hãng thiết bị nước nóng/sưởi Nhật) hiện chỉ lấy dữ liệu 1 lần/ngày, gateway không chủ động điều khiển được"* |
+| Requirement *"đặt được giờ đi ngủ (就寝時刻)"* | Không còn trong requirement app *(file phụ lục `Z_old_mapping.md` dòng 41 vẫn giữ dòng cũ — đó là bản đồ đối chiếu nháp cũ, không phải requirement)* — **và tài liệu yêu cầu tích hợp v1.2 vẫn ghi** 「就寝時刻はアプリから設定できる」 (`00_integrated_requirements_v1.2.md` dòng 491). Hai tài liệu đang lệch nhau |
 
-🔴 **Đây mới là phương án tạm, chưa chốt.**
+⚠️ **Bị xoá khỏi requirement ≠ giờ làm được.** Ba dòng trên chỉ nói *requirement app không còn mô tả chúng*; ràng buộc kỹ thuật và yêu cầu gốc vẫn nguyên ở biên bản và tài liệu tích hợp. Gặp slide cũ nói ngược thì tra lại dòng `経緯` (*lịch sử sửa đổi*, nằm ở bảng đầu mỗi file requirement) và `git log` của file, đừng vội kết luận bên nào sai.
+
+Lý do chung của đợt xoá này ghi ở dòng `経緯` của chính file *(dòng 8)*: 「先方レビューの結果をスライドから反映（2026-08-03）／合宿議事を出典とする記述を削除（2026-08-05）」 — tức phản ánh kết quả review của 北ガス, và **gỡ mọi mô tả lấy biên bản trại tập trung làm nguồn**.
 
 ### Hành vi khi tắt — chi tiết dễ bỏ sót
 
 🔍 Nguồn: `eminel_gw_project/docs/eminel/3_requirements/app/B02_heating_control.md`
-→ mục 「暖房自動制御のON/OFF」, dòng 116–120
+→ mục 「暖房自動制御のON/OFF」, dòng 112–116
 → nguyên văn:
 > 「1. 暖房自動制御をON/OFFできる」
 > 「2. OFFにすると、スケジュール運転・予約運転・省エネモードをすべて停止する / 設定済みの予約運転はキャンセルする / 再ONしても、キャンセルした予約運転は復活しない」
@@ -1964,7 +1998,7 @@ Tắt 暖房自動制御
 Tài liệu gốc còn nói rõ hơn requirement app:
 
 🔍 Nguồn: `eminel_gw_project/docs/eminel/3_requirements/00_integrated_requirements_v1.2.md`
-→ mục 「8-1」→ F-GW-05 「基本制御」, dòng 480–487
+→ mục 「8-1」→ F-GW-05 「基本制御」, dòng 482–487
 → nguyên văn:
 > 「予約運転はスケジュール運転よりも優先される」
 > 「外出・就寝モードは、補正は行わない」
@@ -1988,7 +2022,7 @@ Dịch: *"Nhiều chế độ tiết kiệm cùng bật thì KHÔNG cộng dồn
 ### Con số của hệ cũ để so sánh
 
 🔍 Nguồn: `eminel_gw_project/docs/eminel/3_requirements/app/B02_heating_control.md`
-→ các bảng 「備考と出典」, dòng 149, 152, 173, 177
+→ các bảng 「備考と出典」, dòng 144, 147, 173, 177
 
 | Hạng mục | Hệ cũ |
 |---|---|
@@ -1998,12 +2032,20 @@ Dịch: *"Nhiều chế độ tiết kiệm cùng bật thì KHÔNG cộng dồn
 | Preset あったか (ấm) | 2 giờ, **+2°C** |
 | Preset ひかえめ (dè dặt) | 2 giờ, **−2°C** |
 
-🔴 Nấc thời gian ở hệ mới **vẫn nằm trong danh sách chưa quyết** của 北ガス.
+Hai preset này **đã được đưa thẳng vào requirement mới** làm ví dụ, không còn chỉ là con số hệ cũ:
 
-🔍 cùng file, mục 「要確認事項」, dòng 272–273
-→ nguyên văn: 「スケジュールの時間刻み・時間帯数の上限 / 現行＝10分刻み・1日最大6時間帯。北ガスTBDリストに「スケジュール刻み」があり未確定」
+🔍 cùng file, mục 「予約運転」 requirement #5, dòng 160–163
+→ nguyên văn: 「あらかじめ用意されたプリセットで予約運転を簡易に開始できる / 例： / あったか: 現在〜2時間後 / 現在温度+2℃ / ひかえめ: 現在〜2時間後 / 現在温度-2℃」
 
-### Chạy theo lịch — khi nào dùng 設定値運転
+🔴 Nấc thời gian ở hệ mới **vẫn nằm trong danh sách chưa quyết** của 北ガス — nhưng chỗ ghi nó **đã chuyển**: bản requirement 08-03 đã bỏ mục này khỏi 要確認事項 của B2, giờ chỉ còn ở danh sách TBD tổng.
+
+🔍 Nguồn: `eminel_gw_project/docs/eminel/2_management/20_open_issues.md`
+→ dòng 176
+→ nguyên văn: 「スケジュール刻み、省エネアドバイスのパラメータ・統廃合（約15種→7種+エコ暖房ポイント）、灯油データソース、3系統以降の暖房対応可否、F-AD-11統計表示内容（完全TBD）、バッジ詳細、冷房のアプリ設定要否、グルーピング閾値」
+
+Hạng mục **đầu tiên** trong danh sách — 「スケジュール刻み」 — chính là nấc thời gian của lịch sưởi. *(Đây là `20_open_issues.md`, danh sách vấn đề chưa quyết của cả dự án; bản rút gọn theo mức cấp bách nằm ở [Phụ lục C](#phụ-lục-c--danh-mục-tbd-đang-chặn-việc).)*
+
+### Nhà nào chạy lịch tuần không kèm 室温制御
 
 ![Chạy theo lịch](assets/02_business_flow/slide-38.png)
 
@@ -2014,14 +2056,22 @@ Dịch: *"Nhiều chế độ tiết kiệm cùng bật thì KHÔNG cộng dồn
 > 「スケジュール運転設定時の設定項目は下記：実施日時 / 運転ON/OFF / 設定温度」
 > 「スマリモ設置宅でスケジュール運転を設定は不可（室温制御のみ）」
 
-⚠️ **Nhà có スマリモ thì KHÔNG dùng được 設定値運転 — chỉ dùng 室温制御.**
+*Dịch: "Chạy theo lịch dùng cho cấu hình thiết bị không hợp với 室温制御" / "Các trường cài khi đặt lịch: ngày giờ thực hiện / bật-tắt vận hành / **nhiệt độ đặt**" / "Nhà lắp スマリモ không đặt được lịch kiểu này (chỉ 室温制御)".*
+
+⚠️ **Chú ý trường thứ ba trong khối trích**: tài liệu nghiệp vụ này ghi 設定温度 (nhiệt độ đặt) vì nó viết **trước** đợt sửa 08-03. Theo B2 hiện hành, nhánh **không có** 室温制御 đặt bằng **温度レベル**, không phải nhiệt độ cụ thể.
+
+⚠️ **Nhà có スマリモ (bộ điều khiển thông minh của 北ガス) thì luôn có 室温制御** — không rơi vào nhánh đặt bằng 温度レベル.
+
+⚠️ Lưu ý cách gọi: tài liệu nghiệp vụ này (chưa cập nhật theo B2 bản 08-03) dùng chữ 「スケジュール運転」 **theo nghĩa hẹp** = chạy lịch không có 室温制御. Trong requirement app hiện hành, 「スケジュール運転」 là **tên gọi chung** cho cả hai nhánh có/không 室温制御.
+
+⚠️ **Còn "rốt cuộc nhà nào" thì chưa ai chốt.** Chính B2 đang treo câu hỏi 「室温制御が適さない機器構成の具体例」 (*cho ví dụ cụ thể cấu hình thiết bị nào không hợp với 室温制御*) ở mục 要確認事項, dòng 238. Hiện chỉ chắc chắn được chiều ngược lại: nhà có スマリモ thì luôn có 室温制御.
 
 ### Quy tắc dùng từ trong chương này
 
 Tài liệu requirement có một mục đặc biệt: **cấm dùng một số từ**.
 
 🔍 Nguồn: `eminel_gw_project/docs/eminel/3_requirements/app/B02_heating_control.md`
-→ mục 「本章での語の扱い」, dòng 52–54
+→ mục 「本章での語の扱い」, dòng 46–52 *(câu trích ở dòng 50)*
 → nguyên văn: 「「暖房制御」「暖房機器制御」という語は使わない（総称か機器操作か紛れるため。統合要件等の機能名の引用を除く）」
 
 Lý do: từ 「暖房制御」 lẫn lộn giữa *điều khiển tự động tổng thể* và *thao tác lên thiết bị*. Khi bạn viết ticket hay comment code, hãy theo quy ước này.
@@ -2040,13 +2090,24 @@ Ngắn hơn nhiều, và **hoàn toàn nằm ngoài phạm vi 2026**.
 
 ```
 冷房自動制御 (điều khiển lạnh tự động) ── đối tượng là ĐIỀU HOÀ
-├─ 基本制御 ── lịch làm lạnh × ngưỡng nhiệt độ phòng → tự bật/tắt
+├─ 基本制御 ── trong khung giờ cho phép làm lạnh, vượt ngưỡng nhiệt độ phòng
+│              → tự bật; xuống dưới ngưỡng → tự tắt
+│              ⚠️ 基本制御 ở đây là khái niệm CỦA PHÍA LẠNH (định nghĩa trong B3).
+│                 Đừng lẫn với tiểu mục cũng tên 「基本制御」 của F-GW-05 phía SƯỞI
+│                 đã trích ở mục 5.5 — cùng chữ, khác chức năng.
 └─ 省エネモード ── 2 loại (ít hơn sưởi một loại)
-     ├─ 不在時エコモード
-     └─ 外気温補正 (đang cân nhắc có làm không)
+     ├─ 不在時エコモード (eco khi vắng nhà)
+     └─ 外気温補正（実施検討中） (hiệu chỉnh theo nhiệt độ ngoài trời, cho mùa chuyển tiếp
+                                — 実施検討中 = CÒN ĐANG CÂN NHẮC CÓ LÀM HAY KHÔNG)
 ```
 
-🔍 cùng file, mục 「用語集」, dòng 23–37
+🔍 cùng file, mục 「用語集」, dòng 21–37 *(cây khái niệm ở dòng 28, định nghĩa 基本制御 ở dòng 35, 省エネモード（冷房） ở dòng 37)*
+
+⚠️ **Điều kiện của 基本制御 vừa được sửa ngày 2026-08-05** (commit `f2a3dab` — dòng `経緯` của B03 chưa cập nhật mốc này nên phải tra `git log`, đừng tin `経緯`): trước là *"trong chế độ 在宅 (ở nhà)"*, nay là **"trong 冷房スケジュール (khung giờ được phép làm lạnh)"** — nguyên văn 「冷房スケジュール中、室温が設定したしきい値を超えたら…」.
+
+Cùng đợt đó, câu hỏi treo *"「在宅モード」 của phía lạnh lấy từ đâu"* đã được gỡ khỏi 要確認事項 — **gỡ vì đổi trục nên hết cần hỏi, không phải vì đã có câu trả lời**.
+
+⚠️ Riêng ghi chú 「実施検討中」 của 外気温補正 **chỉ bị bỏ ở ô định nghĩa trong 用語集** (dòng 37) — nó vẫn còn ở cây khái niệm (`B03_cooling.md` dòng 28) và ở bảng 「備考と出典」 (dòng 104). Tức **外気温補正 vẫn đang ở diện cân nhắc**; đừng đọc việc mất chữ ở một ô thành "đã chốt làm".
 
 ### Khác biệt so với sưởi
 
@@ -2055,7 +2116,7 @@ Ngắn hơn nhiều, và **hoàn toàn nằm ngoài phạm vi 2026**.
 | Phạm vi 2026 | Gần như toàn bộ | **なし — không có gì** |
 | Kế thừa hệ cũ | Có (5 chức năng) | **Không có gì** — hệ cũ không có điều khiển lạnh tự động |
 | Thiết bị | Hệ sưởi trung tâm (nồi hơi gas) | **Điều hoà** |
-| Cơ chế | 室温制御 / 設定値運転 + đặt trước | Lịch × ngưỡng nhiệt độ |
+| Cơ chế | Lịch tuần (có/không 室温制御) + đặt trước | Khung giờ cho phép × ngưỡng nhiệt độ |
 | 省エネモード | 3 loại | 2 loại |
 
 🔍 cùng file, bảng đầu, dòng 6
@@ -2068,6 +2129,8 @@ Ngắn hơn nhiều, và **hoàn toàn nằm ngoài phạm vi 2026**.
 → nguyên văn:
 > 「① 室温ベースの制御（リリース対象）：在宅モード中、室温がアプリで設定した一定の温度を超えた場合にエアコンを「自動モード」でONにする。設定温度を下回った場合はエアコンをOFFにする」
 > 「② 室温・湿度ベースの細かい制御（リリース対象外・試験継続）」
+
+⚠️ Khối trích trên lấy từ **v1.2** nên vẫn ghi 「在宅モード中」 — tài liệu tích hợp **chưa cập nhật** theo điều kiện mới của B3 (「冷房スケジュール中」, sửa 2026-08-05; xem cảnh báo ở đầu mục). Cùng một cơ chế, hai cách mô tả — khi làm thì theo B3.
 
 | Phương án | Nội dung | Số phận |
 |---|---|---|
@@ -2161,7 +2224,7 @@ Dịch: **khởi động lại gateway → bỏ DR, quay về điều khiển s�
 ### Phạm vi của DR
 
 🔍 Nguồn: `eminel_gw_project/docs/eminel/3_requirements/app/B05_dr.md`
-→ mục 「要件案：26年対応スコープ」, dòng 33–35
+→ mục 「要件案：26年対応スコープ」, dòng 32–34
 → nguyên văn: 「## 要件案：26年対応スコープ」 / 「- なし」
 
 **DR nằm hoàn toàn ngoài phạm vi 2026.** Requirement được viết đầy đủ, spec màn hình quản trị F cũng có, nhưng code thuộc 2027.
@@ -2275,7 +2338,7 @@ GW管理クラウド → gateway đặt file vào chỗ
 1. Trong onboarding, thứ tự đăng ký thiết bị là gì? Vì sao có ân hạn 7 ngày?
 2. Bốn loại thông báo, loại nào **không** dùng Push? Vì sao?
 3. Chế độ tiết kiệm hoạt động ở chế độ nào của lịch tuần? Nhiều chế độ tiết kiệm cùng bật thì tính thế nào?
-4. Nhà lắp スマリモ: vòng lặp điều khiển chạy ở đâu, và nhà đó có dùng được 設定値運転 không?
+4. Nhà lắp スマリモ: vòng lặp điều khiển chạy ở đâu, và nhà đó cài lịch tuần bằng nhiệt độ hay bằng 温度レベル?
 5. Hai phương án kết thúc DR khác nhau chỗ nào? Vì sao phải chốt sớm dù DR đã lùi sang 2027?
 
 <details>
@@ -2284,7 +2347,7 @@ GW管理クラウド → gateway đặt file vào chỗ
 1. **Wi-SUN → Wi-Fi → ECHONET Lite.** Ân hạn 7 ngày vì hệ thống hợp đồng Xzilla cần thời gian đồng bộ — nếu bắt người dùng chờ, họ sẽ bỏ cuộc ngay lúc cài đặt. *(dòng 42)*
 2. **Lỗi.** Chỉ hiện ở header app khi mở lên. Vì lỗi thiết bị kéo dài và lặp lại — Push mỗi lần thì người dùng sẽ tắt thông báo và bỏ lỡ cả những thứ quan trọng khác. *(dòng 522–526)*
 3. Chỉ ở chế độ **在宅 (ở nhà)**. Chế độ 外出 và 就寝 **không hiệu chỉnh gì**. Nhiều chế độ cùng bật thì **không cộng dồn** — chỉ áp dụng cái có mức hiệu chỉnh lớn nhất. *(`00_integrated_requirements_v1.2.md` dòng 484, 493)*
-4. Vòng lặp chạy ở **スマリモ**, gateway chỉ gửi xuống nhiệt độ cài đặt + nhiệt độ đo được. Nhà đó **không dùng được 設定値運転** — chỉ 室温制御. *(`11_business_process/readme.md` dòng 742–743, 761)*
+4. Vòng lặp chạy ở **スマリモ**, gateway chỉ gửi xuống nhiệt độ cài đặt + nhiệt độ đo được. Nhà đó **luôn có 室温制御** nên cài bằng **nhiệt độ cụ thể**, không rơi vào nhánh 温度レベル. *(`11_business_process/readme.md` dòng 742–743, 761)*
 5. **Cách A**: server phát lệnh kết thúc đúng giờ, rủi ro mất mạng thì không dừng được. **Cách B**: gửi kèm giờ kết thúc từ đầu, nhưng gateway phải lưu trạng thái. Phải chốt sớm vì *"gateway có lưu trạng thái hay không"* là **quyết định kiến trúc firmware năm 2026**. *(dòng 839)*
 
 </details>
@@ -2599,10 +2662,12 @@ Học một lần là đọc được cả 23 file:
 
 ```
 ┌─ Bảng đầu file
-│   状態          → trạng thái (ドラフト済 / レビュー中 / fix済)
+│   状態          → tiến độ NỘI BỘ của bản nháp
+│                   ドラフト済（レビュー待ち） / レビュー中 / (fix済 — bậc cuối,
+│                   hiện CHƯA file nào đạt). Thực tế: 21/23 file đang là レビュー中
 │   ベース(現行機能) → tương ứng chức năng số mấy của app hiện hành
 │   踏襲元        → kế thừa từ đâu (統合要件 / 現行 / ESTA)
-│   経緯          → lịch sử sửa đổi
+│   経緯          → lịch sử sửa đổi ⚠️ có file chưa cập nhật kịp (B03) — mốc chắc chắn nằm ở git log
 │
 ├─ 参照        → bảng ký hiệu viết tắt, dùng suốt file
 ├─ 用語集      → CÂY KHÁI NIỆM + định nghĩa + "từ nào cấm dùng"
@@ -2613,11 +2678,16 @@ Học một lần là đọc được cả 23 file:
 │
 ├─ 関連項目    → ranh giới với section khác
 ├─ 検討事項    → khác biệt với hệ cũ, xung đột, điểm lo ngại
-└─ 要確認事項  → CÁI PHẢI HỎI 北ガス (ghi rõ hỏi ai)
+├─ 要確認事項  → CÁI PHẢI HỎI 北ガス (ghi rõ hỏi ai)
+└─ 要件・仕様・デザインの判断に迷うポイント
+                 → chỗ người viết còn phân vân + cách đặt tạm
+                   ⚠️ KHÔNG phải file nào cũng có: B02 không có, B03/B06/A04 có
 ```
 
 🔍 Nguồn ví dụ: `eminel_gw_project/docs/eminel/3_requirements/app/B02_heating_control.md`
-→ toàn bộ file, dòng 1–320
+→ toàn bộ file, dòng 1–269
+
+⚠️ Tiểu mục 「現行からの変更点（候補）」 *(khác biệt so với hệ cũ)* từng nằm trong 検討事項 đã bị **bỏ khỏi toàn bộ bộ tài liệu ngày 2026-07-23** — vài file còn sót lại tiêu đề rỗng. Đừng đi tìm nội dung ở đó *(nguồn: `app/README.md` dòng 5)*.
 
 ### Hai kỷ luật của bộ tài liệu này
 
@@ -2625,66 +2695,112 @@ Học một lần là đọc được cả 23 file:
 
 **② Tag 【新規】 nghĩa là không có trong app hiện hành** (đối chiếu tài liệu thiết kế bản thương mại V1.0.4).
 
-🔍 Nguồn: cùng file, dòng 78
+🔍 Nguồn: cùng file, dòng 76
 → nguyên văn: 「【新規】＝現行EMINELアプリ（機能設計書V1.0.4）に無いもの」
 
 ### Bản đồ 23 section
 
 🔍 Nguồn: `eminel_gw_project/docs/eminel/3_requirements/app/README.md`
-→ mục 「セクション一覧」, dòng 26–72
+→ mục 「セクション一覧」, dòng 24–74
 
-Cột **Trạng thái** lấy từ dòng `状態` trong chính mỗi file *(không lấy từ bảng index, xem cảnh báo bên dưới)*:
+⚠️ **Bảng index vừa đổi cách quản lý trạng thái (2026-08-05).** Trước đây nó có cột 「状態」 tự khai; nay ba cột 「内容・スコープ」「ステータス」「劣後」 đều **lấy nguyên giá trị từ slide 「要件一覧」 gửi 北ガス**, còn tiến độ review của từng file md thì chuyển sang `tasks/app_requirements_plan.md` — file **không được commit**, bạn không mở được *(xem [mục 0.7 ②](#07-giới-hạn-của-tài-liệu-này))*.
 
-| Nhóm | Mã | Tên | Phạm vi 2026 | Trạng thái |
+🔍 cùng file, ghi chú đầu mục 「セクション一覧」, dòng 26
+→ nguyên văn: 「内容・スコープ／ステータス／劣後＝対顧客スライド「要件一覧」の値（2026-08-05反映）。mdのレビュー状態は `tasks/app_requirements_plan.md` の進捗表で管理（本表には持たない）」
+
+Cột **ステータス** dưới đây là giá trị đối khách; cột **劣後** ✅ = **được phép lùi sang 2027**, 一部 = lùi một phần:
+
+| Nhóm | Mã | Tên | ステータス (đối khách) | 劣後 |
 |---|---|---|---|---|
-| **A** ユーザー系 | A1 | Tài khoản · đăng nhập | ✅ | ドラフト済（レビュー待ち） |
-| | A2 | Cài đặt | ✅ | ドラフト済（レビュー待ち） |
-| | A3 | Điểm thưởng | ✅ | レビュー中 |
-| | A4 | Huy hiệu · xếp hạng | ⚠️ ✅ *(mâu thuẫn — xem Phụ lục B.1)* | レビュー中 |
-| **B** 機器制御系 | B1 | Cài đặt ban đầu · liên kết thiết bị | ✅ | ドラフト済（レビュー待ち） |
-| | **B2** | **Điều khiển sưởi tự động** | ✅ | レビュー中 |
-| | B3 | Điều khiển lạnh tự động | ❌ **なし** | レビュー中 |
-| | B4 | Thao tác thiết bị gia dụng | ✅ | レビュー中 *(index đã đồng bộ)* |
-| | B5 | DR | ❌ **なし** | ⚠️ レビュー中 *(index vẫn ghi ドラフト済 — B.4)* |
-| | B6 | マイホーム発電 — điều khiển phát điện | *(chưa viết)* | 🆕 未着手 *(tách từ B4 ngày 2026-07-30)* |
-| **C** エネルギー系 | C1 | Biểu đồ | ✅ | レビュー中 |
-| | C2 | Report | ✅ | レビュー中 |
-| | C3 | Trạng thái năng lượng hiện tại | ✅ | レビュー中 |
-| | C4 | Trạng thái cảm biến hiện tại | ✅ | レビュー中 |
-| | C5 | Tư vấn tiết kiệm | ✅ | レビュー中 |
-| **D** お知らせ系 | D1 | Thông báo | ✅ | レビュー中 |
-| | D2 | Khảo sát | ✅ | レビュー中 |
-| | D3 | Push | ✅ | レビュー中 |
-| | D4 | Trông nom | ✅ | レビュー中 |
-| **E** その他 | E1 | Hiển thị lỗi hệ thống | ✅ | ドラフト済（レビュー待ち） |
-| | E2 | Thu thập & gửi log app | ✅ | ドラフト済（レビュー待ち） |
-| | E3 | Trợ giúp | ✅ | ドラフト済（レビュー待ち） |
-| | E4 | Phi chức năng | ✅ | ドラフト済（レビュー待ち） |
+| **A** ユーザー系 | A1 | Tài khoản · đăng nhập | 未掲載 | |
+| | A2 | Cài đặt | 未掲載 | |
+| | A3 | Điểm thưởng | ドラフト作成中 | ✅ |
+| | A4 | Huy hiệu · xếp hạng | ドラフト作成 | ✅ |
+| **B** 機器制御系 | B1 | Cài đặt ban đầu · liên kết thiết bị | ドラフト作成 | |
+| | **B2** | **Điều khiển sưởi tự động** | レビュー中 | |
+| | B3 | Điều khiển lạnh tự động | ドラフト作成 | ✅ |
+| | B4 | Thao tác thiết bị gia dụng | レビュー前 | 一部 |
+| | B5 | DR | レビュー前 | 一部 |
+| | B6 | マイホーム発電制御 — điều khiển phát điện tại nhà | ドラフト作成 | |
+| **C** エネルギー系 | C1 | Biểu đồ | **レビュー済** | |
+| | C2 | Report | **レビュー済** | |
+| | C3 | Trạng thái năng lượng hiện tại | **レビュー済** | |
+| | C4 | Trạng thái cảm biến hiện tại | **レビュー済** | |
+| | C5 | Tư vấn tiết kiệm | **レビュー済** | |
+| **D** お知らせ系 | D1 | Thông báo | レビュー前 | |
+| | D2 | Khảo sát | レビュー前 | |
+| | D3 | Push | レビュー前 | |
+| | D4 | Trông nom | レビュー前 | |
+| **E** その他 | E1 | Hiển thị lỗi hệ thống | 未掲載 | |
+| | E2 | Thu thập & gửi log app | 未掲載 | |
+| | E3 | Trợ giúp | 未掲載 | |
+| | E4 | Phi chức năng | 未掲載 | |
 
-📖 **Hai trạng thái này khác nhau thế nào?**
+📖 **Sáu giá trị ステータス nghĩa là gì**
 
-| Trạng thái | Nghĩa |
+| Giá trị | Nghĩa |
 |---|---|
-| **ドラフト済（レビュー待ち）** | Đã viết xong bản nháp, **đang chờ** người phụ trách xem |
-| **レビュー中** | **Đang được xem xét** — tức là đã có người đọc và đang trao đổi |
+| **未掲載** | **Chưa đưa lên slide đối khách** — không có nghĩa là chưa viết; các file này đều đã có nội dung |
+| **ドラフト作成中** | Đang viết bản nháp |
+| **ドラフト作成** | Nháp đã viết xong |
+| **レビュー前** | Chờ 北ガス xem |
+| **レビュー中** | **北ガス đang xem, chưa xong** — hiện chỉ B2 (điều khiển sưởi) ở mức này |
+| **レビュー済** | **北ガス đã xem xong** — mức cao nhất hiện có |
 
-Cả hai đều **chưa fix**. Trong toàn bộ 23 section, **không có section nào ở trạng thái đã chốt** (B6 thậm chí còn 未着手 — chưa bắt đầu viết).
+⚠️ **Hai thang trạng thái song song, đừng lẫn.** Mỗi file md vẫn giữ dòng `状態` riêng ở bảng đầu file *(vd `B05_dr.md` dòng 5 ghi 「レビュー中」 trong khi index ghi 「レビュー前」)*. Chúng **không mâu thuẫn** — một cái là tiến độ nội bộ của tài liệu, một cái là trạng thái trong mắt khách hàng. Đáng chú ý: **chữ 「レビュー中」 có mặt ở CẢ HAI thang** nhưng nghĩa khác nhau — ở cột đối khách nghĩa là *北ガス đang review*, ở dòng `状態` nghĩa là *người viết đã đưa bản nháp vào vòng review nội bộ*. Thấy chữ giống nhau đừng vội kết luận hai bên đã khớp.
 
-> **Chỉ đúng 2 trên 22 section đã viết nằm ngoài phạm vi 2026: B3 và B5** (B6 mới lập, chưa viết phần phạm vi).
-> Và **chỉ đúng 1 mục** nằm ở 「それ以降スコープ」 trên toàn bộ tài liệu: giao tiếp nội bộ trong B2.
+*Chi tiết + cách chọn thang khi báo cáo tiến độ: [Phụ lục B.4](#b4-trạng-thái-requirement-app--hai-thang-đo-song-song-đừng-lẫn) — bảng hai thang, ví dụ B5 và D3, và quy tắc: báo cho mui/北ガス thì dùng ステータス, tự tra file thì xem `状態`.*
 
-🔍 Nguồn: `eminel_gw_project/docs/eminel/3_requirements/app/B02_heating_control.md`
-→ mục 「要件案：それ以降スコープ」→「ローカル通信（2027/4〜）」, dòng 222–224
-→ nguyên văn: 「インターネット接続が失われていても、宅内から暖房自動制御を停止できる」
+> **Nhóm C là nhóm duy nhất đã qua review của khách** (C1–C5 đều レビュー済). Không section nào đạt mức 「fix済」 — nghĩa là **chưa có gì được đóng băng**.
+>
+> **Hai section B3 (lạnh) và B5 (DR) không làm gì trong 2026**: mục 「26年対応スコープ」 (*phạm vi làm trong 2026*) của chúng ghi 「- なし」 = không có gì, toàn bộ nội dung dồn xuống 「それ以降スコープ」 (*phạm vi làm sau đó*).
+> **Ngược lại, 21 section còn lại không hoãn gì cả**: mục 「それ以降スコープ」 của chúng mới là chỗ ghi 「- なし」.
 
-💡 Yêu cầu tối thiểu của giao tiếp nội bộ chỉ là: **mất internet vẫn tắt được sưởi.** Không phải để xem realtime.
+⚠️ Mục 「ローカル通信（2027/4〜）」 của B2 — *"mất internet vẫn tắt được sưởi từ trong nhà"* — **đã bị xoá khỏi requirement ngày 2026-08-05** cùng đợt gỡ các mô tả lấy biên bản trại tập trung làm nguồn. Yêu cầu gốc vẫn nằm ở biên bản `2_management/minutes/20260624_egw_camp_day2.md` mục 「ローカル通信（アプリ⇔GW）」 dòng 92–98 — 「ただしアプリからのローカル通信の口を全く作らないのはなし。最低限オフライン対応は要る」 *(vẫn phải chừa cửa giao tiếp nội bộ, tối thiểu là đối ứng offline)* — nhưng **không còn là requirement app**.
+
+### B6 マイホーム発電制御 — section trẻ nhất, đọc 5 phút là xong
+
+Section này tách khỏi B4 ngày 2026-07-30 và **nội dung mới được viết đầu tháng 8**. Gần như ngắn nhất bộ tài liệu (97 dòng, chỉ dài hơn C4 センサー情報 = 94 dòng), nhưng nên đọc vì nó là ví dụ sạch nhất về *"requirement bị chặn bởi một câu hỏi chưa ai trả lời"*.
+
+**Chức năng — đúng một câu:**
+
+🔍 Nguồn: `eminel_gw_project/docs/eminel/3_requirements/app/B06_myhome_generation.md`
+→ mục 「要件案：26年対応スコープ」, dòng 40
+→ nguyên văn: 「PVの発電量が閾値に達したとき、コレモまたはエネファームの発電を停止するよう促す案内を受けられる 【新規】」
+
+```
+Điện mặt trời (PV) phát nhiều, vượt ngưỡng
+        ↓  (E-GW theo dõi ngưỡng — phía gateway)
+App báo cho người dùng: "nên dừng phát điện コレモ / エネファーム đi"
+        ↓
+NGƯỜI DÙNG tự tắt  ← requirement hiện chỉ dừng ở mức GỢI Ý
+```
+
+📖 **Vì sao lại khuyên dừng máy phát điện?** Nhà đã có điện mặt trời dư thì chạy thêm máy phát bằng gas (コレモ/エネファーム) là **đốt gas để tạo thứ đang thừa** — vừa tốn tiền vừa lãng phí.
+
+**Ba ranh giới cần nhớ** *(mục 「関連項目」, dòng 59–60)*:
+
+| Việc | Thuộc section nào |
+|---|---|
+| Bật/tắt phát điện **thủ công** | B4 家電操作 (thao tác thiết bị gia dụng) |
+| **Ép dừng** phát điện do lệnh DR | B5 DR |
+| **Gợi ý** dừng khi PV vượt ngưỡng | B6 — chính là section này |
+
+🔴 **Chỗ chưa quyết — và đây mới là phần đáng giá:**
+
+🔍 cùng file, mục 「要確認事項」, dòng 80–82
+→ nguyên văn: 「F-GW-07の閾値到達時の挙動は、案内（ユーザーによる手動の発電停止）どまりの想定で良いか（確認先：先方）」
+
+Nghĩa là: tài liệu yêu cầu tích hợp mô tả `F-GW-07` *(mã chức năng gateway số 07 — "điều khiển phát điện tự dùng theo giám sát lượng phát PV")* bằng chữ 「ON/OFFの制御ができる」, **đọc được thành gateway tự tắt máy phát**. Còn requirement app lại viết là **chỉ gợi ý**. Nếu là tự động dừng thì phải bổ sung cả một cụm requirement mới: (1) cho người dùng **bật/tắt chính tính năng tự động dừng**, (2) báo cho họ biết khi máy phát đã bị dừng, (3) cơ chế xin đồng ý trước.
+
+Kèm hai thứ chưa có *(bảng 「備考と出典」, dòng 47)*: **giá trị ngưỡng** PV vẫn đang bàn (`GW-07` — ⚠️ đây là **mã vấn đề đang mở**, không phải mã chức năng `F-GW-07` vừa nhắc ở trên: *"các ngưỡng của logic điều khiển"*), và **エネファーム có nằm trong đối tượng điều khiển hay không** vẫn treo (`GW-04` — *"có điều khiển エネファーム hay không"*, mức 🔴). Cả hai nằm ở [mục 8.3](#83-những-gì-đang-mở) — bảng liệt kê mọi vấn đề chưa quyết theo nhóm SVC/GW/CLD kèm mức cấp bách.
 
 ### ⚠️ Cấu trúc vẫn đang chuyển động
 
 Chỉ trong tháng 7/2026 đã có **bốn** lần thay đổi:
 
 🔍 Nguồn: `eminel_gw_project/docs/eminel/3_requirements/app/README.md`
-→ mục 「廃止したセクション」, dòng 78–84 *(hai thay đổi đầu)*; hai thay đổi sau ghi ở dòng 経緯 của chính file mới: `A04_badge_rank.md` dòng 8, `B06_myhome_generation.md` dòng 8
+→ mục 「廃止したセクション」, dòng 82–87 *(hai thay đổi đầu)*; hai thay đổi sau ghi ở dòng 経緯 của chính file mới: `A04_badge_rank.md` dòng 8, `B06_myhome_generation.md` dòng 8
 
 | Ngày | Thay đổi | Lý do |
 |---|---|---|
@@ -2693,9 +2809,19 @@ Chỉ trong tháng 7/2026 đã có **bốn** lần thay đổi:
 | 2026-07-27 | **Tách A4 khỏi A3** | Huy hiệu/xếp hạng thành section riêng |
 | 2026-07-30 | **Tách B6 khỏi B4** | Điều khiển phát điện マイホーム発電 thành section riêng (bật/tắt phát điện thủ công vẫn ở B4) |
 
-🔍 nguyên văn (dòng 83): 「**ホーム**：画面であって機能ではないため廃止(2026-07-15)」
+🔍 nguyên văn (dòng 86): 「**ホーム**:画面であって機能ではないため廃止(2026-07-15)」
 
-⚠️ **Đừng hardcode mã section vào ticket hay tên branch.** Trạng thái các file vẫn là *レビュー中* / *ドラフト済（レビュー待ち）* — **chưa có file nào fix**.
+Và sang tháng 8, **nội dung** cũng bị sửa mạnh chứ không chỉ cấu trúc — **15 file bị đụng trong ba đợt liên tiếp**:
+
+| Ngày | Thay đổi | Nguồn |
+|---|---|---|
+| 2026-08-03 | **Phản ánh kết quả review của 北ガス từ slide đối khách** — chỉ đụng **B2**: bỏ 設定値運転, đổi sang trục 室温制御の有無 (*nhà có điều khiển theo nhiệt độ phòng hay không* — [§5.5](#55-điều-khiển-sưởi--phần-khó-nhất)), xoá section 機器構成とできること (*cấu hình thiết bị thì dùng được gì*) | `git show 9dc5e34` |
+| 2026-08-05 | • **Xoá mọi mô tả lấy biên bản trại tập trung (合宿議事) làm nguồn** — kéo theo mục 「ローカル通信（2027/4〜）」 của B2 và nhiều câu 要確認事項 biến mất<br>• **B3** đổi điều kiện 基本制御 sang 冷房スケジュール中 (*trong khung giờ được phép làm lạnh* — [§5.6](#56-điều-khiển-lạnh))<br>• **B6** マイホーム発電制御 được viết đầy đủ<br>• **Index** chuyển sang ba cột 内容・スコープ／ステータス／劣後 lấy từ slide đối khách | dòng `経緯`; `README.md` dòng 26 |
+| **2026-08-06** *(= commit `460c671` mà guide này đối chiếu)* | **E2 アプリログ và E3 ヘルプ**: dòng `状態` đổi từ 「ドラフト済（レビュー待ち）」 sang 「レビュー中」, cắt bớt 検討事項・関連項目 | `git show 460c671` |
+
+⚠️ **Đừng hardcode mã section vào ticket hay tên branch** — và **đừng trích requirement app mà không kiểm lại ngày sửa**: một câu bạn đọc tuần trước có thể đã bị xoá.
+
+📌 **Không section nào đạt 「fix済」.** Mức cao nhất hiện có là 「レビュー済」 (nhóm C).
 
 ---
 
@@ -2829,7 +2955,7 @@ Nguồn gốc thiết kế:
 
 Sau khi chốt layout sẽ **chuyển ngược vào Figma** làm tài sản bàn giao.
 
-⚠️ **Cập nhật 2026-08-03 (QA Notion, còn 回答中)**: hướng "chung với E-Smart" đã được masao takahashi (mui) trả lời — màn hình quản trị **chung source code, deploy cũng chung** với E-Smart (cùng người vận hành dùng), khớp với cách bản nháp này thể hiện (một web, chuyển E-Smart / E-GW bằng thanh bên). Nguyên văn + các trả lời QA khác: xem bảng ở [9.4](#94-vai-trò-và-môi-trường-của-syp).
+⚠️ **Hướng "chung với E-Smart" đã được xác nhận qua QA Notion (còn 回答中)**: masao takahashi (mui) trả lời — màn hình quản trị **chung source code, deploy cũng chung** với E-Smart (cùng người vận hành dùng), khớp với cách bản nháp này thể hiện (một web, chuyển E-Smart / E-GW bằng thanh bên). Nguyên văn + các trả lời QA khác: xem bảng ở [9.4](#94-vai-trò-và-môi-trường-của-syp).
 
 💡 **Cách dùng thực tế cho bạn**: khi đọc spec chữ thấy khó hình dung, mở màn hình tương ứng trong trình duyệt xem. Nhưng luôn nhớ **bản nháp không phải bản chốt**.
 
@@ -3119,7 +3245,7 @@ Chương trình trợ cấp của Bộ Môi trường Nhật Bản cho các dự
 
 ## 9.2 Hôm nay đang đứng ở đâu
 
-Tài liệu này lập ngày **2026-08-03**.
+Bản cập nhật này đối chiếu repo ngày **2026-08-06** (commit `460c671`).
 
 ```
     7/2026        [8/2026] ←── ĐANG Ở ĐÂY        9/2026            10/2026
@@ -3133,8 +3259,8 @@ Tài liệu này lập ngày **2026-08-03**.
 
 | | |
 |---|---|
-| **Còn ~2 tháng** | Tới hạn đóng băng toàn bộ spec và design — chính là những tài liệu mô tả ở [Chương 7](#chương-7--bộ-tài-liệu-của-dự-án) |
-| **Tất cả requirement app** | Vẫn ở trạng thái *レビュー中* / *ドラフト済* — **chưa file nào fix** |
+| **Còn chưa đầy 2 tháng** *(tính từ 2026-08-12)* | Tới hạn đóng băng toàn bộ spec và design — chính là những tài liệu mô tả ở [Chương 7](#chương-7--bộ-tài-liệu-của-dự-án) |
+| **Tất cả requirement app** | Cao nhất mới tới *レビュー済* (5 section nhóm C); còn lại rải từ *未掲載* (6) → *ドラフト作成中* (1) → *ドラフト作成* (4) → *レビュー前* (6) → *レビュー中* (1, chính là B2 điều khiển sưởi) — **chưa file nào fix** |
 | **Tất cả spec màn hình quản trị** | Vẫn ở trạng thái *DRAFT* |
 | **Việc cấp bách nhất** | Chốt các T.B.D — xem [Phụ lục C](#phụ-lục-c--danh-mục-tbd-đang-chặn-việc) |
 
@@ -3208,7 +3334,7 @@ Phần này dành riêng cho người ở phía SYP.
 
 Dịch: *"SYP tham gia mỏng hơn dự kiến ban đầu → hướng giao mảng batch và liên kết hệ thống ngoài (phần spec đã cố định). Việc có cần làm hay không thì phía mui sẽ ước lượng trước."*
 
-### ⚠️ Cập nhật từ QAデータベース Notion (2026-08-03 → 08-04)
+### ⚠️ Bốn câu trả lời của mui về phạm vi SYP (QAデータベース Notion)
 
 Bốn câu trả lời của mui mới hơn biên bản 6/25 phía trên, **đều đang ở trạng thái 回答中** (đang trả lời — chưa chốt) tại thời điểm đọc 2026-08-04; 質問者 đều là Bui Trong Dat (SYP), 起票 2026-08-03. Hai người trả lời đều thuộc **mui** — chú ý **masao takahashi (mui)** là người khác với 高橋 phía 北ガス ở [1.3](#13-bốn-bên-và-ai-làm-gì-cho-ai). *Notion là dữ liệu sống — trước khi trích lại phải mở trang gốc kiểm tra.*
 
@@ -3278,13 +3404,13 @@ Dịch: *"Spec quyết xong là SYP implement được gần hết."*
 
 Màn hình quản trị và app đều **chuyển đổi giữa ESTA và EMINEL bằng biến môi trường / cấu hình build**. Riêng app thì build hẳn thành **hai ứng dụng riêng biệt**.
 
-⚠️ **Cập nhật 2026-08-03 (QA Notion, 回答中)**: với màn hình quản trị, masao takahashi (mui) trả lời rõ hơn ghi chú camp này — **chung source code và deploy cũng chung một chỗ** (「デプロイも同一（同じ操作者が使う想定）」), không phải hai bản deploy tách nhau chuyển bằng biến môi trường. Xem bảng QA ở đầu mục 9.4.
+⚠️ **Với màn hình quản trị, QA Notion (回答中) nói khác ghi chú camp này**: masao takahashi (mui) trả lời rõ hơn — **chung source code và deploy cũng chung một chỗ** (「デプロイも同一（同じ操作者が使う想定）」), không phải hai bản deploy tách nhau chuyển bằng biến môi trường. Xem bảng QA ở đầu mục 9.4.
 
 ---
 
 ## 9.5 Sáu rủi ro lớn nhất
 
-*(Thang cảnh báo riêng của mục này: 🔴 = rủi ro cao · 🟠 = rủi ro vừa — không phải bộ ký hiệu trạng thái vấn đề ở mục 0.2.)*
+*(Thang cảnh báo riêng của mục này: 🔴 = rủi ro cao · 🟠 = rủi ro vừa · 🟡 = rủi ro thấp nhưng chưa ai đụng tới — **không** phải bộ ký hiệu trạng thái vấn đề ở mục 0.2, nơi 🟡 nghĩa là "đang chờ thông tin".)*
 
 Tổng hợp lại những gì rải rác khắp tài liệu. Xếp theo mức độ nghiêm trọng.
 
@@ -3292,9 +3418,9 @@ Tổng hợp lại những gì rải rác khắp tài liệu. Xếp theo mức �
 
 | | |
 |---|---|
-| Rủi ro | Tháng 9/2026 phải fix toàn bộ design + spec. Nhưng **23/23 section requirement app** đều chưa chốt (`レビュー中` / `ドラフト済`, riêng B6 còn `未着手`), và **10/10 spec màn hình quản trị** đều còn `DRAFT` |
+| Rủi ro | Tháng 9/2026 phải fix toàn bộ design + spec. Nhưng **23/23 section requirement app** đều chưa chốt — 5 section nhóm C mới đạt `レビュー済` (khách đã xem), 18 section còn lại chưa qua review, và **không section nào ở mức `fix済`**; **10/10 spec màn hình quản trị** vẫn còn `DRAFT` |
 | Vì sao nguy hiểm | Không chốt được thì tháng 10 không ghép được, kéo theo cả chuỗi tới thử nghiệm thực địa mùa đông — mà **mùa đông không dời được** |
-| Dấu hiệu | Đầu tháng 9 mà vẫn còn section ở `レビュー中` |
+| Dấu hiệu | Đầu tháng 9 mà ngoài nhóm C vẫn chưa có section nào lên được `レビュー済` |
 
 ### 🔴 2. Chưa có spec API — chặn cả việc giao và cả việc kiểm thử
 
@@ -3603,7 +3729,8 @@ Sắp theo **nhóm chủ đề**, không theo bảng chữ cái — vì học th
 | **暖房自動制御** | danbō jidō seigyo | **Điều khiển sưởi tự động** — tên gọi chung của toàn bộ hệ thống vận hành sưởi |
 | **スケジュール運転** | | **Chạy theo lịch** — lịch tuần với 3 chế độ |
 | **室温制御** | shitsuon seigyo | **Điều khiển theo nhiệt độ phòng** — đọc cảm biến, so với nhiệt độ cài đặt |
-| **設定値運転** | | **Chạy theo giá trị đặt sẵn** — không hiệu chỉnh theo nhiệt độ thực tế |
+| **温度レベル** | ondo reberu | **Mức nhiệt** — dùng thay nhiệt độ cụ thể ở nhà không có 室温制御 (nấc cụ thể chưa được định nghĩa) |
+| **設定値運転** | | ⚠️ **Khái niệm đã bị gỡ (08/2026)** — không còn hiệu lực. Nghĩa cũ: chạy theo giá trị đặt sẵn, không hiệu chỉnh theo nhiệt độ thực tế; nay gọi là *lịch tuần không có 室温制御*. Chữ này còn sót đúng một chỗ trong repo: bảng đối chiếu tên gọi của `B02_heating_control.md` dòng 59 — xem [5.5](#55-điều-khiển-sưởi--phần-khó-nhất) |
 | **予約運転** | yoyaku unten | **Chạy theo đặt trước** — giờ bắt đầu + kết thúc + nhiệt độ. Ưu tiên hơn lịch |
 | **優先運転** | yūsen unten | ⚠️ **Của hệ CŨ.** Chỉ bắt đầu ngay. **Không còn trong E-GW** |
 | **省エネモード** | shōene mōdo | **Chế độ tiết kiệm** — 3 loại hiệu chỉnh, chỉ chạy trong 室温制御 |
@@ -3660,14 +3787,14 @@ Sắp theo **nhóm chủ đề**, không theo bảng chữ cái — vì học th
 
 # Phụ lục B — Bảng mâu thuẫn giữa các tài liệu
 
-Bốn mâu thuẫn tìm được khi đối chiếu chéo. **Trình bày cả hai phía, không tự phán bên nào đúng** — việc kết luận thuộc về người có thẩm quyền.
+Ba mâu thuẫn tìm được khi đối chiếu chéo, cộng **một cặp trạng thái hay bị đọc nhầm thành mâu thuẫn** (B.4). **Trình bày cả hai phía, không tự phán bên nào đúng** — việc kết luận thuộc về người có thẩm quyền.
 
 | # | Mâu thuẫn | Mức độ | Cần hỏi ai |
 |---|---|---|---|
 | B.1 | Huy hiệu / xếp hạng thuộc năm nào | 🔴 Cao — ảnh hưởng ước lượng | 北ガス *(QA câu 1 — đã có trả lời tạm của mui 08-03; 回答中, đọc 08-04)* |
 | B.2 | Điểm thưởng và tư vấn tiết kiệm thuộc năm nào | 🔴 Cao — ~2 người-tháng | 北ガス *(QA câu 2)* |
 | B.3 | Thông báo trông nom có làm không | 🔴 Cao — ảnh hưởng firmware | 北ガス *(QA câu 3)* |
-| B.4 | Trạng thái B5 giữa file và index (B4 đã đồng bộ) | 🟡 Thấp — nội bộ | Người quản lý tài liệu |
+| B.4 | Hai thang trạng thái song song (file md ↔ index đối khách) | 🟡 Thấp — chỉ cần đọc đúng thang | Không phải mâu thuẫn, chỉ cần biết |
 
 ## B.1 Huy hiệu / xếp hạng thuộc phạm vi năm nào
 
@@ -3705,7 +3832,9 @@ Bốn mâu thuẫn tìm được khi đối chiếu chéo. **Trình bày cả ha
 |---|---|---|
 | `20_open_issues.md` | `CLD-05` 🔴 **実装要否** chưa quyết, chênh 0–1 người-tháng | dòng 171–173 |
 | `10_feature_list.md` | 0.75 người-tháng, **không** đánh dấu 劣後 | dòng 94 |
-| `3_requirements/app/D04_mimamori.md` | Có nội dung đầy đủ trong **26年対応スコープ** | mục 「要件案：26年対応スコープ」 |
+| `3_requirements/app/D04_mimamori.md` | Có nội dung đầy đủ trong **26年対応スコープ**. Mục 「要確認事項」 nay chỉ còn 「- なし」 — dấu hiệu duy nhất còn lại nằm ở dòng `経緯` (dòng 8) và bảng 参照 (dòng 20) | mục 「要件案：26年対応スコープ」 |
+
+⚠️ **Mâu thuẫn này vừa sâu thêm (2026-08-05).** Bản trước của D04 có hẳn một khối 要確認事項 ghi rõ *"việc có làm hay không còn chưa quyết (CLD-05), bản nháp này viết theo giả định là làm; nếu chốt không làm thì **bỏ nguyên section, không làm mỏng từng phần**"*, kèm việc *"phải điều tra chức năng 「お部屋みまもり」 của ESTA trước khi chốt nháp"* — khối đó **đã bị xoá**, trong khi `CLD-05` **vẫn còn nguyên** trong danh sách vấn đề đang mở (dòng 45 và 171). Cảnh báo còn sót lại giờ **chỉ là một mệnh đề phụ trong dòng `経緯`** — 「実装要否は未決（CLD-05）だが、やる前提で全量記載」 — chỗ mà người đọc requirement rất dễ lướt qua.
 
 **Nghi ngờ**: đây có thể không phải lỗi mà là **hai tầng khác nhau** — bảng chức năng và requirement giả định "sẽ làm", còn vấn đề đang mở phản ánh việc 北ガス chưa xác nhận chính thức. Nhưng cần làm rõ, vì:
 
@@ -3713,20 +3842,33 @@ Bốn mâu thuẫn tìm được khi đối chiếu chéo. **Trình bày cả ha
 
 → Đã đưa vào `qa_kitagas.md` **câu 3**.
 
-## B.4 Trạng thái của B5 — index không khớp file *(B4 đã được đồng bộ)*
+## B.4 Trạng thái requirement app — hai thang đo song song, đừng lẫn
 
-| Nguồn | B4 家電操作 | B5 DR |
+Từ 2026-08-05, một section có **hai trạng thái khác nhau cùng lúc**, và chúng không phải lúc nào cũng trùng:
+
+| Thang đo | Ghi ở đâu | Giá trị | Ý nghĩa |
+|---|---|---|---|
+| **Tiến độ tài liệu** (nội bộ) | dòng `状態` ở bảng đầu **mỗi file md** | ドラフト済（レビュー待ち） / レビュー中 / *(fix済 — bậc cuối theo quy trình, **hiện chưa file nào đạt**)* | Người viết requirement tự khai bản nháp đang ở bước nào |
+| **ステータス đối khách** | bảng index `app/README.md` | 未掲載 / ドラフト作成中 / ドラフト作成 / レビュー前 / レビュー中 / レビュー済 | Lấy nguyên từ slide 「要件一覧」 gửi 北ガス |
+
+⚠️ Hai thang **dùng chung chữ 「レビュー中」** nhưng khác nghĩa: ở cột đối khách = *北ガス đang review*; ở dòng `状態` = *người viết đã đưa bản nháp vào vòng review nội bộ*. Thấy chữ giống nhau đừng vội kết luận hai bên đã khớp.
+
+Ví dụ điển hình *(kiểm ngày 2026-08-12, commit `460c671`)*:
+
+| Section | Trong file md | Trên index (đối khách) |
 |---|---|---|
-| Chính file *(dòng `状態` đầu file)* | レビュー中 | **レビュー中** |
-| Bảng index `app/README.md` | レビュー中 *(✅ đã khớp)* | ⚠️ **ドラフト済（レビュー待ち）** |
+| B5 DR | `B05_dr.md` dòng 5 → レビュー中 | レビュー前 |
+| D3 PUSH通知 | `D03_push.md` dòng 5 → レビュー中 | レビュー前 |
 
-**Nghi ngờ**: chính file là bản mới hơn. File B05 ghi trong dòng `経緯` rằng đã được chỉnh sang định dạng mới ngày **2026-07-29** — nhiều khả năng lúc đó trạng thái được nâng lên nhưng **quên cập nhật bảng index** (B4 đã được sửa lại index, B5 thì chưa).
+**Đây không phải lỗi đồng bộ.** Từ 2026-08-05, index thôi khai cột 状態 và chuyển sang chép nguyên giá trị đối khách từ slide 「要件一覧」 — nên hai con số **cố ý** đo hai việc khác nhau, không còn buộc phải khớp: nội bộ đã đưa vào review rồi, nhưng với khách thì vẫn tính là chưa review xong.
 
-**Hệ quả**: nhẹ hơn ba mâu thuẫn trên, nhưng vẫn đáng biết. Nếu bạn nhìn bảng index để đánh giá tiến độ, sẽ tưởng B5 chưa ai đọc, trong khi thực tế đang được trao đổi.
+**Hệ quả khi làm việc**:
 
-**Nguyên tắc rút ra**: 👉 **khi trạng thái file và index khác nhau, tin chính file** — vì file được sửa trước, index được cập nhật sau.
+- Báo cáo tiến độ cho **mui / 北ガス** → dùng cột ステータス của index.
+- Muốn biết **file đã viết tới đâu để đọc/trích** → mở chính file, xem dòng `状態`.
+- Trạng thái review chi tiết nhất nằm ở `tasks/app_requirements_plan.md` — **không có trong repo local**, muốn xem phải hỏi mui.
 
-*(Đây là mâu thuẫn nội bộ, không cần hỏi 北ガス — chỉ cần báo cho người quản lý tài liệu.)*
+*(Không cần hỏi 北ガス. Đây không phải lỗi tài liệu — chỉ cần đọc đúng thang; thấy hai bên lệch là bình thường, không phải chỗ để báo lỗi.)*
 
 ---
 
@@ -3744,12 +3886,12 @@ Những chỗ **chưa quyết mà đang cản trở công việc**, xếp theo m
 | 6 | **Còn phải suy luận tách gas không** | Toàn bộ biểu đồ gas + report sưởi | `old_eminel/01_overview.md` dòng 59 · `IF-23` TBD | 北ガス |
 | 7 | **Nguồn dữ liệu gom nhóm** | Batch tổng hợp cho xếp hạng và so sánh | `00_integrated_requirements_v1.2.md` dòng 417 · `4_spec/admin/B_user_management.md` dòng 37 | oi / 北ガス |
 | 8 | **Gom 15 loại tư vấn còn 7** | Requirement C5 + màn hình quản trị G | `20_open_issues.md` dòng 176 | 北ガス |
-| 9 | **Nấc thời gian của lịch sưởi** | Giao diện đặt lịch | `app/B02_heating_control.md` dòng 272–273 | 北ガス |
+| 9 | **Nấc thời gian của lịch sưởi** (`スケジュール刻み`) | Giao diện đặt lịch | `20_open_issues.md` dòng 176 *(bản 08-03 đã bỏ mục này khỏi 要確認事項 của B2)* | 北ガス |
 | 10 | **Nội dung màn hình thống kê F-AD-11** | Màn hình thống kê — hoàn toàn trống | `20_open_issues.md` dòng 176 | 北ガス |
 | 11 | **Yêu cầu phi chức năng** (số kết nối đồng thời, SLA, thời hạn lưu, di trú 30.000 khách) | Chọn kiến trúc server, cấu hình dự phòng | `20_open_issues.md` dòng 86–88 | 北ガス |
 | 12 | **Tài khoản dev cho TagTag / PI / Xzilla** | `CLD-02` — quyết định chiến lược branch | `20_open_issues.md` dòng 158 | 北ガス / Aqara |
 
-⚠️ **Mười trên mười hai câu có bóng ở phía 北ガス.** Nên gom vào **một bảng câu hỏi gửi một lần**, không hỏi lẻ — đúng cách 北ガス đang làm việc qua bảng QA.
+⚠️ **Cả mười hai câu đều cần 北ガス**, trong đó **chín câu bóng nằm hoàn toàn ở phía họ**; ba câu còn lại phải quyết cùng một bên nữa (kihara ở #5 · oi ở #7 · Aqara ở #12). Nên gom vào **một bảng câu hỏi gửi một lần**, không hỏi lẻ — đúng cách 北ガス đang làm việc qua bảng QA.
 
 ---
 
@@ -3832,10 +3974,13 @@ Câu hỏi của bạn
 | 3 | Repo tham chiếu | `legacy_eminel_docs` (hệ cũ) / `syp-eminelstandard-*` (ESTA) |
 | 4 | **Slack** | 3 kênh dự án — thường có câu trả lời nhanh nhất |
 | 5 | **Notion / OneDrive** | Bản chính của spec và biên bản |
+| 6 | **QAデータベース (Notion)** | Nơi SYP đăng câu hỏi, mui trả lời trực tiếp — nguồn **cấp 1** cho mọi câu trả lời của mui |
 
 🔍 Nguồn quy trình: `eminel_gw_project/.claude/skills/trace-source/SKILL.md`
 
-⚠️ **Bổ sung 2026-08-03**: dự án có **QAデータベース trên Notion** — nơi SYP đăng câu hỏi (khối 🇯🇵 trong `qa_kitagas.md` dán được nguyên vẹn) và phía mui trả lời trực tiếp. Mỗi trang có property: ステータス (*trạng thái* — 回答中 = đang trả lời, 回答済 = đã trả lời xong), 質問者 (*người hỏi*), 回答者 (*người trả lời*), 回答内容 (*nội dung trả lời*), 起票 (*ngày tạo phiếu*). Đây là nguồn **cấp 1** cho các câu trả lời của mui — nhưng là dữ liệu sống: khi trích dẫn phải ghi kèm ngày đọc, và mở lại trang gốc kiểm tra trạng thái trước khi dùng.
+**Về QAデータベース (hàng 6)**: SYP đăng câu hỏi ở đây (khối 🇯🇵 trong `qa_kitagas.md` dán được nguyên vẹn) và phía mui trả lời trực tiếp. Mỗi trang có property: ステータス (*trạng thái* — 回答中 = đang trả lời, 回答済 = đã trả lời xong), 質問者 (*người hỏi*), 回答者 (*người trả lời*), 回答内容 (*nội dung trả lời*), 起票 (*ngày tạo phiếu*).
+
+⚠️ Đây là **dữ liệu sống**: khi trích dẫn phải ghi kèm ngày đọc, và mở lại trang gốc kiểm tra trạng thái trước khi dùng.
 
 ## E.3 Bước 3 — Bản nào là bản chính?
 
@@ -3864,7 +4009,7 @@ Repo có sẵn các skill của Claude Code:
 | `/trace-source` | *"Tìm giúp tôi X"* / *"Căn cứ của câu này ở đâu?"* — tự động lần về nguồn gốc |
 | `/fact-check` | Kiểm chứng một khẳng định có đúng không |
 | `/check-issues` | Kiểm tra tính nhất quán giữa các file 20/21/22 |
-| `/backport-slide-review` | Đồng bộ nội dung review trên slide ngược về file `.md` *(mới thêm 2026-08-03)* |
+| `/backport-slide-review` | Đồng bộ nội dung review trên slide ngược về file `.md` *(dùng khi 北ガス review trên slide, cần kéo kết quả về requirement)* |
 
 🔍 Nguồn: `eminel_gw_project/.claude/skills/`
 
@@ -3952,15 +4097,15 @@ Làm hết rồi mới xem [Phụ lục G](#phụ-lục-g--đáp-án). Đạt **
 **21.** Tắt 暖房自動制御 rồi bật lại, 予約運転 đã đặt ra sao?
 (A) Bị huỷ, không khôi phục (B) Giữ và tự chạy lại (C) Giữ nhưng phải xác nhận (D) Chuyển thành lịch tuần
 
-**22.** Nhà không đọc được nhiệt độ phòng thì lịch tuần chạy kiểu gì?
-(A) 室温制御 dùng nhiệt độ ngoài trời (B) 設定値運転 (C) Không chạy được lịch tuần (D) Chuyển sang 予約運転
+**22.** Nhà không đọc được nhiệt độ phòng thì lịch tuần cài đặt kiểu gì?
+(A) 室温制御 dùng nhiệt độ ngoài trời (B) Đặt 温度レベル cho từng chế độ, không có 室温制御 (C) Không chạy được lịch tuần (D) Chuyển sang 予約運転
 
 **23.** 26年対応スコープ của B3 (lạnh) và B5 (DR) ghi gì?
 (A) Đầy đủ như B2 (B) Một nửa trong 2026 (C) なし — không có gì (D) Để trống chờ 北ガス
 
 ## Nhóm 7 — Tài liệu (câu 24–27)
 
-**24.** Trong các section requirement app đã viết, section nào có 26年スコープ = なし?
+**24.** Section nào có 26年対応スコープ ghi 「- なし」?
 (A) Chỉ B3 và B5 (B) Toàn bộ nhóm B (C) B3, B5, A4 (D) Không section nào
 
 **25.** Section 「ホーム」 bị bỏ vì lý do gì?
@@ -4050,9 +4195,9 @@ Làm hết rồi mới xem [Phụ lục G](#phụ-lục-g--đáp-án). Đạt **
 | 19 | **C** | MC = Management Cloud | [6.1](#61-bốn-nhóm-mã-chức-năng) |
 | 20 | **D** | Tắt 省エネモード thì 室温制御 vẫn chạy | [5.5](#55-điều-khiển-sưởi--phần-khó-nhất) |
 | 21 | **A** | Vì không đảo ngược được nên bắt buộc hỏi xác nhận trước khi tắt | [5.5](#55-điều-khiển-sưởi--phần-khó-nhất) |
-| 22 | **B** | Đặt thẳng bật/tắt + nhiệt độ theo khung giờ | [5.5](#55-điều-khiển-sưởi--phần-khó-nhất) |
+| 22 | **B** | Không có nhiệt độ phòng để so → mỗi chế độ đặt **温度レベル** thay cho nhiệt độ cụ thể | [5.5](#55-điều-khiển-sưởi--phần-khó-nhất) |
 | 23 | **C** | Requirement viết đầy đủ nhưng toàn bộ nằm ở 「それ以降スコープ」 | [7.3](#73-requirement-app-23-section) |
-| 24 | **A** | 20/23 section còn lại đều có nội dung trong phạm vi 2026 (B6 mới lập, chưa viết phần phạm vi) | [7.3](#73-requirement-app-23-section) |
+| 24 | **A** | Chỉ B3 (lạnh) và B5 (DR) ghi 「- なし」 ở 26年対応スコープ; 21 section còn lại đều có nội dung thuộc phạm vi 2026 | [7.3](#73-requirement-app-23-section) |
 | 25 | **D** | Việc gom lên màn hình Home thuộc pha thiết kế | [7.3](#73-requirement-app-23-section) |
 | 26 | **B** | Đối chiếu tài liệu thiết kế bản thương mại V1.0.4 | [7.3](#73-requirement-app-23-section) |
 | 27 | **C** | Chỉ định nghĩa What; UI và How thuộc tài liệu khác | [7.1](#71-bản-đồ-sáu-tầng) |
@@ -4082,6 +4227,6 @@ Làm hết rồi mới xem [Phụ lục G](#phụ-lục-g--đáp-án). Đạt **
 |---|---|
 | Bộ khung và tiêu chuẩn review | [README.md](README.md) |
 | Bảng câu hỏi gửi khách hàng | [qa_kitagas.md](qa_kitagas.md) |
-| Đối chiếu với repo | `eminel_gw_project` bản ngày **2026-08-03** |
+| Đối chiếu với repo | `eminel_gw_project` commit **`460c671`** (2026-08-06) |
 
 ⚠️ Nếu bạn đọc tài liệu này sau nhiều tháng, hãy kiểm tra lại `最終更新` của các file gốc — dự án đang chuyển động nhanh.

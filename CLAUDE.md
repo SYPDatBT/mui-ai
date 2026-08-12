@@ -16,7 +16,7 @@ là làm việc tiếp được**, chỉ cần trỏ lại vị trí các repo g
 | Đường dẫn | Là gì | Quyền |
 |---|---|---|
 | `requirements/README.md` | Bộ khung + tiêu chuẩn review của bộ tài liệu trong `requirements/` | sửa khi có lý do |
-| `requirements/onboarding_guide.md` | TÀI LIỆU HỌC CHÍNH (v1.1, ~4.000 dòng) + `assets/` ảnh | sửa theo quy trình `requirements/README.md` §8–9 |
+| `requirements/onboarding_guide.md` | TÀI LIỆU HỌC CHÍNH (v1.2, ~4.200 dòng) + `assets/` ảnh | sửa theo quy trình `requirements/README.md` §8–9 |
 | `requirements/qa_kitagas.md` | Bảng câu hỏi VN–JP gửi khách (khối JP paste được nguyên vẹn) | sửa cẩn trọng — sẽ gửi khách |
 | `memory/` | Ký ức xuyên phiên: `00_INDEX.md` + `NN_session_*.md` | cập nhật bằng skill `/update-memory` |
 | `skillAI/` | Skill: `notion-connect`, `slack-connect`, `update-memory`, `3-step-review` (review 3 vòng + thủ tục máy mới), `create-investigation-report` (tạo báo cáo điều tra theo TEMPLATE v4), `analyze-change-request` (⛔#11 — tiếp nhận yêu cầu sửa: phân tích → tranh biện đa agent → đề xuất tổng thể, KHÔNG vá ngay) | đọc SKILL.md trước khi dùng |
