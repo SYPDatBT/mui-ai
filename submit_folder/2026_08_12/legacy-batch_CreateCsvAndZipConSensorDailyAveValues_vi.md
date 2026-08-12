@@ -1,5 +1,30 @@
 # Điều tra batch hệ cũ — CreateCsvAndZipConSensorDailyAveValuesCommand (sinh CSV/ZIP giá trị trung bình theo ngày)
 
+> ## Kết luận
+>
+> **Phán định: không cần giữ batch（バッチとしては不要）— hệ mới thay bằng F-AD-09（データダウンロード / tải dữ liệu）.**
+>
+> - **Batch này làm gì**: biến partition tháng-trước-nữa của bảng trung bình nhóm `s_113` (không có cột EMS-SP) thành **đúng một** file CSV; lần chạy nào cũng nén ZIP rồi xoá thư mục.
+> - **Vì sao bỏ được**: hệ mới không "làm sẵn file định kỳ" — khi quản trị viên chọn khoảng thời gian, `api-download` khởi động bất đồng bộ `batch-download` Lambda sinh ZIP rồi phát qua URL ký sẵn của S3; việc lưu giữ do DynamoDB TTL + PITR đảm nhận → cơ chế "xuất file trước khi DROP" tự nó không còn cần. *(Căn cứ: điều tra backend e-smart `api-download`/`batch-download` — ngoài phạm vi tài liệu này.)*
+> - **Riêng batch này**: điểm cần bàn khi chuyển hệ là "giữ dữ liệu quá thời hạn lưu 2 tháng bằng cách nào", **không phải** tái hiện logic xuất CSV. Giá trị trung bình do batch tổng hợp `CalcCommonAverageDataCommand` tính (nhóm 集計・計算系, chưa điều tra) — hệ mới giữ/cung cấp dữ liệu trung bình nhóm thế nào là luận điểm phía spec; 別表① của spec [I] cũng chưa có loại tương đương (đã lập câu QA).
+> - **Điểm treo (要FIX ở spec [I])**: 保持期間 (thời hạn lưu) và 対象データ種別 (loại dữ liệu download) của E-GW chưa chốt — bộ câu hỏi ở `qa_batch_csvzip.md` (cùng thư mục).
+>
+> Bảng phán định đầy đủ (47 batch): `summary_batch_migration_ja.md` (cùng thư mục), dòng `CreateCsvAndZipConSensorDailyAveValuesCommand`.
+
+**Khối tiếng Nhật để đăng Notion** (paste nguyên vẹn):
+
+```
+役割：月毎平均センサ情報（s_113）の前々月パーティションをCSV1本にまとめ、毎回ZIP圧縮（EMS-SP列を持たないグループ平均値）。
+
+判定：バッチとしては不要（新システムでは F-AD-09 データダウンロードで代替）。
+
+理由：新システムは「定期的にファイルを作り置き」しない。管理者が期間を指定した時点で api-download が batch-download Lambda を非同期起動してZIPを生成し、S3経由の署名付きURLで配布する方式。DB側の保持は DynamoDB TTL、バックアップは PITR が担うため、「退避してからDROP」という仕組み自体が不要。
+
+補足：移行時の論点は「保持期間（2ヶ月）を超えたデータをどう残すか」であり、CSV出力ロジックの再現ではない。平均値の算出は本バッチではなく集計系バッチ CalcCommonAverageDataCommand が担うため、グループ平均データ自体を新システムでどう保持・提供するかは spec 側の論点。
+
+残論点：E-GWの保持期間・対象データ種別は spec [I]（データダウンロード機能仕様）で要FIX。別表①にグループ平均値の相当種別が無い点も別途QAにて確認予定。
+```
+
 ## Tổng quan
 
 `CreateCsvAndZipConSensorDailyAveValuesCommand` là batch của hệ cũ (máy chủ concierge của EMINEL), **chỉ chạy vào mùng 1 hằng tháng lúc 05:15**. Nó đọc partition theo tháng của **tháng trước nữa** trong bảng thông tin cảm biến trung bình theo tháng (「月毎平均センサ情報」) `s_113`, ghi ra **đúng một file CSV**, rồi **lần chạy nào cũng nén ZIP** và xoá cả thư mục.
@@ -21,8 +46,7 @@
 >
 > 📖 **"Tháng trước nữa" (前々月)**: nếu chạy ngày 01/03 thì tháng đích là **tháng 1**, không phải tháng 2. Lý do ở mục 2.1.
 
-> **Phạm vi tài liệu này**: chỉ điều tra hành vi hệ cũ. Tài liệu **không** chứa: thiết kế thay thế cho E-GW, các bước chuyển đổi, bảng đối chiếu cũ↔mới.
-> **Kết luận đã chốt ở bảng tổng hợp** (nêu ở đây để khỏi phải tra ngược): **"không cần giữ batch"** — hệ mới dùng **F-AD-09 (tải dữ liệu: sinh file tại thời điểm quản trị viên chọn khoảng thời gian)**, thay vì làm sẵn file định kỳ. Căn cứ đầy đủ ở `requirements/summary_batch_migration_ja.md`, dòng `CreateCsvAndZipConSensorDailyAveValuesCommand`.
+> **Phạm vi tài liệu này**: chỉ điều tra hành vi hệ cũ. Tài liệu **không** chứa: thiết kế thay thế cho E-GW, các bước chuyển đổi, bảng đối chiếu cũ↔mới. Phán định giữ/bỏ: khối **Kết luận** đầu tài liệu.
 
 ## Phần 1 — Tổng quan
 
@@ -187,4 +211,4 @@ Nguồn: `legacy_eminel_docs/sources/conciergesv-develop/src/Command/CreateZipsT
 
 Tên có chữ "giá trị trung bình" nhưng batch **không tính trung bình**. Giá trị trung bình do batch tổng hợp `CalcCommonAverageDataCommand` ghi sẵn vào `s_113` (`legacy_eminel_docs/sources/conciergesv-develop/src/Command/CalcCommonAverageDataCommand.php:1283` chỉ định bảng đích `EminelSvLib.ConSensorDailyAveValues`; lệnh lưu ở cùng file `:468, 1013`); batch này chỉ chép sang CSV. Vì vậy điểm cần bàn khi chuyển hệ thu về: **dữ liệu quá thời hạn lưu (2 tháng) thì giữ lại bằng cách nào.**
 
-> Phán định (có giữ batch không, hệ mới thay bằng gì) nằm ở bảng tổng hợp `requirements/summary_batch_migration_ja.md`, dòng của batch này. Kết luận: **"không cần giữ batch"** — hệ mới dùng F-AD-09.
+> Phán định (có giữ batch không, hệ mới thay bằng gì) nằm ở bảng tổng hợp `summary_batch_migration_ja.md` (cùng thư mục), dòng của batch này. Kết luận: **"không cần giữ batch"** — hệ mới dùng F-AD-09.

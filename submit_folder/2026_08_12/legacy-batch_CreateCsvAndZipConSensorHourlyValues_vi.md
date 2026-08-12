@@ -1,5 +1,30 @@
 # Điều tra batch hệ cũ — CreateCsvAndZipConSensorHourlyValuesCommand (sinh CSV/ZIP giá trị cảm biến theo giờ)
 
+> ## Kết luận
+>
+> **Phán định: không cần giữ batch（バッチとしては不要）— hệ mới thay bằng F-AD-09（データダウンロード / tải dữ liệu）.**
+>
+> - **Batch này làm gì**: biến partition 8-ngày-trước của bảng giá trị cảm biến theo giờ `s_102` (một bản ghi = một ngày, 24 giờ nằm ngang) thành CSV theo từng hộ, thứ Hai nén ZIP thư mục tuần-trước-nữa — di tản dữ liệu ra file trước khi hết hạn lưu **14 ngày** trong DB.
+> - **Vì sao bỏ được**: hệ mới không "làm sẵn file định kỳ" — khi quản trị viên chọn khoảng thời gian, `api-download` khởi động bất đồng bộ `batch-download` Lambda sinh ZIP rồi phát qua URL ký sẵn của S3; việc lưu giữ do DynamoDB TTL + PITR đảm nhận → cơ chế "xuất file trước khi DROP" tự nó không còn cần. *(Căn cứ: điều tra backend e-smart `api-download`/`batch-download` — ngoài phạm vi tài liệu này.)*
+> - **Riêng batch này**: DB giữ `s_102` 14 ngày nhưng CSV hoá vẫn ở mốc −8 ngày → file luôn có trước lúc DROP 7 ngày; đó là chủ ý hay khuôn code chép lại thì code lẫn tài liệu thiết kế đều không ghi. Hệ mới thay toàn bộ thiết kế thời hạn lưu bằng TTL.
+> - **Điểm treo (要FIX ở spec [I])**: 保持期間 (thời hạn lưu) và 対象データ種別 (loại dữ liệu download) của E-GW chưa chốt — bộ câu hỏi ở `qa_batch_csvzip.md` (cùng thư mục).
+>
+> Bảng phán định đầy đủ (47 batch): `summary_batch_migration_ja.md` (cùng thư mục), dòng `CreateCsvAndZipConSensorHourlyValuesCommand`.
+
+**Khối tiếng Nhật để đăng Notion** (paste nguyên vẹn):
+
+```
+役割：日毎センサ情報（s_102）の8日前パーティションを契約者ごとにCSV化し、月曜に前々週分をZIP圧縮（24時間分が横持ち）。
+
+判定：バッチとしては不要（新システムでは F-AD-09 データダウンロードで代替）。
+
+理由：新システムは「定期的にファイルを作り置き」しない。管理者が期間を指定した時点で api-download が batch-download Lambda を非同期起動してZIPを生成し、S3経由の署名付きURLで配布する方式。DB側の保持は DynamoDB TTL、バックアップは PITR が担うため、「退避してからDROP」という仕組み自体が不要。
+
+補足：s_102 のDB保持は14日だがCSV化は8日前に行われるため、結果として DROP の7日前にファイルが出来上がる（それが意図的な設計かはコード・設計書に記述が無く不明）。新システムでは保持期間の設計そのものを TTL で置き換える。
+
+残論点：E-GWの保持期間・対象データ種別は spec [I]（データダウンロード機能仕様）で要FIX。
+```
+
 ## Tổng quan
 
 `CreateCsvAndZipConSensorHourlyValuesCommand` là batch của hệ cũ (máy chủ concierge của EMINEL), chạy **05:15 mỗi ngày**. Nó đọc **partition theo ngày của 8 ngày trước** trong bảng thông tin cảm biến theo ngày (「日毎センサ情報」) `s_102`, rồi ghi ra **mỗi hộ (EMS-SP) một file CSV** vào thư mục theo tuần.
@@ -21,8 +46,7 @@ Mỗi ngày batch ghi thêm dữ liệu của "8 ngày trước" vào thư mục
 >
 > 📖 **EMS-SP**: mã số định danh một hộ ký hợp đồng dịch vụ EMINEL (`EMS-SP-NO`).
 
-> **Phạm vi tài liệu này**: chỉ điều tra hành vi hệ cũ. Tài liệu **không** chứa: thiết kế thay thế cho E-GW, các bước chuyển đổi, bảng đối chiếu cũ↔mới.
-> **Kết luận đã chốt ở bảng tổng hợp** (nêu ở đây để khỏi phải tra ngược): **"không cần giữ batch"** — hệ mới dùng **F-AD-09 (tải dữ liệu: sinh file tại thời điểm quản trị viên chọn khoảng thời gian)**, thay vì làm sẵn file định kỳ. Căn cứ đầy đủ ở `requirements/summary_batch_migration_ja.md`, dòng `CreateCsvAndZipConSensorHourlyValuesCommand`.
+> **Phạm vi tài liệu này**: chỉ điều tra hành vi hệ cũ. Tài liệu **không** chứa: thiết kế thay thế cho E-GW, các bước chuyển đổi, bảng đối chiếu cũ↔mới. Phán định giữ/bỏ: khối **Kết luận** đầu tài liệu.
 
 ## Phần 1 — Tổng quan
 
@@ -200,4 +224,4 @@ Nguồn: `legacy_eminel_docs/sources/conciergesv-develop/src/Command/CreateZipsT
 
 Batch không tính toán hay tổng hợp giá trị nào — giá trị theo giờ đã được batch tổng hợp khác ghi sẵn vào `s_102`, batch này chỉ chép sang CSV. Vì vậy điểm cần bàn khi chuyển hệ thu về: **dữ liệu quá thời hạn lưu (14 ngày) thì giữ lại bằng cách nào.**
 
-> Phán định (có giữ batch không, hệ mới thay bằng gì) nằm ở bảng tổng hợp `requirements/summary_batch_migration_ja.md`, dòng của batch này. Kết luận: **"không cần giữ batch"** — hệ mới dùng F-AD-09.
+> Phán định (có giữ batch không, hệ mới thay bằng gì) nằm ở bảng tổng hợp `summary_batch_migration_ja.md` (cùng thư mục), dòng của batch này. Kết luận: **"không cần giữ batch"** — hệ mới dùng F-AD-09.
