@@ -45,21 +45,40 @@
    → ĐỀ XUẤT giải pháp tổng thể cho user duyệt → thực thi nguyên khối (sửa gốc template/skill trước, áp
    xuống tài liệu sau). **Đồng thuận ngay + vá ngay = lỗi quy trình.** (Bài học 08-06: chuỗi vá đuổi theo
    từng yêu cầu tạo tài liệu "nồi lẩu", phải đập làm lại từ đầu theo template mẫu.)
+12. **MỌI file QA sống ở `submit_folder/qa/` — tên file = mô tả nội dung hỏi + NGÀY THÁNG.** (User chỉ đạo 08-13,
+   đã tự tay dời `qa_kitagas.md` từ `requirements/` và `qa_batch_csvzip.md` từ `submit_folder/2026_08_12/` vào đó.)
+   Quy ước tên: `qa_<chủ-đề>_<YYYYMMDD>.md` — ví dụ `qa_batch_shukei_20260815.md`. **Không** rải file QA theo
+   thư mục ngày nộp như tài liệu điều tra, **không** để trong `requirements/`. Hai file cũ giữ nguyên tên
+   (chưa có ngày) vì đã bị nhiều tài liệu trích dẫn — quy ước ngày áp cho file TẠO MỚI từ 08-13.
+13. **grep phủ định phải MỞ CẢ FILE NÉN** (`.tgz`/`.zip`/`.tar.gz`): giải nén ra thư mục tạm rồi grep, đừng
+   grep repo trần rồi kết luận "0 hit". (Lỗi đã mắc: review 08-12 báo *"shell flock không có căn cứ, grep
+   `flock` = 0"*; thực tế `flock` nằm trong `.sh` **bên trong** `cron実行用シェルスクリプト/eminel-mng-webap.20240909.tgz`
+   — 08-13 giải nén thấy ngay. Suýt vá một khẳng định ĐÚNG thành SAI.) Hệ quả của ⛔#2, và: **finding do agent
+   review sinh ra vẫn phải kiểm chứng lại trên nguồn trước khi vá** — agent sai thì vá làm hỏng tài liệu đúng.
+14. **Trước khi tin số dòng/nội dung trên đĩa: `git log -1` chính repo đó.** Ghi chép "đã pull X" của phiên
+   trước KHÔNG đủ tin. (Phát hiện 08-13: working tree `eminel_gw_project` đứng ở `788b438` suốt từ 03/08 trong
+   khi memory ghi đã pull `fbc0af0`→`460c671`; reflog chỉ có 1 lần merge. Các phiên đó đọc bằng
+   `git show <commit>:<path>` nên kết luận vẫn đúng — nhưng ai tin ghi chép mà đọc thẳng file trên đĩa thì sai.)
 
 ---
 
 ## 🎯 TIẾN ĐỘ — HỎI "LÀM ĐẾN ĐÂU / HÔM NAY LÀM GÌ" LÀ ĐỌC Ở ĐÂY
-> Cập nhật lần cuối: **2026-08-12 (guide v1.2 theo `460c671` + review 6 agent)** (chi tiết + việc dở dang: file ⭐ dưới bảng).
+> Cập nhật lần cuối: **2026-08-13 (pull `1100487` — spec app xuất hiện ・ vá `new_2/` để nộp lại ・ ⛔#12 QA folder)** (chi tiết + việc dở dang: file ⭐ dưới bảng).
 
-**[08-12] Trạng thái mới nhất:**
-- **3 tập báo cáo batch ĐÃ NỘP cả 3** (hạn 14/08). Bản dùng = `submit_folder/2026_08_06/new_2/`. ⚠️ Thư mục `new/` (thế hệ 2 v4) **không còn trên đĩa** — chưa rõ cố ý hay nhầm; baseline mục 4 của skill `3-step-review` vẫn đang trỏ vào đó.
-- `eminel_gw_project` pull **`fbc0af0` → `460c671`** (chỉ E02/E03 của app). **`onboarding_guide.md` → v1.2**, đối chiếu `460c671`: viết lại §5.5 (設定値運転 bị gỡ → 室温制御の有無 + 温度レベル), §5.6 (基本制御 → 冷房スケジュール中), §7.3 (bảng 23 section theo ステータス/劣後 đối khách, C1–C5 レビュー済, thêm mục B6), Phụ lục B.3/B.4, §0.3 (hai mốc kiểm).
-- **Review 6 agent (⛔#5): 142 findings.** Guide đã vá hết (fence chẵn, 94 anchor/0 hỏng, 0 tàn dư). **`new_2/` còn 78 findings CHƯA vá — chờ user quyết** (4 [cao], đã có sẵn câu chữ thay thế).
-- **3 phát hiện lật giả định** (chi tiết file ⭐): ① hệ cũ CÓ chiều gửi SFTP Xzilla (`PutLogFileCommand`, cron 00:00) → củng cố giả thuyết đích `/EST` ② spec [I] còn giữ 4 bảng của batch #5–#7 làm loại download nội bộ ③ **e-smart CÓ bảng tích luỹ `TABLE_DEVICE_*_HISTORY`** → kết luận "集計・計算系 không có gì dùng lại" phải xem lại trước khi điều tra.
+**[08-13] Trạng thái mới nhất:**
+- **`eminel_gw_project` = `1100487`** (working tree đã pull thật, kiểm bằng `git log -1`). So với mốc guide v1.2 (`460c671`): **thư mục `docs/eminel/4_spec/app/` MỚI xuất hiện** — 機能仕様 app bắt đầu được viết (`README` 195 dòng ・ `c02_グラフ` ・ `c03_レポート` ・ `Z_コントロールタブ構成検討`) + 11 file requirement app bị sửa (A01–A04, B01, B04, **B06**, **E01 −140 dòng**, E04, README). → **guide v1.2 đã lệch mốc, phải rà §7.3 + các mục trích A0x/B0x/E0x.** 3 repo còn lại không đổi.
+- **`new_2/` ĐÃ VÁ XONG** (6 file, +71/−49) — user upload lại. Vá theo KHỐI: 4 [cao] + nhóm [vừa] (xem file ⭐ mục 2.2), mỗi finding kiểm lại trên code trước khi sửa. Kiểm chứng sau vá: 0 tàn dư ・ fence chẵn ・ heading JA↔VN khớp 3/3 cặp ・ cặp Xzilla trùng khít 324 dòng.
+  ⚠️ **Danh sách chi tiết 78 findings của 08-12 đã MẤT** (không lưu ra đĩa) — chỉ vá được phần có ghi nhận trong memory; phần [thấp] còn lại chưa dựng lại được.
+- **1 finding của review agent đã bị BÁC BỎ** khi kiểm lại: "shell flock không có căn cứ" là SAI (flock nằm trong `.sh` bên trong file `.tgz`) → thành ⛔#13.
+- **3 tập báo cáo batch ĐÃ NỘP cả 3** (hạn 14/08). Bản chuẩn duy nhất = `submit_folder/2026_08_06/new_2/`. (Thư mục `new/`: user đã xoá 08-13 — xem như chưa từng tồn tại.)
+- **Bảng tổng hợp 47 batch** `submit_folder/2026_08_12/summary_batch_migration_ja.md`: **6/47 dòng có kết luận** — 4 dòng CSV/ZIP của SYP (đã có link Notion) + 2 dòng 集計 của thành viên khác. **7 dòng 配信・通知系 + Xzilla đã điều tra xong từ 08-06 nhưng CHƯA điền.**
+- **Mọi file QA nay ở `submit_folder/qa/`** (⛔#12) — `qa_kitagas.md` ・ `qa_batch_csvzip.md`.
+- **[08-12] Guide → v1.2** (đối chiếu `460c671`): viết lại §5.5 (設定値運転 bị gỡ → 室温制御の有無 + 温度レベル), §5.6, §7.3 (bảng 23 section + mục B6), Phụ lục B.3/B.4, §0.3. Review 6 agent = 142 findings, phần guide vá hết.
+- **[08-12] Bộ 4 batch `CSV/ZIPエクスポート系` theo FORMAT MỚI** → `submit_folder/2026_08_12/` (8 file JP+VN). Format user chỉ đạo, khác TEMPLATE v4: **1 batch = 1 file, chỉ điều tra hệ CŨ**; phán định để ở bảng tổng hợp. Mẫu: `legacy-batch_CalcTenMinutesSensor_ja.md` của thành viên khác.
+- **3 phát hiện lật giả định (08-12, đã áp vào `new_2/` ngày 08-13)**: ① hệ cũ CÓ chiều gửi SFTP Xzilla (`PutLogFileCommand`, cron 00:00) ② spec [I] còn giữ 4 bảng của batch #5–#7 làm loại download nội bộ ③ **e-smart CÓ 3 bảng tích luỹ `DeviceAccumulated/DailyUsage/MonthlyUsageHistoryTable`** → "集計・計算系 không có gì dùng lại" đã bị bác.
+- **Bài học vá tài liệu**: vá theo FILE làm vỡ nhất quán → **vá theo KHỐI** (1 bản chuẩn/khối → áp đồng loạt → `grep -c`/`diff` chứng minh). Chi tiết `05_session…` mục 8.3.
 - Bộ skill: `create-investigation-report` (TEMPLATE v4) ・ `analyze-change-request` (⛔#11) ・ `3-step-review` ・ `notion-connect` ・ `slack-connect` ・ `update-memory`.
-- **[08-12 đợt 2] Bộ 4 batch `CSV/ZIPエクスポート系` theo FORMAT MỚI** → `submit_folder/2026_08_12/` (8 file: 4 batch × JP+VN). Format do user chỉ đạo, khác TEMPLATE v4: **1 batch = 1 file, chỉ điều tra hệ CŨ**, phán định để ở `requirements/summary_batch_migration_ja.md` (đã điền 4 dòng, chừa cột link Notion). Mẫu tham chiếu: `legacy-batch_CalcTenMinutesSensor_ja.md` của thành viên khác.
-- **Bài học quy trình lớn nhất phiên này**: vá findings **theo FILE** làm vỡ tính nhất quán (lượt review 2 sinh thêm 50 findings, 14 [cao], trong đó 3 lỗi sai sự thật MỚI). Cách đúng = **vá theo KHỐI** (1 bản chuẩn/khối → viết lại toàn bộ file → `grep -c` + `diff` chứng minh đồng nhất). Chi tiết file ⭐ mục 8.3.
-- `requirements/self_study_plan.md`: kế hoạch tự học 4 hạng mục — **hạng mục 1 mới xong bước 1** (§8-3 F-ES của v1.2).
+- `requirements/self_study_plan.md`: 4 hạng mục — **hạng mục 1 mới xong bước 1** (§8-3 F-ES của v1.2).
 
 **Đã xong (tích lũy):** bộ tài liệu học v1.1 (10 chương + 7 phụ lục, đối chiếu `788b438`, đã qua review nhiều vòng)
 ・ `qa_kitagas.md` (8+4 câu; **câu 1 đã đăng QAデータベース Notion, có trả lời tạm của mui: badge ngoài scope 2026, 回答中**)
@@ -77,21 +96,23 @@ và viết lại; CLAUDE.md mục SOURCES đã cập nhật 4 repo git + 1 snaps
 ・ **[08-05] Bản tiếng Nhật báo cáo batch cho mui**: `submit_folder/2026_08_05/旧EMINELバッチ移行判定報告書_3グループ11本.md` — bố cục 結論先出し, bỏ khối code (thay 🔍 ref), 対応ステップ đánh số khớp bản VN để đọc song song; review 2 lượt `3-step-review` (8+3 agent), vá 46 findings; **phát hiện 6 điểm nội dung bản VN còn dính** (ゆ抜く→ゆーぬっく, Node 20→24, 4/19 cron thông năm, DR schedule lúc 配信完了, #6 chỉ 7 loại 契約種別, emn_confirm append-only — chi tiết session 03 mục 3); 付録A = 6 điểm lệch tài liệu khảo sát.
 
 **Việc tiếp theo (theo thứ tự):**
-0. **Quyết định về 78 findings của `new_2/`**: vá vào bản đã nộp hay chỉ áp bài học cho tập sau. Kèm: xác nhận số phận thư mục `new/` → sửa baseline `3-step-review` mục 4.
-0b. **Điều tra tiếp ~35/46 batch còn lại** — nhóm **集計・計算系**. ⚠️ **Trước khi bắt đầu phải kiểm lại 3 bảng `TABLE_DEVICE_{MONTHLY,DAILY,ACCUMULATED}_*_HISTORY`** (`template-dynamodb.yaml:105-111`): giả định cũ "e-smart không có gì dùng lại" đã bị code bác bỏ. Dùng skill `create-investigation-report`.
-0c. ✅ Xong 08-12: guide v1.2 theo `460c671` (đã review 3 vòng + vá findings).
-0d. **`requirements/self_study_plan.md`** — hạng mục 1 tiếp bước 2–6; đồng thời sửa mục "集計・計算系 e-smart không có gì dùng lại" theo phát hiện 08-12.
-1. **Trả lời vế ただし của QA 独立デプロイ trên Notion** — danh sách "chức năng nên dùng tiếp": hệ cũ = không có;
+0. ✅ Xong 08-13: vá `new_2/` (user upload lại) ・ pull `1100487` ・ ⛔#12 QA folder ・ 4 link Notion vào bảng tổng hợp.
+1. **Rà `onboarding_guide.md` v1.2 theo `1100487`** — §7.3 bảng 23 section (E01/B06/A0x vừa đổi) + **đọc `docs/eminel/4_spec/app/` MỚI** (chính là nguồn cho hạng mục 4 của kế hoạch tự học).
+2. **Điền 7 dòng 配信・通知系 (#1–#4) + Xzilla (#5–#7) vào `summary_batch_migration_ja.md`** — kết luận đã có sẵn trong `new_2/`; cần quyết: có tách thành file `legacy-batch_<Command>_{ja,vi}.md` theo format mới không.
+3. **Điều tra nhóm 集計・計算系** (17/19 dòng còn lại của nhóm; SYP còn ~30/43 batch chưa điều tra). ⚠️ Giả định cũ "e-smart không có gì dùng lại" **đã bị bác** — e-smart CÓ 3 bảng history (`template-dynamodb.yaml:1113/1145/1177`), ghi bởi 5 batch `batch-import-rinnai/noritz-*`. Dùng skill `create-investigation-report`.
+4. **`requirements/self_study_plan.md`** — hạng mục 1 tiếp bước 2–6; **sửa dòng 54** ("集計・計算系 — e-smart không có gì dùng lại") theo phát hiện trên (CHƯA làm).
+5. Findings [thấp]/[vừa] còn lại của 78 (đã mất danh sách) — user quyết có chạy lại một lượt review để dựng lại không.
+6. **Trả lời vế ただし của QA 独立デプロイ trên Notion** — danh sách "chức năng nên dùng tiếp": hệ cũ = không có;
    ESTA = push/point-PI/Xzilla-import/data-export (xem báo cáo batch §1; xác nhận trước nghĩa 「既存システム」).
-2. Chốt nội bộ với **kihara** về Q5 (GW giữ trạng thái DR — báo cáo batch #4 cũng treo vào đây) → gửi `qa_kitagas.md`
+7. Chốt nội bộ với **kihara** về Q5 (GW giữ trạng thái DR — báo cáo batch #4 cũng treo vào đây) → gửi `qa_kitagas.md`
    qua PM mui (quyết kèm Dự phòng 3/4 không).
-3. **Theo dõi 5 trang QA đang 回答中** → khi 回答済: cập nhật các chỗ đánh dấu trong guide (grep "回答中") + B.1 theo README §9.
-4. Hỏi mui xác nhận **đích của luồng export SFTP `/EST`** trong backend e-smart (≒「EMINELデータの共有」 F-ES-10?) — xem báo cáo batch §6.
-5. Khi **IF-01/CLD-07** (định nghĩa 入出力 Xzilla) có spec → rà lại nhóm Xzilla của báo cáo batch (§4, gồm cả
+8. **Theo dõi 5 trang QA đang 回答中** → khi 回答済: cập nhật các chỗ đánh dấu trong guide (grep "回答中") + B.1 theo README §9.
+9. Hỏi mui xác nhận **đích của luồng export SFTP `/EST`** trong backend e-smart (≒「EMINELデータの共有」 F-ES-10?) — xem báo cáo batch §6.
+10. Khi **IF-01/CLD-07** (định nghĩa 入出力 Xzilla) có spec → rà lại nhóm Xzilla của báo cáo batch (§4, gồm cả
    chiều xuất); khi review **spec [I]** → nêu 保持期間/loại dữ liệu download (**chưa có trong bảng QA — cân nhắc
    thêm câu hỏi**); danh sách việc-cần-xác-nhận đầy đủ: bảng §6 của báo cáo batch (8 mục).
-6. **B06 マイホーム発電 ĐÃ ĐƯỢC VIẾT** tại `788b438` (kèm B04/B05/C01/C02/C03 có sửa) → cập nhật guide 7.3 + rà các mục guide trích B04/B05/C01–C03; cân nhắc guide 0.7 (legacy_eminel_docs đã có local).
-7. Bối cảnh: hạn **tháng 9/2026 fix design+spec** vẫn treo trên 23/23 section chưa chốt + 10/10 spec admin DRAFT;
+11. **B06 マイホーム発電**: phần cập nhật guide §7.3 ✅ đã làm ở v1.2 (đã có mục B6). Còn lại: rà các mục guide trích **B04/B05/C01–C03** theo `1100487` (B04/B06 vừa bị sửa tiếp ngày 12/08); cân nhắc bổ sung guide 0.7 (`legacy_eminel_docs` đã có local).
+12. Bối cảnh: hạn **tháng 9/2026 fix design+spec** vẫn treo trên 23/23 section chưa chốt + 10/10 spec admin DRAFT;
    3 vấn đề chặn SYP = CLD-01 / CLD-02 / GW-01.
 
 ---
@@ -106,4 +127,5 @@ và viết lại; CLAUDE.md mục SOURCES đã cập nhật 4 repo git + 1 snaps
 | `02_session_20260804_qaNotion_capNhatTaiLieu_baoCaoBatch.md` | [2026-08-04 chiều→tối] 5 QA Notion đầu → cập nhật guide/qa_kitagas + review §8 (21 findings) → báo cáo phán định 11 batch (điều tra cả code backend/web-admin e-smart, viết lại nhiều lượt theo chuẩn: trích code + cách làm từng bước + tóm tắt 3 nhóm) → skill `3-step-review` → quy tắc ⛔#8, ⛔#9 |
 | `03_session_20260805_soanBaoCaoBatchJP_review2luot.md` | [2026-08-05 sáng→trưa] Soạn bản tiếng Nhật báo cáo batch cho mui (`submit_folder/2026_08_05/`) → review 2 lượt 3-step-review (8+3 agent, 46 findings vá hết) → 6 điểm nội dung bản VN còn dính + F-ES-10=Xzilla連携 + B06 đã được viết ở `788b438` |
 | `04_session_20260806_tach3tap_templateV4_boSkillMoi.md` | [2026-08-06] Pull `fbc0af0` + phân tích 6 commit (app 13 file) → tách báo cáo thành **3 tập × JP+VN**, 3 thế hệ (`2026_08_06/` → `new/` v4 → **`new_2/` bản dùng**) → review độc lập bắt 2 lỗi [cao] (前々月, path bịa) → **bộ skill mới** `create-investigation-report` (TEMPLATE v4) + `analyze-change-request` (⛔#11) + sửa `3-step-review` → `requirements/self_study_plan.md` |
-| ⭐ `05_session_20260812_guideV12_review6agent.md` | [2026-08-12] Pull `460c671` → **guide v1.2** (viết lại §5.5 mô hình sưởi mới, §5.6, §7.3 + mục B6, Phụ lục B.3/B.4) → **review 6 agent** (3 vòng guide + 3 cặp `new_2/`) = 142 findings, guide vá hết / `new_2/` chờ quyết → **3 phát hiện lật giả định**: hệ cũ có chiều gửi SFTP Xzilla ・ spec [I] giữ 4 bảng batch #5–#7 ・ e-smart CÓ bảng tích luỹ `TABLE_DEVICE_*_HISTORY` |
+| `05_session_20260812_guideV12_review6agent.md` | [2026-08-12] Pull `460c671` → **guide v1.2** (viết lại §5.5 mô hình sưởi mới, §5.6, §7.3 + mục B6, Phụ lục B.3/B.4) → **review 6 agent** (3 vòng guide + 3 cặp `new_2/`) = 142 findings, guide vá hết / `new_2/` chờ quyết → **3 phát hiện lật giả định**: hệ cũ có chiều gửi SFTP Xzilla ・ spec [I] giữ 4 bảng batch #5–#7 ・ e-smart CÓ bảng tích luỹ `TABLE_DEVICE_*_HISTORY` |
+| ⭐ `06_session_20260813_pullSpecApp_vaNew2_ruleQA.md` | [2026-08-13] Pull **`1100487`** — `4_spec/app/` (機能仕様 app) xuất hiện + 11 file requirement app đổi → **guide v1.2 lệch mốc** ・ **vá `new_2/` để nộp lại** (6 file, 4 [cao] + nhóm [vừa]; danh sách 78 findings gốc đã mất) ・ **bác bỏ 1 finding sai** (flock nằm trong `.tgz`) → ⛔#13 ・ phát hiện working tree cũ 10 ngày → ⛔#14 ・ **⛔#12 mọi file QA về `submit_folder/qa/`** ・ điền 4 link Notion vào bảng tổng hợp (6/47 dòng) |

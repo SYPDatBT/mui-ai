@@ -17,10 +17,11 @@ là làm việc tiếp được**, chỉ cần trỏ lại vị trí các repo g
 |---|---|---|
 | `requirements/README.md` | Bộ khung + tiêu chuẩn review của bộ tài liệu trong `requirements/` | sửa khi có lý do |
 | `requirements/onboarding_guide.md` | TÀI LIỆU HỌC CHÍNH (v1.2, ~4.200 dòng) + `assets/` ảnh | sửa theo quy trình `requirements/README.md` §8–9 |
-| `requirements/qa_kitagas.md` | Bảng câu hỏi VN–JP gửi khách (khối JP paste được nguyên vẹn) | sửa cẩn trọng — sẽ gửi khách |
+| `requirements/self_study_plan.md` | Kế hoạch tự học 4 hạng mục | cập nhật khi tiến độ đổi |
 | `memory/` | Ký ức xuyên phiên: `00_INDEX.md` + `NN_session_*.md` | cập nhật bằng skill `/update-memory` |
 | `skillAI/` | Skill: `notion-connect`, `slack-connect`, `update-memory`, `3-step-review` (review 3 vòng + thủ tục máy mới), `create-investigation-report` (tạo báo cáo điều tra theo TEMPLATE v4), `analyze-change-request` (⛔#11 — tiếp nhận yêu cầu sửa: phân tích → tranh biện đa agent → đề xuất tổng thể, KHÔNG vá ngay) | đọc SKILL.md trước khi dùng |
-| `submit_folder/` | Bản giao nộp chụp theo ngày | KHÔNG sửa ngược |
+| `submit_folder/<YYYY_MM_DD>/` | Bản giao nộp chụp theo ngày | KHÔNG sửa ngược (ngoại lệ: user yêu cầu vá để nộp lại) |
+| `submit_folder/qa/` | **NƠI DUY NHẤT chứa mọi file QA** — câu hỏi gửi khách (qua PM mui) lẫn hỏi mui trực tiếp. Hiện có `qa_kitagas.md` (bảng VN–JP gửi khách, khối JP paste được nguyên vẹn) ・ `qa_batch_csvzip.md`. **File QA tạo mới đặt ở đây, tên = mô tả nội dung hỏi + ngày: `qa_<chủ-đề>_<YYYYMMDD>.md`** (⛔#12) | sửa được (KHÁC các thư mục ngày ở trên) — nhưng cẩn trọng vì sẽ gửi ra ngoài |
 | `../sources/` | **Các repo git của dự án** (xem dưới) | repo của dự án — không sửa trừ khi được giao |
 
 ## Quy tắc SOURCES (⚠️ bài học 2026-08-04 — đã suýt kết luận sai vì bỏ qua)

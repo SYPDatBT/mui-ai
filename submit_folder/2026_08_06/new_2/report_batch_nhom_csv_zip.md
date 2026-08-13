@@ -13,8 +13,9 @@
 | SVC-03 | Vấn đề mở: yêu cầu 性能・可用性・運用・移行 chưa ghi (`eminel_gw_project/docs/eminel/2_management/20_open_issues.md:86`; gồm 保持期間/backup — dòng 87) |
 | F-ES-10 | 「Xzilla連携」 trong 統合要件 v1.2 |
 | t_202/s_102/s_103/s_113 | 機器状態/時間値/日値/日平均値 ・ EMS-SP-NO = mã điểm lắp đặt (≈ hộ) |
-| 質問表 / QAデータベース | Bảng câu hỏi gửi khách `mui-ai/requirements/qa_kitagas.md` / kênh QA nội bộ với mui (Notion) |
+| 質問表 / QAデータベース | Bảng câu hỏi gửi khách `mui-ai/submit_folder/qa/qa_kitagas.md` / kênh QA nội bộ với mui (Notion) |
 | 確実 / *推定* / 🔸 | Đã kiểm trên code / suy đoán có căn cứ / giả thuyết chưa kiểm ・ trong code `...` = lược |
+| Viết tắt hạ tầng / dịch vụ | **TTL** = hạn tự xóa bản ghi của DynamoDB ・ **PITR** = Point-In-Time Recovery, backup liên tục cho phép khôi phục về thời điểm bất kỳ ・ **FCM** = Firebase Cloud Messaging, dịch vụ đẩy thông báo của Google ・ **PushCore** = server trung gian đẩy push của hệ cũ ・ **Tip** = nội dung mẹo hiển thị trong app ESTA ・ **DR** = デマンドレスポンス, điều tiết giảm nhu cầu điện khi lưới căng ・ **Xzilla** (クジラ) = nền liên kết dữ liệu phía 北ガス (cấp/nhận hợp đồng, người trả tiền, điện 30 phút… qua SFTP) |
 
 Mục lục: KẾT LUẬN ・ I: §1 Vì sao ・ §2 Nơi xử lý mới ・ §3 Cần xác nhận ・ §4 Dễ hiểu sai ・ §5 Việc tiếp ・ II: §6 Chi tiết ・ §7 Hạ tầng ・ §8 Đối chiếu ・ §9 A/B ・ §10 QA ・ §11 Căn cứ
 ## KẾT LUẬN
@@ -79,7 +80,7 @@ Hỏi mui (QAデータベース; chung tập 外部連携・受信系, hỏi 1 l
 | 4 | Mở rộng download cho loại E-GW (4 lớp — §6.5-3) | SYP Dev |
 | 5 | Nếu khách muốn file định kỳ: batch export pattern `/EST` (§9-B) | SYP Dev |
 | 6 | Task Notion: ghi 4 batch = "bỏ, thay bằng retention + download/export" — không đếm vào ~46本 | SYP + PM |
-| 7 | Trả lời vế QA 独立デプロイ *"既存システムを使い続けたほうがいい機能"*: ① 旧EMINEL: không batch nào đáng giữ nguyên trạng; ② e-smart: 4 ứng viên (chung 3 tập) — nhóm này góp cơ chế download/export (§7.2/§7.3) | SYP (QAデータベース) |
+| 7 | Trả lời vế QA 独立デプロイ *"既存システムを使い続けたほうがいい機能"*: ① 旧EMINEL: không batch nào đáng giữ nguyên trạng; ② e-smart: 4 ứng viên chung 3 tập (Push ・ point/PI ・ nền nhận Xzilla SFTP→S3→DynamoDB ・ cơ chế download/export) — nhóm này góp cơ chế download/export (§7.2/§7.3) | SYP (QAデータベース) |
 > **Phương châm**: *Port nhu cầu, đừng port giải pháp* — cơ chế sinh từ ràng buộc đã mất (DB chật → backup rồi xóa) bỏ cùng ràng buộc; mang sang chỉ nhu cầu (lấy file) + van an toàn tương đương (PITR thay `set -eu`).
 # PHẦN II — CHI TIẾT KỸ THUẬT
 ## 6. Chi tiết 4 batch (#8–#11, gộp — chỉ khác bảng dữ liệu + chu kỳ)
@@ -162,7 +163,7 @@ Kiểm thử: end-to-end ① (form → sinh → `BUCKET_DOWNLOAD` → presigned 
 | Batch | cron server + shell flock | Step Functions + EventBridge Scheduler |
 | Nhận file | SFTP → đĩa | SFTP → S3 → DynamoDB |
 
-3 lịch tĩnh (`ScheduleV2`, `Asia/Tokyo` — `syp-eminelstandard-backend/template.yaml:9-11`): ① `BatchRunSequentially` `cron(5 0-7 * * ? *)` (853–888); ② `BatchMigrationIntegratedData` `cron(0 8 * * ?)` (2205–2240) — **đường ② `/EST` chạy trong đây**; ③ `BatchGetErrorDeviceInfoOfRinnai` (2966–2980); còn lại: one-shot động (`syp-eminelstandard-backend/src/layers/common/nodejs/services/put-schedule.ts:18-33`), ngoại lệ automation rule (`syp-eminelstandard-backend/src/functions/api-automation/common.ts:115, 167-175`), không polling phút (grep `rate(`: 0 hit). Day3: batch cũ 「いけてない」 — làm lại, 1 batch = 1 task, バッチボーン trước, 結合 tháng 9 (🔍 `eminel_gw_project/docs/eminel/2_management/minutes/20260625_egw_camp_day3.md:35, 51, 99-103, 147-149`); QA 独立デプロイ (swan, 回答中): hướng độc lập → "dùng lại" ≠ 0 công; `gw-syp-dev` chưa có commit E-GW; *推定*: viết thêm vào codebase e-smart (từ QA 管理画面 chung source — masao takahashi, 回答中).
+3 lịch tĩnh (`ScheduleV2`, `Asia/Tokyo` — `syp-eminelstandard-backend/template.yaml:9-11`): ① `BatchRunSequentially` `cron(5 0-7 * * ? *)` (853–888) — chuỗi nhận 8 kênh IF Xzilla; ② `BatchMigrationIntegratedData` `cron(0 8 * * ?)` (2205–2240) — **đường ② `/EST` chạy trong đây** (6 CSV thiết bị); ③ `BatchGetErrorDeviceInfoOfRinnai` (2966–2980) — lấy thông tin lỗi thiết bị Rinnai; còn lại: one-shot động (`syp-eminelstandard-backend/src/layers/common/nodejs/services/put-schedule.ts:18-33`), ngoại lệ automation rule (`syp-eminelstandard-backend/src/functions/api-automation/common.ts:115, 167-175`), không polling phút (grep `rate(` trong `syp-eminelstandard-backend/template.yaml`: 0 hit). Day3: batch cũ 「いけてない」 — làm lại, 1 batch = 1 task, バッチボーン trước, 結合 tháng 9 (🔍 `eminel_gw_project/docs/eminel/2_management/minutes/20260625_egw_camp_day3.md:35, 51, 99-103, 147-149`); QA 独立デプロイ (swan, 回答中): hướng độc lập → "dùng lại" ≠ 0 công; `gw-syp-dev` chưa có commit E-GW; *推定*: viết thêm vào codebase e-smart (từ QA 管理画面 chung source — masao takahashi, 回答中).
 
 **7.2 Đường ①** (確実) — router 17 endpoint (🔍 `syp-eminelstandard-backend/src/functions/api-download/app.ts:23-46`) + 7 loại web-admin (🔍 `syp-eminelstandard-web-admin/constants/common.ts:614-622`):
 ```ts
@@ -192,7 +193,7 @@ export const DOWNLOAD_DATA_MANAGEMENT_TYPE = {
 | `s_102` | 14 ngày | 集計データ・1時間値 (🔴T.B.D) | ❌ dựng mới, phối hợp nhóm 集計 |
 | `s_103` | 2 tháng | 集計データ・1日値 (🔴T.B.D) | ❌ dựng mới, phối hợp nhóm 集計 |
 | `s_113` | 2 tháng | không có mục riêng trong 別表① | ❌ chờ chốt loại ở [I] |
-| **Đếm** | — | — | **0/4 có sẵn (❌×4)** — khớp "không tài sản đo đạc dùng lại; e-smart không tính sẵn 集計 (`syp-eminelstandard-backend/src/functions/api-dashboard/get-monthly-report-of-user.ts:21`)" |
+| **Đếm** | — | — | **0/4 có sẵn (❌×4)** — khớp "không có tài sản xuất file định kỳ để dùng lại; monthly report của app cũng không lưu mà forward thẳng TagTag (`syp-eminelstandard-backend/src/functions/api-dashboard/get-monthly-report-of-user.ts:21`)". ⚠️ Chỉ nói về 4 batch này — e-smart CÓ 3 bảng lịch sử tích luỹ (`template-dynamodb.yaml:1113, 1145, 1177`), không suy rộng sang nhóm 集計・計算系 |
 
 | Cơ chế | Hệ cũ | Hệ mới | Trạng thái |
 |---|---|---|---|
@@ -218,7 +219,7 @@ Chọn **A trước** (ít phụ thuộc; "file định kỳ" chưa xác nhận 
 | A2 | Khách/PM | Muốn giữ thói quen ZIP định kỳ? (văn bản §3) | Quyết A/B (§9); mục chưa quyết của [I] | 🟡 |
 | A3 | Khách/PM | 7 loại kế thừa E-Smart: loại nào áp cho E-GW? (別表① đều 🔴T.B.D) | Phạm vi bước 3 | 🟡 |
 | B1 | mui | Đích `/EST` = Xzilla/DWH? (rút gọn §3; bản đầy đủ ở tập Xzilla §3 — hỏi 1 lần chung 2 tập) | Tiền đề pattern ② (§9-B); liên quan F-ES-10 chiều gửi | 🟡 |
-| B2 | mui *(SYP trả lời)* | Vế 使い続け của QA 独立デプロイ: ① 旧EMINEL không có; ② e-smart 4 ứng viên — nhóm này: download/export (§7.2/§7.3) | mui đang chờ; giúp chốt dùng chung (§5-7) | 🟡 |
+| B2 | mui *(SYP trả lời)* | Vế 使い続け của QA 独立デプロイ: ① 旧EMINEL không có; ② e-smart 4 ứng viên (Push ・ point/PI ・ nền nhận Xzilla SFTP→S3→DynamoDB ・ cơ chế download/export) — nhóm này: download/export (§7.2/§7.3) | mui đang chờ; giúp chốt dùng chung (§5-7) | 🟡 |
 | C1 | Bàn giao hệ cũ | Format cột CSV cũ có ràng buộc nghiệp vụ (hệ nào đọc file)? | Quyết mức tương thích bước 5 — hiện là *推定* | 🟡 |
 ```
 A1 [I]+SVC-03 (🔴) ─→ bước 2 retention → bước 3 mở rộng download
@@ -240,5 +241,5 @@ A2 + B1 ─→ quyết A/B (§9) → (B) bước 4 export        C1 ─→ bư�
 | Tài liệu khảo sát ESTA ghi | Code thực tế |
 |---|---|
 | `CsvDownloadHistory` = lịch sử download (`eminel_gw_project/docs/eminel-smart/03_backend_models.md:107`) | Chiều NHẬN — chống tải trùng SFTP (§7.2) |
-| 自動化ルール mỗi phút (`eminel_gw_project/docs/eminel-smart/02_product_overview.md:85`) | Lịch tuần tạo động theo rule (§7.1; grep `rate(`: 0 hit) |
+| 自動化ルール mỗi phút (`eminel_gw_project/docs/eminel-smart/02_product_overview.md:85`) | Lịch tuần tạo động theo rule (§7.1; grep `rate(` trong `syp-eminelstandard-backend/template.yaml`: 0 hit) |
 | Node.js 20.x (`eminel_gw_project/docs/eminel-smart/02_product_overview.md:49`) | `nodejs24.x` (`syp-eminelstandard-backend/template.yaml:181`; CompatibleRuntimes vẫn 20 — :3163) |

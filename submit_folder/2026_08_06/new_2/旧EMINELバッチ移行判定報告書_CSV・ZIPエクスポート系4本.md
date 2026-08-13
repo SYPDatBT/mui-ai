@@ -13,8 +13,9 @@
 | SVC-03 | 未決事項: 性能・可用性・運用・移行要件が未記載（`eminel_gw_project/docs/eminel/2_management/20_open_issues.md:86`。保持期間・バックアップは同:87） |
 | F-ES-10 | 統合要件 v1.2 の「Xzilla連携」 |
 | t_202/s_102/s_103/s_113 | 機器状態／時間値／日値／日平均値 ・ EMS-SP-NO = 設置地点番号（≈世帯） |
-| 質問表／QAデータベース | 北ガス様向け質問一覧 `mui-ai/requirements/qa_kitagas.md`／mui との内部QA（Notion） |
+| 質問表／QAデータベース | 北ガス様向け質問一覧 `mui-ai/submit_folder/qa/qa_kitagas.md`／mui との内部QA（Notion） |
 | 確実／*推定*／※推定（未確認） | コードで確認済み／根拠ある推測／未検証の仮説 ・ コード内 `...` = 省略 |
+| インフラ／サービス略語 | **TTL** = DynamoDB レコードの自動失効期限 ・ **PITR** = Point-In-Time Recovery（任意時点へ復元できる継続バックアップ）・ **FCM** = Firebase Cloud Messaging（Google のプッシュ配信基盤）・ **PushCore** = 旧システムの Push 中継サーバー ・ **Tip** = ESTA アプリ内の豆知識コンテンツ ・ **DR** = デマンドレスポンス（需給ひっ迫時の需要抑制）・ **Xzilla**（クジラ）= 北ガス様側のデータ連携基盤（契約・支払者・電力30分値などを SFTP で授受） |
 
 目次: 結論 ・ I: §1 理由 ・ §2 新側の受け皿 ・ §3 要確認 ・ §4 誤解されやすい点 ・ §5 次アクション ・ II: §6 詳細 ・ §7 共通基盤 ・ §8 データ対照 ・ §9 案A/B ・ §10 QA ・ §11 根拠
 ## 結論
@@ -79,7 +80,7 @@ mui 様向け（QAデータベース。外部連携・受信系分冊と共通�
 | 4 | E-GW 種別へのダウンロード拡張（4レイヤー — §6.5-3） | SYP Dev |
 | 5 | 顧客が定期ファイル希望なら `/EST` パターンでエクスポートバッチ（§9-B） | SYP Dev |
 | 6 | Notion 分割時: 4本は「廃止、retention＋DL／エクスポートで代替」— 約46本の母数に算入しない | SYP＋PM |
-| 7 | QA「旧Eminel基盤継承＋独立デプロイ」内の設問「既存システムを使い続けたほうがいい機能」への回答 — ① 旧EMINEL: 使い続ける価値のあるバッチなし ・ ② e-smart: 4候補（3分冊共通）— 本グループからは管理画面ダウンロード／エクスポート機構（§7.2/§7.3） | SYP（QAデータベースへ直接回答） |
+| 7 | QA「旧Eminel基盤継承＋独立デプロイ」内の設問「既存システムを使い続けたほうがいい機能」への回答 — ① 旧EMINEL: 使い続ける価値のあるバッチなし ・ ② e-smart: 4候補（3分冊共通 — Push ・ ポイント/PI ・ Xzilla 受信基盤 SFTP→S3→DynamoDB ・ ダウンロード／エクスポート機構）— 本グループからは管理画面ダウンロード／エクスポート機構（§7.2/§7.3） | SYP（QAデータベースへ直接回答） |
 > **方針（教訓）**: *ニーズを移植する。解決策を移植しない* — 消えた制約（DB が窮屈 → バックアップして削除）から生まれた機構は制約もろとも廃止。持ち込むのはニーズ（ファイルで取り出せること）と同等の安全弁（`set -eu` の代わりの PITR）。
 # 第II部 — 技術詳細編
 ## 6. 4バッチの詳細（#8〜#11 一括 — 違いは対象テーブルと周期のみ）
@@ -161,7 +162,7 @@ $this->dropDailyTable('s_112', $dateTimeForDay, 8);
 | バッチ | サーバー cron＋shell flock | Step Functions + EventBridge Scheduler |
 | 受信 | SFTP → ディスク | SFTP → S3 → DynamoDB |
 
-静的スケジュール3本（`ScheduleV2`・`Asia/Tokyo` — `syp-eminelstandard-backend/template.yaml:9-11`）: ① `BatchRunSequentially` `cron(5 0-7 * * ? *)`（853–888）② `BatchMigrationIntegratedData` `cron(0 8 * * ?)`（2205–2240）— **経路② `/EST` はこの中**③ `BatchGetErrorDeviceInfoOfRinnai`（2966–2980）。他は one-shot 動的生成（`syp-eminelstandard-backend/src/layers/common/nodejs/services/put-schedule.ts:18-33`）、例外はオートメーション（`syp-eminelstandard-backend/src/functions/api-automation/common.ts:115, 167-175`）、毎分ポーリングなし（grep `rate(`: 0件）。Day3: 現行バッチ「いけてない」— 作り直し・1バッチ=1タスク・バッチボーン先置き・結合9月（🔍 `eminel_gw_project/docs/eminel/2_management/minutes/20260625_egw_camp_day3.md:35, 51, 99-103, 147-149`）。QA 独立デプロイ（swan・回答中）: 独立方向 →「流用」≠ 工数ゼロ。`gw-syp-dev` に E-GW コミットなし。*推定*: e-smart コードベースへの追記方式（QA 管理画面共通ソース — masao takahashi・回答中 — からの推測）。
+静的スケジュール3本（`ScheduleV2`・`Asia/Tokyo` — `syp-eminelstandard-backend/template.yaml:9-11`）: ① `BatchRunSequentially` `cron(5 0-7 * * ? *)`（853–888）— Xzilla 8 IF の受信連鎖; ② `BatchMigrationIntegratedData` `cron(0 8 * * ?)`（2205–2240）— **経路② `/EST` はこの中**（機器 CSV 6種）; ③ `BatchGetErrorDeviceInfoOfRinnai`（2966–2980）— Rinnai 機器のエラー情報取得。他は one-shot 動的生成（`syp-eminelstandard-backend/src/layers/common/nodejs/services/put-schedule.ts:18-33`）、例外はオートメーション（`syp-eminelstandard-backend/src/functions/api-automation/common.ts:115, 167-175`）、毎分ポーリングなし（grep `rate(`（`syp-eminelstandard-backend/template.yaml`）: 0件）。Day3: 現行バッチ「いけてない」— 作り直し・1バッチ=1タスク・バッチボーン先置き・結合9月（🔍 `eminel_gw_project/docs/eminel/2_management/minutes/20260625_egw_camp_day3.md:35, 51, 99-103, 147-149`）。QA 独立デプロイ（swan・回答中）: 独立方向 →「流用」≠ 工数ゼロ。`gw-syp-dev` に E-GW コミットなし。*推定*: e-smart コードベースへの追記方式（QA 管理画面共通ソース — masao takahashi・回答中 — からの推測）。
 
 **7.2 経路①**（確実）— 17 エンドポイント（🔍 `syp-eminelstandard-backend/src/functions/api-download/app.ts:23-46`）＋ web-admin 7種別（🔍 `syp-eminelstandard-web-admin/constants/common.ts:614-622`）:
 ```ts
@@ -191,7 +192,7 @@ export const DOWNLOAD_DATA_MANAGEMENT_TYPE = {
 | `s_102` | 14日 | 集計データ・1時間値（🔴T.B.D） | ❌ 新設・集計系と連携 |
 | `s_103` | 2ヶ月 | 集計データ・1日値（🔴T.B.D） | ❌ 新設・集計系と連携 |
 | `s_113` | 2ヶ月 | 別表①に直接対応なし | ❌ [I] の種別確定待ち |
-| **集計** | — | — | **既存 0/4（❌×4）** —「計測系の流用資産なし。e-smart は事前集計も持たない（`syp-eminelstandard-backend/src/functions/api-dashboard/get-monthly-report-of-user.ts:21`）」と整合 |
+| **集計** | — | — | **既存 0/4（❌×4）** —「定期ファイル生成の流用資産なし。アプリの月次レポートも非保存で TagTag へ都度転送（`syp-eminelstandard-backend/src/functions/api-dashboard/get-monthly-report-of-user.ts:21`）」と整合。⚠️ 本4バッチに限った評価です — e-smart には積算・日次・月次の履歴テーブル3本が存在するため（`template-dynamodb.yaml:1113, 1145, 1177`）、集計・計算系グループへの一般化は不可 |
 
 | 機構 | 旧 | 新 | 状態 |
 |---|---|---|---|
@@ -217,7 +218,7 @@ export const DOWNLOAD_DATA_MANAGEMENT_TYPE = {
 | A2 | 北ガス様/PM | 週次／月次 ZIP の定期作成・保管の継続希望は？（文面 §3） | 案A/B の分岐（§9）。[I] 未決 | 🟡 |
 | A3 | 北ガス様/PM | e-smart 踏襲7種別のうち E-GW 対象はどれか（別表①すべて 🔴T.B.D） | ステップ3の範囲 | 🟡 |
 | B1 | mui 様 | `/EST` の宛先は Xzilla/DWH か（短縮形 §3。完全版は Xzilla 分冊 §3 — 両分冊で1回） | 経路②の前提。F-ES-10 送信方向にも関わる | 🟡 |
-| B2 | mui 様 *（SYP から回答）* | QA 独立デプロイの設問「使い続けたほうがいい機能」への回答: ① 旧EMINEL なし ・ ② e-smart 4候補 — 本グループは DL／エクスポート機構（§7.2/§7.3） | mui 様が回答待ち。基盤共用方針の確定を助ける（§5-7） | 🟡 |
+| B2 | mui 様 *（SYP から回答）* | QA 独立デプロイの設問「使い続けたほうがいい機能」への回答: ① 旧EMINEL なし ・ ② e-smart 4候補（Push ・ ポイント/PI ・ Xzilla 受信基盤 SFTP→S3→DynamoDB ・ ダウンロード／エクスポート機構）— 本グループは DL／エクスポート機構（§7.2/§7.3） | mui 様が回答待ち。基盤共用方針の確定を助ける（§5-7） | 🟡 |
 | C1 | 引継ぎ元 | 現行 CSV 列形式に業務上の制約はあるか（読み込む後続システムの有無） | ステップ5の互換レベル — 現状は*推定* | 🟡 |
 ```
 A1 [I]+SVC-03（🔴）─→ ステップ2 retention → ステップ3 DL 拡張
@@ -239,5 +240,5 @@ A2＋B1 ─→ 案A/B 決定（§9）→（B なら）ステップ4 エクスポ
 | ESTA 調査資料の記載 | 実コード |
 |---|---|
 | `CsvDownloadHistory` = ダウンロード履歴（`eminel_gw_project/docs/eminel-smart/03_backend_models.md:107`） | 受信方向 — SFTP 取得の二重取込防止（§7.2） |
-| 自動化ルール毎分（`eminel_gw_project/docs/eminel-smart/02_product_overview.md:85`） | ルール毎の週次スケジュール動的生成（§7.1。grep `rate(`: 0件） |
+| 自動化ルール毎分（`eminel_gw_project/docs/eminel-smart/02_product_overview.md:85`） | ルール毎の週次スケジュール動的生成（§7.1。grep `rate(`（`syp-eminelstandard-backend/template.yaml`）: 0件） |
 | Node.js 20.x（`eminel_gw_project/docs/eminel-smart/02_product_overview.md:49`） | `nodejs24.x`（`syp-eminelstandard-backend/template.yaml:181`。CompatibleRuntimes は 20 のまま — :3163） |

@@ -14,6 +14,7 @@
 | F-ES-xx ・ A03, B05, D03 ・ CLD-xx ・ [G] | mã chức năng 統合要件 v1.2 ・ section yêu cầu app (Point/DR/PUSH通知) ・ vấn đề mở (CLD-05 見守り; CLD-06 gom advice 15種→7種) ・ spec màn quản trị 省エネアドバイス |
 | Bảng QA / QAデータベース ・ 確実 / *推定* / grep 0 hit | `qa_kitagas.md` gửi khách ("câu N") / QA nội bộ mui (Notion) ・ kiểm chứng trực tiếp / suy đoán có căn cứ / tìm toàn code không ra |
 | `...` / comment trong khối code | ký hiệu lược bớt / chú thích của báo cáo — không phải code gốc |
+| Viết tắt hạ tầng / dịch vụ | **TTL** = hạn tự xóa bản ghi của DynamoDB ・ **PITR** = Point-In-Time Recovery, backup liên tục cho phép khôi phục về thời điểm bất kỳ ・ **FCM** = Firebase Cloud Messaging, dịch vụ đẩy thông báo của Google ・ **PushCore** = server trung gian đẩy push của hệ cũ ・ **Tip** = nội dung mẹo hiển thị trong app ESTA ・ **DR** = デマンドレスポンス, điều tiết giảm nhu cầu điện khi lưới căng ・ **Xzilla** (クジラ) = nền liên kết dữ liệu phía 北ガス (cấp/nhận hợp đồng, người trả tiền, điện 30 phút… qua SFTP) |
 **Mục lục**: [KẾT LUẬN](#ket-luan) ─ I: [§1](#s1) [§2](#s2) [§3](#s3) [§4](#s4) [§5](#s5) ─ II: [§6](#s6) ([#1](#s6-1) [#2](#s6-2) [#3](#s6-3) [#4](#s6-4)) [§7](#s7) [§8](#s8) [§9](#s9) [§10](#s10) [§11](#s11)
 
 ## KẾT LUẬN <a id="ket-luan"></a>
@@ -29,7 +30,7 @@ Phương châm (合宿 Day3, 2026-06-25): batch hiện hành 「いけてない�
 
 | | Hệ cũ (`conciergesv`) | e-smart |
 |---|---|---|
-| Chạy nền | cron cố định (mỗi phút ~ tháng) | 3 lịch tĩnh + one-shot động; không polling mỗi phút (grep `rate(`: 0 hit) |
+| Chạy nền | cron cố định (mỗi phút ~ tháng) | 3 lịch tĩnh + one-shot động; không polling mỗi phút (grep `rate(` trong `syp-eminelstandard-backend/template.yaml`: 0 hit) |
 | Push | hàng đợi DB + PushCore → FCM (*推定*) | firebase-admin gửi thẳng FCM, chia lô S3 |
 | DR | ghi lệnh DB, GW poll — "giả dạng app user" | server gọi thẳng cloud hãng; lưu & khôi phục trạng thái trước DR |
 | Nền | PHP 8.0 / CakePHP 4.4 / PostgreSQL | TypeScript / Lambda (Node.js 24 — `syp-eminelstandard-backend/template.yaml:181`) / DynamoDB |
@@ -49,7 +50,7 @@ Phương châm (合宿 Day3, 2026-06-25): batch hiện hành 「いけてない�
 | #4 | Ghi `instructions` giả dạng app user | ❌ tuyệt đối bỏ | mẹo lách GW cũ — kiến trúc mới hết tiền đề |
 | #4 | GW poll qua `hemssv` | ❌ | 2027 lệnh qua HEMS-SV |
 | #4 | Khung sự kiện DR | ✅ có sẵn | model + màn quản trị + push + điểm đủ; chỉ thêm nhánh "qua E-GW" |
-Ngoài phạm vi: e-smart không tính sẵn 集計 — monthly report chỉ forward TagTag API, không lưu (🔍 `syp-eminelstandard-backend/src/functions/api-dashboard/get-monthly-report-of-user.ts:21`) → nhóm 集計・計算系 cũng không có sẵn gì dùng lại.
+Ngoài phạm vi — **đọc thận trọng**: monthly report của app không được tính sẵn mà forward thẳng sang TagTag API, không lưu (🔍 `syp-eminelstandard-backend/src/functions/api-dashboard/get-monthly-report-of-user.ts:21`). **Không suy ra được từ đó rằng nhóm 集計・計算系 không có gì dùng lại**: e-smart CÓ 3 bảng lịch sử tích luỹ — `DeviceAccumulatedHistoryTable`・`DeviceDailyUsageHistoryTable`・`DeviceMonthlyUsageHistoryTable` (🔍 `syp-eminelstandard-backend/template-dynamodb.yaml:1113, 1145, 1177`), được ghi bằng `Put` kèm TTL bởi `batch-import-rinnai-monthly-usage/app.ts:18, 84`・`batch-import-rinnai-daily-usage/app.ts:18, 83`・`batch-import-noritz-hourly-usage/app.ts:18, 68`・`batch-import-rinnai-sensor-data/app.ts:17, 173`・`batch-import-noritz-sensor-data/app.ts:17, 81`. Khác biệt thật nằm ở chỗ khác: e-smart **nhận giá trị đã tính sẵn** từ Rinnai/Noritz, chưa tự tính từ số đo thô. 🔸 *Giả thuyết — CHƯA kiểm chứng*: dùng lại được đến đâu phải điều tra riêng khi vào nhóm 集計・計算系.
 ## §2. Hệ mới xử lý ở đâu <a id="s2"></a>
 
 | Việc | Nơi | Loại |
@@ -86,7 +87,7 @@ Tư tưởng: cũ = lịch cố định + quét hàng đợi; mới = sự kiệ
 
 | Hiểu sai | Đúng |
 |---|---|
-| "e-smart có point → #1 xong" | mới 2/3: PI + sổ có; **phán định từ dữ liệu đo chưa có** (grep `energy|usage` luồng point: 0 hit) |
+| "e-smart có point → #1 xong" | mới 2/3: PI + sổ có; **phán định từ dữ liệu đo chưa có** (grep `energy|usage` trong `src/functions/give-point-to-point-infinity/`・`get-point-quantity-from-point-infinity/`・`business-logic/give-point-badge-for-user.ts`: 0 hit) |
 | "Tip = advice engine" | Tip = admin soạn tay + targeting tĩnh — engine phải tạo mới |
 | "tên `batch-*` = chạy theo lịch" | 81/105 tên `batch-*` nhưng chỉ 3 lịch tĩnh ([§2](#s2)) |
 | "#4 = bỏ DR" | 2026 chỉ hoãn code; **câu 5 KHÔNG hoãn được** — ràng firmware 2026 |
@@ -95,7 +96,7 @@ Tư tưởng: cũ = lịch cố định + quét hàng đợi; mới = sự kiệ
 | # | Việc | Phụ trách |
 |---|---|---|
 | 1 | Chốt kihara 終了方式 A/B → gửi câu 5 (gấp nhất) | SYP+PM |
-| 2 | Trả lời QA 独立デプロイ vế ただし: ① hệ cũ không batch nào đáng giữ; ② e-smart 4 ứng viên (nhóm này: Push + point/PI). ⚠️ Xác nhận trước 「既存システム」 chỉ hệ nào | SYP |
+| 2 | Trả lời QA 独立デプロイ vế ただし: ① hệ cũ không batch nào đáng giữ; ② e-smart 4 ứng viên (Push ・ point/PI ・ nền nhận Xzilla SFTP→S3→DynamoDB ・ cơ chế download/export) — nhóm này góp: Push + point/PI. ⚠️ Xác nhận trước 「既存システム」 chỉ hệ nào | SYP |
 | 3 | Rà 通知種別 hệ cũ → bảng mapping (nguồn mới + `target_screen`) cho D03 | SYP (+app) |
 | 4 | Rà 判定式 [G] G-C-05: mỗi式 cần dữ liệu gì, lấy từ đâu (GW/TagTag/Xzilla) | SYP |
 | 5 | Tách task Notion: #3 "bỏ, thay batch-push-notice", #4 "2026 không code" — khỏi đếm vào ~46本 | SYP+PM |
@@ -106,7 +107,7 @@ Tư tưởng: cũ = lịch cố định + quét hàng đợi; mới = sự kiệ
 ### 6.1 #1 `DistributeMonthlyEcoPointsCommand` — cấp エコ暖房ポイント hàng tháng <a id="s6-1"></a>
 **Mục đích**: thưởng điểm hàng tháng cho hộ có nhiệt độ sưởi cài đặt TB tháng ≤22℃.
 **Phán định**: BỎ = code PHP cũ ・ GIỮ = ①PI連携 + ②luồng cấp point tập trung ・ TẠO MỚI = duy nhất ③phán định từ dữ liệu đo.
-**Vì sao**: ①② có sẵn trên code (cùng khuôn batch cũ); ③ không tồn tại (grep `energy|usage`: 0 hit); phương châm không port; khớp dự đoán Day3.
+**Vì sao**: ①② có sẵn trên code (cùng khuôn batch cũ); ③ không tồn tại (grep `average|_avg` toàn `syp-eminelstandard-backend/src/**/*.ts`: 0 hit ・ `eco.?point|エコ暖房`: 0 hit (riêng `energy|usage` thì CÓ hit — là các batch nhập/xuất giá trị Rinnai/Noritz đã tính sẵn, không phải logic phán định)); phương châm không port; khớp dự đoán Day3.
 **Flow cũ** (確実) — bảng: `ConCustomers`・`ConSensorMonthlyValues`(`s_104`)・`ConEcoPoints`(`s_141`)・`ConPointLinkLogs` (`fetchTable` :48-51); PI cùng transaction :116-188:
 ```
 cron 17:00 ngày 1 hàng tháng (cron :113-114) ▼ DistributeMonthlyEcoPointsCommand
@@ -128,7 +129,7 @@ cron 17:00 ngày 1 hàng tháng (cron :113-114) ▼ DistributeMonthlyEcoPointsCo
 | Điểm / ngưỡng / khóa chống trùng | `BENEFIT_POINTS = 250` (:33); ≤22.0℃ nhiệt độ **cài đặt**; `monthly_eco_points_YYYYMM` (= tháng trước) |
 | PI lỗi | rollback riêng khách đó, tiếp tục khách sau |
 | ⚠️ Mùa | chạy **quanh năm** — lệch A03 「12〜3月」 ([§3](#s3)-3) |
-**e-smart**: ① PI連携 CÓ SẴN (確実) — `syp-eminelstandard-backend/src/functions/give-point-to-point-infinity/app.ts` (khai báo `syp-eminelstandard-backend/template.yaml:3282`, secret :3289); cùng họ giao thức hệ cũ (CP932 form + XML, `if0200.do`/IF0200 — `legacy_eminel_docs/sources/eminel_sv_lib-develop/src/PointInfinity/PointInfinity.php:39, 65-71, 85-98`・`legacy_eminel_docs/sources/eminel_sv_lib-develop/src/Api/InterfaceCode.php:20`; "IF0200" không có trong backend); tra số dư `syp-eminelstandard-backend/src/functions/get-point-quantity-from-point-infinity/app.ts` (GET+`<ZNDK>` :32, 79; secret `syp-eminelstandard-backend/template.yaml:2629`):
+**e-smart**: ① PI連携 CÓ SẴN (確実) — `syp-eminelstandard-backend/src/functions/give-point-to-point-infinity/app.ts` (khai báo `syp-eminelstandard-backend/template.yaml:3282`, secret :3289); cùng họ giao thức hệ cũ (CP932 form + XML, `if0200.do`/IF0200 — `legacy_eminel_docs/sources/eminel_sv_lib-develop/src/PointInfinity/PointInfinity.php:39, 65-71, 85-98`・`legacy_eminel_docs/sources/eminel_sv_lib-develop/src/PointInfinity/Api/InterfaceCode.php:20`; "IF0200" không có trong backend); tra số dư `syp-eminelstandard-backend/src/functions/get-point-quantity-from-point-infinity/app.ts` (GET+`<ZNDK>` :32, 79; secret `syp-eminelstandard-backend/template.yaml:2629`):
 ```ts
 const fuyoRiyuSjisArray = Encoding.convert(fuyoRiyuUnicodeArray, {  // :35-39 — FUYO_RIYU encode Shift_JIS
   to: 'SJIS', from: 'UNICODE', });
@@ -144,7 +145,7 @@ export const givePointBadgeForUser = async (      // :57 — MỌI nơi cấp đ
 // Rollback transaction items if there is an error // :296-303 — PI lỗi → hoàn tác DynamoDB
   await writeOneTransaction(transactionRollbackItems);
 ```
-③ CHƯA CÓ (確実): phán định từ dữ liệu đo — grep `energy|usage` luồng point: 0 hit.
+③ CHƯA CÓ (確実): phán định từ dữ liệu đo — grep `energy|usage` trong `src/functions/give-point-to-point-infinity/`・`get-point-quantity-from-point-infinity/`・`business-logic/give-point-badge-for-user.ts`: 0 hit.
 **E-GW**: F-ES-04 + F-ES-09; 必須 2026 (6/10) nhưng 機能一覧 ✅劣後 ([§3](#s3)-2). 🔍 `eminel_gw_project/docs/eminel/3_requirements/00_integrated_requirements_v1.2.md:409, 414, 675-691`・`eminel_gw_project/docs/eminel/2_management/22_decisions.md:31`・`eminel_gw_project/docs/eminel/1_product/10_feature_list.md:93, 95`・`eminel_gw_project/docs/eminel/2_management/minutes/20260625_egw_camp_day3.md:125`・`eminel_gw_project/docs/eminel/3_requirements/app/A03_point.md:48-102`
 ```
 GW đo ──HEMS-SV──▶ bảng TB-tháng-theo-hộ (MỚI, như s_104 — phối hợp nhóm 集計) ▼ ScheduleV2 tĩnh ngày 1 (MỚI)
@@ -302,7 +303,7 @@ Luồng data — Cũ: `ConDrOperations` → (cron mỗi phút) `instructions` [g
 5. (2027) Tách task theo Day3 (~17項目) — *tránh "nhồi 1 batch"*.
 6. Test (2027): hỗn hợp nhánh cũ/mới, giải ước giữa chừng, khôi phục — *chỗ dễ vỡ nhất*.
 ## §7. Hạ tầng chung & tiền đề <a id="s7"></a>
-**Nền lịch**: 3 lịch tĩnh (`ScheduleV2`, `Asia/Tokyo` — `syp-eminelstandard-backend/template.yaml:9-11`): ① `BatchRunSequentially` `cron(5 0-7 * * ? *)` (:853-888, cron :881-882); ② `BatchMigrationIntegratedData` `cron(0 8 * * ?)` (:2205-2240, :2233); ③ `BatchGetErrorDeviceInfoOfRinnai` 8:00 (:2966-2980). Còn lại đều lịch động — 🔍 `syp-eminelstandard-backend/src/layers/common/nodejs/services/put-schedule.ts:18-33` (build `syp-eminelstandard-backend/src/layers/common/nodejs/utils/date-utils.ts:117`); ví dụ: `syp-eminelstandard-backend/src/functions/api-news/common.ts:207-209`, `syp-eminelstandard-backend/src/functions/batch-send-news-complete/app.ts:72-80`; automation mỗi rule 1 lịch tuần (`syp-eminelstandard-backend/src/functions/api-automation/common.ts:115`); không polling (grep `rate(`: 0 hit). 💡 G-A-02 đã có lời giải sẵn = pattern này:
+**Nền lịch**: 3 lịch tĩnh (`ScheduleV2`, `Asia/Tokyo` — `syp-eminelstandard-backend/template.yaml:9-11`): ① `BatchRunSequentially` `cron(5 0-7 * * ? *)` (:853-888, cron :881-882) — chuỗi nhận 8 kênh IF Xzilla; ② `BatchMigrationIntegratedData` `cron(0 8 * * ?)` (:2205-2240, :2233) — xuất 6 CSV thiết bị lên SFTP `/EST`; ③ `BatchGetErrorDeviceInfoOfRinnai` 8:00 (:2966-2980) — lấy thông tin lỗi thiết bị Rinnai. Còn lại đều lịch động — 🔍 `syp-eminelstandard-backend/src/layers/common/nodejs/services/put-schedule.ts:18-33` (build `syp-eminelstandard-backend/src/layers/common/nodejs/utils/date-utils.ts:117`); ví dụ: `syp-eminelstandard-backend/src/functions/api-news/common.ts:207-209`, `syp-eminelstandard-backend/src/functions/batch-send-news-complete/app.ts:72-80`; automation mỗi rule 1 lịch tuần (`syp-eminelstandard-backend/src/functions/api-automation/common.ts:115`); không polling (grep `rate(` trong `syp-eminelstandard-backend/template.yaml`: 0 hit). 💡 G-A-02 đã có lời giải sẵn = pattern này:
 ```ts
 return await scheduler.createSchedule({
   ScheduleExpression: scheduleExpression,          // vd cron(30 14 15 8 ? 2026) — một thời điểm

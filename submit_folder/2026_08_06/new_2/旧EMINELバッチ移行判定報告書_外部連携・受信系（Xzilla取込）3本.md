@@ -14,6 +14,7 @@
 | IF-01 | E-GW⇔Xzilla の新連携窓口 — 統合要件 v1.2 §4-1 IF一覧の1番、北ガスクラウド経由、未確定（旧4桁 IF とは別物） |
 | CLD-07 / SVC-03 ・ F-ES-10 / F-ES-01 | 未決事項: IF-01 の入出力＋認証（約10項目）/ 保持期間・バックアップ方針未定義 ・ 統合要件 v1.2 サーバー機能コード: Xzilla連携 / グラフ |
 | 回答中 | QA（Notion）未確定（参照 2026-08-04 — 再引用時は原ページ確認） |
+| インフラ／サービス略語 | **TTL** = DynamoDB レコードの自動失効期限 ・ **PITR** = Point-In-Time Recovery（任意時点へ復元できる継続バックアップ）・ **FCM** = Firebase Cloud Messaging（Google のプッシュ配信基盤）・ **PushCore** = 旧システムの Push 中継サーバー ・ **Tip** = ESTA アプリ内の豆知識コンテンツ ・ **DR** = デマンドレスポンス（需給ひっ迫時の需要抑制）・ **Xzilla**（クジラ）= 北ガス様側のデータ連携基盤（契約・支払者・電力30分値などを SFTP で授受） |
 
 **目次**: 結論 ・ I: §1 理由 ・ §2 実現場所 ・ §3 要確認 ・ §4 誤解されやすい点 ・ §5 ネクストアクション ・ II: §6 バッチ別 ・ §7 共通基盤 ・ §8 データ対照 ・ §9 設計オプション ・ §10 QA ・ §11 根拠と確度
 ## 結論
@@ -56,18 +57,22 @@
 | #7 30分値＋買電売電計算 | 新規 handler＋速報/確報新テーブル（`syp-eminelstandard-backend/template-dynamodb.yaml`）＋計算 Lambda | 未実装 — グループ最重量 |
 | 送信方向 → 基幹 | `upload-data-backup-to-sftp.ts` → `/EST`（機器 CSV 6種・8:00） | 既存（宛先 ※推定（未確認）— §3-4） |
 
-- フロー全図: §7.3。思想: 旧 = cron 密集; 新 = 静的3本＋動的 one-shot、**毎分ポーリングなし**（grep `rate(`: 0件 — §7.1）。
+- フロー全図: §7.3。思想: 旧 = cron 密集; 新 = 静的3本＋動的 one-shot、**毎分ポーリングなし**（grep `rate(`（`syp-eminelstandard-backend/template.yaml`）: 0件 — §7.1）。
 ### §3 確定前に要確認の点
 | # | 論点 | 旧 | 新／計画 | 重要度 |
 |---|---|---|---|---|
 | 1 | IF-01 の入出力＋認証（CLD-07、送信方向「EMINELデータの共有」含む） | 3 IF 安定稼働 | 未確定 — 3バッチすべて依存 | 🔴 |
 | 2 | IF-01 に解約フローはあるか | IF2249 が5分毎提供 | 不明 — なければ即要件追加を提起 | 🔴 |
 | 3 | 30分値の提供周期 | 10分毎 | e-smart は 0〜7時のみ — 準リアルタイムは新規要素 | 🔴 |
-| 4 | SFTP `/EST` の宛先 | （相当なし） | 6種 CSV を毎日 8:00 送信中; ※推定（未確認）: Xzilla/DWH、接続先は secret | 🟡 |
+| 4 | SFTP `/EST` の宛先 | 送信自体は存在（種別は異なる）: アプリログ `.tsv` を Xzilla の SFTP へ（`PutLogFileCommand`・0:00 — 監視・ログ系のため本書対象外）; 機器 CSV の送信は相当なし | 6種 CSV を毎日 8:00 送信中; ※推定（未確認）: Xzilla/DWH、接続先は secret | 🟡 |
+| 5 | #5〜#7 の4テーブルが管理画面の**内部ダウンロード種別**として現役 | `ipf_ems_pls_cntr_payers`・`ipf_cntct_cancellations`・`emn_all_electric_powers`・`emn_fast_electric_powers` が「本表外の内部種別」5種に含まれる（実装に存在・仕様書§28 未記載）— 🔍 `eminel_gw_project/docs/eminel/4_spec/admin/I_data_download.md:200` | 「E-GWでダウンロード対象とするデータ種別」は要FIX — 代替種別を定義せずに4テーブルを廃止すると、運用・照合に使われている内部ダウンロード4種が失われる | 🟡 |
 
 **質問文案**:
 > **mui 様へ（QAデータベース）— #4**:
 > 「e-smart が毎日 8:00 に機器データ CSV 6種（給湯器系5種＋赤外線リモコン）を SFTP の `/EST` フォルダへアップロードしていますが（`upload-data-backup-to-sftp.ts`）、この宛先は Xzilla もしくは DWH（分析用データ基盤）という理解で合っていますか。接続先が secret 管理のためコードから確認できず、ご確認をお願いしたいです。該当する場合、F-ES-10「EMINELデータの共有」の既存実装として扱いたいと考えています。」
+
+> **mui 様へ（QAデータベース）— #5**:
+> 「管理画面のデータダウンロードについてご確認をお願いいたします。現行実装では `ipf_ems_pls_cntr_payers`／`ipf_cntct_cancellations`／`emn_all_electric_powers`／`emn_fast_electric_powers` が「本表外の内部種別」として取得可能になっております（仕様書§28 には未記載）。E-GW では旧バッチ #5〜#7 の廃止に伴い、これらのテーブル自体が存在しなくなります。①これらの内部種別は、どなたがどのような目的で利用されているでしょうか。②E-GW でも同等のダウンロード種別が必要でしょうか（必要な場合、新データ構造ではどの単位で出力すべきかもご教示ください）。「E-GWでダウンロード対象とするデータ種別」が要FIX のままですと、#5〜#7 の廃止判定に影響いたします。」
 
 > **北ガス様へ（mui PM 様経由）— #2・#3**（CLD-07 議論と同じタイミングで）:
 > 「新アーキテクチャの IF-01（北ガスクラウドAPI — Xzillaデータ連携）について2点ご相談です。①電力契約の解約情報のデータフローは IF-01 に含まれますか（旧 IF2249 相当 — 解約時の買電売電計算停止に必要）。②電力30分値の提供周期はどの程度を想定できますか（旧システムは10分毎。準リアルタイム提供は新規要素のため、可否を確認したいです）。」
@@ -85,7 +90,7 @@
 | 1 | CLD-07/IF-01 フォロー; 待機中に即着手: 契約終了判定スペック抽出（§6.2 ステップ1）＋支払者4フィールド突合表（§6.2 ステップ2） | SYP |
 | 2 | `/EST` 質問送付（§3） | SYP → QAデータベース |
 | 3 | IF-01 質問（解約フロー＋30分値周期 — §3）送付 | SYP → mui PM 様 → 北ガス様 |
-| 4 | 「既存システムを使い続けたほうがいい機能」への回答: 本グループ候補 = Xzilla SFTP→S3→DynamoDB 受信基盤（2部構成・3分冊共通: ①旧 — なし ・ ②e-smart — 4候補） | SYP → Notion |
+| 4 | 「既存システムを使い続けたほうがいい機能」への回答: 本グループ候補 = Xzilla SFTP→S3→DynamoDB 受信基盤（2部構成・3分冊共通: ①旧 — なし ・ ②e-smart — 4候補（Push ・ ポイント/PI ・ Xzilla 受信基盤 SFTP→S3→DynamoDB ・ ダウンロード／エクスポート機構）） | SYP → Notion |
 
 > **方針**（合宿 Day3 — 「バッチ群…作り直す前提」、1バッチ=1タスク）: 新規受信チャネルは既存 SFTP→S3→DynamoDB フローに載せる; 0〜7時より高頻度が必須（30分値のみ）の場合だけ専用スケジュール新設（§9）。
 
@@ -162,7 +167,8 @@ IF2023/IF2024/DM1040 (毎日稼働) ──▶ TABLE_KAIIN・TABLE_IF2023_USE_CNT
 
 **旧フロー**（確実）— cron `legacy_eminel_docs/docs/02_詳細設計/10_バッチ処理/mng-webap_cron設定_20241029.txt:109-110`・10分毎 ・ 🔍 `legacy_eminel_docs/sources/conciergesv-develop/src/Command/RcvHalfHourElectricPowerCommand.php:107-122, 192-233, 449-583, 591-725, 734-1050`（分岐 875–893）:
 ```
-cron */10' ──▶ 速報値: emn_all/emn_fast_electric_powers 全件入替え (:449-583) ・ 確報値 (fixed_div=1): emn_confirm_electric_powers へ追記 (:591-725)
+cron */10' ──▶ 取込テーブル emn_all_electric_powers: 全件削除 → CSV 全件投入 (:193-194, :205)
+           ──▶ 速報値 (fixed_div 空): emn_fast_electric_powers 全件入替え (:214-215, :449-583, 抽出条件 :569-570) ・ 確報値 (fixed_div=1): emn_confirm_electric_powers へ追記 (:591-725, 抽出条件 :711-712)
            → 2×30分→1時間値へ集約、設備構成で分岐 (:875-893) → s_102 へ → グラフ/レポート
 ```
 キーコード（売電分岐）— 🔍 `legacy_eminel_docs/sources/conciergesv-develop/src/Command/RcvHalfHourElectricPowerCommand.php:875-882`:
@@ -185,7 +191,7 @@ $calcFromXzilla = (
 IF-01 30分値 (ステップ1) ──▶ SFTP→S3→新規 handler (ステップ2; 高頻度なら専用 ScheduleV2 — §9) ──▶ 速報/確報新テーブル (ステップ3)
    ──▶ 計算 Lambda: 2×30分→1時間 + 買電/売電条件表を設置9パターンへ (ステップ4) + #5 のフラグ ──▶ 集計系バッチグループ (ステップ5)
 ```
-旧: 10分毎 → 速報2テーブル（`emn_all`/`emn_fast_electric_powers`）+ 確報1テーブル（`emn_confirm_electric_powers`）→ `s_102` ↔ 新: 速報/確報の新2テーブル → 計算 Lambda（設置9パターン）→ 集計系グループ。
+旧: 10分毎 → 取込テーブル `emn_all_electric_powers`（全件入替え; テーブルコメント「EMN_30分電力量出力情報取り込みデータ」）→ そこから 速報 `emn_fast_electric_powers`（全件入替え）＋ 確報 `emn_confirm_electric_powers`（追記蓄積）へ振り分け → `s_102` ↔ 新: 速報/確報の新2テーブル → 計算 Lambda（設置9パターン）→ 集計系グループ。
 1. IF-01 の30分値部分を確定: ファイル形式・提供周期（旧 10分毎）・認証（CLD-07）。— *理由*: ステップ2〜3 が全面依存; 周期が最難点、北ガス様の合意要（§3）。
 2. §7.3 パターンで受信経路: `syp-eminelstandard-backend/src/functions/batch-get-list-file-name-from-sftp-server/` → `syp-eminelstandard-backend/src/functions/batch-forward-csv-from-sftp-server-to-s3/` → 新規 handler; 周期 > 0〜7時 → `syp-eminelstandard-backend/template.yaml` に専用 `ScheduleV2`、`BatchRunSequentially` へ相乗りしない（§9）。— *理由*: 直列＋多重起動防止の8 IF 列に高頻度を入れると詰まる; 障害分離。
 3. 新テーブル（`syp-eminelstandard-backend/template-dynamodb.yaml`）: 速報（上書き）／確報（追記蓄積）を分離 — 旧 `emn_fast`/`emn_confirm_electric_powers` 相当; TTL は保持期間（SVC-03）に従い検討。— *理由*: 性質が正反対; 旧も同じ理由で分離（:449-583 / :591-725）。
@@ -197,7 +203,7 @@ IF-01 30分値 (ステップ1) ──▶ SFTP→S3→新規 handler (ステッ�
 - 方針（合宿 Day3・2026-06-25）: 現行バッチ「いけてない」→ 作り直し前提、1バッチ=1タスク、バッチボーンを結合フェーズ（9月目標）前に; 「流用」= e-smart の機構・コードベース利用。🔍 `eminel_gw_project/docs/eminel/2_management/minutes/20260625_egw_camp_day3.md:35, 51, 99-103, 147-149`
 - QA 独立デプロイ（swan（mui）・回答中）: *基本的には独立システムの方向* → 流用 ≠ 工数ゼロ（§4）。
 - `gw-syp-dev` に E-GW コミットゼロ（web-admin: `git log origin/main..gw-syp-dev` 空; backend: 直近15コミットは e-smart 本体のみ）。*推定*: e-smart コードベースへの追記方式 — QA 管理画面（masao takahashi（mui）・回答中 — 暫定回答の要旨: e-smart と共通ソースの方向）からの推測、文書化された決定ではない; 「共通ソース」≠「共通実行環境」。
-- 静的スケジュール3本のみ（`ScheduleV2`・`Asia/Tokyo` — `syp-eminelstandard-backend/template.yaml:9-11`）: ① `BatchRunSequentiallyStateMachine`、`cron(5 0-7 * * ? *)` = JST 0〜7時の毎時5分（`syp-eminelstandard-backend/template.yaml:853-888`、cron 881–882）— 本グループの受信フロー; ② `BatchMigrationIntegratedDataStateMachine`、`cron(0 8 * * ?)`（`syp-eminelstandard-backend/template.yaml:2205-2240`、cron 2233）— 送信 `/EST`; ③ `BatchGetErrorDeviceInfoOfRinnaiStateMachine`、8:00（`syp-eminelstandard-backend/template.yaml:2966-2980`）。残りは EventBridge Scheduler の動的生成、大半 one-shot（`syp-eminelstandard-backend/src/layers/common/nodejs/services/put-schedule.ts:18-33`）; 例外はオートメーション — ルール毎の週次・自動削除なし（`syp-eminelstandard-backend/src/functions/api-automation/common.ts:115, 167-175`）; **毎分ポーリングなし**（grep `rate(`: 0件）。
+- 静的スケジュール3本のみ（`ScheduleV2`・`Asia/Tokyo` — `syp-eminelstandard-backend/template.yaml:9-11`）: ① `BatchRunSequentiallyStateMachine`、`cron(5 0-7 * * ? *)` = JST 0〜7時の毎時5分（`syp-eminelstandard-backend/template.yaml:853-888`、cron 881–882）— 本グループの受信フロー; ② `BatchMigrationIntegratedDataStateMachine`、`cron(0 8 * * ?)`（`syp-eminelstandard-backend/template.yaml:2205-2240`、cron 2233）— 送信 `/EST`; ③ `BatchGetErrorDeviceInfoOfRinnaiStateMachine`、8:00（`syp-eminelstandard-backend/template.yaml:2966-2980`）。残りは EventBridge Scheduler の動的生成、大半 one-shot（`syp-eminelstandard-backend/src/layers/common/nodejs/services/put-schedule.ts:18-33`）; 例外はオートメーション — ルール毎の週次・自動削除なし（`syp-eminelstandard-backend/src/functions/api-automation/common.ts:115, 167-175`）; **毎分ポーリングなし**（grep `rate(`（`syp-eminelstandard-backend/template.yaml`）: 0件）。
 - スコープ決定 6/10（決定ログ）: 必須 = 暖房機能/暖房制御/照明アドバイス※/ポイント連携/グルーピング・レポート; 劣後（→2027/4〜）= 複合制御・DR・ダッシュボード・バッジ（※省エネアドバイスの誤記と思われる — *推定*; 🔍 `eminel_gw_project/docs/eminel/2_management/22_decisions.md:30-31`）・ SYP 範囲（QA 調査範囲・swan（mui）・回答中）: `conciergesv`/`eminelsv` は調査対象であり継続開発範囲ではない; GW 通信は HEMS-SV（m2-cloud）経由、スペック後日共有（B-2、§10）。
 #### §7.2 旧システムの受信方式
 🔍 `legacy_eminel_docs/docs/02_詳細設計/10_バッチ処理/cron設定概要.txt:1-37`（flock は同フォルダ `eminel-mng-webap.20240909.tgz` 内 `.sh`）:
@@ -250,20 +256,23 @@ backend 全体 grep `IF1156`・`IF2249`・`IF2264`・`30分`・`HalfHour`・`hal
 [当日取得済み機器データ] ──▶ BatchMigrationIntegratedDataStateMachine (毎日8:00 — template.yaml:2215-2226)
         ──▶ CSV 6種 (給湯器系5種 + 赤外線リモコン) ──SFTP・アップロード専用アカウント──▶ [/EST]  宛先 = Xzilla/DWH? ※推定（未確認）
 ```
-旧: 相当する送信なし ↔ 新: 1フロー、CSV 6種/日（給湯器系5＋赤外線リモコン1）、8:00。
+旧: **Xzilla の SFTP サーバーへの送信は存在する — ただしデータ種別が異なる**: `PutLogFileCommand` が前日分のアプリ操作ログ ZIP を展開し、`.tsv` を `XZILLA_RELATION_SERVER_HOST` へ送信専用アカウント `XZILLA_SEND_SFTP_USER` で PUT（cron `00 00 * * *`）。本バッチは監視・ログ系のため**本書3バッチの対象外**。`/EST` に相当する機器 CSV の送信は旧にはない ↔ 新: 1フロー、CSV 6種/日（給湯器系5＋赤外線リモコン1）、8:00。
+- 🔍 `legacy_eminel_docs/sources/conciergesv-develop/src/Command/PutLogFileCommand.php:34`（前日分を対象）、`:42-43`（ホスト＋送信ユーザー）、`:47, 50`（送信先ディレクトリ・送信元 ZIP `…/xzilla/*.zip`）、`:100`（`$sftp->put`）・cron `legacy_eminel_docs/docs/02_詳細設計/10_バッチ処理/mng-webap_cron設定_20241029.txt:120`（`31_PutLogFile.sh`）。
 - 🔍 `syp-eminelstandard-backend/src/layers/common/nodejs/services/upload-data-backup-to-sftp.ts:22-43, 52-57` — `pathExport = '/EST'`、同一 SFTP サーバー、アップロード専用ユーザー（`username_for_upload`/`private_key_for_upload`）。※推定（未確認）: 宛先は Xzilla/DWH と思われる — 接続先は secret 管理、mui 様へ確認（§3）; 該当すれば「EMINELデータの共有」（F-ES-10 — `eminel_gw_project/docs/eminel/3_requirements/00_integrated_requirements_v1.2.md:696`）の既存実装。
-- Xzilla タスク一覧にこの送信方向を追加（§4）。合宿 Day3 議事録 126 行の見立て（アプリログ送信も既にある可能性）は確認の結果**なし**（管理画面ダウンロードのみ）。
+- Xzilla タスク一覧にこの送信方向を追加（§4）。合宿 Day3 議事録 126 行の見立て（アプリログのクジラ送信インターフェースも **ESTA** に既にある可能性）について、e-smart バックエンドを確認した結果**ESTA 側には存在しません**（管理画面ダウンロードのみ）。ただし**旧システム側には存在します**（上記 `PutLogFileCommand`）— アプリログ送信は旧システムの資産であり、E-GW ではどちら側で担うかの確定が必要です。
+- ※推定（未確認）: 旧システムが**受信と送信で同一の Xzilla SFTP サーバーを使用している**ことは、e-smart の `/EST` の宛先も Xzilla であるという推定の傍証になります。確定には mui 様のご確認が必要です（§3）— 実アドレスは secret 管理でコード上に存在しません。
 ### §8 新旧データ対照
 | 旧データ（PostgreSQL） | 新（DynamoDB）／計画 | 状態 |
 |---|---|---|
 | `ipf_cntct_cancellations`（#5） | IF-01 に沿った解約テーブル新設、既存フローへ（§6.1 ステップ2） | ❌ |
 | `t_101` のフラグ＋連携番号（`c065` 等 — #5/#6） | 世帯レコード上のフラグを後処理④で設定（§6.1 ステップ3）＋契約終了判定後処理（§6.2 ステップ3） | ❌ |
 | `ipf_ems_pls_cntr_payers`（#6） | 専用テーブルなし — `TABLE_KAIIN`＋`TABLE_IF2023_USE_CNTR_INFO`/`TABLE_IF2024_CUSTOMER_INFO` に分散、IF-01 で拡張（§6.2 ステップ2） | ⚠️ |
-| `emn_all`/`emn_fast_electric_powers`（速報 — #7） | 速報用新テーブル（`syp-eminelstandard-backend/template-dynamodb.yaml` — §6.3 ステップ3） | ❌ |
+| `emn_all_electric_powers`（取込用の中間テーブル — #7） | 中間テーブルは設けない: 原本は S3 に置き、handler が速報/確報の2テーブルへ直接書き込む（§6.3 ステップ3） | ❌ |
+| `emn_fast_electric_powers`（速報 — #7） | 速報用新テーブル（`syp-eminelstandard-backend/template-dynamodb.yaml` — §6.3 ステップ3） | ❌ |
 | `emn_confirm_electric_powers`（確報 — #7） | 確報用新テーブル・分離（§6.3 ステップ3） | ❌ |
 | `s_102`（1時間値 — #7） | 新計算 Lambda の出力 → 集計系バッチグループ（§6.3 ステップ5） | ❌ |
 
-**集計**: ✅ 0 ・ ⚠️ 1 ・ ❌ 5 — 3 IF 不在の現状そのまま; 支払者データのみ既存の受け皿あり（3テーブルに分散）。機構: 受信経路 SFTP→ディスク＋cron 5〜10分毎 → SFTP→S3→DynamoDB 0〜7時毎時（`syp-eminelstandard-backend/src/statemachine/batch_run_sequentially.asl.json`）; 多重防止 `flock` → asl 内ブロック（5–38）＋`CsvDownloadHistory`; スケジュール 固定 cron（`/etc/cron.d/eminel-mng-webap`）→ 静的 `ScheduleV2` 3本＋動的 one-shot（§7.1）。
+**集計**: ✅ 0 ・ ⚠️ 1 ・ ❌ 6 — 3 IF 不在の現状そのまま; 支払者データのみ既存の受け皿あり（3テーブルに分散）。機構: 受信経路 SFTP→ディスク＋cron 5〜10分毎 → SFTP→S3→DynamoDB 0〜7時毎時（`syp-eminelstandard-backend/src/statemachine/batch_run_sequentially.asl.json`）; 多重防止 `flock` → asl 内ブロック（5–38）＋`CsvDownloadHistory`; スケジュール 固定 cron（`/etc/cron.d/eminel-mng-webap`）→ 静的 `ScheduleV2` 3本＋動的 one-shot（§7.1）。
 ### §9 #7 のスケジュール設計
 | 基準 | A. `BatchRunSequentially` 相乗り | B. `syp-eminelstandard-backend/template.yaml` に専用 `ScheduleV2` |
 |---|---|---|
@@ -310,5 +319,5 @@ backend 全体 grep `IF1156`・`IF2249`・`IF2264`・`30分`・`HalfHour`・`hal
 | 基幹取込「日次・深夜〜早朝」（`eminel_gw_project/docs/eminel-smart/02_product_overview.md:30, 63-64`） | `cron(5 0-7 * * ? *)` — JST 0〜7時の毎時（§7.1） |
 | 会員マージロック「6分」（`eminel_gw_project/docs/eminel-smart/02_product_overview.md:73, 78`） | `UPDATE_LOCK_TTL_MINUTES = 5`（§7.3） |
 | `CsvDownloadHistory` = 管理者ダウンロード履歴を示唆（`eminel_gw_project/docs/eminel-smart/03_backend_models.md:107`） | SFTP からの受信履歴（二重取込防止）— 管理者ダウンロードと無関係（§7.3） |
-| 「自動化ルール実行（毎分）」（`eminel_gw_project/docs/eminel-smart/02_product_overview.md:85`） | 毎分なし — ルール毎の週次を動的生成（§7.1; grep `rate(`: 0件） |
+| 「自動化ルール実行（毎分）」（`eminel_gw_project/docs/eminel-smart/02_product_overview.md:85`） | 毎分なし — ルール毎の週次を動的生成（§7.1; grep `rate(`（`syp-eminelstandard-backend/template.yaml`）: 0件） |
 | ランタイム「Node.js 20.x, arm64」（`eminel_gw_project/docs/eminel-smart/02_product_overview.md:49`） | `Runtime: nodejs24.x`（`syp-eminelstandard-backend/template.yaml:181`; 共通レイヤーの CompatibleRuntimes は nodejs20.x — 同:3163） |

@@ -53,6 +53,8 @@
    C bên bàn giao hệ cũ / D team app (nhóm nào không có thì ghi chú bỏ). Mỗi câu: # | câu hỏi | vì sao cần |
    mức 🔴🟡🟢. Cuối mục: sơ đồ "thứ tự xử lý đề xuất" (dependency giữa các câu).
    KHÔNG giữ bảng "việc cần xác nhận" trùng lặp ở chỗ khác — gộp hết về đây, Phần I §3 chỉ giữ bản rút gọn.
+   Nếu tách các câu này thành **file QA riêng** (kiểu `qa_batch_csvzip.md`): file đó nằm ở
+   `submit_folder/qa/`, tên = mô tả nội dung hỏi + ngày tháng — `qa_<chủ-đề>_<YYYYMMDD>.md` (⛔#12).
 §11 Căn cứ & độ chắc chắn
    - Bảng nguồn dẫn: nội dung | nguồn (path đầy đủ + dòng)
    - Bảng ĐỘ CHẮC CHẮN 3 mức: ✅ đã xác minh / ⚠️ suy đoán (*推定* — liệt kê ĐÍCH DANH) / ❓ chưa xác minh

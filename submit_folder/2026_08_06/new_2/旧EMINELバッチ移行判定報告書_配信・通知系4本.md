@@ -11,6 +11,7 @@
 | e-smart = ESTA = EMINEL-Smart | 同一システムの3呼称; hemssv（旧GWサーバー）≠ HEMS-SV（m2-cloud・mui 開発 — 名称類似のみ）; PI = PointInfinity（北ガスのポイントサービス）; TagTag = 北ガスの会員基盤 |
 | CLD-05 / CLD-06 ・ [G] ・ 質問表 / QAデータベース ・ 確実 / *推定* / grep 0件 | 未決事項: 見守り / アドバイス15種→7種集約 ・ 管理画面機能仕様「省エネアドバイス」 ・ `qa_kitagas.md`（北ガス様向け・「質問N」）/ mui との内部QA（Notion）・ 直接確認済み / 根拠ある推測 / 全コード検索ヒットなし |
 | コード内 `...`・注記コメント | 本書の中略記号・注釈（原文コードではない） |
+| インフラ／サービス略語 | **TTL** = DynamoDB レコードの自動失効期限 ・ **PITR** = Point-In-Time Recovery（任意時点へ復元できる継続バックアップ）・ **FCM** = Firebase Cloud Messaging（Google のプッシュ配信基盤）・ **PushCore** = 旧システムの Push 中継サーバー ・ **Tip** = ESTA アプリ内の豆知識コンテンツ ・ **DR** = デマンドレスポンス（需給ひっ迫時の需要抑制）・ **Xzilla**（クジラ）= 北ガス様側のデータ連携基盤（契約・支払者・電力30分値などを SFTP で授受） |
 **目次**: [結論](#ket-luan) ─ I: [§1](#s1) [§2](#s2) [§3](#s3) [§4](#s4) [§5](#s5) ─ II: [§6](#s6)（[#1](#s6-1) [#2](#s6-2) [#3](#s6-3) [#4](#s6-4)）[§7](#s7) [§8](#s8) [§9](#s9) [§10](#s10) [§11](#s11)
 
 ## 結論 <a id="ket-luan"></a>
@@ -26,7 +27,7 @@
 
 | | 旧（`conciergesv`） | e-smart |
 |---|---|---|
-| 常駐起動 | 固定 cron（毎分〜月次） | 静的3本＋動的 one-shot。毎分ポーリングなし（grep `rate(`: 0件） |
+| 常駐起動 | 固定 cron（毎分〜月次） | 静的3本＋動的 one-shot。毎分ポーリングなし（grep `rate(`（`syp-eminelstandard-backend/template.yaml`）: 0件） |
 | Push | DB キュー＋PushCore → FCM（*推定*） | firebase-admin で FCM 直接送信、S3 ロット分割 |
 | DR | DB へ指令書込み・GW ポーリング —「アプリ操作へ偽装」 | サーバーがメーカークラウドを直接呼出し。DR 前状態の保存・復元つき |
 | 基盤 | PHP 8.0 / CakePHP 4.4 / PostgreSQL | TypeScript / Lambda（Node.js 24 — `syp-eminelstandard-backend/template.yaml:181`）/ DynamoDB |
@@ -46,7 +47,7 @@
 | #4 | `instructions` へのアプリ操作偽装書込み | ❌ 一切継承しない | 旧 GW 制約への回避策 — 新方式で前提消滅 |
 | #4 | GW が `hemssv` 経由ポーリング | ❌ | 2027年は HEMS-SV 経由 |
 | #4 | DR イベントの枠組み | ✅ 既存あり | モデル・管理画面・Push・ポイント完備; 「E-GW 経由」分岐追加のみ |
-範囲外への示唆: e-smart は事前集計を持たない — 月次レポートは都度 TagTag API へ転送・非保存（🔍 `syp-eminelstandard-backend/src/functions/api-dashboard/get-monthly-report-of-user.ts:21`）→ 集計・計算系グループにも流用資産なし。
+範囲外への示唆（**取扱注意**）: アプリの月次レポートは事前集計せず TagTag API へ都度転送・非保存です（🔍 `syp-eminelstandard-backend/src/functions/api-dashboard/get-monthly-report-of-user.ts:21`）。ただし、そこから「集計・計算系グループに流用資産なし」とは**言えません**: e-smart には積算・日次・月次の履歴テーブル3本が既に存在します — `DeviceAccumulatedHistoryTable`・`DeviceDailyUsageHistoryTable`・`DeviceMonthlyUsageHistoryTable`（🔍 `syp-eminelstandard-backend/template-dynamodb.yaml:1113, 1145, 1177`）。書き込みは `batch-import-rinnai-monthly-usage/app.ts:18, 84`・`batch-import-rinnai-daily-usage/app.ts:18, 83`・`batch-import-noritz-hourly-usage/app.ts:18, 68`・`batch-import-rinnai-sensor-data/app.ts:17, 173`・`batch-import-noritz-sensor-data/app.ts:17, 81`（TTL 付き `Put`）。実際の差分は別の点にあります: e-smart は Rinnai/Noritz が**計算済みの値を受け取る**方式で、生の計測値から自前で算出してはいません。※推定（未確認）: どこまで流用できるかは集計・計算系の調査時に個別確認が必要です。
 ## §2. 新システムでの担い先 <a id="s2"></a>
 
 | 仕事 | 担い先 | 種別 |
@@ -83,7 +84,7 @@
 
 | 誤解 | 正しくは |
 |---|---|
-| 「ポイント基盤がある → #1 完了同然」 | 2/3 のみ: PI＋記帳は既存、**計測データからの判定は未実装**（grep `energy|usage`: 0件） |
+| 「ポイント基盤がある → #1 完了同然」 | 2/3 のみ: PI＋記帳は既存、**計測データからの判定は未実装**（`syp-eminelstandard-backend/src/**/*.ts` 全体で grep `average|_avg`: 0件・`eco.?point|エコ暖房`: 0件（`energy|usage` 自体はヒットしますが、Rinnai/Noritz の計算済み値を入出力するバッチ群であり判定ロジックではありません）） |
 | 「Tip = アドバイスエンジン」 | Tip は管理者の手動作成＋静的ターゲティング — エンジンは新規作成部分 |
 | 「`batch-*` 名 = 定時バッチ」 | 81/105 が `batch-*` 名だが静的スケジュールは 3本（[§2](#s2)） |
 | 「#4 = DR をやらない」 | 2026年はコード保留のみ; **質問5だけは保留不可** — 2026年ファームウェアを拘束 |
@@ -92,7 +93,7 @@
 | # | 内容 | 担当 |
 |---|---|---|
 | 1 | kihara と終了方式 A/B を整理 → 質問5送付（最優先） | SYP＋PM |
-| 2 | QA 独立デプロイのただし書きへ回答: ① 旧EMINEL に使い続ける価値のあるバッチなし; ② e-smart 4候補（本グループ: Push＋ポイント/PI）。⚠️ 回答前に「既存システム」の指す対象を確認 | SYP |
+| 2 | QA 独立デプロイのただし書きへ回答: ① 旧EMINEL に使い続ける価値のあるバッチなし; ② e-smart 4候補（Push ・ ポイント/PI ・ Xzilla 受信基盤 SFTP→S3→DynamoDB ・ ダウンロード／エクスポート機構）— 本グループからは Push＋ポイント/PI。⚠️ 回答前に「既存システム」の指す対象を確認 | SYP |
 | 3 | 旧通知種別の棚卸し → D03 向けマッピング表（新生成元＋`target_screen`） | SYP（＋アプリ） |
 | 4 | [G] G-C-05 判定式の精査: 式ごとの入力データと取得元（GW/TagTag/Xzilla） | SYP |
 | 5 | Notion 分割時: #3「廃止、batch-push-notice で代替」、#4「2026年コードなし」と明記 — 約46本に誤算入させない | SYP＋PM |
@@ -103,7 +104,7 @@
 ### 6.1 #1 `DistributeMonthlyEcoPointsCommand` — エコ暖房ポイント月次付与 <a id="s6-1"></a>
 **目的**: 設定温度の月平均 ≤22℃ の世帯へ毎月ポイント特典を付与。
 **判定**: 廃止 = 旧 PHP コード ・ 流用 = ①PI連携＋②ポイント付与集中経路 ・ 新規 = ③計測データ判定のみ。
-**理由**: ①② はコードで確認済み（旧の中核と同型）; ③ は存在しない（grep `energy|usage`: 0件）; 方針は移植なし; Day3 の見立てと一致。
+**理由**: ①② はコードで確認済み（旧の中核と同型）; ③ は存在しない（`syp-eminelstandard-backend/src/**/*.ts` 全体で grep `average|_avg`: 0件・`eco.?point|エコ暖房`: 0件（`energy|usage` 自体はヒットしますが、Rinnai/Noritz の計算済み値を入出力するバッチ群であり判定ロジックではありません））; 方針は移植なし; Day3 の見立てと一致。
 **旧フロー**（確実）— テーブル: `ConCustomers`・`ConSensorMonthlyValues`（`s_104`）・`ConEcoPoints`（`s_141`）・`ConPointLinkLogs`（`fetchTable` :48-51）; PI 同一トランザクション :116-188:
 ```
 cron 毎月1日 17:00（cron :113-114）▼ DistributeMonthlyEcoPointsCommand
@@ -125,7 +126,7 @@ cron 毎月1日 17:00（cron :113-114）▼ DistributeMonthlyEcoPointsCommand
 | ポイント／閾値／重複防止キー | `BENEFIT_POINTS = 250`（:33）; ≤22.0℃ **設定**温度; `monthly_eco_points_YYYYMM`（= 前月） |
 | PI エラー | 当該顧客分のみロールバック・後続継続 |
 | ⚠️ 季節 | **通年**実行 — A03「12〜3月」と食い違い（[§3](#s3)-3） |
-**e-smart**: ① PI連携 既存（確実）— `syp-eminelstandard-backend/src/functions/give-point-to-point-infinity/app.ts`（宣言 `syp-eminelstandard-backend/template.yaml:3282`・secret :3289）; 旧と同系統プロトコル（CP932 フォーム＋XML・`if0200.do`/IF0200 — `legacy_eminel_docs/sources/eminel_sv_lib-develop/src/PointInfinity/PointInfinity.php:39, 65-71, 85-98`・`legacy_eminel_docs/sources/eminel_sv_lib-develop/src/Api/InterfaceCode.php:20`; "IF0200" は backend に出現しない）; 残高照会 `syp-eminelstandard-backend/src/functions/get-point-quantity-from-point-infinity/app.ts`（GET＋`<ZNDK>` :32, 79; secret `syp-eminelstandard-backend/template.yaml:2629`）:
+**e-smart**: ① PI連携 既存（確実）— `syp-eminelstandard-backend/src/functions/give-point-to-point-infinity/app.ts`（宣言 `syp-eminelstandard-backend/template.yaml:3282`・secret :3289）; 旧と同系統プロトコル（CP932 フォーム＋XML・`if0200.do`/IF0200 — `legacy_eminel_docs/sources/eminel_sv_lib-develop/src/PointInfinity/PointInfinity.php:39, 65-71, 85-98`・`legacy_eminel_docs/sources/eminel_sv_lib-develop/src/PointInfinity/Api/InterfaceCode.php:20`; "IF0200" は backend に出現しない）; 残高照会 `syp-eminelstandard-backend/src/functions/get-point-quantity-from-point-infinity/app.ts`（GET＋`<ZNDK>` :32, 79; secret `syp-eminelstandard-backend/template.yaml:2629`）:
 ```ts
 const fuyoRiyuSjisArray = Encoding.convert(fuyoRiyuUnicodeArray, {  // :35-39 — FUYO_RIYU を Shift_JIS 変換
   to: 'SJIS', from: 'UNICODE', });
@@ -141,7 +142,7 @@ export const givePointBadgeForUser = async (      // :57 — すべての付与�
 // Rollback transaction items if there is an error // :296-303 — PI 失敗 → DynamoDB 巻き戻し
   await writeOneTransaction(transactionRollbackItems);
 ```
-③ 未実装（確実）: 計測データからの判定 — grep `energy|usage`（ポイント経路）: 0件。
+③ 未実装（確実）: 計測データからの判定 — `src/functions/give-point-to-point-infinity/`・`get-point-quantity-from-point-infinity/`・`business-logic/give-point-badge-for-user.ts` で `syp-eminelstandard-backend/src/**/*.ts` 全体で grep `average|_avg`: 0件・`eco.?point|エコ暖房`: 0件（`energy|usage` 自体はヒットしますが、Rinnai/Noritz の計算済み値を入出力するバッチ群であり判定ロジックではありません）。
 **E-GW**: F-ES-04＋F-ES-09; 必須 2026（6/10）だが機能一覧は ✅劣後（[§3](#s3)-2）。🔍 `eminel_gw_project/docs/eminel/3_requirements/00_integrated_requirements_v1.2.md:409, 414, 675-691`・`eminel_gw_project/docs/eminel/2_management/22_decisions.md:31`・`eminel_gw_project/docs/eminel/1_product/10_feature_list.md:93, 95`・`eminel_gw_project/docs/eminel/2_management/minutes/20260625_egw_camp_day3.md:125`・`eminel_gw_project/docs/eminel/3_requirements/app/A03_point.md:48-102`
 ```
 GW 計測 ──HEMS-SV──▶ 世帯別月平均テーブル（新設・s_104 相当 — 集計系Gと連携）▼ 静的 ScheduleV2 毎月1日（新設）
@@ -173,7 +174,7 @@ foreach ($this->PushMessageDestinations->createByEmsSp($emsSp) as $pd) {
 $this->ConEcoMissionDestinations->saveManyOrFail($ecoMissionDestinations);
 $this->PushMessageDestinations->saveManyOrFail($pushMessageDestinations);
 ```
-**e-smart**: エンジンなし（確実）— grep `advice|アドバイス|mission|ミッション|判定`: 実ヒット0件（全て `permission`）。最近縁 = Tip（`syp-eminelstandard-backend/src/layers/common/nodejs/models/Tip.ts:4-22`）: 静的ターゲティング3種（`syp-eminelstandard-backend/src/functions/batch-send-tip-preprocessing/app.ts:43-50`）; 既読時付与 `syp-eminelstandard-backend/src/functions/api-tip/read-tip.ts:68`（`TABLE_TIP_STATS`/`TABLE_TIP_USER_ACTION`）; エネルギーデータを読む関数なし（`api-tip` 内 grep `energy|usage`: 0件）:
+**e-smart**: エンジンなし（確実）— grep `advice|アドバイス|mission|ミッション|判定`: 実ヒット0件（全て `permission`）。最近縁 = Tip（`syp-eminelstandard-backend/src/layers/common/nodejs/models/Tip.ts:4-22`）: 静的ターゲティング3種（`syp-eminelstandard-backend/src/functions/batch-send-tip-preprocessing/app.ts:43-50`）; 既読時付与 `syp-eminelstandard-backend/src/functions/api-tip/read-tip.ts:68`（`TABLE_TIP_STATS`/`TABLE_TIP_USER_ACTION`）; エネルギーデータを読む関数なし（`api-tip` 内 `syp-eminelstandard-backend/src/**/*.ts` 全体で grep `average|_avg`: 0件・`eco.?point|エコ暖房`: 0件（`energy|usage` 自体はヒットしますが、Rinnai/Noritz の計算済み値を入出力するバッチ群であり判定ロジックではありません））:
 ```ts
 export interface Tip {
   target_type?: string;          // ALL／属性／CSV —「エネルギーデータによる」は無い
@@ -295,7 +296,7 @@ batch-end-dr ─ ポイント付与（'dr#<id>'）＋ pre_control_status で復�
 5. （2027年）タスク分割は Day3 どおり（約17項目）— *「1バッチ全部盛り」を避ける*。
 6. テスト（2027年）: 新旧分岐の混在・途中解除・復元 — *最も壊れやすい箇所*。
 ## §7. グループ共通基盤と前提 <a id="s7"></a>
-**スケジュール基盤**: 静的3本（`ScheduleV2`・`Asia/Tokyo` — `syp-eminelstandard-backend/template.yaml:9-11`）: ① `BatchRunSequentially` `cron(5 0-7 * * ? *)`（:853-888、cron :881-882）② `BatchMigrationIntegratedData` `cron(0 8 * * ?)`（:2205-2240、:2233）③ `BatchGetErrorDeviceInfoOfRinnai` 8:00（:2966-2980）。残りは全て動的 — 🔍 `syp-eminelstandard-backend/src/layers/common/nodejs/services/put-schedule.ts:18-33`（組立て `syp-eminelstandard-backend/src/layers/common/nodejs/utils/date-utils.ts:117`）; 例: `syp-eminelstandard-backend/src/functions/api-news/common.ts:207-209`、`syp-eminelstandard-backend/src/functions/batch-send-news-complete/app.ts:72-80`; オートメーションはルール毎の週次（`syp-eminelstandard-backend/src/functions/api-automation/common.ts:115`）; ポーリングなし（grep `rate(`: 0件）。💡 G-A-02 の技術解 = このパターン:
+**スケジュール基盤**: 静的3本（`ScheduleV2`・`Asia/Tokyo` — `syp-eminelstandard-backend/template.yaml:9-11`）: ① `BatchRunSequentially` `cron(5 0-7 * * ? *)`（:853-888、cron :881-882）— Xzilla 8 IF の受信連鎖; ② `BatchMigrationIntegratedData` `cron(0 8 * * ?)`（:2205-2240、:2233）— 機器 CSV 6種を SFTP `/EST` へ送信; ③ `BatchGetErrorDeviceInfoOfRinnai` 8:00（:2966-2980）— Rinnai 機器のエラー情報取得。残りは全て動的 — 🔍 `syp-eminelstandard-backend/src/layers/common/nodejs/services/put-schedule.ts:18-33`（組立て `syp-eminelstandard-backend/src/layers/common/nodejs/utils/date-utils.ts:117`）; 例: `syp-eminelstandard-backend/src/functions/api-news/common.ts:207-209`、`syp-eminelstandard-backend/src/functions/batch-send-news-complete/app.ts:72-80`; オートメーションはルール毎の週次（`syp-eminelstandard-backend/src/functions/api-automation/common.ts:115`）; ポーリングなし（grep `rate(`（`syp-eminelstandard-backend/template.yaml`）: 0件）。💡 G-A-02 の技術解 = このパターン:
 ```ts
 return await scheduler.createSchedule({
   ScheduleExpression: scheduleExpression,          // 例 cron(30 14 15 8 ? 2026) — 特定の一時点

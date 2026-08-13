@@ -1,5 +1,6 @@
 # SESSION 2026-08-12 — Guide v1.2 theo `460c671` ・ review 6 agent ・ bộ 4 batch CSV/ZIP format mới (8 file)
-> Đọc SAU `00_INDEX.md`. ⭐ TRẠNG THÁI MỚI NHẤT.
+> ⛔ TRẠNG THÁI ĐÃ LỖI THỜI (2026-08-13) — xem `06_session_20260813_pullSpecApp_vaNew2_ruleQA.md`. Giữ lại vì chứa chi tiết 142 findings, format mới 4 batch CSV/ZIP và bài học "vá theo KHỐI" (mục 8.3).
+> Đọc SAU `00_INDEX.md`.
 > Phiên có **2 đợt**: đợt 1 = guide v1.2 + review `new_2/` (mục 1–7 dưới); đợt 2 = bộ báo cáo 4 batch CSV/ZIP theo **format mới** (mục 8).
 
 ## 1. Bối cảnh
@@ -45,7 +46,7 @@ Sau vá: fence 68 chẵn ・ 94 anchor / 0 hỏng ・ 0 tàn dư ・ 4.232 dòng
 
 ## 5. QUYẾT ĐỊNH & PHÁT HIỆN
 
-1. **Thư mục `submit_folder/2026_08_06/new/` (thế hệ 2 v4) KHÔNG còn trên đĩa** — chỉ còn thế hệ 1 (`2026_08_06/*.md`) và `new_2/`. Chưa rõ cố ý hay nhầm; **baseline mục 4 của skill `3-step-review` đang trỏ vào `new/`** → phải sửa khi user xác nhận.
+1. ~~Thư mục `submit_folder/2026_08_06/new/` không còn trên đĩa~~ → **ĐÃ GIẢI QUYẾT 08-13: user chủ động xoá, xem như không tồn tại.** Bản chuẩn duy nhất = `new_2/`; baseline mục 4 của `3-step-review` đã trỏ lại `new_2/`.
 2. **Dự đoán "集計・計算系 = e-smart không có gì dùng lại" phải xem lại trước khi điều tra** (mục 0b của 00_INDEX và `self_study_plan.md` đang ghi theo dự đoán cũ).
 3. Bài học quy trình: guide sửa "từ giữa ra" — thân bài kỹ nhưng **vỏ (bảng meta, bảng chú giải, phụ lục) không được rà lại**; 5/6 finding [cao] của vòng 2 thuộc loại này.
 4. Bài học ⛔#8/⛔#2: mọi câu "grep X: 0 hit" phải ghi **phạm vi grep**; bỏ phạm vi là nói quá nguồn (3 lần mắc trong 1 ngày, ở 2 tài liệu khác nhau).

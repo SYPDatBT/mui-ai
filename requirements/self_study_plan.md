@@ -123,6 +123,6 @@ Khi có spec Hạng mục 4           → app phụ thuộc requirement chốt (
 | File | Dùng khi |
 |---|---|
 | `mui-ai/requirements/onboarding_guide.md` | Nền tổng thể — 10 chương; tra nhanh bằng Phụ lục D |
-| `mui-ai/requirements/qa_kitagas.md` | Câu hỏi đã/sắp gửi khách |
+| `mui-ai/submit_folder/qa/` | Toàn bộ file QA — `qa_kitagas.md` (câu hỏi đã/sắp gửi khách) ・ `qa_batch_csvzip.md` (hỏi mui về nhóm batch CSV/ZIP) |
 | `mui-ai/submit_folder/2026_08_06/new_2/` | 3 báo cáo batch — mẫu để lặp lại |
 | `mui-ai/skillAI/create-investigation-report/TEMPLATE.md` | Khuôn viết báo cáo điều tra |

@@ -14,6 +14,7 @@
 | IF-01 | kênh liên kết MỚI E-GW⇔Xzilla — dòng 1 IF一覧 統合要件 v1.2 §4-1, qua 北ガスクラウド, chưa chốt (≠ IF 4 số hệ cũ) |
 | CLD-07 / SVC-03 ・ F-ES-10 / F-ES-01 | vấn đề mở: vào/ra + 認証 IF-01 (~10 mục) / lưu trữ + backup chưa định nghĩa ・ mã chức năng server 統合要件 v1.2: Xzilla連携 / グラフ |
 | 回答中 | QA Notion chưa chốt (tham chiếu 2026-08-04 — mở trang gốc trước khi trích lại) |
+| Viết tắt hạ tầng / dịch vụ | **TTL** = hạn tự xóa bản ghi của DynamoDB ・ **PITR** = Point-In-Time Recovery, backup liên tục cho phép khôi phục về thời điểm bất kỳ ・ **FCM** = Firebase Cloud Messaging, dịch vụ đẩy thông báo của Google ・ **PushCore** = server trung gian đẩy push của hệ cũ ・ **Tip** = nội dung mẹo hiển thị trong app ESTA ・ **DR** = デマンドレスポンス, điều tiết giảm nhu cầu điện khi lưới căng ・ **Xzilla** (クジラ) = nền liên kết dữ liệu phía 北ガス (cấp/nhận hợp đồng, người trả tiền, điện 30 phút… qua SFTP) |
 
 **Mục lục**: KẾT LUẬN ・ I: §1 Vì sao ・ §2 Chỗ xử lý ・ §3 Cần xác nhận ・ §4 Dễ hiểu sai ・ §5 Việc tiếp theo ・ II: §6 Từng batch ・ §7 Luồng chung ・ §8 Đối chiếu dữ liệu ・ §9 Phương án ・ §10 QA ・ §11 Căn cứ
 ## KẾT LUẬN
@@ -56,18 +57,22 @@
 | #7 30分値 + tính 買電売電 | handler mới + cặp bảng 速報/確報 mới (`syp-eminelstandard-backend/template-dynamodb.yaml`) + Lambda tính | CHƯA CÓ — nặng nhất nhóm |
 | Chiều gửi → 基幹 | `upload-data-backup-to-sftp.ts` → `/EST` (6 CSV thiết bị, 8:00) | SẴN CÓ (đích 🔸 — §3-4) |
 
-- Sơ đồ luồng đầy đủ: §7.3. Tư tưởng: cũ = cron dày; mới = 3 lịch tĩnh + one-shot động, **không polling mỗi phút** (grep `rate(`: 0 hit — §7.1).
+- Sơ đồ luồng đầy đủ: §7.3. Tư tưởng: cũ = cron dày; mới = 3 lịch tĩnh + one-shot động, **không polling mỗi phút** (grep `rate(` trong `syp-eminelstandard-backend/template.yaml`: 0 hit — §7.1).
 ### §3 Cần xác nhận trước khi chốt
 | # | Điểm treo | Hệ cũ | Hệ mới / kế hoạch | Mức |
 |---|---|---|---|---|
 | 1 | Vào/ra + 認証 của IF-01 (CLD-07, gồm chiều xuất 「EMINELデータの共有」) | 3 IF ổn định | chưa chốt — cả 3 batch phụ thuộc | 🔴 |
 | 2 | IF-01 có luồng 解約 không | IF2249 cấp CSV mỗi 5 phút | chưa biết — không có thì phải nêu yêu cầu NGAY | 🔴 |
 | 3 | Nhịp cấp 30分値 | 10 phút/lượt | e-smart chỉ quen 0–7h — "gần real-time" là yêu cầu MỚI với 北ガス | 🔴 |
-| 4 | Đích SFTP `/EST` | (không có chiều gửi) | 6 CSV/ngày 8:00; 🔸 nghi Xzilla/DWH, địa chỉ trong secret | 🟡 |
+| 4 | Đích SFTP `/EST` | CÓ chiều gửi nhưng khác loại: app-log `.tsv` → chính SFTP Xzilla (`PutLogFileCommand`, 0:00 — nhóm 監視・ログ系, ngoài tập này); không có chiều gửi CSV thiết bị | 6 CSV/ngày 8:00; 🔸 nghi Xzilla/DWH, địa chỉ trong secret | 🟡 |
+| 5 | 4 bảng của #5–#7 đang là **loại tải nội bộ** của 管理画面 | `ipf_ems_pls_cntr_payers`・`ipf_cntct_cancellations`・`emn_all_electric_powers`・`emn_fast_electric_powers` nằm trong 5 loại 「本表外の内部種別」 (có trong hiện thực, spec §28 chưa ghi) — 🔍 `eminel_gw_project/docs/eminel/4_spec/admin/I_data_download.md:200` | Danh mục 「E-GWでダウンロード対象とするデータ種別」 vẫn 要FIX → bỏ 4 bảng mà không định nghĩa loại thay thế thì mất 4 đường tải đang dùng để vận hành/đối soát | 🟡 |
 
 **Câu chữ soạn sẵn**:
 > **Hỏi mui (QAデータベース) — #4**:
 > 「e-smart が毎日 8:00 に機器データ CSV 6種（給湯器系5種＋赤外線リモコン）を SFTP の `/EST` フォルダへアップロードしていますが（`upload-data-backup-to-sftp.ts`）、この宛先は Xzilla もしくは DWH（分析用データ基盤）という理解で合っていますか。接続先が secret 管理のためコードから確認できず、ご確認をお願いしたいです。該当する場合、F-ES-10「EMINELデータの共有」の既存実装として扱いたいと考えています。」
+
+> **Hỏi mui (QAデータベース) — #5**:
+> 「管理画面のデータダウンロードについてご確認をお願いいたします。現行実装では `ipf_ems_pls_cntr_payers`／`ipf_cntct_cancellations`／`emn_all_electric_powers`／`emn_fast_electric_powers` が「本表外の内部種別」として取得可能になっております（仕様書§28 には未記載）。E-GW では旧バッチ #5〜#7 の廃止に伴い、これらのテーブル自体が存在しなくなります。①これらの内部種別は、どなたがどのような目的で利用されているでしょうか。②E-GW でも同等のダウンロード種別が必要でしょうか（必要な場合、新データ構造ではどの単位で出力すべきかもご教示ください）。「E-GWでダウンロード対象とするデータ種別」が要FIX のままですと、#5〜#7 の廃止判定に影響いたします。」
 
 > **Hỏi khách qua PM mui — #2・#3** (gửi cùng đợt thảo luận CLD-07):
 > 「新アーキテクチャの IF-01（北ガスクラウドAPI — Xzillaデータ連携）について2点ご相談です。①電力契約の解約情報のデータフローは IF-01 に含まれますか（旧 IF2249 相当 — 解約時の買電売電計算停止に必要）。②電力30分値の提供周期はどの程度を想定できますか（旧システムは10分毎。準リアルタイム提供は新規要素のため、可否を確認したいです）。」
@@ -85,7 +90,7 @@
 | 1 | Bám CLD-07/IF-01; trong lúc chờ làm ngay: trích spec 契約終了判定 (§6.2 bước 1) + bảng đối chiếu 4 trường payer (§6.2 bước 2) | SYP |
 | 2 | Gửi câu hỏi `/EST` (§3) | SYP → QAデータベース |
 | 3 | Gửi câu hỏi IF-01: luồng 解約 + nhịp 30分値 (§3) | SYP → PM mui → 北ガス |
-| 4 | Góp 「既存システムを使い続けたほうがいい機能」 vào QA 独立デプロイ: ứng viên nhóm này = luồng nhận Xzilla SFTP→S3→DynamoDB (trả lời 2 vế, chung 3 tập: ①hệ cũ — không có ・ ②e-smart — 4 ứng viên) | SYP → Notion |
+| 4 | Góp 「既存システムを使い続けたほうがいい機能」 vào QA 独立デプロイ: ứng viên nhóm này = luồng nhận Xzilla SFTP→S3→DynamoDB (trả lời 2 vế, chung 3 tập: ①hệ cũ — không có ・ ②e-smart — 4 ứng viên (Push ・ point/PI ・ nền nhận Xzilla SFTP→S3→DynamoDB ・ cơ chế download/export)) | SYP → Notion |
 
 > **Phương châm** (合宿 Day3 — 「バッチ群…作り直す前提」, 1 batch = 1 task): kênh nhận mới cắm vào luồng SFTP→S3→DynamoDB sẵn có; chỉ nhịp dày hơn 0–7h (duy nhất 30分値) mới khai lịch riêng (§9).
 
@@ -162,7 +167,8 @@ Cũ: 5 phút full-reload → `ipf_ems_pls_cntr_payers` (1 bảng riêng) ↔ M�
 
 **Flow cũ** (確実) — cron `legacy_eminel_docs/docs/02_詳細設計/10_バッチ処理/mng-webap_cron設定_20241029.txt:109-110`, nhịp 10 phút ・ 🔍 `legacy_eminel_docs/sources/conciergesv-develop/src/Command/RcvHalfHourElectricPowerCommand.php:107-122, 192-233, 449-583, 591-725, 734-1050` (rẽ nhánh 875–893):
 ```
-cron */10' ──▶ 速報値: xóa-nạp lại emn_all/emn_fast_electric_powers (:449-583) ・ 確報値 (fixed_div=1): ghi bổ sung emn_confirm_electric_powers (:591-725)
+cron */10' ──▶ bảng 取込 emn_all_electric_powers: xóa sạch → nạp lại cả file CSV (:193-194, :205)
+           ──▶ 速報値 (fixed_div rỗng): xóa-nạp lại emn_fast_electric_powers (:214-215, :449-583, lọc :569-570) ・ 確報値 (fixed_div=1): ghi bổ sung emn_confirm_electric_powers (:591-725, lọc :711-712)
            → gộp 2×30分→1時間値, rẽ nhánh theo cấu hình nhà (:875-893) → ghi s_102 → đồ thị/report
 ```
 Trích code (rẽ nhánh 売電) — 🔍 `legacy_eminel_docs/sources/conciergesv-develop/src/Command/RcvHalfHourElectricPowerCommand.php:875-882`:
@@ -185,7 +191,7 @@ Rẽ nhánh: 太陽光 → 売電 từ số liệu GW (batch tích lũy ngày đ
 IF-01 30分値 (bước 1) ──▶ SFTP→S3→handler mới (bước 2; ScheduleV2 riêng nếu nhịp cao — §9) ──▶ bảng 速報/確報 mới (bước 3)
    ──▶ Lambda tính: 2×30分→1時間 + điều kiện 買電/売電 map 9 pattern (bước 4) + cờ #5 ──▶ nhóm batch 集計 (bước 5)
 ```
-Cũ: 10 phút/lượt → 速報 2 bảng (`emn_all`/`emn_fast_electric_powers`) + 確報 1 bảng (`emn_confirm_electric_powers`) → `s_102` ↔ Mới: 2 bảng 速報/確報 mới → Lambda tính (map 9 pattern) → nhóm batch 集計.
+Cũ: 10 phút/lượt → bảng 取込 `emn_all_electric_powers` (xóa-nạp lại nguyên file; comment bảng: 「EMN_30分電力量出力情報取り込みデータ」) → từ đó tách ra 速報 `emn_fast_electric_powers` (xóa-nạp lại) + 確報 `emn_confirm_electric_powers` (ghi bổ sung) → `s_102` ↔ Mới: 2 bảng 速報/確報 mới → Lambda tính (map 9 pattern) → nhóm batch 集計.
 1. Chốt IF-01 phần 30分値: format file, nhịp cấp (cũ: 10 phút), 認証 (CLD-07). — *Vì sao*: bước 2–3 đổ theo 3 tham số; nhịp gắt nhất, cần 北ガス đồng ý (§3).
 2. Dựng đường nhận theo §7.3: `syp-eminelstandard-backend/src/functions/batch-get-list-file-name-from-sftp-server/` → `syp-eminelstandard-backend/src/functions/batch-forward-csv-from-sftp-server-to-s3/` → handler mới; nhịp > 0–7h → `ScheduleV2` riêng trong `syp-eminelstandard-backend/template.yaml`, KHÔNG nhét `BatchRunSequentially` (§9). — *Vì sao*: chuỗi 8 IF tuần tự có khóa — luồng nhịp cao làm nghẽn; lịch riêng cô lập sự cố.
 3. Bảng DynamoDB mới (`syp-eminelstandard-backend/template-dynamodb.yaml`): tách 速報 (đổ đè) / 確報 (tích lũy) — tương đương `emn_fast`/`emn_confirm_electric_powers`; TTL theo 保持期間 (SVC-03). — *Vì sao*: 2 tính chất ngược nhau; hệ cũ cũng tách vì vậy (:449-583 / :591-725).
@@ -197,7 +203,7 @@ Cũ: 10 phút/lượt → 速報 2 bảng (`emn_all`/`emn_fast_electric_powers`)
 - Phương châm 合宿 Day3 (2026-06-25): batch hiện hành 「いけてない」 → làm lại không bê nguyên, 1 batch = 1 task, バッチボーン trước 結合フェーズ (tháng 9); "dùng lại" = dùng cơ chế/codebase e-smart. 🔍 `eminel_gw_project/docs/eminel/2_management/minutes/20260625_egw_camp_day3.md:35, 51, 99-103, 147-149`
 - QA độc lập deploy (swan (mui), 回答中): *cơ bản hệ độc lập* → dùng lại ≠ 0 công (§4).
 - Chưa có commit E-GW trên `gw-syp-dev` (web-admin: `git log origin/main..gw-syp-dev` rỗng; backend: 15 commit gần nhất thuần e-smart). *推定*: viết thêm vào codebase e-smart — suy từ QA 管理画面 (masao takahashi (mui), 回答中 — trả lời tạm: hướng chung source), chưa thành văn; "chung source" ≠ "chung môi trường chạy".
-- 3 lịch tĩnh (`ScheduleV2`, `Asia/Tokyo` — `syp-eminelstandard-backend/template.yaml:9-11`): ① `BatchRunSequentiallyStateMachine`, `cron(5 0-7 * * ? *)` = :05 mỗi giờ 0–7h JST (`syp-eminelstandard-backend/template.yaml:853-888`, cron 881–882) — luồng nhận nhóm này; ② `BatchMigrationIntegratedDataStateMachine`, `cron(0 8 * * ?)` (`syp-eminelstandard-backend/template.yaml:2205-2240`, cron 2233) — chiều `/EST`; ③ `BatchGetErrorDeviceInfoOfRinnaiStateMachine`, 8:00 (`syp-eminelstandard-backend/template.yaml:2966-2980`). Còn lại: lịch tạo động EventBridge Scheduler, đa số one-shot (`syp-eminelstandard-backend/src/layers/common/nodejs/services/put-schedule.ts:18-33`); ngoại lệ automation rule — lịch tuần/rule, không tự xóa (`syp-eminelstandard-backend/src/functions/api-automation/common.ts:115, 167-175`); **không polling mỗi phút** (grep `rate(`: 0 hit).
+- 3 lịch tĩnh (`ScheduleV2`, `Asia/Tokyo` — `syp-eminelstandard-backend/template.yaml:9-11`): ① `BatchRunSequentiallyStateMachine`, `cron(5 0-7 * * ? *)` = :05 mỗi giờ 0–7h JST (`syp-eminelstandard-backend/template.yaml:853-888`, cron 881–882) — luồng nhận nhóm này; ② `BatchMigrationIntegratedDataStateMachine`, `cron(0 8 * * ?)` (`syp-eminelstandard-backend/template.yaml:2205-2240`, cron 2233) — chiều `/EST`; ③ `BatchGetErrorDeviceInfoOfRinnaiStateMachine`, 8:00 (`syp-eminelstandard-backend/template.yaml:2966-2980`). Còn lại: lịch tạo động EventBridge Scheduler, đa số one-shot (`syp-eminelstandard-backend/src/layers/common/nodejs/services/put-schedule.ts:18-33`); ngoại lệ automation rule — lịch tuần/rule, không tự xóa (`syp-eminelstandard-backend/src/functions/api-automation/common.ts:115, 167-175`); **không polling mỗi phút** (grep `rate(` trong `syp-eminelstandard-backend/template.yaml`: 0 hit).
 - Scope 6/10 (決定ログ): 必須 = 暖房機能/暖房制御/照明アドバイス※/ポイント連携/グルーピング・レポート; 劣後 (→2027/4~) = 複合制御・DR・ダッシュボード・バッジ (※nghi 誤記 của 省エネアドバイス — *推定*; 🔍 `eminel_gw_project/docs/eminel/2_management/22_decisions.md:30-31`) ・ Phạm vi SYP (QA 調査範囲, swan (mui), 回答中): `conciergesv`/`eminelsv` = đối tượng điều tra, không phát triển tiếp; GW đi qua HEMS-SV (m2-cloud), spec chia sẻ sau (B-2, §10).
 #### §7.2 Luồng nhận hệ cũ
 🔍 `legacy_eminel_docs/docs/02_詳細設計/10_バッチ処理/cron設定概要.txt:1-37` (flock trong `.sh` thuộc `eminel-mng-webap.20240909.tgz` cùng thư mục):
@@ -250,20 +256,23 @@ Grep toàn backend `IF1156`・`IF2249`・`IF2264`・`30分`・`HalfHour`・`half
 [dữ liệu thiết bị trong ngày] ──▶ BatchMigrationIntegratedDataStateMachine (8:00 — template.yaml:2215-2226)
         ──▶ 6 CSV (5 loại 給湯器 + remote hồng ngoại) ──SFTP, tài khoản upload riêng──▶ [/EST]  đích = Xzilla/DWH? 🔸 hỏi mui
 ```
-Cũ: không có chiều gửi tương đương ↔ Mới: 1 luồng, 6 CSV/ngày (5 給湯器 + 1 remote hồng ngoại), 8:00.
+Cũ: **CÓ chiều gửi lên chính SFTP server Xzilla — nhưng khác loại dữ liệu**: `PutLogFileCommand` giải nén ZIP log thao tác app của ngày hôm trước rồi PUT từng file `.tsv` lên `XZILLA_RELATION_SERVER_HOST` bằng tài khoản gửi riêng `XZILLA_SEND_SFTP_USER`, cron `00 00 * * *`. Batch này thuộc nhóm 監視・ログ系 nên **ngoài phạm vi 3 batch của tập này**; không có chiều gửi CSV thiết bị tương đương `/EST` ↔ Mới: 1 luồng, 6 CSV/ngày (5 給湯器 + 1 remote hồng ngoại), 8:00.
+- 🔍 `legacy_eminel_docs/sources/conciergesv-develop/src/Command/PutLogFileCommand.php:34` (lấy ngày hôm trước), `:42-43` (host + user gửi), `:47, 50` (thư mục đích ・ nguồn ZIP `…/xzilla/*.zip`), `:100` (`$sftp->put`)・cron `legacy_eminel_docs/docs/02_詳細設計/10_バッチ処理/mng-webap_cron設定_20241029.txt:120` (`31_PutLogFile.sh`).
 - 🔍 `syp-eminelstandard-backend/src/layers/common/nodejs/services/upload-data-backup-to-sftp.ts:22-43, 52-57` — `pathExport = '/EST'`, cùng SFTP server, user upload riêng (`username_for_upload`/`private_key_for_upload`). 🔸 đích nghi là Xzilla/DWH — secret ngoài code, hỏi mui (§3); nếu đúng = hiện thực sẵn có của 「EMINELデータの共有」 (F-ES-10 — `eminel_gw_project/docs/eminel/3_requirements/00_integrated_requirements_v1.2.md:696`).
-- Lập danh mục task Xzilla phải thêm chiều xuất này (§4). Camp day3 dòng 126 đoán ESTA có sẵn đường gửi アプリログ — đã kiểm: KHÔNG có (chỉ download cho admin).
+- Lập danh mục task Xzilla phải thêm chiều xuất này (§4). Camp day3 dòng 126 đoán **ESTA** có sẵn đường gửi アプリログ sang Xzilla — kiểm backend e-smart: **chưa có** (chỉ có đường download cho 管理画面). Nhưng **hệ cũ thì có** (`PutLogFileCommand`, ngay trên) → interface gửi app-log ↗ Xzilla là tài sản của hệ CŨ, không phải của ESTA; làm E-GW phải chốt ai gánh phần này.
+- 🔸 *Giả thuyết — CHƯA kiểm chứng*: việc hệ cũ dùng **cùng một SFTP server Xzilla cho cả nhận lẫn gửi** là căn cứ gián tiếp cho phỏng đoán đích `/EST` của e-smart cũng là Xzilla. Vẫn phải hỏi mui để xác nhận (§3) — địa chỉ thật nằm trong secret, không có trong code.
 ### §8 Đối chiếu dữ liệu cũ ↔ mới
 | Dữ liệu hệ cũ (PostgreSQL) | Hệ mới (DynamoDB) / kế hoạch | Trạng thái |
 |---|---|---|
 | `ipf_cntct_cancellations` (#5) | bảng 解約 mới theo IF-01, vào luồng nhận sẵn có (§6.1 bước 2) | ❌ |
 | cờ + số liên kết trên `t_101` (`c065`… — #5/#6) | cờ trên bảng hộ E-GW qua hậu xử lý ④ (§6.1 bước 3) + hậu xử lý 契約終了判定 (§6.2 bước 3) | ❌ |
 | `ipf_ems_pls_cntr_payers` (#6) | KHÔNG bảng riêng — nằm trong `TABLE_KAIIN`+`TABLE_IF2023_USE_CNTR_INFO`/`TABLE_IF2024_CUSTOMER_INFO`, mở rộng theo IF-01 (§6.2 bước 2) | ⚠️ |
-| `emn_all`/`emn_fast_electric_powers` (速報 — #7) | bảng 速報 mới (`syp-eminelstandard-backend/template-dynamodb.yaml` — §6.3 bước 3) | ❌ |
+| `emn_all_electric_powers` (bảng 取込 trung gian — #7) | không dựng bảng trung gian: file gốc nằm ở S3, handler ghi thẳng vào 2 bảng 速報/確報 (§6.3 bước 3) | ❌ |
+| `emn_fast_electric_powers` (速報 — #7) | bảng 速報 mới (`syp-eminelstandard-backend/template-dynamodb.yaml` — §6.3 bước 3) | ❌ |
 | `emn_confirm_electric_powers` (確報 — #7) | bảng 確報 mới, tách riêng (§6.3 bước 3) | ❌ |
 | `s_102` (kết quả giờ — #7) | đầu ra Lambda tính mới → nhóm batch 集計 (§6.3 bước 5) | ❌ |
 
-**Đếm**: ✅ 0 ・ ⚠️ 1 ・ ❌ 5 — đúng hiện trạng 3 IF chưa tồn tại; chỉ dữ liệu payer có chỗ chứa sẵn (phân tán 3 bảng). Cơ chế: đường nhận SFTP→đĩa + cron 5–10 phút → SFTP→S3→DynamoDB 0–7h (`syp-eminelstandard-backend/src/statemachine/batch_run_sequentially.asl.json`); chống trùng `flock` → khối asl (5–38) + `CsvDownloadHistory`; lịch cron cố định (`/etc/cron.d/eminel-mng-webap`) → 3 `ScheduleV2` + one-shot động (§7.1).
+**Đếm**: ✅ 0 ・ ⚠️ 1 ・ ❌ 6 — đúng hiện trạng 3 IF chưa tồn tại; chỉ dữ liệu payer có chỗ chứa sẵn (phân tán 3 bảng). Cơ chế: đường nhận SFTP→đĩa + cron 5–10 phút → SFTP→S3→DynamoDB 0–7h (`syp-eminelstandard-backend/src/statemachine/batch_run_sequentially.asl.json`); chống trùng `flock` → khối asl (5–38) + `CsvDownloadHistory`; lịch cron cố định (`/etc/cron.d/eminel-mng-webap`) → 3 `ScheduleV2` + one-shot động (§7.1).
 ### §9 Phương án lịch chạy cho #7
 | Tiêu chí | A. Nhét vào `BatchRunSequentially` | B. `ScheduleV2` riêng trong `syp-eminelstandard-backend/template.yaml` |
 |---|---|---|
@@ -310,5 +319,5 @@ Thứ tự: A-1 → A-2/A-3/A-4 (hỏi gộp cùng đợt) → §6.1 bước 2�
 | Import 基幹 「日次・深夜〜早朝」 (`eminel_gw_project/docs/eminel-smart/02_product_overview.md:30, 63-64`) | `cron(5 0-7 * * ? *)` — mỗi giờ 0–7h JST (§7.1) |
 | Lock merge 「6分」 (`eminel_gw_project/docs/eminel-smart/02_product_overview.md:73, 78`) | `UPDATE_LOCK_TTL_MINUTES = 5` (§7.3) |
 | `CsvDownloadHistory` = lịch sử admin download (`eminel_gw_project/docs/eminel-smart/03_backend_models.md:107`) | lịch sử tải TỪ SFTP về (chống tải trùng) — không liên quan admin (§7.3) |
-| 「自動化ルール実行（毎分）」 (`eminel_gw_project/docs/eminel-smart/02_product_overview.md:85`) | không mỗi phút — lịch tuần/rule tạo động (§7.1; grep `rate(`: 0 hit) |
+| 「自動化ルール実行（毎分）」 (`eminel_gw_project/docs/eminel-smart/02_product_overview.md:85`) | không mỗi phút — lịch tuần/rule tạo động (§7.1; grep `rate(` trong `syp-eminelstandard-backend/template.yaml`: 0 hit) |
 | Runtime 「Node.js 20.x, arm64」 (`eminel_gw_project/docs/eminel-smart/02_product_overview.md:49`) | `Runtime: nodejs24.x` (`syp-eminelstandard-backend/template.yaml:181`; CompatibleRuntimes layer chung vẫn nodejs20.x — dòng 3163) |
