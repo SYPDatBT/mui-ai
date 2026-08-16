@@ -37,7 +37,7 @@ BƯỚC 8  Gọi API (có điều kiện)→ chỉ khi IF2264 (payer) hôm nay c
 | 6 | Đặt cờ dừng tính toán mua/bán điện | §2.5 |
 | 7 | Ghi log "hoàn tất" | §2.6 |
 | 8 | Gọi API thông báo — có điều kiện phụ thuộc IF2264 | §2.7 |
-| — | Cấu trúc dữ liệu ghi ra `ipf_cntct_cancellations` | §2.8 |
+| — | Cấu trúc dữ liệu ghi ra `ipf_cntct_cancellations` | §2.4 |
 
 ---
 

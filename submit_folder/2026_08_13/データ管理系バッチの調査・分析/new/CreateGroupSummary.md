@@ -3,7 +3,7 @@
 ## Tóm tắt
 
 `CreateGroupSummaryCommand` là batch cron chạy hàng ngày (02:10) trên server `conciergesv`: phân khúc
-toàn bộ khách hàng theo tổ hợp 5 thuộc tính hộ gia đình (loại nhà, công suất máy sưởi, diện tích sàn, số
+toàn bộ khách hàng theo tổ hợp 5 thuộc tính hộ gia đình (loại nhà, công suất máy sưởi [c042=C_HEATER_POWER; cùng thuộc tính này được gọi là "nguồn nhiệt sưởi (暖房熱源)" ở batch RankingCreation — nguồn hệ cũ tự dùng 2 tên cho 1 cột], diện tích sàn, số
 người trong gia đình, có đồng phát khí gas hay không — mỗi thuộc tính được "bucket hóa" qua `CASE WHEN`
 thành nhóm ít giá trị hơn), tính **số lượng khách hàng (population)** trong mỗi phân khúc rồi lưu vào
 bảng sensor-value dùng chung dưới mã `device_type=16` ("グループ母数" = population (số khách hàng) của

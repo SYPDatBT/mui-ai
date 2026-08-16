@@ -3,14 +3,14 @@
 | | |
 |---|---|
 | Người review | AI (Claude) — theo `review_plan_20260813.md` (đã user duyệt 16/08) |
-| Ngày chạy | 2026-08-16 → (đang chạy) |
-| Trạng thái | 🟡 **P0–P7 ✅ trọn vẹn** (43/43 verdict, đối kháng 0 REFUTED §3c, P7 §3b) ・ **P8: G1 vá xong** (18/18 batch → `new/`, §3d; commit `f5a299b`) — còn vá G4+G5/G3/G2+G7/G8, dịch JA 24 file, sửa summary 15 dòng, re-review, chốt |
+| Ngày chạy | 2026-08-16 → 2026-08-17 (hoàn tất) |
+| Trạng thái | ✅ **P0–P8 XONG TRỌN VẸN** — 43/43 verdict phán định, đối kháng 0 REFUTED (§3c), P7 đối chiếu 43 sheet↔summary (§3b) ・ P8: vá đủ 43/43 batch+module → `new/` (§3d), dịch JA 24/24 file VN-only, kiểm sau dịch 0 lỗi cao (§3e), sửa `summary_batch_migration_ja.md` 15/15 mục P7-B, re-review thu hẹp ⛔#5 ĐẠT 8/8 lát trước bàn giao. 4 câu QA gộp từ 9 mục 要業務確認 đã tách ra `submit_folder/qa/qa_review_20260813_20260817.md`, chờ user duyệt gửi PM mui |
 | Mốc bàn giao | Commit local `312d6d0` (85 file nguyên trạng của team + plan) — mọi `file:dòng` trong báo cáo này trỏ theo mốc đó |
 | Mốc repo đối chiếu | `eminel_gw_project@1100487` (main) ・ `legacy_eminel_docs@ccd8f56` (main) ・ `syp-eminelstandard-backend@dc39aa39` (gw-syp-dev) ・ `syp-eminelstandard-web-admin@e550326` (gw-syp-dev) ・ `syp-eminelstandard-app@41ee385` (syp-dev) — fetch xác nhận khớp origin 16/08 |
 
 ## 1. Tổng quan & thống kê
 
-*(Điền dần sau mỗi phase; chốt ở P8.)*
+**Chốt cuối (P8, 17/08):** 43/43 batch+module có verdict (妥当 6 ・ 根拠不足 19 ・ 要修正 14 ・ 要業務確認 4) ・ tổng **189 findings** [cao ~24 ・ vừa ~85 ・ thấp ~80] qua P1–P5 ・ đối kháng đầy đủ mọi [cao]+要修正 = **0 REFUTED ・ 0 UNSURE** (§3c) ・ P8 vá 43/43 (146 finding áp theo fixspec, 0 tàn dư — re-review §8a/§8b xác nhận) ・ dịch JA 24/24 file VN-only, văn thể である体 theo phong cách member ・ 9 câu 要業務確認 gộp thành 4 câu module đã tách `submit_folder/qa/qa_review_20260813_20260817.md`.
 
 | Phase | Phạm vi | Trạng thái | Findings [cao/vừa/thấp] | Verdict phán định |
 |---|---|---|---|---|
@@ -22,7 +22,7 @@
 | P5 | G3 配信・通知 (4+4) | ✅ 16/08 (đối kháng 2/2 ✅ §3c) | xem §3.G3 | 1 妥当 ・ 1 根拠不足 ・ 1 要修正 ・ 1 要業務確認 |
 | P6 | G6 CSV/ZIP (4 sheet) | ✅ 16/08 | 0 (md skip — identical bản đã review 08-12) | 妥当 2 ・ 根拠不足 1 ・ 要業務確認 1 |
 | P7 | Tổng đối chiếu 43 sheet ↔ summary | ✅ 16/08 | 10 lệch sheet/summary/new_2 + 15 dòng summary cần sửa (xem §3b) | — |
-| P8 | Sửa (new/) + dịch JA + chốt | 🟡 G1 ✅ (18/18 batch, §3d) — còn G4+G5/G3/G2+G7/G8 + dịch + summary + re-review | | |
+| P8 | Sửa (`new/`) + dịch JA + kiểm dịch + sửa summary + re-review | ✅ 16–17/08 | 146 finding fixspec áp đủ (0 tàn dư); kiểm dịch 0 cao/2 vừa (quy ước, chấp nhận)/7 thấp (đã thống nhất); re-review ⛔#5 ĐẠT 8/8 lát | 43/43 batch có bản sửa; 3 nhóm có `new/batch_decision.md` (G1 7 sheet ・ G2 3 ・ G4 3) |
 
 ## 2. Bảng verdict 43 phán định
 
@@ -1075,7 +1075,7 @@ Ghi chú: `CalcYearlyAverageData` không có finding → không có bản trong 
 
 ## 4. Các điểm 要業務確認 (câu hỏi soạn sẵn chờ user duyệt gửi)
 
-*(Nếu user duyệt gửi → tách ra `submit_folder/qa/qa_<chủ-đề>_<YYYYMMDD>.md` theo ⛔#12.)*
+> ✅ **ĐÃ TÁCH RA FILE QA (17/08, user duyệt)**: toàn bộ **9 mục 要業務確認** rải trong §3 các nhóm đã được **gộp theo nhóm module thành 4 câu** (mỗi câu chia ý ①②③) và chuyển sang **`submit_folder/qa/qa_review_20260813_20260817.md`** theo ⛔#12 — bảng truy vết 9 mục gốc → 4 câu gộp nằm ở phụ lục cuối file QA đó. Phần dưới đây giữ lại làm bản gốc từng mục (nguyên văn khi soạn).
 
 **Q-G6-1 (từ verdict `CreateCsvAndZipConSensorDailyAveValues` — đích: PM mui / 業務側):**
 
@@ -1103,11 +1103,38 @@ Bối cảnh thêm: câu này giao thoa với trục "app cần 他世帯平均/
 
 ## 6. Danh sách file đã dịch JA + kết quả kiểm sau dịch
 
-*(P8 điền. Quy ước: bản dịch ngắn gọn y phong cách file `_ja` của member, đặt trong `new/`, tên `<tên-file-VN>_ja.md`. Nhóm có sheet phán định 要修正 → P8 tạo thêm `new/batch_decision.md` bản-đã-sửa: đủ mọi sheet, sheet 要修正 thay câu kết luận đã chốt, meta đầu file liệt kê sheet đã sửa để member cập nhật xlsx.)*
+**Đã dịch 24/24 file VN-only** (bản dịch đặt trong `new/`, tên `<tên-file-VN>_ja.md`, dịch từ **bản đã vá** trong `new/`):
+
+| Nhóm | Số file dịch | Danh sách |
+|---|---|---|
+| G2 データ管理系 | 8 | CreateGroupSummary ・ CreateTablePartition ・ DeleteData ・ DeleteLogicalDeletedDevices ・ DeleteTimeOutControlOneMinute ・ DeleteTimeOutControlTenMinute ・ TerminateOutdatedDeviceControlJobs ・ RankingCreation |
+| G3 配信・通知系 | 8 | 4 cặp `legacy-batch_*` + `current-eminelsmart_*` của DistributeMonthlyEcoPoints ・ PublishRegularEcoMissions ・ DispatchPushMessages ・ ControlDrOperation |
+| G4 外部連携・受信系 | 3 | RcvCntctCancellation ・ RcvEmsPlsCntrPayer ・ RcvHalfHourElectricPower |
+| G5 監視・ログ系 | 3 | SendAlertLogMail ・ WatchNotification ・ PutLogFile |
+| G7 EminelSV | 2 | MakeCodeMapData ・ HashPassword |
+
+**Quy ước dịch đã chốt** (đo thực tế: 0/24 file `_ja` member tự viết dùng ます/です): văn thể **である体（常体）**, dịch 1-1 không thêm bớt ý, giữ nguyên cấu trúc heading/bảng/fence; **code thật (SQL/PHP) giữ nguyên 100%** kể cả comment tiếng Việt (theo tiền lệ member), riêng **sơ đồ ASCII dạng văn xuôi thì dịch** để người đọc JP hiểu; định danh code/tên bảng/số dòng giữ nguyên tuyệt đối; placeholder mô tả có chữ Việt (vd `[ngày, ngày+1)`) dịch sang JA.
+
+**Kết quả kiểm sau dịch (24 cặp VN↔JA, 6 checker độc lập)**: **0 lỗi cao** ・ 2 "vừa" = quy ước dịch-sơ-đồ-trong-fence (đã xét: nhất quán toàn lô → **chấp nhận**) ・ 7 "thấp" = lệch thuật ngữ heading giữa các file (**đã thống nhất 12 chuỗi/9 file**: 概要 ・ 第A部/第B部 ― ・ 対照 ・ 確認済み ・ まとめ; grep xác nhận 0 sót). Cấu trúc kiểm máy khớp 1-1 từng file (số heading, số cột từng dòng bảng, số fence, code span identical).
 
 ## 7. Giới hạn của đợt review
 
-*(Chốt ở P8. Ghi sẵn từ P0:)*
+**A. Việc member cần tự làm sau bàn giao**
 
-- `batch_decision.xlsx` không được sửa (bản giao nộp của member) — mọi verdict 要修正 chỉ phản ánh trong báo cáo này + `summary_batch_migration_ja.md`; danh sách sheet chờ member tự cập nhật sẽ liệt kê ở đây khi P7 xong.
-- 4 batch hemssv (`DlLimitManager`/`DlUlController`/`ErrorDeviceMailSend`/`LogDelete`) 担当 mui — ngoài phạm vi SYP, không điều tra, không verdict.
+1. **`batch_decision.xlsx` KHÔNG được sửa** (bản giao nộp của member) — bản đã sửa nằm ở `new/batch_decision.md` của 3 nhóm, member cập nhật ngược vào xlsx: **G1 集計系 7 sheet** (CalcTenMinutesSensor ・ CalcDailyAccumulatedValue ・ CalcDailyEnergyConsumption ・ CalcDailyRoomTemperature ・ CalcMonthlyAccumulatedValue ・ CalcYearlyAccumulatedValue ・ CalcWeeklySavingReportUsing) ・ **G2 データ管理系 3 sheet** (CreateTablePartition ・ DeleteData ・ DeleteLogicalDeletedDevices) ・ **G4 Xzilla 3 sheet** (RcvCntctCancellation ・ RcvEmsPlsCntrPayer ・ RcvHalfHourElectricPower). Cột "xlsx đã cập nhật theo verdict chưa" ở mục 2 để ⬜ cho member tự tick.
+2. **Sheet verdict 妥当だが根拠不足 KHÔNG được thay câu** — theo quy ước đã chốt (chỉ thay câu ở sheet 要修正). Các sheet sau có **câu bổ sung đã soạn sẵn trong đợt review nhưng CHƯA áp vào `new/batch_decision.md`**, member cân nhắc bổ sung khi cập nhật xlsx: G1 `CalcDailyAverageData` (vế: e-smart không có グルーピング/平均値, nhu cầu F-ES-02/F-ES-12 scope 26年 → phải tự dựng pipeline) ・ G1 `CalcWeeklySavingReportEffect` (vế 踏襲元 F-ES-02) ・ G2 `CreateGroupSummary` (gap C2/F-ES-12) ・ G2 `RankingCreation` (gap C2 ranking + tham chiếu logic cũ) ・ G5 `SendAlertLogMail` (dẫn chứng nhánh feat/kitagas + chú 「調査時点で gw-syp-dev へ未マージ」 — nhóm G5 không có sheet 要修正 nên không sinh `new/batch_decision.md`). Nội dung nguyên văn từng câu: xem §3 nhóm tương ứng.
+3. **`summary_batch_migration_ja.md`**: bản sửa ở `new/` cấp gốc (15/15 mục P7-B). Còn 3 điểm chờ thông tin của member: ① URL Notion thật của trang `DeleteLogicalDeletedDevicesCommand` (dòng 66 hiện để 「（NotionページURL確認中）」 sau khi gỡ href trỏ nhầm); ② trạng thái upload Notion của `CreateGroupSummaryCommand` (dòng 63 vẫn ghi 「（Notion未アップロード）」 dù có URL sống); ③ dòng 50 `CalcWeeklySavingReportEffect` chưa đồng bộ độ chi tiết với dòng 51 (§3b ghi không bắt buộc).
+
+**B. Lỗi có sẵn trong bản gốc member (pre-existing) — không thuộc phạm vi vá đợt này**
+
+- Bảng vỡ cột do ký tự `|` trong regex không escape: `CalcCarbonDioxideEmissions:25` ・ `CalcYearlyRoomTemperature:25` (cả VN lẫn JA) — muốn sửa phải escape `\|` ở cả cặp.
+- Cột nguồn thứ 3 nằm dưới header 2 cột: `CalcDailyEnergyConsumption:34-35` (cả VN lẫn JA).
+- Đường dẫn nội bộ `docs/legacy-batch-review/...` (không tồn tại trong gói giao nộp) còn ở `DeleteData` ・ `DeleteLogicalDeletedDevices` ・ `TerminateOutdatedDeviceControlJobs` (VN+JA) — cùng defect đã được vá ở 2 file khác theo fixspec nên hiện không nhất quán.
+- Link tham chiếu dùng đường dẫn máy cá nhân `e:/Projects/mui/*-main/` ở nhóm G3 (`DispatchPushMessages` ・ `PublishRegularEcoMissions`, cả VN lẫn JA) và tiền tố repo `-main` ở 2 file `current-eminelsmart_*` — muốn chuẩn hoá phải sửa đồng thời cặp VN+JA.
+- Comment tiếng Việt còn trong khối code SQL/PHP của một số bản `_ja` — **giữ có chủ đích** theo tiền lệ member (chính file `_ja` member tự viết cũng để nguyên comment VN trong fence SQL).
+
+**C. Ngoài phạm vi**
+
+- 4 batch hemssv (`DlLimitManager`/`DlUlController`/`ErrorDeviceMailSend`/`LogDelete`) 担当 mui — không điều tra, không verdict.
+- Kết luận về hệ mới bám mốc pin `syp-eminelstandard-backend@dc39aa39` (2026-07-06): nhánh `feat/kitagas-batch-import-error-notification` (b087399c〜68d7a5fc, 11–14/08) **chưa merge** vào `gw-syp-dev` tại thời điểm review — phần mở rộng thông báo lỗi cho Kita Gas chỉ tồn tại trên nhánh feature.
+- 4 câu QA (gộp từ 9 mục 要業務確認) **chưa gửi** — nằm ở `submit_folder/qa/qa_review_20260813_20260817.md`, chờ user duyệt chuyển PM mui.

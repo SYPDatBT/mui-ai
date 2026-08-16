@@ -61,7 +61,7 @@
 |---|---|---|
 | `0` | 処理中（*推定* ― 本コマンド内に専用の定数名はなく、コメント「ステータスが処理中」と値 `0`/`1` の対照から推定した；定数 `XZILLA_RELATION_LOGS_STAUS_PROCESSING=0` は `XzillaRelationComponent` に定義がある ([:29](e:/Projects/mui/legacy_eminel_docs-main/sources/conciergesv-develop/src/Controller/Component/XzillaRelationComponent.php#L29))） | バッチを停止（`commit` ＋ `abort`） |
 | `1` | 完了済み（定数 `XZILLA_RELATION_LOGS_STAUS_COMPLETED`） | バッチを停止（`commit` ＋ `abort`） |
-| レコードなし、または `0`/`1` 以外のレコード | 未処理 | 続行 | ([:132-140](e:/Projects/mui/legacy_eminel_docs-main/sources/conciergesv-develop/src/Command/RcvEmsPlsCntrPayerCommand.php#L132-L140)) |
+| レコードなし、または `0`/`1` 以外のレコード | 未処理 | 続行 ([:132-140](e:/Projects/mui/legacy_eminel_docs-main/sources/conciergesv-develop/src/Command/RcvEmsPlsCntrPayerCommand.php#L132-L140)) |
 
 `upload_type` は、本バッチに関係するXzillaの2種類のファイルを区別する ([:34-36](e:/Projects/mui/legacy_eminel_docs-main/sources/conciergesv-develop/src/Command/RcvEmsPlsCntrPayerCommand.php#L34-L36))：
 

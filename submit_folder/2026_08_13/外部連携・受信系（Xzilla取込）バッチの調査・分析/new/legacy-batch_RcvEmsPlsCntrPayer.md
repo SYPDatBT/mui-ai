@@ -61,7 +61,7 @@ Trước khi tải file, batch tra bảng `XzillaRelationLogs` theo `(upload_typ
 |---|---|---|
 | `0` | Đang xử lý (*suy đoán* — không có hằng số tên riêng trong command này, suy từ comment "ステータスが処理中" đối chiếu giá trị `0`/`1`; hằng số `XZILLA_RELATION_LOGS_STAUS_PROCESSING=0` có định nghĩa ở `XzillaRelationComponent` ([:29](e:/Projects/mui/legacy_eminel_docs-main/sources/conciergesv-develop/src/Controller/Component/XzillaRelationComponent.php#L29))) | Dừng batch (`commit` + `abort`) |
 | `1` | Đã hoàn tất (hằng số `XZILLA_RELATION_LOGS_STAUS_COMPLETED`) | Dừng batch (`commit` + `abort`) |
-| Không có record, hoặc record khác `0`/`1` | Chưa xử lý | Tiếp tục | ([:132-140](e:/Projects/mui/legacy_eminel_docs-main/sources/conciergesv-develop/src/Command/RcvEmsPlsCntrPayerCommand.php#L132-L140)) |
+| Không có record, hoặc record khác `0`/`1` | Chưa xử lý | Tiếp tục ([:132-140](e:/Projects/mui/legacy_eminel_docs-main/sources/conciergesv-develop/src/Command/RcvEmsPlsCntrPayerCommand.php#L132-L140)) |
 
 `upload_type` phân biệt 2 loại file Xzilla liên quan tới batch này ([:34-36](e:/Projects/mui/legacy_eminel_docs-main/sources/conciergesv-develop/src/Command/RcvEmsPlsCntrPayerCommand.php#L34-L36)):
 
