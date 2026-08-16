@@ -124,6 +124,6 @@ s_103  "ConSensorDailyValues"    1行/月  × 31日カラム  (c011~c041)
 s_104  "ConSensorMonthlyValues"  1行/年    × 12月カラム
 ```
 
-`GAS_POWER/SOLAR_GENERATION/SALE_ELECTRIC/BATTERY_DISCHARGE/BATTERY_CHARGE` について `s_102` を書き込む元バッチは `CalcDailyAccumulatedValueCommand`；`BUY_ELECTRIC` の書き込み元は `RcvHalfHourElectricPowerCommand`（Xzilla電力30分値取込）である ― 現行設定では `CalcDailyAccumulatedValueCommand` の対象から除外済み（`const.php:660-661`）で、`SALE_ELECTRIC` も一部条件（売電量算出条件②）では同コマンドが書き込む；`POWER_CONSUMPTION` については `CalcDailyEnergyConsumptionCommand`（本バッチ内で直接呼び出される、2.4参照）；`GAS_CO_TYPE_CONSUMPTION/GAS_WATER_HEAT_RATE/GAS_HEAT_CONSUMPTION/ROOM_TEMP_ADJUST_CNT` については本ドキュメントの対象範囲外である。
+`GAS_POWER/SOLAR_GENERATION/SALE_ELECTRIC/BATTERY_DISCHARGE/BATTERY_CHARGE` について `s_102` を書き込む元バッチは `CalcDailyAccumulatedValueCommand`；`BUY_ELECTRIC` の書き込み元は `RcvHalfHourElectricPowerCommand`（Xzilla電力30分値取込）である ― 現行設定では `CalcDailyAccumulatedValueCommand` の対象から除外済み（`const.php:660-661`）で、`SALE_ELECTRIC` も一部条件（売電量算出条件②）では同Rcvコマンドが書き込む；`POWER_CONSUMPTION` については `CalcDailyEnergyConsumptionCommand`（本バッチ内で直接呼び出される、2.4参照）；`GAS_CO_TYPE_CONSUMPTION/GAS_WATER_HEAT_RATE/GAS_HEAT_CONSUMPTION/ROOM_TEMP_ADJUST_CNT` については本ドキュメントの対象範囲外である。
 
 ---

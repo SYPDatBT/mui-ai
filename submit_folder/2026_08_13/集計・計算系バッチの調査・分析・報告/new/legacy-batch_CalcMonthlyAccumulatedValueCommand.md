@@ -128,3 +128,4 @@ s_104  "ConSensorMonthlyValues"  1 dòng/năm    × 12 cột tháng
 Batch nguồn ghi `s_102` cho `GAS_POWER/SOLAR_GENERATION/SALE_ELECTRIC/BATTERY_DISCHARGE/BATTERY_CHARGE` là `CalcDailyAccumulatedValueCommand`; riêng `BUY_ELECTRIC` do `RcvHalfHourElectricPowerCommand` (取込 điện 30分値 từ Xzilla) ghi — cấu hình hiện tại đã loại BUY khỏi batch daily (`const.php:660-661`), và `SALE_ELECTRIC` trong một số điều kiện (売電量算出条件②) cũng do batch Rcv này ghi; cho `POWER_CONSUMPTION` là `CalcDailyEnergyConsumptionCommand` (được gọi lại trực tiếp trong batch này, xem 2.4); cho `GAS_CO_TYPE_CONSUMPTION/GAS_WATER_HEAT_RATE/GAS_HEAT_CONSUMPTION/ROOM_TEMP_ADJUST_CNT` nằm ngoài phạm vi tài liệu này.
 
 ---
+

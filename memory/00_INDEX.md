@@ -76,7 +76,7 @@
 ---
 
 ## 🎯 TIẾN ĐỘ — HỎI "LÀM ĐẾN ĐÂU / HÔM NAY LÀM GÌ" LÀ ĐỌC Ở ĐÂY
-> Cập nhật lần cuối: **2026-08-16 tối, phiên tiếp nối (đợt review `2026_08_13/`: P0–P7 XONG ・ 43/43 verdict ・ P8 đã vá XONG G1+G4+G5+G3+G2+G7 = 39/43 batch, còn G8 app 4 module. ⛔ TRẦN CHI TIÊU THÁNG SẬP khi chạy khối G8 → 0 file ghi, dừng đúng quy trình. **deadline 17/08 NGÀY MAI**)** — bước kế tiếp đánh số đầy đủ + cảnh báo model ở file ⭐ mục 5 item 1g; script mọi khối tại `handoff_20260816/wf_scripts/`.
+> Cập nhật lần cuối: **2026-08-16 đêm, phiên tiếp nối (đợt review `2026_08_13/`: P8 KHỐI 1→8 XONG TOÀN BỘ — vá 43/43 batch+module, dịch JA 24/24 file, kiểm dịch 0 cao, sửa summary 15/15 mục, re-review ⛔#5 ĐẠT 8/8 lát. ⏸ DỪNG TẠI CỔNG KHỐI 9 chờ user duyệt: 9 câu 要業務確認 + gói quyết định ①–⑨ ở file ⭐ item 1g. **deadline 17/08 HÔM NAY**)** — script mọi khối tại `handoff_20260816/wf_scripts/`, output từng khối tại `handoff_20260816/tasks/`.
 
 **[08-16] Trạng thái mới nhất — ĐỢT REVIEW TÀI LIỆU TEAM (ưu tiên số 1, dở dang):**
 - Đối tượng: 75 file điều tra + 43 sheet phán định (`batch_decision.xlsx`) + summary 47 dòng trong `submit_folder/2026_08_13/`. Plan = `review_plan_20260813.md` (user duyệt 16/08); kết quả tích lũy = `review_summary.md`; mốc bàn giao = commit local `312d6d0`.
