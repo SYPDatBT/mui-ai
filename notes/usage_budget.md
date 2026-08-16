@@ -39,6 +39,37 @@
 3. Phóng xong, nhận notification → **ghi số thật vào ledger §4** (cột subagent_tokens của usage) → lệch đơn giá >30% thì sửa bảng §2.
 4. Bài học chuẩn: P2 ngày 16/08 chạy 1 lượt 2,21M ≈ **74% cửa sổ giả định** — đáng lẽ phải chia 4 khối ~5 batch; trần sập đúng lúc đó.
 
+## 3b. ĐỊNH TUYẾN MODEL (endpoint theo loại task — user chốt 16/08)
+
+> Cách gọi: trong workflow, mỗi agent đặt `opts.model` ('fable'/'opus'/'sonnet'/'haiku'); KHÔNG đặt = kế thừa Fable (main-loop). Fable có bucket tuần riêng — đẩy việc cơ học sang Opus/Sonnet là cách giữ đệm Fable.
+
+| Loại task | Model | Lý do |
+|---|---|---|
+| Verifier điều tra/verdict phán định (truy bảng, đối chiếu code) | **fable** (mặc định) | Phán đoán sâu, kết luận sai là hỏng cả verdict |
+| Đối kháng / phản biện lô | **fable** | Chất lượng phản biện quyết định ⛔#13 |
+| Fixer vá theo fixspec (tự kiểm nguồn + viết lại liền mạch) | **fable** | Đụng bản bàn giao, phải giữ giọng member + kiểm nguồn |
+| Re-review thu hẹp cuối trước bàn giao (⛔#5) | **fable** | Vòng chất lượng cuối |
+| **Dịch JA (bản nộp khách)** | **opus** (`model:'opus'`) | Chất lượng tiếng Nhật đối khách; không ăn bucket Fable |
+| Kiểm sau dịch (khớp cặp 1-1 + quét mã nội bộ ⛔#4) | **sonnet** (`model:'sonnet'`) | Đối chiếu máy móc theo checklist |
+| Fidelity/so khớp ô・đếm fence・grep tàn dư | **sonnet** (hoặc haiku) | Thuần cơ học |
+| Convert/parse/gom kết quả | **script python — 0 agent** | Đã chứng minh qua P0/consolidate |
+
+**Hàng đợi còn lại + model + ước lượng** (đánh dấu ☑ khi xong, ghi số thật vào ledger):
+
+| # | Khối | Model | Ước lượng | Trạng thái |
+|---|---|---|---|---|
+| 1 | Vá G4+G5 (6 fixer) | fable | ~440k | ⬜ |
+| 2 | Vá G3 (4 fixer, cặp legacy+current) | fable | ~330k | ⬜ |
+| 3 | Vá G2+G7 (2 khối × 5 fixer) | fable | ~700k | ⬜ |
+| 4 | Vá G8 (4 fixer, cặp ja+vn) | fable | ~310k | ⬜ |
+| 5 | Dịch JA 24 file (3 khối × 8 translator) | **opus** | ~1,4M opus | ⬜ |
+| 6 | Kiểm sau dịch (5-6 checker) | **sonnet** | ~250k sonnet | ⬜ |
+| 7 | Sửa summary 15 dòng P7-B + HTML/link (script + 1 agent kiểm) | fable | ~100k | ⬜ |
+| 8 | Re-review toàn bộ new/ (7 agent theo nhóm) | fable | ~600k | ⬜ |
+| 9 | Gộp 9 câu 要業務確認 trình user + chốt (main-loop) | fable | ~150k | ⬜ |
+
+→ **Fable dùng thêm ~2,6M** (kết thúc tuần ~81–84%, đệm giữ được) ・ Opus ~1,4M ・ Sonnet ~0,3M.
+
 ## 4. Ledger — số thật đã quan sát
 
 | Ngày | Khối | Agent | Token subagent thật | Ước lượng nếu áp cơ chế | Ghi chú |
