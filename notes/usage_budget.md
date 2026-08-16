@@ -12,6 +12,12 @@
 | **Ngưỡng hành động 20%** | **600.000 token / khối** | Ước lượng khối > 600k → BẮT BUỘC chia nhỏ đến khi mỗi khối ≤ 600k, mỗi khối kết thúc = kết quả ra đĩa + memory nhích |
 | Khối ≤ 600k | Vẫn chốt memory trước nếu là mốc quan trọng (⛔#15 vế ①) | |
 
+## 1b. Hiệu chỉnh từ số THẬT phía gói (user đọc từ /usage, 16/08 tối)
+
+- User báo: session usage ~69%, **weekly Fable usage ~68%**. Đối chiếu ledger (phiên 16/08 ≈ 10M gồm main-loop; + phiên 08-13 ước 2–4M) → **quota tuần Fable ≈ 18–20M token; còn 32% ≈ 5–6M**. Sai số ±30% (Anthropic tính % theo cost có trọng số, không phải token thô).
+- Phần việc còn lại của đợt review ước ~4,3–4,6M → vừa đủ nếu toàn Fable, KHÔNG có đệm. **Chiến lược chốt: việc phán đoán sâu (vá, re-review) giữ Fable (~2,4M); việc cơ học (dịch JA 24 file + kiểm dịch ~1,7M) chạy `opts.model:'sonnet'`** — Sonnet có bucket tuần riêng, không ăn quota Fable. Weekly reset giữa tuần nếu deadline 24/08 → có thể dồn khối dịch sang tuần mới.
+- Quy trình bổ sung: mỗi lần user cho số % thật → đối chiếu ledger, cập nhật mục này; ước lượng khối từ nay tính thêm cột "model" (Fable/Sonnet).
+
 ## 2. Đơn giá ước lượng theo loại agent (hiệu chỉnh từ số thật 16/08)
 
 | Loại agent | Đơn giá ước | Nguồn hiệu chỉnh |
