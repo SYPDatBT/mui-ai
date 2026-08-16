@@ -6,7 +6,7 @@
 | Ngày lập | 2026-08-06 |
 | Mục tiêu | Nắm đủ để (a) điều tra tiếp ~35 batch còn lại, (b) đọc/viết requirement, (c) ước công khi spec chốt |
 | Phạm vi | 4 khối SYP đối ứng: server E-GW ・ batch + liên kết ngoài ・ 管理画面 ・ mobile app |
-| Ghi chú path | Mọi đường dẫn tính từ `sources/`. Bốn repo git + 1 snapshot app (xem `CLAUDE.md`) |
+| Ghi chú path | Mọi đường dẫn tính từ `sources/`. **5 repo git** — gồm cả repo app `syp-eminelstandard-app` (branch `syp-dev`); xem `CLAUDE.md` |
 
 ## Nguyên tắc chung khi tự học
 
@@ -96,11 +96,11 @@
 | 2 | `eminel_gw_project/docs/eminel/3_requirements/app/` — 23 file `A01`〜`E04` | **Requirement app.** Đọc theo nhóm: A tài khoản/điểm ・ B điều khiển thiết bị ・ C hiển thị năng lượng ・ D thông báo ・ E khác. Nặng nhất: `B02_heating_control.md` |
 | 3 | `eminel_gw_project/docs/eminel/3_requirements/app/Z_old_mapping.md` | Bản đồ đối chiếu chức năng app cũ ↔ section mới |
 | 4 | `eminel_gw_project/docs/eminel-smart/05_view_structure.md` + `04_app_models.md` | Cấu trúc màn hình + model của app ESTA hiện có |
-| 5 | `syp-eminelstandard-app-syp-dev/lib/presentation/pages/` + `lib/server/rest_client/` | Code thật: màn hình và client API |
+| 5 | `syp-eminelstandard-app/lib/presentation/pages/` + `lib/server/rest_client/` | Code thật: màn hình và client API |
 | 6 | `legacy_eminel_docs/docs/04_アプリ/` — `01_機能設計・仕様書まとめ.md`, `03_ソース構成まとめ.md`, `11_アーキテクチャ.md`, `12_画面遷移・画面構成.md` | App cũ: chức năng, kiến trúc, sơ đồ chuyển màn hình |
 | 7 | `eminel_gw_project/docs/old_eminel/app/00_feature_list.md` + `screens/` (22 ảnh) | Ảnh chụp màn hình app cũ — nhanh nhất để hình dung |
 
-**Lưu ý**: app build **2 bản riêng** (ESTA / EMINEL) bằng biến môi trường; repo app là **snapshot không có git** → số dòng có thể lệch khi mui giao bản mới.
+**Lưu ý**: app build **2 bản riêng** (ESTA / EMINEL) bằng biến môi trường; repo app là **git thật** (`syp-eminelstandard-app`, branch `syp-dev`, mốc 16/08 = `41ee385`) → trích số dòng phải kèm commit và `git fetch` trước khi fact-check như 4 repo còn lại (⛔#1).
 
 **Tự kiểm**: ① 23 section chia làm mấy nhóm, nhóm nào nặng nhất? ② app ESTA đã có màn hình nào dùng lại được cho E-GW? ③ section nào đang 劣後?
 

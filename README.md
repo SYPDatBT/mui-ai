@@ -30,7 +30,7 @@ The actual project sources live **outside** this workspace (by default in `../so
 - `eminel_gw_project` — project documentation (the primary reference)
 - `legacy_eminel_docs` — design and code of the legacy system
 - `syp-eminelstandard-backend` / `syp-eminelstandard-web-admin` — EMINEL-Smart code (branch `gw-syp-dev`)
-- `syp-eminelstandard-app-syp-dev` — Flutter app (ESTA) snapshot
+- `syp-eminelstandard-app` — Flutter app (ESTA), branch `syp-dev` (a real git repository; earlier notes describing it as a non-git snapshot were outdated — verified 2026-08-16)
 
 On a new machine, clone/place those repositories yourself and point the workspace at their location. Line-number citations in the onboarding guide correspond to the commit recorded at the top of the guide.
 

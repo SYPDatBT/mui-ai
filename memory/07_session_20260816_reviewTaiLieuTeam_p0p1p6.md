@@ -1,5 +1,6 @@
-# SESSION 2026-08-16 — Review đợt tài liệu team 2026_08_13: P0–P7 XONG (43/43 verdict, đối kháng 0 REFUTED) ・ P8 vá xong G1 + commit `f5a299b`
+# SESSION 2026-08-16→17 — Review đợt tài liệu team 2026_08_13: ✅ HOÀN TẤT P0→P9 (43/43 verdict ・ vá 43/43 ・ dịch JA 24/24 ・ re-review ⛔#5 ĐẠT ・ QA 4 câu chờ user gửi)
 > Đọc SAU `00_INDEX.md`. ⭐ TRẠNG THÁI MỚI NHẤT (chưa có file nào thay).
+> ✅ **ĐỢT REVIEW ĐÃ ĐÓNG (17/08)** — bàn giao sẵn sàng trên đĩa, không còn việc AI phải làm. Việc còn lại thuộc user/member: gửi QA ・ cập nhật xlsx ・ điền URL Notion (xem `review_summary.md` mục 7-A). Toàn bộ diễn biến bên dưới giữ nguyên làm vết.
 > ⚡ PHIÊN MỚI ĐỌC NHANH: trạng thái cuối + việc kế tiếp = **mục 5, items 1e (hàng đợi P8) + 1f (handoff) + 4b (2 việc ngoài hàng đợi)**. Các đoạn có nhãn [LỖI THỜI] trong file là diễn biến giữa phiên, giữ làm vết — đừng hành động theo.
 
 ## 1. Bối cảnh & mục tiêu phiên

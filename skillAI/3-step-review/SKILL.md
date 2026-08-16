@@ -32,9 +32,10 @@ Quy trình kế thừa tinh thần checklist `requirements/README.md` §8 và t�
    1 câu *"Review tài liệu nào?"* kèm gợi ý mặc định = tài liệu ở mục 4. (Bước 1 và 3a làm được
    trước khi có câu trả lời; các bước sau cần tài liệu đích.)
 3. **Kiểm repo nguồn**:
-   a. `../sources/` cần có: 4 repo git — `eminel_gw_project`, `legacy_eminel_docs`,
-      `syp-eminelstandard-backend`, `syp-eminelstandard-web-admin` — và 1 snapshot không git
-      `syp-eminelstandard-app-syp-dev`. Không thấy → hỏi user đường dẫn (KHÔNG tự tìm bừa);
+   a. `../sources/` cần có **5 repo git**: `eminel_gw_project`, `legacy_eminel_docs`,
+      `syp-eminelstandard-backend`, `syp-eminelstandard-web-admin`, `syp-eminelstandard-app`
+      (branch `syp-dev` — **là git thật**, xác minh `git log -1` 16/08 = `41ee385`; mô tả
+      "snapshot không git" trong tài liệu cũ đã lỗi thời). Không thấy → hỏi user đường dẫn (KHÔNG tự tìm bừa);
       câu trả lời của user **thay thế `../sources/` trong toàn bộ phiên** (kể cả trong prompt
       subagent), không sửa cứng vào skill/tài liệu, ghi vào memory khi chốt phiên.
       Thiếu hẳn repo nào → báo rõ "mục nào của tài liệu sẽ không kiểm chứng được", đừng review chay.
@@ -45,8 +46,8 @@ Quy trình kế thừa tinh thần checklist `requirements/README.md` §8 và t�
       - Khác branch (vd `gw-syp-dev`) → `git show` đúng branch+commit.
       - Fetch lỗi (mạng/quyền) → tiếp tục bằng HEAD local + `git show`, nhưng ghi rõ đầu findings:
         *"chưa fetch được origin — kết luận về độ mới của repo là 推定"*.
-      - Snapshot (app): bỏ qua fetch/HEAD; tài liệu không khai mốc phiên bản cho nó → ghi chú đầu
-        findings *"nguồn app là snapshot không mốc, chỉ kiểm chứng được trên nội dung hiện có"*.
+      - Repo app: fetch + đối chiếu HEAD **như 4 repo còn lại** (branch `syp-dev`). Nếu tài liệu đích
+        không khai mốc cho repo app → lấy HEAD sau fetch làm mốc và ghi 1 finding [thấp] đề nghị bổ sung.
       - Tài liệu đích **không có** bảng Repo đối chiếu → lấy HEAD sau fetch làm mốc phiên review
         + tự ghi 1 finding [vừa]: "tài liệu chưa khai mốc repo, đề xuất bổ sung bảng Repo đối chiếu".
 4. Đọc mục **⚠️ Giới hạn** của tài liệu (nếu có) — nó khai sẵn chỗ chưa kiểm chứng được
@@ -189,12 +190,21 @@ chữ thay thế cụ thể** (không chỉ "nên sửa").
 ⚠️ Các bảng dưới là **snapshot** để nhận diện nhanh — nếu lệch với bảng 「Repo đối chiếu」
 trong chính tài liệu thì **tin tài liệu**; review xong phải cập nhật lại bảng này (mục 3).
 
-### 4a. Bộ báo cáo batch tách 3 tập — thế hệ v4 (review gần nhất: 2026-08-06)
+### 4a. Đợt review tài liệu team `submit_folder/2026_08_13/` — 43 batch (review gần nhất: 2026-08-16→17)
+
+| | |
+|---|---|
+| File | **75 file điều tra md + 43 sheet phán định (7 `batch_decision.xlsx`) + `summary_batch_migration_ja.md`** trong `submit_folder/2026_08_13/`. Đây là tài liệu **của member**, không phải của SYP-AI → áp nguyên tắc #7 mục 1 (chỉ review TÍNH CHÍNH XÁC, miễn TEMPLATE v4, giữ phong cách member). Plan: `review_plan_20260813.md`; kết quả tích lũy: `review_summary.md`; bản sửa: `new/` trong từng thư mục nhóm (file gốc không đụng, xlsx KHÔNG BAO GIỜ sửa) |
+| Cần repo | đủ 5 repo git mục 3a; HEAD kỳ vọng: `eminel_gw_project@1100487` (main) ・ `legacy_eminel_docs@ccd8f56` (main) ・ backend@`dc39aa39` (`gw-syp-dev`) ・ web-admin@`e550326` (`gw-syp-dev`) ・ **app@`41ee385`** (`syp-dev`). Mốc bàn giao tài liệu team = commit local `312d6d0` |
+| Trạng thái lần review cuối | **P0–P8 xong trọn vẹn**: 43/43 verdict (妥当 6 ・ 根拠不足 19 ・ 要修正 14 ・ 要業務確認 4) ・ 189 findings ・ đối kháng mọi [cao]+要修正 = **0 REFUTED** ・ vá 43/43 batch (146 finding áp) ・ dịch JA 24/24 file VN-only ・ kiểm sau dịch 0 lỗi cao ・ sửa `summary_batch_migration_ja.md` 15/15 mục ・ re-review thu hẹp ⛔#5 ĐẠT 8/8 lát. 9 mục 要業務確認 → gộp 4 câu QA tại `submit_folder/qa/qa_review_20260813_20260817.md` (chưa gửi) |
+| Điểm kiểm đặc thù nếu review lại | ① **Quy ước dịch JA đã chốt**: văn thể **である体**(0/24 file `_ja` member dùng ます/です), code thật giữ nguyên 100% kể cả comment VN, sơ đồ ASCII văn xuôi thì dịch; heading thống nhất 概要・第A部/第B部 ―・対照・確認済み・まとめ. ② Sheet **妥当だが根拠不足 KHÔNG thay câu** (chỉ sheet 要修正) — 5 sheet có câu bổ sung soạn sẵn nhưng cố ý chưa áp, xem `review_summary.md` mục 7-A2, đừng báo là sót. ③ Lỗi **pre-existing** của member đã liệt kê ở mục 7-B (bảng vỡ cột do `\|` trong regex, đường dẫn `e:/Projects/...`, `docs/legacy-batch-review/...`) — không tính là lỗi đợt vá. ④ Kết luận về hệ mới bám pin `dc39aa39`: nhánh `feat/kitagas-batch-import-error-notification` **chưa merge**. ⑤ Cơ chế ước lượng token trước mỗi khối: `notes/usage_budget.md` (⛔#15) — đơn giá thật đã hiệu chỉnh: verifier ~120k ・ fixer ~65k/batch ・ **dịch ~120k/file** ・ checker ~144k |
+
+### 4b. Bộ báo cáo batch tách 3 tập — thế hệ v4 (review: 2026-08-06)
 
 | | |
 |---|---|
 | File | **`submit_folder/2026_08_06/new_2/` — 6 file v4 theo `create-investigation-report/TEMPLATE.md`** (bản chuẩn DUY NHẤT, đã nộp mui): cặp JP+VN × 3 nhóm theo 3 task Notion (外部連携・受信系（Xzilla取込） 3本 #5–#7 ・ 配信・通知系 4本 #1–#4 ・ CSV・ZIPエクスポート系 4本 #8–#11). Thế hệ trước nằm ở `submit_folder/2026_08_06/` (gốc dữ kiện đã kiểm — không sửa ngược); 2 báo cáo gộp 08-04/08-05 cũng giữ nguyên. Số batch #1–#11 xuyên suốt. LƯU Ý chủ ý (để reviewer sau khỏi báo nhầm): ① JP v4 trích query #1 theo range `:83-104` đồng bộ VN (JP thế hệ trước dùng `:89-100` — cả 2 đều đúng repo); ② câu hỏi /EST bản đầy đủ chỉ nằm ở tập Xzilla §3, 2 tập kia trỏ về ("hỏi 1 lần chung"); ③ 配信 §9 bỏ mục có ghi chú, CSV §6 viết gộp 4 batch — đều hợp lệ template |
-| Cần repo | đủ 5 nguồn mục 0-3a; HEAD kỳ vọng: `eminel_gw_project@fbc0af0` (main — điều tra gốc tại `788b438`; file nhóm Xzilla/CSV trích không đổi giữa 2 commit, nhóm 配信 đã cập nhật số dòng B05/D03 theo fbc0af0) ・ `legacy_eminel_docs@ccd8f56` (main) ・ backend@`dc39aa39` (`gw-syp-dev`) ・ web-admin@`e550326` (`gw-syp-dev`) ・ app = snapshot không mốc |
+| Cần repo | đủ 5 nguồn mục 0-3a; HEAD kỳ vọng: `eminel_gw_project@fbc0af0` (main — điều tra gốc tại `788b438`; file nhóm Xzilla/CSV trích không đổi giữa 2 commit, nhóm 配信 đã cập nhật số dòng B05/D03 theo fbc0af0) ・ `legacy_eminel_docs@ccd8f56` (main) ・ backend@`dc39aa39` (`gw-syp-dev`) ・ web-admin@`e550326` (`gw-syp-dev`) ・ app: bộ này viết khi còn tưởng repo app không có git nên **không khai mốc** — nay là git thật, review lại thì lấy `41ee385` (`syp-dev`) làm mốc đối chiếu |
 | Trạng thái lần review cuối (2026-08-06, bộ v4) | 3 reviewer độc lập (1/cặp) chạy đủ 3 vòng + tuân thủ TEMPLATE v4: **Xzilla** 28 điểm spot-check + grep phủ định tái hiện 100% — 1 [cao] (path v1.2 ghi nhầm `1_product/`) + 2 [vừa] + 6 [thấp], vá hết; **配信・通知系** 25+ spot-check + 3 con số tự đếm (105/81/3) xác nhận — 2 [vừa] ("still" sót trong heading JP; rơi kết luận 集計・計算系) + 5 [thấp], vá hết; **CSV/ZIP** 22 spot-check — 4 [vừa] (rơi mục 使い続け; mã nội bộ lọt blockquote gửi khách; "still"; trỏ chéo §7→§7.6) + 4 [thấp], vá hết. Quét cuối toàn bộ 6 file: fence chẵn (16/34/46 ×2), tàn dư (`1_product/00_integrated`, " still ", mã nội bộ trong blockquote khách) = 0. Thế hệ trước (2026_08_06 gốc) từng qua: Xzilla 4-agent + 3 vòng kiểm tuân-thủ; CSV bắt 1 [cao] 前月→**前々月** |
 | Điểm kiểm đặc thù nếu review lại | ① 3 trang QA Notion vẫn 回答中 (tham chiếu 08-04) — mở trang gốc trước khi trích lại; ② baseline số bước 対応ステップ mới (kiểm thử = bước cuối theo template): #1=5・#2=6・#3=5・#4=6・#5=4・#6=4・#7=6; ③ `handleControlDevice` là hàm local của `batch-start-dr/app.ts:81`, lõi thật là `business-logic/control-device.ts` (4 nhánh SERVER_TYPE) — đừng sửa ngược theo cách viết cũ; ④ các điểm treo CLD-06/CLD-07/spec [G]/[I]/SVC-03 — chốt cái nào thì mục tương ứng cập nhật; ⑤ 6 điểm lệch tài liệu khảo sát ESTA phân bổ theo tập (Xzilla 5 ・ 配信 3 ・ CSV 3 — có trùng nhau); ⑥ 質問表 đang 送付前 — khi gửi khách rồi, sửa các chỗ 「（送付前）」 |
 
