@@ -69,6 +69,15 @@ Quy trình kế thừa tinh thần checklist `requirements/README.md` §8 và t�
 6. **Findings lặp lại cùng loại hoặc mang tính hệ thống** (lỗ hổng của template/quy trình chứ không phải
    của riêng tài liệu) → KHÔNG vá lẻ: chuyển qua skill `analyze-change-request` để phân tích và đề xuất
    sửa GỐC (TEMPLATE/skill/⛔) rồi mới áp xuống tài liệu (⛔#11).
+7. **Tài liệu do MEMBER khác viết** (file điều tra bàn giao cho SYP review — vd đợt `submit_folder/2026_08_13/`;
+   user chốt 2026-08-16): trọng tâm DUY NHẤT là **tính chính xác** — phong cách **ngắn gọn, dễ hiểu** của
+   member là chuẩn phải GIỮ, không phải lỗi phải sửa. Cụ thể: MIỄN kiểm tuân thủ TEMPLATE v4 ở vòng 2 lẫn
+   checklist tự-chứa ⛔#10 ở vòng 3 (khác cấu trúc ≠ lỗi; vòng 3 chỉ nêu finding thật sự gây hiểu nhầm,
+   vd "bỏ batch" ≠ bỏ nghiệp vụ); bản sửa giữ độ dài + giọng văn tương đương bản gốc, chỉ thay đúng chỗ sai,
+   không phình file, không thêm mục theo thói quen template SYP. Bản dịch JA (khi cần bản nộp khách) cũng
+   ngắn gọn, dịch 1-1 y phong cách các file `_ja` member đã viết; sau dịch phải kiểm cặp VN↔JA khớp
+   heading + kết luận và grep quét sạch mã nội bộ khỏi file JA (⛔#4). Độ sâu kiểm chứng KHÔNG giảm theo —
+   xem gạch "truy luồng data đến tận bảng" ở Vòng 1.
 
 ## 2. Ba vòng — nội dung từng vòng
 
@@ -91,6 +100,10 @@ chữ thay thế cụ thể** (không chỉ "nên sửa").
   (F-ES-05↔見守り通知), cách ghi số/ngày kiểu Nhật (9月↔2026/9) — khẳng định phủ định chỉ đứng được
   khi tự tái hiện.
 - **Đếm lại mọi con số đếm tay** (17 endpoint, 7 loại, 10 Publisher, 6 state machine, số dòng file…).
+- **Truy luồng data đến TẬN BẢNG** (chuẩn user chốt 2026-08-16, học theo cách member điều tra): batch/chức năng
+  đọc bảng nào – ghi bảng nào, mở code xác minh — hệ cũ: bảng `t_xxx`/`s_xxx` (model tập trung ở
+  `eminel_sv_lib-develop/src/Model`), e-smart: bảng DynamoDB trong `template-dynamodb.yaml` — grep TỪNG tên bảng
+  tài liệu nêu, không đoán; tên bảng sai/thiếu trong tài liệu là finding [cao] vì kéo sai cả phán định dùng lại.
 - Soi **suy đoán viết như sự thật**: câu diễn giải vượt nguồn mà không có nhãn *推定*/🔸.
 - Khi cần kiểm sâu (file nén, shell trong tgz): giải nén vào scratchpad, KHÔNG bung vào repo.
 

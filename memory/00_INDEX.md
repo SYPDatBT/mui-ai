@@ -59,11 +59,31 @@
    trước KHÔNG đủ tin. (Phát hiện 08-13: working tree `eminel_gw_project` đứng ở `788b438` suốt từ 03/08 trong
    khi memory ghi đã pull `fbc0af0`→`460c671`; reflog chỉ có 1 lần merge. Các phiên đó đọc bằng
    `git show <commit>:<path>` nên kết luận vẫn đúng — nhưng ai tin ghi chép mà đọc thẳng file trên đĩa thì sai.)
+15. **Việc NẶNG (fan-out nhiều agent / phase dài) phải SỐNG SÓT được qua sập trần usage — phòng thủ 2 lớp,
+   tự làm không đợi user nhắc.** ① **Chốt memory TRƯỚC khi phóng**: cập nhật 🎯 của 00_INDEX + file session ⭐
+   (đã xong gì ・ đang chạy gì ・ kết quả nằm ở file/journal nào — đường dẫn cụ thể ・ bước tiếp theo đánh số),
+   đủ để phiên mới bootstrap là tiếp tục ngay. ② **CHIA việc thành KHỐI NHỎ TỰ-HOÀN-CHỈNH**: mỗi khối xong là
+   kết quả nằm trên ĐĨA + memory nhích theo, rồi mới sang khối sau — không dồn thành một lượt chạy dài mà kết quả
+   chỉ có khi TẤT CẢ xong; khối chưa chạy phải chạy-lại-được độc lập (script/prompt lưu sẵn ra file, ghi rõ
+   khối nào xong khối nào chưa); sập giữa chừng = mất tối đa 1 khối. Kết quả trung gian (findings, verdict)
+   không bao giờ sống trong chat. **Định lượng (user chốt 08-16): TRƯỚC khi phóng phải ƯỚC LƯỢNG token theo
+   `notes/usage_budget.md` (đơn giá hiệu chỉnh từ số thật) — ước lượng > 20% ngân sách gói Max 20x
+   (= ~600k token/khối theo giả định 3M/cửa sổ 5h) → BẮT BUỘC chia khối; chạy xong ghi số thật vào ledger
+   của file đó để hiệu chỉnh dần.** (Lỗi suýt mắc 08-16: trần chi tiêu tháng sập GIỮA lúc 3 workflow ~30 agent
+   đang chạy — P2 một lượt 2,21M token ≈ 74% cửa sổ; vòng đối kháng chết nửa chừng; may user vừa yêu cầu chốt
+   memory vài phút trước nên không mất gì. Cùng họ với bài học 78 findings 08-12 chỉ nằm trong chat → MẤT.)
 
 ---
 
 ## 🎯 TIẾN ĐỘ — HỎI "LÀM ĐẾN ĐÂU / HÔM NAY LÀM GÌ" LÀ ĐỌC Ở ĐÂY
-> Cập nhật lần cuối: **2026-08-13 (pull `1100487` — spec app xuất hiện ・ vá `new_2/` để nộp lại ・ ⛔#12 QA folder)** (chi tiết + việc dở dang: file ⭐ dưới bảng).
+> Cập nhật lần cuối: **2026-08-16 tối (đợt review `2026_08_13/`: P0–P7 XONG toàn bộ ・ 43/43 verdict ・ đối kháng sạch 0 REFUTED ・ P8 vá xong NHÓM G1 18/18 batch + commit local — còn G4+G5/G3/G2+G7/G8 + dịch JA 24 file + sửa summary + chốt; deadline thứ 2 tuần sau)** (bước kế + handoff: file ⭐ mục 5, tư liệu tại `handoff_20260816/`).
+
+**[08-16] Trạng thái mới nhất — ĐỢT REVIEW TÀI LIỆU TEAM (ưu tiên số 1, dở dang):**
+- Đối tượng: 75 file điều tra + 43 sheet phán định (`batch_decision.xlsx`) + summary 47 dòng trong `submit_folder/2026_08_13/`. Plan = `review_plan_20260813.md` (user duyệt 16/08); kết quả tích lũy = `review_summary.md`; mốc bàn giao = commit local `312d6d0`.
+- ✅ P0 (commit mốc ・ 5 repo khớp origin ・ convert 7 xlsx→`batch_decision.md` 43/43 sheet 0 lỗi) ・ ✅ P1 G8 app C1–C5 (12 findings, 1 [cao] CONFIRMED 2/2; C5 sạch; bảng nhu cầu dữ liệu app → `app_data_needs_ref.md`) ・ ✅ P6 G6 CSV/ZIP (妥当2・根拠不足1・**要業務確認1**: s_113 平均 liên hộ không có đích trong 別表① — câu hỏi JP chờ gộp).
+- ✅ P2/P4/P5 về đủ + ĐÃ GOM vào `review_summary.md`: 29 batch, 130 findings [cao 14], verdict 妥当1・根拠不足14・**要修正11**・要業務確認3. ⚠️ **CHẠM TRẦN CHI TIÊU giữa chừng → đối kháng của P2/P4 CHƯA chạy (P5 1/2)** — chưa vá gì theo verdict chưa đối kháng (⛔#13). Còn lại: đối kháng bù → P3 (G2+G7) → P7 (đối chiếu 3 nguồn phán định) → P8 (vá vào `new/` + `new/batch_decision.md` cho sheet 要修正 + dịch JA 24 file + chốt).
+- Quy ước user chốt: file gốc member không đụng ・ bản sửa/dịch vào `new/` từng folder ・ xlsx không sửa ・ JA ngắn gọn y phong cách member, chỉ review TÍNH CHÍNH XÁC ・ truy luồng data đến tận bảng (đã vào SKILL `3-step-review` #7 + Vòng 1).
+- Phát hiện phiên: repo app là **git thật** `syp-eminelstandard-app@41ee385` (syp-dev) — CLAUDE.md/README/SKILL/self_study_plan ghi "snapshot" là LỖI THỜI, P8 sửa ・ spec [I]:200 nội bộ là **5 loại** không phải 4 bảng ・ header C0x còn レビュー中 nhưng README ghi レビュー済, `tasks/app_requirements_plan.md` không tồn tại trong repo.
 
 **[08-13] Trạng thái mới nhất:**
 - **`eminel_gw_project` = `1100487`** (working tree đã pull thật, kiểm bằng `git log -1`). So với mốc guide v1.2 (`460c671`): **thư mục `docs/eminel/4_spec/app/` MỚI xuất hiện** — 機能仕様 app bắt đầu được viết (`README` 195 dòng ・ `c02_グラフ` ・ `c03_レポート` ・ `Z_コントロールタブ構成検討`) + 11 file requirement app bị sửa (A01–A04, B01, B04, **B06**, **E01 −140 dòng**, E04, README). → **guide v1.2 đã lệch mốc, phải rà §7.3 + các mục trích A0x/B0x/E0x.** 3 repo còn lại không đổi.
@@ -96,6 +116,7 @@ và viết lại; CLAUDE.md mục SOURCES đã cập nhật 4 repo git + 1 snaps
 ・ **[08-05] Bản tiếng Nhật báo cáo batch cho mui**: `submit_folder/2026_08_05/旧EMINELバッチ移行判定報告書_3グループ11本.md` — bố cục 結論先出し, bỏ khối code (thay 🔍 ref), 対応ステップ đánh số khớp bản VN để đọc song song; review 2 lượt `3-step-review` (8+3 agent), vá 46 findings; **phát hiện 6 điểm nội dung bản VN còn dính** (ゆ抜く→ゆーぬっく, Node 20→24, 4/19 cron thông năm, DR schedule lúc 配信完了, #6 chỉ 7 loại 契約種別, emn_confirm append-only — chi tiết session 03 mục 3); 付録A = 6 điểm lệch tài liệu khảo sát.
 
 **Việc tiếp theo (theo thứ tự):**
+-1. **[ƯU TIÊN 1] Hoàn tất đợt review team**: thu P2/P4/P5 → P3 → P7 → P8 (chi tiết từng bước + đường phục hồi: file ⭐ `07_session…` mục 5). Deadline thứ 2 tuần sau (hiểu an toàn 17/08).
 0. ✅ Xong 08-13: vá `new_2/` (user upload lại) ・ pull `1100487` ・ ⛔#12 QA folder ・ 4 link Notion vào bảng tổng hợp.
 1. **Rà `onboarding_guide.md` v1.2 theo `1100487`** — §7.3 bảng 23 section (E01/B06/A0x vừa đổi) + **đọc `docs/eminel/4_spec/app/` MỚI** (chính là nguồn cho hạng mục 4 của kế hoạch tự học).
 2. **Điền 7 dòng 配信・通知系 (#1–#4) + Xzilla (#5–#7) vào `summary_batch_migration_ja.md`** — kết luận đã có sẵn trong `new_2/`; cần quyết: có tách thành file `legacy-batch_<Command>_{ja,vi}.md` theo format mới không.
@@ -128,4 +149,5 @@ và viết lại; CLAUDE.md mục SOURCES đã cập nhật 4 repo git + 1 snaps
 | `03_session_20260805_soanBaoCaoBatchJP_review2luot.md` | [2026-08-05 sáng→trưa] Soạn bản tiếng Nhật báo cáo batch cho mui (`submit_folder/2026_08_05/`) → review 2 lượt 3-step-review (8+3 agent, 46 findings vá hết) → 6 điểm nội dung bản VN còn dính + F-ES-10=Xzilla連携 + B06 đã được viết ở `788b438` |
 | `04_session_20260806_tach3tap_templateV4_boSkillMoi.md` | [2026-08-06] Pull `fbc0af0` + phân tích 6 commit (app 13 file) → tách báo cáo thành **3 tập × JP+VN**, 3 thế hệ (`2026_08_06/` → `new/` v4 → **`new_2/` bản dùng**) → review độc lập bắt 2 lỗi [cao] (前々月, path bịa) → **bộ skill mới** `create-investigation-report` (TEMPLATE v4) + `analyze-change-request` (⛔#11) + sửa `3-step-review` → `requirements/self_study_plan.md` |
 | `05_session_20260812_guideV12_review6agent.md` | [2026-08-12] Pull `460c671` → **guide v1.2** (viết lại §5.5 mô hình sưởi mới, §5.6, §7.3 + mục B6, Phụ lục B.3/B.4) → **review 6 agent** (3 vòng guide + 3 cặp `new_2/`) = 142 findings, guide vá hết / `new_2/` chờ quyết → **3 phát hiện lật giả định**: hệ cũ có chiều gửi SFTP Xzilla ・ spec [I] giữ 4 bảng batch #5–#7 ・ e-smart CÓ bảng tích luỹ `TABLE_DEVICE_*_HISTORY` |
-| ⭐ `06_session_20260813_pullSpecApp_vaNew2_ruleQA.md` | [2026-08-13] Pull **`1100487`** — `4_spec/app/` (機能仕様 app) xuất hiện + 11 file requirement app đổi → **guide v1.2 lệch mốc** ・ **vá `new_2/` để nộp lại** (6 file, 4 [cao] + nhóm [vừa]; danh sách 78 findings gốc đã mất) ・ **bác bỏ 1 finding sai** (flock nằm trong `.tgz`) → ⛔#13 ・ phát hiện working tree cũ 10 ngày → ⛔#14 ・ **⛔#12 mọi file QA về `submit_folder/qa/`** ・ điền 4 link Notion vào bảng tổng hợp (6/47 dòng) |
+| `06_session_20260813_pullSpecApp_vaNew2_ruleQA.md` | [2026-08-13] Pull **`1100487`** — `4_spec/app/` (機能仕様 app) xuất hiện + 11 file requirement app đổi → **guide v1.2 lệch mốc** ・ **vá `new_2/` để nộp lại** (6 file, 4 [cao] + nhóm [vừa]; danh sách 78 findings gốc đã mất) ・ **bác bỏ 1 finding sai** (flock nằm trong `.tgz`) → ⛔#13 ・ phát hiện working tree cũ 10 ngày → ⛔#14 ・ **⛔#12 mọi file QA về `submit_folder/qa/`** ・ điền 4 link Notion vào bảng tổng hợp (6/47 dòng) |
+| ⭐ `07_session_20260816_reviewTaiLieuTeam_p0p1p6.md` | [2026-08-16] **Đợt review tài liệu team `2026_08_13/`** (75 file + 43 sheet phán định): plan `review_plan_20260813.md` duyệt (4 agent phản biện, 26 findings) → **P0** commit mốc `312d6d0` + convert 7 xlsx→md (43/43 sheet, 0 lỗi) → **P1** G8 C1–C5 (12 findings, C4 [cao] CONFIRMED 2/2, C5 sạch, bảng nhu cầu app) → **P6** CSV/ZIP (妥当2・根拠不足1・要業務確認1 s_113) ・ SKILL `3-step-review` +#7 & truy-bảng ・ **P2/P4/P5 đang chạy — đường phục hồi journal trong mục 5** ・ app repo = git thật `41ee385` ・ spec [I]:200 = 5 loại |

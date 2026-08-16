@@ -1,5 +1,6 @@
 # SESSION 2026-08-13 — Pull `1100487` (spec app xuất hiện) ・ vá `new_2/` để nộp lại ・ quy tắc QA folder
-> Đọc SAU `00_INDEX.md`. ⭐ TRẠNG THÁI MỚI NHẤT (chưa có file nào thay).
+> ⛔ TRẠNG THÁI ĐÃ LỖI THỜI (2026-08-16) — xem `07_session_20260816_reviewTaiLieuTeam_p0p1p6.md`.
+> Đọc SAU `00_INDEX.md`.
 
 ## 1. Bối cảnh & mục tiêu phiên
 

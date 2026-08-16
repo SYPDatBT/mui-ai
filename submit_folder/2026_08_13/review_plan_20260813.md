@@ -96,10 +96,12 @@ Tổng: **75 file điều tra ・ 43 sheet phán định (19+8+4+3+3+4+2) ・ 24
    - File có finding phải sửa → bản sửa vào `new/` (sửa = **viết lại liền mạch** ⛔#9, giữ giọng văn + cấu trúc vốn có của member). File thuộc cặp VN+JA mà chỉ 1 bên có lỗi → **vá đồng thời cả cặp** vào `new/` cho đồng bộ (22 cặp sẵn có: 17 G1 + 5 G8).
    - Bản dịch JA mới tạo (cho file VN-only) → cũng đặt vào `new/`. Quy ước tên: theo mẫu của chính member trong folder đó — file VN giữ nguyên tên, bản dịch thêm hậu tố `_ja` (vd `CreateGroupSummary.md` → `new/CreateGroupSummary_ja.md`).
    - File **không có finding** → không copy vào `new/` (bản gốc tại chỗ = bản chuẩn). Re-review sau sửa (⛔#5) chạy trên file trong `new/`.
+   - **Phán định cần sửa → tạo thêm `new/batch_decision.md`** (user chỉ đạo 08-16): nhóm nào có ≥1 sheet verdict **要修正** thì P8 tạo trong `new/` của nhóm đó 1 file `batch_decision.md` bản-đã-sửa — đủ mọi sheet đúng thứ tự như bản gốc, sheet 要修正 thay câu kết luận bằng câu đã chốt qua đối kháng (replacement_ja), sheet còn lại giữ nguyên văn; đầu file ghi meta "bản đã sửa theo review + danh sách sheet đã sửa" để member đối chiếu cập nhật xlsx. Bản convert trung thực ở gốc folder KHÔNG đổi (vẫn phản ánh xlsx nguyên trạng).
 4. **Mọi finding phải kiểm lại trên nguồn trước khi vá** (⛔#13). Finding [cao] qua vòng đối kháng ≥2 agent, chạy theo **LÔ finding cùng gốc** (vd cụm 18 sheet G1 chung câu trần = 1 lô, 2 agent phản biện cả lô) — không nhân bản đối kháng theo từng finding trùng nhau. Sửa xong chạy lại 3 vòng thu hẹp phạm vi (⛔#5), tối đa 2 lượt; còn tồn đọng [cao] → dừng, trình user.
 5. **Tách QUAN SÁT / SUY ĐOÁN** (⛔#3); trích nguyên văn tiếng Nhật trong 「」 (⛔#8); mọi khẳng định trong `review_summary.md` phải có `file:dòng`.
 6. **Miễn kiểm tuân thủ TEMPLATE v4 cho file member ở CẢ vòng 2 lẫn vòng 3** — file member theo format 1-batch-1-file do user chỉ đạo 08-12 (mẫu: `legacy-batch_CalcTenMinutesSensor_ja.md`), phán định đặt ở bảng tổng hợp → khác cấu trúc TEMPLATE v4 **không phải lỗi**. Vòng 3 áp mức nhẹ: chỉ finding thật sự cản trở hiểu hoặc gây hiểu nhầm ("bỏ batch" ≠ bỏ nghiệp vụ…). Lệch lớn ghi nhận 1 dòng trong review_summary, không tính finding.
-7. Bản dịch JA tạo **sau khi** file VN đã sửa xong + qua re-review; giọng văn theo mẫu các bản `_ja` sẵn có; **sau dịch phải qua kiểm** (§6 P8): cặp VN↔JA mới khớp heading + kết luận 1-1 (cách kiểm như đợt vá new_2 08-13), và **grep quét sạch mã nội bộ** trên toàn bộ file JA (CLD-xx, GW-xx, đường dẫn repo, 🔴 — ⛔#4).
+   **Trọng tâm duy nhất của review là TÍNH CHÍNH XÁC** (user chỉ đạo 08-16): phong cách **ngắn gọn, dễ hiểu** của file member là chuẩn phải GIỮ — bản sửa trong `new/` giữ độ dài + giọng văn tương đương bản gốc, chỉ thay đúng chỗ sai, **không phình file**, không bổ sung mục mới theo thói quen template SYP. Chuẩn kiểm chứng độ sâu: **truy tường tận luồng data đến TẬN BẢNG** — hệ cũ: bảng `t_xxx`/`s_xxx` (model tập trung ở `eminel_sv_lib-develop/src/Model`), e-smart: bảng DynamoDB trong `template-dynamodb.yaml` — grep xác minh, không đoán; đúng cách member đã điều tra. Độ sâu này áp cho việc KIỂM của reviewer, không phải cớ bắt member viết dài thêm.
+7. Bản dịch JA tạo **sau khi** file VN đã sửa xong + qua re-review; **ngắn gọn, dễ hiểu y như các file `_ja` member đã viết** (mẫu chuẩn: các cặp VN↔JA sẵn có của G1 — dịch 1-1 trung thành, không phình, không thêm mục); **sau dịch phải qua kiểm** (§6 P8): cặp VN↔JA mới khớp heading + kết luận 1-1 (cách kiểm như đợt vá new_2 08-13), và **grep quét sạch mã nội bộ** trên toàn bộ file JA (CLD-xx, GW-xx, đường dẫn repo, 🔴 — ⛔#4).
 
 ## 5. Phương pháp review 1 batch (checklist — verifier agent nhóm G1–G7 đều theo)
 
@@ -108,7 +110,9 @@ Tổng: **75 file điều tra ・ 43 sheet phán định (19+8+4+3+3+4+2) ・ 24
    trước khi tin nội dung trên đĩa: git log -1 đúng repo mình trích (⛔#14)
 ① Đọc file điều tra member (cả cặp VN+JA nếu có) + phán định trong batch_decision.md tương ứng
 ② XÁC THỰC (vòng 1): chọn ≥15 dẫn chứng/con số/trích code rải đều (file <200 dòng: kiểm TOÀN BỘ);
-   mở code hệ cũ thật (Command/*.php, cron txt+tgz, bảng t_/s_ trong eminel_sv_lib) đối chiếu từng token
+   mở code hệ cũ thật (Command/*.php, cron txt+tgz) đối chiếu từng token; TRUY LUỒNG DATA ĐẾN TẬN BẢNG:
+   batch đọc bảng nào ghi bảng nào (hệ cũ: t_xxx/s_xxx trong eminel_sv_lib/src/Model; e-smart: bảng
+   DynamoDB trong template-dynamodb.yaml) — grep xác minh từng tên bảng member nêu, không đoán
 ③ Chạy lại MỌI grep phủ định trong file (đủ biến thể ⛔#2, mở tgz ⛔#13)
 ④ Kiểm khẳng định "e-smart có/không có" trên code backend thật (template-dynamodb.yaml, src/…)
 ⑤ TÁI PHÁN ĐỊNH độc lập theo requirement mới: nghiệp vụ batch này ứng F-xx nào trong v1.2?
@@ -145,6 +149,9 @@ Tổng: **75 file điều tra ・ 43 sheet phán định (19+8+4+3+3+4+2) ・ 24
 
 > Mỗi phase = 1 workflow đa agent. **Kết thúc MỖI phase, toàn bộ findings + verdict ghi ngay vào `review_summary.md` trên đĩa rồi mới chuyển phase** — không để findings chỉ tồn tại trong chat (bài học 78 findings 08-12). Sau mỗi phase trình findings trong chat để user liếc nhanh (không chờ duyệt từng cái — trừ 要業務確認 thì chờ user).
 >
+> **Chống sập trần usage (⛔#15, bổ sung 16/08 sau khi chạm trần thật)**: phase nặng chia thành KHỐI tự-hoàn-chỉnh — riêng P8 chạy **theo NHÓM** (mỗi nhóm: đối kháng bù nếu thiếu → vá vào `new/` → re-review → dịch JA → ghi review_summary + memory nhích theo → mới sang nhóm kế), KHÔNG chạy 1 lượt 40+ agent; thứ tự nhóm ưu tiên: G1 (nhiều 要修正 nhất) → G4 → G3 → G5 → G2/G7 → G8. Mỗi khối sập là chạy lại được độc lập từ script/verdict đã lưu.
+> **Định lượng**: trước mỗi khối ƯỚC LƯỢNG token theo `notes/usage_budget.md` (đơn giá hiệu chỉnh từ số thật 16/08); ước lượng **> 600k token (= 20% ngân sách giả định gói Max 20x)** → chia tiếp; chạy xong ghi số thật vào ledger. Bài học chuẩn: P2 chạy 1 lượt 2,21M token ≈ 74% cửa sổ → trần sập giữa chừng.
+>
 > **Phụ thuộc thật giữa các phase**: P0 → P1 (bảng nhu cầu dữ liệu app) → P2 → P3; **P4・P5・P6 độc lập nhau, chạy song song sau P1**; P7 chờ đủ P1–P6; P8 cuối. (Nếu user muốn duyệt theo nhịp từng phase thì chạy tuần tự — đó là lựa chọn nhịp trình bày, không phải phụ thuộc dữ liệu; xem §8.5.)
 
 | Phase | Phạm vi | Trọng tâm / điểm kiểm đặc thù | Ước lượng agent |
@@ -157,7 +164,7 @@ Tổng: **75 file điều tra ・ 43 sheet phán định (19+8+4+3+3+4+2) ・ 24
 | **P5** | **G3 配信・通知系** — 4 legacy + 4 current-eminelsmart, 4 sheet (song song được) | Đối chiếu chéo new_2 (đã review kỹ nhất); kết luận chính thức của member nằm trong 4 md current-eminelsmart (xlsx chỉ trỏ file) — xác định câu kết luận trước khi phán xét; bẫy `handleControlDevice`, path `PointInfinity/` | 8 verifier + ~3 đối kháng + 1 tổng hợp |
 | **P6** | **G6 CSV/ZIP** — 4 sheet phán định (4 md đề xuất skip §8.3) (song song được) | Verdict 「F-AD-09で代替」+ TTL/PITR: khớp new_2 + `I_data_download.md`? Spec [I] còn giữ 4 bảng batch #5–#7 làm loại download nội bộ (phát hiện 08-12) — phán định member có phủ ý này không | 2 verifier + 1 đối kháng |
 | **P7** | **Tổng đối chiếu 3 nơi ghi phán định**: 43 sheet (qua `batch_decision.md`) ↔ 43 dòng SYP trong summary (47 − 4 hemssv) ↔ verdict P2–P6; so bản summary 2026_08_12 xem có phân nhánh; dòng SYP (11 batch cũ) có bị member sửa đè không | Bảng nào lệch bảng nào | 2 agent |
-| **P8** | **Sửa + dịch + chốt**: bản sửa vào `new/` từng folder (§4.3 — file gốc không đụng; cặp VN+JA vá đồng thời cả cặp); re-review thu hẹp trên `new/` (⛔#5, max 2 lượt); sửa dòng sai trong summary md; dịch JA 24 file VN-only vào `new/` + **kiểm sau dịch** (khớp cặp 1-1 + quét mã nội bộ ⛔#4); hoàn thiện `review_summary.md`; **commit local lần 2** (cặp commit trước/sau cho phép `git diff` chứng minh mọi thay đổi); cập nhật **mục 4 SKILL.md của `3-step-review`** (đối tượng, mốc, trạng thái, điểm kiểm đặc thù mới) rồi chốt phiên `/update-memory` | — | ~10 fixer + ~24 translator + ~8 re-review/kiểm dịch |
+| **P8** | **Sửa + dịch + chốt**: bản sửa vào `new/` từng folder (§4.3 — file gốc không đụng; cặp VN+JA vá đồng thời cả cặp); **tạo `new/batch_decision.md` bản-đã-sửa cho nhóm có sheet 要修正** (§4.3); re-review thu hẹp trên `new/` (⛔#5, max 2 lượt); sửa dòng sai trong summary md; dịch JA 24 file VN-only vào `new/` + **kiểm sau dịch** (khớp cặp 1-1 + quét mã nội bộ ⛔#4); hoàn thiện `review_summary.md`; **commit local lần 2** (cặp commit trước/sau cho phép `git diff` chứng minh mọi thay đổi); cập nhật **mục 4 SKILL.md của `3-step-review`** (đối tượng, mốc, trạng thái, điểm kiểm đặc thù mới) rồi chốt phiên `/update-memory` | — | ~10 fixer + ~24 translator + ~8 re-review/kiểm dịch |
 
 Tổng ước lượng: **~115 lượt agent** qua 9 workflow. Nếu user muốn gọn: bỏ đối kháng cho finding [vừa/thấp] (giữ [cao]) — giảm ~15%.
 
