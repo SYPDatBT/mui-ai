@@ -4,7 +4,7 @@
 |---|---|
 | Người review | AI (Claude) — theo `review_plan_20260813.md` (đã user duyệt 16/08) |
 | Ngày chạy | 2026-08-16 → (đang chạy) |
-| Trạng thái | 🟡 ĐANG REVIEW — P0 ✅ ・ P1 đang chạy ・ P2–P8 chưa |
+| Trạng thái | 🟡 **P0–P7 ✅ trọn vẹn** (43/43 verdict, đối kháng 0 REFUTED §3c, P7 §3b) ・ **P8: G1 vá xong** (18/18 batch → `new/`, §3d; commit `f5a299b`) — còn vá G4+G5/G3/G2+G7/G8, dịch JA 24 file, sửa summary 15 dòng, re-review, chốt |
 | Mốc bàn giao | Commit local `312d6d0` (85 file nguyên trạng của team + plan) — mọi `file:dòng` trong báo cáo này trỏ theo mốc đó |
 | Mốc repo đối chiếu | `eminel_gw_project@1100487` (main) ・ `legacy_eminel_docs@ccd8f56` (main) ・ `syp-eminelstandard-backend@dc39aa39` (gw-syp-dev) ・ `syp-eminelstandard-web-admin@e550326` (gw-syp-dev) ・ `syp-eminelstandard-app@41ee385` (syp-dev) — fetch xác nhận khớp origin 16/08 |
 
@@ -22,7 +22,7 @@
 | P5 | G3 配信・通知 (4+4) | ✅ 16/08 (đối kháng 2/2 ✅ §3c) | xem §3.G3 | 1 妥当 ・ 1 根拠不足 ・ 1 要修正 ・ 1 要業務確認 |
 | P6 | G6 CSV/ZIP (4 sheet) | ✅ 16/08 | 0 (md skip — identical bản đã review 08-12) | 妥当 2 ・ 根拠不足 1 ・ 要業務確認 1 |
 | P7 | Tổng đối chiếu 43 sheet ↔ summary | ✅ 16/08 | 10 lệch sheet/summary/new_2 + 15 dòng summary cần sửa (xem §3b) | — |
-| P8 | Sửa (new/) + dịch JA + chốt | ⬜ | | |
+| P8 | Sửa (new/) + dịch JA + chốt | 🟡 G1 ✅ (18/18 batch, §3d) — còn G4+G5/G3/G2+G7/G8 + dịch + summary + re-review | | |
 
 ## 2. Bảng verdict 43 phán định
 

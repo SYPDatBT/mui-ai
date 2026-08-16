@@ -1,5 +1,6 @@
-# SESSION 2026-08-16 — Review đợt tài liệu team 2026_08_13: plan duyệt ・ P0/P1/P6 xong ・ P2/P4/P5 đang chạy
+# SESSION 2026-08-16 — Review đợt tài liệu team 2026_08_13: P0–P7 XONG (43/43 verdict, đối kháng 0 REFUTED) ・ P8 vá xong G1 + commit `f5a299b`
 > Đọc SAU `00_INDEX.md`. ⭐ TRẠNG THÁI MỚI NHẤT (chưa có file nào thay).
+> ⚡ PHIÊN MỚI ĐỌC NHANH: trạng thái cuối + việc kế tiếp = **mục 5, items 1e (hàng đợi P8) + 1f (handoff) + 4b (2 việc ngoài hàng đợi)**. Các đoạn có nhãn [LỖI THỜI] trong file là diễn biến giữa phiên, giữ làm vết — đừng hành động theo.
 
 ## 1. Bối cảnh & mục tiêu phiên
 
@@ -23,7 +24,7 @@ User giao review TOÀN BỘ tài liệu team nộp trong `submit_folder/2026_08_
 2. **Repo app là GIT THẬT**: `sources/syp-eminelstandard-app` @ `41ee385` (branch `syp-dev`, khớp origin) — KHÔNG phải snapshot như CLAUDE.md/README/SKILL/self_study_plan đang ghi → P8 sửa 4 file đó (không đụng sources).
 3. **Đính chính ghi chép 08-12**: 「本表外の内部種別」 `I_data_download.md:200` là **5 loại** (devices・ipf_ems_pls_cntr_payers・emn_all_electric_powers・ipf_cntct_cancellations・emn_fast_electric_powers), không phải "4 bảng" — không loại nào trùng t_202/s_102/s_103/s_113.
 4. Nguồn tự mâu thuẫn phía repo mui: header `C0x_*.md` còn 「レビュー中」 nhưng bảng C系 `app/README.md` ghi レビュー済 (giá trị slide 08-05); `tasks/app_requirements_plan.md` (nơi README bảo là trạng-thái-chính) **không tồn tại trong repo** @1100487. → không phải lỗi member; cân nhắc báo mui.
-5. Nghi vấn trung tâm cho P2 (chưa kết luận — đang verify): **18/19 sheet G1** + 3/3 G4 + 3/8 G2 + 2/2 G7 dùng câu trần 「再利用可能なバッチ、または同等のロジックは存在しません。」 — va chạm 3 bảng tích luỹ e-smart (**tên đúng**: `DeviceAccumulatedHistoryTable`/`DeviceDailyUsageHistoryTable`/`DeviceMonthlyUsageHistoryTable`, `template-dynamodb.yaml:1113/1145/1177`, ghi bởi 5 Lambda `batch-import-rinnai/noritz-*`) + nền nhận Xzilla SFTP→S3→DynamoDB. Quy tắc phân ranh verdict ở plan §5.
+5. ✅ ĐÃ KẾT LUẬN (qua P2–P5 + đối kháng): nghi vấn câu trần 「存在しません」 (18/19 G1 + 3/3 G4 + 3/8 G2 + 2/2 G7) phân xử xong — **11+3 = 14 sheet thành 要修正** (kết luận hành động của member phần lớn đúng nhưng câu khẳng định sai sự kiện, vd e-smart CÓ 3 bảng tích luỹ `DeviceAccumulatedHistoryTable`/`DeviceDailyUsageHistoryTable`/`DeviceMonthlyUsageHistoryTable` `template-dynamodb.yaml:1113/1145/1177` + luồng 人感 motion + nền nhận Xzilla SFTP→S3→DynamoDB); số còn lại 妥当だが根拠不足. Toàn bộ đã qua đối kháng 0 REFUTED, câu thay thế đã áp vào `new/batch_decision.md`.
 
 ## 4. Thay đổi phía repo dự án
 
@@ -31,8 +32,7 @@ Không có — cả 5 repo fetch 16/08 đứng nguyên mốc: `eminel_gw_project
 
 ## 5. VIỆC DỞ DANG / TIẾP THEO LÀM GÌ (theo thứ tự)
 
-**[CẬP NHẬT cuối phiên 16/08] P2/P4/P5 ĐÃ VỀ + ĐÃ GOM vào `review_summary.md` §2–3** (script `consolidate_p2p4p5.py`, không qua LLM): 29 batch, **130 findings [cao 14・vừa 44・thấp 72]**, verdict: **妥当 1 ・ 妥当だが根拠不足 14 ・ 要修正 11 ・ 要業務確認 3** (11 要修正 = 7 G1 câu-trần + 3 G4 Xzilla + DistributeMonthlyEcoPoints).
-⚠️ **CHẠM TRẦN CHI TIÊU THÁNG giữa chừng**: agent đối kháng của P2/P4 bị chặn (P5 chạy được 1/2 — 5 verdicts đã ghi §3.G3-đối-kháng). → **Mọi verdict 要修正/[cao] của P2/P4 CHƯA qua đối kháng — TUYỆT ĐỐI chưa vá theo chúng (⛔#13); phải chạy đối kháng bù trước P8.** Bảng journal dưới chỉ còn giá trị tra ngược:
+[LỖI THỜI — đã giải quyết, xem 1c] ~~Giữa phiên chạm trần chi tiêu: đối kháng P2/P4 bị chặn, từng cấm vá.~~ Đối kháng bù đã chạy đủ + sạch (1c) và G1 đã vá xong (1e). P2/P4/P5 đã gom vào review_summary §2–3: 29 batch, 130 findings [cao 14・vừa 44・thấp 72], verdict 妥当1・根拠不足14・要修正11・要業務確認3. Bảng journal dưới chỉ còn giá trị tra ngược:
 
 | Phase | Nội dung | Kết quả đầy đủ đọc ở (nếu đã chạy xong) | Script (chạy lại nếu cần) |
 |---|---|---|---|
@@ -50,13 +50,18 @@ Không có — cả 5 repo fetch 16/08 đứng nguyên mốc: `eminel_gw_project
 1f. 📦 **HANDOFF cho phiên mới** (user chuyển phiên sau G1): mọi tư liệu làm việc đã copy sang **`C:\Users\a\.claude\projects\d--SYP-Home-mui-eminelGW\handoff_20260816\`** — `fixspec/` (42 file, input trực tiếp cho các khối vá còn lại) ・ `tasks/` (10 task output JSON đầy đủ findings/verdict P1–P8-G1b) ・ toàn bộ script python (convert/consolidate/gen_fixspecs — chạy lại được) ・ `app_data_needs.md` ・ `adv_lo_*.md`. Phiên mới KHÔNG cần scratchpad phiên cũ. Ước lượng khối theo `notes/usage_budget.md` (fixer ~65k/batch, dịch ~60k🔸, ngưỡng 600k/khối).
 2. ~~Phóng P3~~ ✅ (xem 1b) — 10 verifier + đối kháng; prompt RẬP KHUÔN script P4 (đổi thư mục/batch); nhớ nạp: 3 bảng tích luỹ (tên đúng ở mục 3.5 trên) ・ `app_data_needs_ref.md` ・ trọng tâm `RankingCreation` vs A03/A04, `CreateGroupSummary` vs C2 ranking 実施する (nếu "chưa port" đúng → GAP phải nêu to) ・ TTL/PITR kiểm từng bảng ・ G7 code ở `eminelsv-develop`.
 3. ✅ **P7 XONG** (2 agent, 258k token — ghi review_summary §3b): 43/43 cặp sheet↔summary đối chiếu; summary 08_13 vs 08_12 = 37 dòng điền mới từ 「—」, **KHÔNG dòng có sẵn nào bị sửa đè**, 4 dòng CSV của SYP nguyên vẹn. **10 lệch P7-A**: 4 sheet↔summary ngược chiều (CreateTablePartition ・ DeleteData ・ HashPassword ・ WatchNotification) + 5 lệch member↔new_2 trên dòng SYP-liên-quan (DistributeMonthlyEcoPoints 重複防止 member bảo làm mới nhưng new_2 chỉ ra `pointBadgeStatsSk` CÓ SẴN ・ PublishRegularEcoMissions thiếu vế lịch G-A-02 ・ RcvCntct/RcvEmsPls member 「新規追加」 vs new_2 「tích hợp flow nhận có sẵn, không batch riêng」 ・ ControlDr thiếu vế 劣後2027) + 1 chùm lỗi HTML/link summary (2 href Notion trỏ nhầm, tag `</td=>` hỏng, ký tự thừa). **15 dòng summary cần sửa (P7-B)** — danh sách chính xác từng ô nằm ở §3b, là input trực tiếp cho P8.
-4. **P8** (làm theo plan §4.3/§5b/§6-P8): vá file member có finding vào `new/` (theo KHỐI, cặp VN+JA đồng thời, GIỮ độ dài/giọng member) ・ tạo `new/batch_decision.md` cho nhóm có 要修正 ・ dịch JA **24 file VN-only** vào `new/` + kiểm sau dịch (khớp cặp 1-1 + grep sạch mã nội bộ ⛔#4) ・ sửa dòng sai trong `summary_batch_migration_ja.md` ・ gộp các 要業務確認 (Q-G6-1 + phát sinh từ P2/P3) trình user duyệt gửi ・ hoàn thiện `review_summary.md` ・ **commit local lần 2** ・ cập nhật SKILL.md `3-step-review` mục 4 (baseline mới) ・ sửa 4 file ghi "app = snapshot" (CLAUDE.md, README.md, SKILL 0.3a/0.3b/4a, self_study_plan.md:9) ・ đính chính memory "5 loại nội bộ spec [I]" ・ `/update-memory` chốt.
+4. [LỖI THỜI — thay bằng 1e] ~~Mô tả P8 ban đầu~~ — tiến độ + hàng đợi thực tế ở **1e**.
+4b. **2 việc thuộc P8 KHÔNG nằm trong câu hàng đợi 1e — đừng bỏ sót khi chốt đợt**:
+   ① **Gộp các 要業務確認 trình user duyệt** — tổng cộng 9 mục có business_question soạn sẵn trong review_summary (Q-G6-1 s_113 平均 liên hộ ・ G5: WatchNotification + PutLogFile ・ G3: ControlDrOperation + DistributeMonthlyEcoPoints ・ G1: CalcCarbonDioxideEmissions ・ G2: DeleteData + DeleteLogicalDeletedDevices + DeleteTimeOutControlTenMinute — xem §3 từng nhóm + mục 4). Gộp trùng lặp → trình user; user duyệt gửi → tách ra `submit_folder/qa/qa_<chủ-đề>_<YYYYMMDD>.md` (⛔#12). KHÔNG tự gửi.
+   ② **Hoàn thiện review_summary khi chốt**: điền thống kê tổng mục 1, cập nhật cột "xlsx đã cập nhật chưa" (member tick sau bàn giao — để ⬜), mục 6 danh sách dịch JA + kiểm sau dịch, mục 7 Giới hạn (danh sách sheet xlsx còn câu cũ chờ member cập nhật theo `new/batch_decision.md`).
 5. **Deadline: thứ 2 tuần sau** (user nói 16/08; hiểu an toàn = **17/08**; nếu ý là 24/08 thì dư dả).
 6. Việc treo cũ (từ 00_INDEX, KHÔNG thuộc đợt review): rà guide v1.2 theo `1100487` ・ điền 7 dòng 配信+Xzilla vào summary ・ sửa `self_study_plan.md:54` ・ QA kihara/Notion… — làm SAU khi đợt review xong.
 
-## 6. CHƯA KIỂM
+## 6. CHƯA KIỂM / CHƯA LÀM (trạng thái cuối phiên)
 
-- Kết quả P2/P4/P5 (đang chạy lúc chốt) — chưa đọc, chưa verdict nhóm G1/G3/G4/G5.
+- File trong `new/` của G1 mới qua **self-check của từng fixer** — CHƯA qua re-review thu hẹp tổng (⛔#5, nằm cuối hàng đợi 1e, chạy sau khi vá xong mọi nhóm).
+- 24 file VN-only (G2 8 ・ G3 8 ・ G4 3 ・ G5 3 ・ G7 2) **chưa có bản dịch JA**.
+- 9 câu 要業務確認 (xem 4b-①) **chưa trình user** — đừng gửi đi đâu khi user chưa duyệt.
 - Nội dung `4_spec/app/` mới + 11 file requirement app đổi (treo từ 08-13) — P1 chỉ đối chiếu phần liên quan C1–C5.
 - 3 trang QA Notion 回答中 (không có Notion MCP).
 - Khoảng trống hoạt động 08-07→08-11 và 08-14→08-15 (member làm việc trong folder ngày 15/08 nhưng không có ghi nhận phiên).
