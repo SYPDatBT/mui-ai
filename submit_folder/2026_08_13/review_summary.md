@@ -22,7 +22,7 @@
 | P5 | G3 配信・通知 (4+4) | ✅ 16/08 (đối kháng 2/2 ✅ §3c) | xem §3.G3 | 1 妥当 ・ 1 根拠不足 ・ 1 要修正 ・ 1 要業務確認 |
 | P6 | G6 CSV/ZIP (4 sheet) | ✅ 16/08 | 0 (md skip — identical bản đã review 08-12) | 妥当 2 ・ 根拠不足 1 ・ 要業務確認 1 |
 | P7 | Tổng đối chiếu 43 sheet ↔ summary | ✅ 16/08 | 10 lệch sheet/summary/new_2 + 15 dòng summary cần sửa (xem §3b) | — |
-| P8 | Sửa (`new/`) + dịch JA + kiểm dịch + sửa summary + re-review | ✅ 16–17/08 | 146 finding fixspec áp đủ (0 tàn dư); kiểm dịch 0 cao/2 vừa (quy ước, chấp nhận)/7 thấp (đã thống nhất); re-review ⛔#5 ĐẠT 8/8 lát | 43/43 batch có bản sửa; **cả 7 nhóm có xlsx đều có `new/batch_decision.md`** — 3 bản 修正版 thay câu ở 13 sheet 要修正 (G1 7 ・ G2 3 ・ G4 3), 1 bản 修正版 của G3 (sheet chỉ trỏ tên file → thêm dòng 「レビュー結果」 chứa câu đã sửa, xlsx không đổi), 3 bản レビュー確認版 trùng khít bản gốc (G5 ・ G6 ・ G7 — 0 sheet 要修正); 6 câu 根拠不足 đề xuất nằm ở mục 付録 của G1 (3) ・ G2 (2) ・ G5 (1), nhãn 【提案・未適用】 |
+| P8 | Sửa (`new/`) + dịch JA + kiểm dịch + sửa summary + re-review | ✅ 16–17/08 | 146 finding fixspec áp đủ (0 tàn dư); kiểm dịch 0 cao/2 vừa (quy ước, chấp nhận)/7 thấp (đã thống nhất); re-review ⛔#5 ĐẠT 8/8 lát | 43/43 batch có bản sửa; **`new/` của mỗi nhóm = BỘ TÀI LIỆU NỘP ĐẦY ĐỦ** (file có finding = bản đã sửa; file không finding = bản sao nguyên văn 0 byte khác — 8 file: G6 4 ・ G8 `report_C05_energy_advice{_ja,_vn}` ・ G1 `legacy-batch_CalcYearlyAverageData{,_ja}`); **cả 7 nhóm có xlsx đều có `new/batch_decision.md`** — 3 bản 修正版 thay câu ở 13 sheet 要修正 (G1 7 ・ G2 3 ・ G4 3), 1 bản 修正版 của G3 (sheet chỉ trỏ tên file → thêm dòng 「レビュー結果」 chứa câu đã sửa, xlsx không đổi), 3 bản レビュー確認版 trùng khít bản gốc (G5 ・ G6 ・ G7 — 0 sheet 要修正); 6 câu 根拠不足 đề xuất nằm ở mục 付録 của G1 (3) ・ G2 (2) ・ G5 (1), nhãn 【提案・未適用】 |
 
 ## 2. Bảng verdict 43 phán định
 
@@ -1071,7 +1071,7 @@ Ghi chú: File đối chiếu: D:\SYP_Home\mui\eminelGW\eminel_gw_onboarding\sub
 **Nhóm G1 集計・計算系 vá HOÀN TẤT (16/08): 18/18 batch có findings → 35 file trong `new/` + `new/batch_decision.md` (7 sheet đã sửa).**
 
 \* skip hợp lệ: mục nhắm vào `batch_decision.md` — đã xử lý riêng bằng script (`new/batch_decision.md`), ngoài phạm vi fixer.
-Ghi chú: `CalcYearlyAverageData` không có finding → không có bản trong `new/` (bản gốc = bản chuẩn).
+Ghi chú: `CalcYearlyAverageData` không có finding → bản trong `new/` là **bản sao nguyên văn** của bản gốc (0 byte khác), có mặt để `new/` đủ bộ tài liệu nộp.
 
 ## 4. Các điểm 要業務確認 (câu hỏi soạn sẵn chờ user duyệt gửi)
 
