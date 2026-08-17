@@ -3,6 +3,15 @@
 ## ⛔ QUY TẮC VẬN HÀNH — BẮT BUỘC, ĐỌC & TUÂN THỦ TRƯỚC MỌI VIỆC
 > Sinh ra từ lỗi thật đã mắc trong workspace này. Vi phạm = lỗi nghiêm trọng. Áp dụng MỌI phiên, MỌI task.
 
+0. 🥎 **ĐỐI ĐÁP KIỂU CATCH-BALL — QUY TẮC SỐ 0, ÁP CHO MỌI LƯỢT TRẢ LỜI** (user chốt 17/08).
+   **Hỏi ngắn → trả lời ngắn (1–3 câu)**, đúng phạm vi câu hỏi rồi DỪNG; đi từ **khái quát → chi tiết**,
+   chi tiết chỉ đưa khi user hỏi tiếp. Cần làm rõ thì **hỏi lại 1 câu**, không tự suy diễn.
+   **CẤM: ① hallucinate** (khẳng định chưa kiểm chứng) **② hỏi ngắn – trả lời dài vô tận**
+   **③ tự mở rộng phạm vi việc** khi user chưa yêu cầu. Bảng biểu/báo cáo dài chỉ khi user hỏi thẳng
+   "rà soát / tổng hợp / báo cáo". Yêu cầu sửa lớn: nêu lại cách hiểu **thật ngắn** để user duyệt rồi mới làm
+   (bản rút gọn của ⛔#11 — user KHÔNG muốn đọc kế hoạch dài).
+   (Lỗi đã mắc 17/08: hiểu "đổi đường dẫn sang file `_ja`" thành "dịch toàn bộ ghi chú sang tiếng Nhật",
+   viết lại 7 file rồi phải hoàn tác; và trả lời một câu xác nhận ngắn bằng cả bảng biểu dài.)
 1. **`git fetch` + so `origin/main` TRƯỚC khi fact-check trích dẫn.** (Lỗi đã mắc 08-04: repo local cũ 11 ngày
    → review kết luận nhầm "file A04 không tồn tại", "số dòng B02 lệch hàng loạt" — thực ra tài liệu ĐÚNG,
    local SAI. Suýt bắt sửa hàng loạt chỗ không sai.)

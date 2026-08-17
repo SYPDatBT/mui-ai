@@ -14,7 +14,7 @@
 |---|---|
 | 旧Eminelシステムの調査結果については、以下のファイルをご参照ください： | legacy-batch_DistributeMonthlyEcoPoints_ja.md |
 | 現行のEminel Smartシステムの調査結果： | current-eminelsmart_DistributeMonthlyEcoPoints_ja.md |
-| 【レビュー結果】修正後の総括<br>※xlsxには存在しない参考行 — xlsxへの貼り付けは不要。修正の反映は current-eminelsmart_DistributeMonthlyEcoPoints.md（＋ _ja 版）の差し替えで行う。 | E-GWで本業務を改めて実装する場合（要件 F-ES-04）、新規に構築が必要なのは、月ごとの平均暖房設定温度を集計するバッチとしきい値判定のロジックのみである。月単位の重複付与防止（checkUserHasReceivedPoint 経由の pointBadgeStatsSk キー）、内部のポイント台帳（PointBadgeStats／UserBadgeSummary）、およびPIエラー時のロールバックは、共用フロー givePointBadgeForUser に既に存在する — 最終的なPoint Infinity呼び出しのステップとして GivePointToPointInfinityFunction とあわせて再利用でき、書き直す必要はない。なお 10_feature_list によると、ポイント管理・PI連携（F-ES-09）のブロックとアプリ側のポイント・省エネアドバイスは劣後（✅）となっている — 実装時期についてはmui／Kitagasと優先度を確認する必要がある。 |
+| 【レビュー結果】修正後の総括<br>※xlsxには存在しない参考行 — xlsxへの貼り付けは不要。修正の反映は current-eminelsmart_DistributeMonthlyEcoPoints_ja.md の差し替えで行う。 | E-GWで本業務を改めて実装する場合（要件 F-ES-04）、新規に構築が必要なのは、月ごとの平均暖房設定温度を集計するバッチとしきい値判定のロジックのみである。月単位の重複付与防止（checkUserHasReceivedPoint 経由の pointBadgeStatsSk キー）、内部のポイント台帳（PointBadgeStats／UserBadgeSummary）、およびPIエラー時のロールバックは、共用フロー givePointBadgeForUser に既に存在する — 最終的なPoint Infinity呼び出しのステップとして GivePointToPointInfinityFunction とあわせて再利用でき、書き直す必要はない。なお 10_feature_list によると、ポイント管理・PI連携（F-ES-09）のブロックとアプリ側のポイント・省エネアドバイスは劣後（✅）となっている — 実装時期についてはmui／Kitagasと優先度を確認する必要がある。 |
 
 *(Nguồn dòng 「レビュー結果」: `./current-eminelsmart_DistributeMonthlyEcoPoints_ja.md:24` — ô 「総括」, cùng thư mục `new/` này; đã bỏ ký hiệu định dạng Markdown (`**`, backtick) để tiện trích dùng dạng văn bản thuần khi cần, nội dung chữ không đổi — **hành động chính thức vẫn là thay nội dung file md trong `new/`, KHÔNG dán dòng này vào xlsx**. Bản VN tương ứng: `./current-eminelsmart_DistributeMonthlyEcoPoints.md:24` ô 「Khái quát」.)*
 
