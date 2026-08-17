@@ -26,119 +26,119 @@
 
 | Batch | CalcDailyAccumulatedValueCommand |
 |---|---|
-| 旧Eminelシステムの調査結果については、以下のファイルをご参照ください： | legacy-batch_CalcDailyAccumulatedValueCommand_ja.md<br>legacy-batch_CalcDailyAccumulatedValueCommand.md |
+| 旧Eminelシステムの調査結果については、以下のファイルをご参照ください： | legacy-batch_CalcDailyAccumulatedValueCommand_ja.md |
 | 現行のEminel Smartシステムの調査結果： | 本バッチの「生の積算値（t_202）から1時間値を差分算出するロジック」そのものは、現行Eminel Smartには存在しない。ただしEminel Smart側には積算系データの受け皿として DeviceAccumulatedHistoryTable／DeviceDailyUsageHistoryTable／DeviceMonthlyUsageHistoryTable（template-dynamodb.yaml:1113/1145/1177）が存在し、batch-import-rinnai-sensor-data／batch-import-noritz-sensor-data／batch-import-rinnai-daily-usage／batch-import-noritz-hourly-usage／batch-import-rinnai-monthly-usage の5本のLambdaが、リンナイ／ノーリツ側で算出済みの使用量データをそのまま取り込む構成である（サーバー側での差分計算は行わない）。太陽光発電・ガス発電・売買電・蓄電池・人感の1時間値に相当するデータ・算出ロジックはどちらにも存在しないため、E-GWのグラフ（F-ES-01）・リアルタイムモニタ（F-ES-15）が必要とする1時間値・1日値・1月値（消費電力量＝太陽光発電電力量＋ガス発電電力量＋蓄電池放電量−蓄電池充電量＋買電量−売電量）をどこで生成するか（GWからの送信値／Xzillaの電力30分値／サーバー側での新規実装）の設計判断が別途必要。 |
 
 ## 4. CalcDailyAverageDataCommand
 
 | Batch | CalcDailyAverageDataCommand |
 |---|---|
-| 旧Eminelシステムの調査結果については、以下のファイルをご参照ください： | legacy-batch_CalcDailyAverageData_ja.md<br>legacy-batch_CalcDailyAverageData.md |
+| 旧Eminelシステムの調査結果については、以下のファイルをご参照ください： | legacy-batch_CalcDailyAverageData_ja.md |
 | 現行のEminel Smartシステムの調査結果： | 再利用可能なバッチ、または同等のロジックは存在しません。 |
 
 ## 5. CalcDailyEnergyConsumptionCommand
 
 | Batch | CalcDailyEnergyConsumptionCommand |
 |---|---|
-| 旧Eminelシステムの調査結果については、以下のファイルをご参照ください： | legacy-batch_CalcDailyEnergyConsumption_ja.md<br>legacy-batch_CalcDailyEnergyConsumption.md |
+| 旧Eminelシステムの調査結果については、以下のファイルをご参照ください： | legacy-batch_CalcDailyEnergyConsumption_ja.md |
 | 現行のEminel Smartシステムの調査結果： | Eminel Smart側に、本バッチをそのまま再利用できるバッチは存在しません。ただし関連する仕組みとして、Rinnai/Noritzクラウドから算出済みの時間・日・月の使用量データを取り込むLambda（batch-import-rinnai-*／batch-import-noritz-*）と、その格納先3テーブル（DeviceAccumulatedHistoryTable／DeviceDailyUsageHistoryTable／DeviceMonthlyUsageHistoryTable）が存在します（ガスの時間値は算出済みで受領するため、本バッチのガス10分値→時間値集約に相当する処理は不要になる可能性があります）。一方、本バッチの消費電力量算出（太陽光発電＋ガス発電＋蓄電池放電−蓄電池充電＋買電−売電）に相当するロジックはEminel Smart側に存在せず、統合要件v1.2（F-ES-01:582行、F-ES-15）では同一の計算式による算出が26年スコープで要求されているため、新システム側で新規に実装する必要があります（本バッチの計算式が参照実装となります）。 |
 
 ## 6. CalcDailyRoomTemperatureCommand
 
 | Batch | CalcDailyRoomTemperatureCommand |
 |---|---|
-| 旧Eminelシステムの調査結果については、以下のファイルをご参照ください： | legacy-batch_CalcDailyRoomTemperature_ja.md<br>legacy-batch_CalcDailyRoomTemperature.md |
+| 旧Eminelシステムの調査結果については、以下のファイルをご参照ください： | legacy-batch_CalcDailyRoomTemperature_ja.md |
 | 現行のEminel Smartシステムの調査結果： | 本バッチと同等の1時間平均室温を算出するバッチ・ロジックは、現行Eminel Smartには存在しません（backend内に平均算出処理は無し）。ただし、室温・湿度データの取り込み・提供パイプラインは既に存在します：muiセンサーのSENSOR_AUTO_REPORTイベント（temperature／humidity／motion）をbatch-receive-data-infrared-remoteが受信してInfraredRemoteDataTableへ生値のまま保存し、get-temp-and-humid-for-user APIが時系列データとしてアプリへ返却しています（集計なし）。新システムの要件F-ES-01（室温グラフ：時刻別/日別/月別、日値・月値は平均値あり）を満たすには、この生値を集計する処理（本バッチの1時間平均算出に相当）を新規に設計・実装する必要があります。 |
 
 ## 7. CalcMonthlyAccumulatedValueCommand
 
 | Batch | CalcMonthlyAccumulatedValueCommand |
 |---|---|
-| 旧Eminelシステムの調査結果については、以下のファイルをご参照ください： | legacy-batch_CalcMonthlyAccumulatedValueCommand_ja.md<br>legacy-batch_CalcMonthlyAccumulatedValueCommand.md |
+| 旧Eminelシステムの調査結果については、以下のファイルをご参照ください： | legacy-batch_CalcMonthlyAccumulatedValueCommand_ja.md |
 | 現行のEminel Smartシステムの調査結果： | 旧CalcMonthlyAccumulatedValueCommandのように時間値（s_102）から日値を集計して月次行（s_103）を組み立てるバッチ、および同等の集計ロジックはEminel Smartには存在しません。ただし月次使用量データの受け皿と取込フローは存在します。DeviceMonthlyUsageHistoryTable（template-dynamodb.yaml 1177行）に、メーカー側で集計済みの前月分使用量（給湯・追いだきガス使用量等）をbatch-import-rinnai-monthly-usageが格納しています（日値はDeviceDailyUsageHistoryTable＋batch-import-rinnai-daily-usage／batch-import-noritz-hourly-usage）。したがってガス機器系の月値はメーカー連携で取得済みの値を利用可能ですが、電力系（消費電力・売買電・蓄電池・発電）の月次集計に相当する仕組みは存在せず、新システムの月値グラフ・レポート（F-ES-01／F-ES-02、26年スコープ）に必要な電力系月値の生成手段（Xzilla電力30分値からの集計、TagTagとの分担範囲を含む）は新規に検討が必要です。 |
 
 ## 8. CalcMonthlyAverageDataCommand
 
 | Batch | CalcMonthlyAverageDataCommand |
 |---|---|
-| 旧Eminelシステムの調査結果については、以下のファイルをご参照ください： | legacy-batch_CalcMonthlyAverageData_ja.md<br>legacy-batch_CalcMonthlyAverageData.md |
+| 旧Eminelシステムの調査結果については、以下のファイルをご参照ください： | legacy-batch_CalcMonthlyAverageData_ja.md |
 | 現行のEminel Smartシステムの調査結果： | 再利用可能なバッチ、または同等のロジックは存在しません。 |
 
 ## 9. CalcMonthlyAverageSetTemperatureCommand
 
 | Batch | CalcMonthlyAverageSetTemperatureCommand |
 |---|---|
-| 旧Eminelシステムの調査結果については、以下のファイルをご参照ください： | legacy-batch_CalcMonthlyAverageSetTemperatureCommand_ja.md<br>legacy-batch_CalcMonthlyAverageSetTemperatureCommand.md |
+| 旧Eminelシステムの調査結果については、以下のファイルをご参照ください： | legacy-batch_CalcMonthlyAverageSetTemperatureCommand_ja.md |
 | 現行のEminel Smartシステムの調査結果： | 再利用可能なバッチ、または同等のロジックは存在しません。 |
 
 ## 10. CalcMonthlyRoomTemperatureCommand
 
 | Batch | CalcMonthlyRoomTemperatureCommand |
 |---|---|
-| 旧Eminelシステムの調査結果については、以下のファイルをご参照ください： | legacy-batch_CalcMonthlyRoomTemperature_ja.md<br>legacy-batch_CalcMonthlyRoomTemperature.md |
+| 旧Eminelシステムの調査結果については、以下のファイルをご参照ください： | legacy-batch_CalcMonthlyRoomTemperature_ja.md |
 | 現行のEminel Smartシステムの調査結果： | 再利用可能なバッチ、または同等のロジックは存在しません。 |
 
 ## 11. CalcYearlyAccumulatedValueCommand
 
 | Batch | CalcYearlyAccumulatedValueCommand |
 |---|---|
-| 旧Eminelシステムの調査結果については、以下のファイルをご参照ください： | legacy-batch_CalcYearlyAccumulatedValueCommand_ja.md<br>legacy-batch_CalcYearlyAccumulatedValueCommand.md |
+| 旧Eminelシステムの調査結果については、以下のファイルをご参照ください： | legacy-batch_CalcYearlyAccumulatedValueCommand_ja.md |
 | 現行のEminel Smartシステムの調査結果： | 本バッチと同名の年次集計バッチ、および日別値から月別・年別値を算出する集計ロジックはEminel Smartに存在しません。ただし関連する仕組みとして、機器の積算値・日別・月別使用量を保持する3テーブル（DeviceAccumulatedHistoryTable／DeviceDailyUsageHistoryTable／DeviceMonthlyUsageHistoryTable）が存在し、batch-import-rinnai-*／batch-import-noritz-*のLambdaがリンナイ・ノーリツ算出済みの値をそのまま取り込んでいます。年単位のテーブルおよび年次集計ロジックは存在しないため、新アプリのC1グラフ（月値・当年／前年比較）およびC2年間レポートに必要な年間データの供給元（メーカー提供値で賄うか、月別値から年間分を集計する処理を新設するか）は別途検討が必要です。 |
 
 ## 12. CalcYearlyAverageDataCommand
 
 | Batch | CalcYearlyAverageDataCommand |
 |---|---|
-| 旧Eminelシステムの調査結果については、以下のファイルをご参照ください： | legacy-batch_CalcYearlyAverageData_ja.md<br>legacy-batch_CalcYearlyAverageData.md |
+| 旧Eminelシステムの調査結果については、以下のファイルをご参照ください： | legacy-batch_CalcYearlyAverageData_ja.md |
 | 現行のEminel Smartシステムの調査結果： | 再利用可能なバッチ、または同等のロジックは存在しません。 |
 
 ## 13. CalcYearlyPresetTemperatureCommand
 
 | Batch | CalcYearlyPresetTemperatureCommand |
 |---|---|
-| 旧Eminelシステムの調査結果については、以下のファイルをご参照ください： | legacy-batch_CalcYearlyPresetTemperature_ja.md<br>legacy-batch_CalcYearlyPresetTemperature.md |
+| 旧Eminelシステムの調査結果については、以下のファイルをご参照ください： | legacy-batch_CalcYearlyPresetTemperature_ja.md |
 | 現行のEminel Smartシステムの調査結果： | 再利用可能なバッチ、または同等のロジックは存在しません。 |
 
 ## 14. CalcYearlyRoomTemperatureCommand
 
 | Batch | CalcYearlyRoomTemperatureCommand |
 |---|---|
-| 旧Eminelシステムの調査結果については、以下のファイルをご参照ください： | legacy-batch_CalcYearlyRoomTemperature_ja.md<br>legacy-batch_CalcYearlyRoomTemperature.md |
+| 旧Eminelシステムの調査結果については、以下のファイルをご参照ください： | legacy-batch_CalcYearlyRoomTemperature_ja.md |
 | 現行のEminel Smartシステムの調査結果： | 再利用可能なバッチ、または同等のロジックは存在しません。 |
 
 ## 15. CalcCommonAverageDataCommand
 
 | Batch | CalcCommonAverageDataCommand |
 |---|---|
-| 旧Eminelシステムの調査結果については、以下のファイルをご参照ください： | legacy-batch_CalcCommonAverageData_ja.md<br>legacy-batch_CalcCommonAverageData.md |
+| 旧Eminelシステムの調査結果については、以下のファイルをご参照ください： | legacy-batch_CalcCommonAverageData_ja.md |
 | 現行のEminel Smartシステムの調査結果： | 再利用可能なバッチ、または同等のロジックは存在しません。 |
 
 ## 16. CalcFixedValueCommand
 
 | Batch | CalcFixedValueCommand |
 |---|---|
-| 旧Eminelシステムの調査結果については、以下のファイルをご参照ください： | legacy-batch_CalcFixedValueCommand_ja.md<br>legacy-batch_CalcFixedValueCommand.md |
+| 旧Eminelシステムの調査結果については、以下のファイルをご参照ください： | legacy-batch_CalcFixedValueCommand_ja.md |
 | 現行のEminel Smartシステムの調査結果： | 再利用可能なバッチ、または同等のロジックは存在しません。 |
 
 ## 17. CalcCarbonDioxideEmissionsCommand
 
 | Batch | CalcCarbonDioxideEmissionsCommand |
 |---|---|
-| 旧Eminelシステムの調査結果については、以下のファイルをご参照ください： | legacy-batch_CalcCarbonDioxideEmissions_ja.md<br>legacy-batch_CalcCarbonDioxideEmissions.md |
+| 旧Eminelシステムの調査結果については、以下のファイルをご参照ください： | legacy-batch_CalcCarbonDioxideEmissions_ja.md |
 | 現行のEminel Smartシステムの調査結果： | 再利用可能なバッチ、または同等のロジックは存在しません。 |
 
 ## 18. CalcWeeklySavingReportEffectCommand
 
 | Batch | CalcWeeklySavingReportEffectCommand |
 |---|---|
-| 旧Eminelシステムの調査結果については、以下のファイルをご参照ください： | legacy-batch_CalcWeeklySavingReportEffect_ja.md<br>legacy-batch_CalcWeeklySavingReportEffect.md |
+| 旧Eminelシステムの調査結果については、以下のファイルをご参照ください： | legacy-batch_CalcWeeklySavingReportEffect_ja.md |
 | 現行のEminel Smartシステムの調査結果： | 再利用可能なバッチ、または同等のロジックは存在しません。 |
 
 ## 19. CalcWeeklySavingReportUsingCommand
 
 | Batch | CalcWeeklySavingReportUsingCommand |
 |---|---|
-| 旧Eminelシステムの調査結果については、以下のファイルをご参照ください： | legacy-batch_CalcWeeklySavingReportUsing_ja.md<br>legacy-batch_CalcWeeklySavingReportUsing.md |
+| 旧Eminelシステムの調査結果については、以下のファイルをご参照ください： | legacy-batch_CalcWeeklySavingReportUsing_ja.md |
 | 現行のEminel Smartシステムの調査結果： | 現行Eminel Smartには、週間使用量を集計する再利用可能なバッチ・同等の週間集計ロジックは存在しません（weekly／先週／先々週／7日間で該当なし）。ただし、Rinnai・Noritz連携のインポートバッチ（batch-import-rinnai-daily-usage等）が日次・月次の使用量実績をDeviceDailyUsageHistoryTable／DeviceMonthlyUsageHistoryTable／DeviceAccumulatedHistoryTableに保持しており、週間集計（日次値7日分の合算）の材料になり得ます。なお、新システムでは週間レポート（F-ES-02：先々週との比較・日ごとの使用量表示、26年スコープ）が要件化されており、週間データの生成主体（TagTag連携か自前実装か）は統合要件上TBDのため、本バッチのロジック（7日分合算・先々週シフト・欠損チェック）は移行設計の参照対象として保持を推奨します。 |
 
 ---

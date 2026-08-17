@@ -12,12 +12,12 @@
 
 | Batch | MakeCodeMapDataCommand |
 |---|---|
-| 旧Eminelシステムの調査結果については、以下のファイルをご参照ください： | MakeCodeMapData.md |
+| 旧Eminelシステムの調査結果については、以下のファイルをご参照ください： | MakeCodeMapData_ja.md |
 | 現行のEminel Smartシステムの調査結果： | 再利用可能なバッチ、または同等のロジックは存在しません。 |
 
 ## 2. HashPasswordCommand
 
 | Batch | HashPasswordCommand |
 |---|---|
-| 旧Eminelシステムの調査結果については、以下のファイルをご参照ください： | HashPassword.md |
+| 旧Eminelシステムの調査結果については、以下のファイルをご参照ください： | HashPassword_ja.md |
 | 現行のEminel Smartシステムの調査結果： | 再利用可能なバッチ、または同等のロジックは存在しません。 |
