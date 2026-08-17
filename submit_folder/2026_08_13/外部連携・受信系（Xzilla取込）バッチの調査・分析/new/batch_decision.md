@@ -1,15 +1,19 @@
 # batch_decision（Markdown版・修正版）
 
-> **BẢN ĐÃ SỬA THEO REVIEW 16/08** — sheet 要修正 đã thay câu kết luận (đã qua đối kháng); các sheet khác giữ nguyên văn. Sheet đã sửa: RcvCntctCancellationCommand、RcvEmsPlsCntrPayerCommand、RcvHalfHourElectricPowerCommand. Bản gốc trung thực với xlsx: `../batch_decision.md`.
+> **【メンバーの作業】要修正シート（3件＝全シート）の新しい結論文を、xlsx の該当セルへ貼り付けてください（下表からコピーできます）。**
 
-> Bản Markdown convert máy móc 1-1 từ `batch_decision.xlsx` cùng thư mục — nội dung convert giữ nguyên từng ô (không dịch); riêng câu kết luận các sheet nêu ở ghi chú trên đã thay theo review. Ngày convert: 2026-08-16 ・ số sheet: 3.
+> **BẢN ĐÃ SỬA THEO REVIEW 16–17/08** — sheet 要修正 đã thay câu kết luận (đã qua đối kháng); các sheet khác giữ nguyên văn. Sheet đã sửa: RcvCntctCancellationCommand、RcvEmsPlsCntrPayerCommand、RcvHalfHourElectricPowerCommand. Bản gốc trung thực với xlsx: `../batch_decision.md`.
+
+> **Verdict 3/3 sheet**: **要修正 3** — cả 3 sheet của nhóm đều đã thay câu, dán thẳng vào xlsx được. Nhóm không có sheet 妥当 / 妥当だが根拠不足 / 要業務確認 → không có câu bổ sung tùy chọn và không có câu hỏi QA nào treo.
+
+> Bản Markdown convert máy móc 1-1 từ `../batch_decision.xlsx` (thư mục nhóm) — nội dung convert giữ nguyên từng ô (không dịch); riêng câu kết luận các sheet nêu ở ghi chú trên đã thay theo review. Ngày convert: 2026-08-16 ・ số sheet: 3.
 
 ## 1. RcvCntctCancellationCommand
 
 | Batch | RcvCntctCancellationCommand |
 |---|---|
 | 旧Eminelシステムの調査結果については、以下のファイルをご参照ください： | legacy-batch_RcvCntctCancellation.md |
-| 現行のEminel Smartシステムの調査結果： | 「同等のロジック（接点データ（IF2249）の取込、および買電売電算出停止フラグ設定に相当する処理）は存在しません（IF2249・接点・解約・買電売電の grep は0件）。ただし、Eminel Smart には Xzilla ファイルの SFTP→S3→DynamoDB 受信基盤（batch-get-list-file-name-from-sftp-server／batch-forward-csv-from-sftp-server-to-s3／batch_run_sequentially.asl.json、重複取込防止の CsvDownloadHistory テーブル）が存在し、IF2016・IF2023 等8種のCSV取込で稼働中のため、本バッチのファイル受信部分はこの基盤を再利用可能です。」 |
+| 現行のEminel Smartシステムの調査結果： | 同等のロジック（接点データ（IF2249）の取込、および買電売電算出停止フラグ設定に相当する処理）は存在しません（IF2249・接点・解約・買電売電の grep は0件）。ただし、Eminel Smart には Xzilla ファイルの SFTP→S3→DynamoDB 受信基盤（batch-get-list-file-name-from-sftp-server／batch-forward-csv-from-sftp-server-to-s3／batch_run_sequentially.asl.json、重複取込防止の CsvDownloadHistory テーブル）が存在し、IF2016・IF2023 等8種のCSV取込で稼働中のため、本バッチのファイル受信部分はこの基盤を再利用可能です。 |
 
 ## 2. RcvEmsPlsCntrPayerCommand
 

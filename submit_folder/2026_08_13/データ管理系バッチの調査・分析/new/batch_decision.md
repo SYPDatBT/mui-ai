@@ -1,8 +1,12 @@
 # batch_decision（Markdown版・修正版）
 
-> **BẢN ĐÃ SỬA THEO REVIEW 16/08** — sheet 要修正 đã thay câu kết luận (đã qua đối kháng); các sheet khác giữ nguyên văn. Sheet đã sửa: CreateTablePartitionCommand、DeleteDataCommand、DeleteLogicalDeletedDevicesCommand. Bản gốc trung thực với xlsx: `../batch_decision.md`.
+> **【メンバーの作業】要修正シート（3件）の新しい結論文を、xlsx の該当セルへ貼り付けてください（下表からコピーできます）。**
 
-> Bản Markdown convert máy móc 1-1 từ `batch_decision.xlsx` cùng thư mục — nội dung convert giữ nguyên từng ô (không dịch); riêng câu kết luận các sheet nêu ở ghi chú trên đã thay theo review. Ngày convert: 2026-08-16 ・ số sheet: 8.
+> **BẢN ĐÃ SỬA THEO REVIEW 16–17/08** — sheet 要修正 đã thay câu kết luận (đã qua đối kháng); các sheet khác giữ nguyên văn. Sheet đã sửa: CreateTablePartitionCommand、DeleteDataCommand、DeleteLogicalDeletedDevicesCommand. Bản gốc trung thực với xlsx: `../batch_decision.md`.
+
+> **Verdict 8/8 sheet**: **要修正 3** (3 sheet nêu trên — đã thay câu, dán thẳng vào xlsx được; trong đó `DeleteDataCommand` có câu hỏi nghiệp vụ **QA-02①②** và `DeleteLogicalDeletedDevicesCommand` có **QA-02③**) ・ **妥当だが根拠不足 3** (`CreateGroupSummaryCommand` và `RankingCreationCommand` — có câu bổ sung đề xuất, **chưa áp**, xem 付録 cuối file; `DeleteTimeOutControlTenMinuteCommand` — không có câu soạn sẵn, có 1 ý hỏi riêng mui trong **QA-02**) ・ **妥当 2** (`DeleteTimeOutControlOneMinuteCommand` ・ `TerminateOutdatedDeviceControlJobsCommand`). Câu hỏi QA: `../../../qa/qa_review_20260813_20260817.md` — **CHƯA GỬI**, chờ user chuyển PM mui.
+
+> Bản Markdown convert máy móc 1-1 từ `../batch_decision.xlsx` (thư mục nhóm) — nội dung convert giữ nguyên từng ô (không dịch); riêng câu kết luận các sheet nêu ở ghi chú trên đã thay theo review. Ngày convert: 2026-08-16 ・ số sheet: 8.
 
 ## 1. CreateGroupSummaryCommand
 
@@ -59,3 +63,17 @@
 |---|---|
 | 旧Eminelシステムの調査結果については、以下のファイルをご参照ください： | RankingCreation.md |
 | 現行のEminel Smartシステムの調査結果： | 再利用可能なバッチ、または同等のロジックは存在しません。 |
+
+---
+
+## 付録：妥当だが根拠不足のシートに対する補足文【提案・未適用】
+
+> ⚠️ **Đây KHÔNG phải câu đã chốt.** Verdict 妥当だが根拠不足 nghĩa là **kết luận của member đúng nhưng chưa dẫn đủ căn cứ** — theo quy ước đợt review, chỉ sheet 要修正 mới thay câu, nên 2 câu dưới đây **cố ý chưa được áp** vào bảng phía trên. Member tự cân nhắc dùng hay không khi cập nhật xlsx; nếu dùng thì đây là phát ngôn của member trước khách, hãy đọc lại lý do ở `../../review_summary.md` §3.G2 trước khi quyết.
+
+**1. CreateGroupSummaryCommand** — câu bổ sung đề xuất (JP, thay cho ô 現行のEminel Smartシステムの調査結果：):
+
+> 再利用可能なバッチ、または同等のロジックは存在しません。ただし、新要件ではグルーピング（F-ES-12：契約情報に基づくグルーピング、ランキング/平均値用・月1回更新）およびレポートのよく似た世帯ランキング（C2、「実施する」で確定済み・100世帯換算）が求められているため、本バッチ相当の機能（グルーピング＋グループ母数集計＋グループ履歴保持）は新規開発が必要なギャップとして起票する必要があります。なお、新要件のグルーピング属性（8属性）は旧システムの5属性と異なるため、旧ロジックの単純移植では対応できず、属性設計からの再設計が必要です。
+
+**2. RankingCreationCommand** — câu bổ sung đề xuất (JP, thay cho ô 現行のEminel Smartシステムの調査結果：):
+
+> 再利用可能なバッチ、または同等のロジックは存在しません（現行の「ランキング」は固定閾値によるバッジのティア判定であり、他世帯との比較・パーセンタイル算出とは別物）。ただし、新要件のC2レポート「よく似た世帯との比較（ランキング・100世帯換算）」（C02:109-111・135、F-ES-02/F-ES-12）で同種のランキング生成機能が必要となるため、本機能はeGW側での新規開発対象となります。旧RankingCreationCommandのロジック（同一グループ内順位付け・100換算・グループ件数が少ない場合の広いグループへのフォールバック＝統合要件620行と同旨）が設計上の参考実装となります（ただし指標はCO2排出量→使用量・一次エネルギー換算、グルーピング属性は5→8項目に変更）。

@@ -1,8 +1,12 @@
 # batch_decision（Markdown版・修正版）
 
-> **BẢN ĐÃ SỬA THEO REVIEW 16/08** — sheet 要修正 đã thay câu kết luận (đã qua đối kháng); các sheet khác giữ nguyên văn. Sheet đã sửa: CalcTenMinutesSensorCommand、CalcDailyAccumulatedValueCommand、CalcDailyEnergyConsumptionCommand、CalcDailyRoomTemperatureCommand、CalcMonthlyAccumulatedValueCommand、CalcYearlyAccumulatedValueCommand、CalcWeeklySavingReportUsingCommand. Bản gốc trung thực với xlsx: `../batch_decision.md`.
+> **【メンバーの作業】要修正シート（7件）の新しい結論文を、xlsx の該当セルへ貼り付けてください（下表からコピーできます）。**
 
-> Bản Markdown convert máy móc 1-1 từ `batch_decision.xlsx` cùng thư mục — nội dung convert giữ nguyên từng ô (không dịch); riêng câu kết luận các sheet nêu ở ghi chú trên đã thay theo review. Ngày convert: 2026-08-16 ・ số sheet: 19.
+> **BẢN ĐÃ SỬA THEO REVIEW 16–17/08** — sheet 要修正 đã thay câu kết luận (đã qua đối kháng); các sheet khác giữ nguyên văn. Sheet đã sửa: CalcTenMinutesSensorCommand、CalcDailyAccumulatedValueCommand、CalcDailyEnergyConsumptionCommand、CalcDailyRoomTemperatureCommand、CalcMonthlyAccumulatedValueCommand、CalcYearlyAccumulatedValueCommand、CalcWeeklySavingReportUsingCommand. Bản gốc trung thực với xlsx: `../batch_decision.md`.
+
+> **Verdict 19/19 sheet**: **要修正 7** (7 sheet nêu trên — đã thay câu, dán thẳng vào xlsx được) ・ **妥当だが根拠不足 12** (giữ nguyên văn; kết luận của member đúng nhưng chưa dẫn đủ căn cứ). Trong nhóm 根拠不足: 3 sheet có sẵn văn bản JP đề xuất **chưa áp** — `CalcYearlyRoomTemperatureCommand` (câu thay thế) ・ `CalcDailyAverageDataCommand` và `CalcWeeklySavingReportEffectCommand` (câu nối thêm vào cuối câu hiện tại) — xem 付録 cuối file; 9 sheet còn lại không có văn bản soạn sẵn (lý do ở `../../review_summary.md` §3.G1) ・ `CalcCarbonDioxideEmissionsCommand` có câu hỏi nghiệp vụ **QA-01②** (`../../../qa/qa_review_20260813_20260817.md` — **CHƯA GỬI**). Nhóm không có sheet 妥当 hay 要業務確認.
+
+> Bản Markdown convert máy móc 1-1 từ `../batch_decision.xlsx` (thư mục nhóm) — nội dung convert giữ nguyên từng ô (không dịch); riêng câu kết luận các sheet nêu ở ghi chú trên đã thay theo review. Ngày convert: 2026-08-16 ・ số sheet: 19.
 
 ## 1. CalcTenMinutesSensorCommand
 
@@ -136,3 +140,21 @@
 |---|---|
 | 旧Eminelシステムの調査結果については、以下のファイルをご参照ください： | legacy-batch_CalcWeeklySavingReportUsing_ja.md<br>legacy-batch_CalcWeeklySavingReportUsing.md |
 | 現行のEminel Smartシステムの調査結果： | 現行Eminel Smartには、週間使用量を集計する再利用可能なバッチ・同等の週間集計ロジックは存在しません（weekly／先週／先々週／7日間で該当なし）。ただし、Rinnai・Noritz連携のインポートバッチ（batch-import-rinnai-daily-usage等）が日次・月次の使用量実績をDeviceDailyUsageHistoryTable／DeviceMonthlyUsageHistoryTable／DeviceAccumulatedHistoryTableに保持しており、週間集計（日次値7日分の合算）の材料になり得ます。なお、新システムでは週間レポート（F-ES-02：先々週との比較・日ごとの使用量表示、26年スコープ）が要件化されており、週間データの生成主体（TagTag連携か自前実装か）は統合要件上TBDのため、本バッチのロジック（7日分合算・先々週シフト・欠損チェック）は移行設計の参照対象として保持を推奨します。 |
+
+---
+
+## 付録：妥当だが根拠不足のシートに対する補足文【提案・未適用】
+
+> ⚠️ **Đây KHÔNG phải câu đã chốt.** Verdict 妥当だが根拠不足 nghĩa là **kết luận của member đúng nhưng chưa dẫn đủ căn cứ** — theo quy ước đợt review, chỉ sheet 要修正 mới thay câu, nên 3 mục dưới đây **cố ý chưa được áp** vào bảng phía trên. Member tự cân nhắc dùng hay không khi cập nhật xlsx; nếu dùng thì đây là phát ngôn của member trước khách, hãy đọc lại lý do ở `../../review_summary.md` §3.G1 trước khi quyết. Chú ý phân biệt **câu thay thế** (dùng thay cả ô) với **câu nối thêm** (viết tiếp sau câu hiện tại, không xoá câu cũ).
+
+**1. CalcYearlyRoomTemperatureCommand** — câu **THAY THẾ** đề xuất (JP, dùng thay cả ô 現行のEminel Smartシステムの調査結果：):
+
+> 再利用可能なバッチ、または同等の集計ロジック（室温の月次平均算出）は存在しません。ただし、E-smartには赤外線リモコン経由の室温・湿度の生データ受信（batch-receive-data-infrared-remote → InfraredRemoteDataTable）とアプリ向け取得API（get-temp-and-humid-for-user）が存在します。新システム要件（F-ES-01：室温グラフ用データ生成 時刻別/日別/月別、26年スコープ）では本バッチ相当の月次平均値が引き続き必要であり、Rinnai/Noritzのように集計済み値が提供される仕組みは無いため、集計ロジックの新規実装が必要です。
+
+**2. CalcDailyAverageDataCommand** — câu **NỐI THÊM** đề xuất (JP, viết tiếp ngay sau câu hiện tại 「再利用可能なバッチ、または同等のロジックは存在しません。」):
+
+> （src/functions・template-dynamodb.yamlに平均値・グルーピング関連の実装は無いことを確認済み。ただし新要件ではグラフ月値の「よく似た世帯の平均」およびレポートのランキングが26年スコープに含まれるため（F-ES-02／F-ES-12）、グルーピング＋平均値算出パイプラインの新規実装が必要。なお本バッチの時間値粒度の他世帯平均は新要件では不要——時間値グラフは平均・比較を表示しない。）
+
+**3. CalcWeeklySavingReportEffectCommand** — câu **NỐI THÊM** đề xuất (JP, viết tiếp ngay sau câu hiện tại 「再利用可能なバッチ、または同等のロジックは存在しません。」):
+
+> ただし、新要件（統合要件v1.2 F-ES-02）ではレポートの省エネ効果について『現行コンシェルジェサーバーの計算方法を踏襲』と明記されており、その計算式は本バッチの計算式と一致する。E-smartに同等ロジックがないため、本バッチの計算式・業務定数（基準温度24℃、Q値1.6、床面積区分、ガス単価、補正係数0.7等）を踏襲元として新規実装（またはTagTag連携：統合要件のTBD 案1/案2）が必要。
