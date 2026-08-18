@@ -1,4 +1,5 @@
 # SESSION 2026-08-16→17 — Review đợt tài liệu team 2026_08_13: ✅ HOÀN TẤT P0→P9 (43/43 verdict ・ vá 43/43 ・ dịch JA 24/24 ・ re-review ⛔#5 ĐẠT ・ QA 4 câu chờ user gửi)
+> ⛔ KHÔNG CÒN LÀ TRẠNG THÁI MỚI NHẤT (2026-08-18) — xem `08_session_20260818_guideV13_theoMoc1100487.md`. Nội dung dưới đây vẫn đúng về đợt review `2026_08_13/` (đã đóng), giữ làm vết.
 > Đọc SAU `00_INDEX.md`. ⭐ TRẠNG THÁI MỚI NHẤT (chưa có file nào thay).
 > ✅ **ĐỢT REVIEW ĐÃ ĐÓNG (17/08)** — bàn giao sẵn sàng trên đĩa, không còn việc AI phải làm. Việc còn lại thuộc user/member: gửi QA ・ cập nhật 13 sheet xlsx + thay 2 file md của G3 ・ điền URL Notion (xem `review_summary.md` mục 7-A). Toàn bộ diễn biến bên dưới giữ nguyên làm vết.
 > 🆕 **17/08 chiều — bổ sung sau khi đóng đợt (commit `b59f1b1`), chi tiết ở mục 5 item 1h**: `new/batch_decision.md` nay có ở **cả 7 nhóm có xlsx** (修正版 / レビュー確認版), 6 câu 根拠不足 gom vào 付録【提案・未適用】, kèm 4 đính chính nội dung bản nộp.

@@ -5,12 +5,12 @@
 
 | | |
 |---|---|
-| Phiên bản | 1.2 |
-| Ngày cập nhật | 2026-08-12 |
-| **Đối chiếu với repo** | `eminel_gw_project` **commit `460c671` (2026-08-06)** |
+| Phiên bản | 1.3 |
+| Ngày cập nhật | 2026-08-18 |
+| **Đối chiếu với repo** | `eminel_gw_project` **commit `1100487` (2026-08-12)** |
 | Bộ khung & tiêu chuẩn | xem [README.md](README.md) — cùng thư mục (workspace: đọc `../CLAUDE.md` + `../memory/00_INDEX.md` trước) |
 
-⚠️ **Số dòng trong mọi trích dẫn ứng với bản repo commit `460c671` (2026-08-06).** Trước khi tra, hãy `git fetch` + `git pull` để repo local ở đúng bản này. Nếu file gốc đã bị sửa sau đó, số dòng sẽ trôi — khi đó hãy tìm theo **tên mục** (mỗi trích dẫn đều ghi kèm tên mục để phòng trường hợp này).
+⚠️ **Số dòng trong mọi trích dẫn ứng với bản repo commit `1100487` (2026-08-12).** Trước khi tra, hãy `git fetch` + `git pull` để repo local ở đúng bản này. Nếu file gốc đã bị sửa sau đó, số dòng sẽ trôi — khi đó hãy tìm theo **tên mục** (mỗi trích dẫn đều ghi kèm tên mục để phòng trường hợp này).
 
 ---
 
@@ -87,7 +87,8 @@
 - [7.2 Ba hệ thống, ba thư mục](#72-ba-hệ-thống-ba-thư-mục)
 - [7.3 Requirement app: 23 section](#73-requirement-app-23-section)
 - [7.4 Spec màn hình quản trị](#74-spec-màn-hình-quản-trị)
-- [7.5 Bản thiết kế nháp](#75-bản-thiết-kế-nháp)
+- [7.5 機能仕様 app — tầng vừa mở](#75-機能仕様-app--tầng-vừa-mở)
+- [7.6 Bản thiết kế nháp](#76-bản-thiết-kế-nháp)
 - [Kiểm tra nhanh — Chương 7](#kiểm-tra-nhanh--chương-7)
 
 **[Chương 8 — Đã làm được đến đâu](#chương-8--đã-làm-được-đến-đâu)**
@@ -198,7 +199,7 @@ Mỗi khẳng định trong tài liệu này đều kèm nguồn theo định d�
 
 | Loại nguồn | Mốc | Nghĩa |
 |---|---|---|
-| Repo (`docs/`, code) | commit `460c671`, kiểm **2026-08-12** | Số dòng và nội dung đúng tại mốc này |
+| Repo (`docs/`, code) | commit `1100487`, kiểm **2026-08-18** | Số dòng và nội dung đúng tại mốc này |
 | QAデータベース Notion | lần đọc **2026-08-04**, **chưa kiểm lại** | Notion là dữ liệu sống — mọi trạng thái 回答中 trong tài liệu này ứng với ngày đó, **phải mở trang gốc trước khi trích lại** |
 
 ---
@@ -255,6 +256,7 @@ Diễn giải bằng chữ:
 | Định nghĩa yêu cầu & thiết kế cơ bản | ✅ **Đã xong, đã bàn giao** (bản v1.2, ngày 2026-04-07) |
 | Requirement cho mobile app | 🔵 Đang viết — 23 section đều đã có nội dung; **5 section nhóm C đã qua review của khách**, còn lại chưa |
 | Spec màn hình quản trị | 🔵 Đang viết — 10 chức năng, tất cả ở trạng thái DRAFT |
+| Spec (機能仕様) mobile app | 🔵 **Vừa khởi động 2026-08-12** — mới có bản索引 kế hoạch **30 tài liệu**, trong đó **2 bản nháp đầu tiên** (biểu đồ · report). Xem [§7.5](#75-機能仕様-app--tầng-vừa-mở) |
 | Bản thiết kế giao diện | 🔵 Bản nháp HTML đã có đủ 10 chức năng |
 | Code | ⬜ **Chưa bắt đầu phần chính** — còn chờ spec API |
 
@@ -393,9 +395,11 @@ Muốn truy về code và spec gốc, bạn cần thêm quyền truy cập:
 🔍 Nguồn: `eminel_gw_project/CLAUDE.md`
 → mục 「必須セットアップ」, dòng 5
 
-### ④ Tài liệu này chụp lại thời điểm 2026-08-06 (commit `460c671`)
+### ④ Tài liệu này chụp lại thời điểm 2026-08-12 (commit `1100487`)
 
-Dự án đang chuyển động nhanh: tháng 7/2026 có 4 lần **cấu trúc** requirement bị đổi, đầu tháng 8 lại có **ba đợt sửa nội dung liên tiếp** — 08-03: **B2** (section điều khiển sưởi) bỏ hẳn khái niệm 設定値運転 (*"chạy theo giá trị đặt sẵn"*, nay gọi là lịch tuần không có 室温制御 — [§5.5](#55-điều-khiển-sưởi--phần-khó-nhất)); 08-05: **B6** (điều khiển phát điện tại nhà) lần đầu được viết nội dung + **bảng index 23 section** chuyển sang lấy trạng thái thẳng từ slide gửi khách ([§7.3](#73-requirement-app-23-section)); 08-06: E2/E3 đổi trạng thái.
+Dự án đang chuyển động nhanh: tháng 7/2026 có 4 lần **cấu trúc** requirement bị đổi, tháng 8 lại có **bốn đợt sửa nội dung liên tiếp** — 08-03: **B2** (section điều khiển sưởi) bỏ hẳn khái niệm 設定値運転 (*"chạy theo giá trị đặt sẵn"*, nay gọi là lịch tuần không có 室温制御 — [§5.5](#55-điều-khiển-sưởi--phần-khó-nhất)); 08-05: **B6** (điều khiển phát điện tại nhà) lần đầu được viết nội dung + **bảng index 23 section** chuyển sang lấy trạng thái thẳng từ slide gửi khách ([§7.3](#73-requirement-app-23-section)); 08-06: E2/E3 đổi trạng thái; **08-12: đợt 「要件fix」 đụng 10 file cùng lúc** — phản ánh kết quả 北ガス review slide đối khách ngày 08-07, đóng hàng loạt câu 要確認事項 về 「なし」 và **đảo kết luận của B6** (từ "chỉ gợi ý" sang "tự động điều khiển" — [§7.3](#73-requirement-app-23-section)).
+
+Cùng ngày 08-12 còn có một việc lớn hơn: **tầng 機能仕様 app (`4_spec/app/`) được mở** — xem [§7.5](#75-機能仕様-app--tầng-vừa-mở). Nghĩa là từ nay một chức năng có tài liệu ở **hai tầng**, đọc requirement thôi là chưa đủ.
 
 Nếu bạn đọc tài liệu này sau nhiều tuần, hãy `git fetch` rồi đối chiếu lại dòng `経緯` (*lịch sử sửa đổi*, ở bảng đầu mỗi file requirement) — và cả `git log`, vì có file quên cập nhật `経緯`.
 
@@ -634,7 +638,7 @@ Nghĩa là: tài liệu v1.2 nói "chưa định nghĩa app", còn công việc 
 | **2026-06-03/04** | Họp tại Sapporo. Chốt lịch, chốt giá. Chuyển hợp đồng bảo trì **Maxell → mui** (từ tháng 5, cơ bản 10万円/tháng). Thống nhất **việc app gộp hay tách do 北ガス quyết** |
 | **2026-06-10** | ✅ **Chốt lịch tổng thể** và **chốt phạm vi bắt buộc cuối 2026**: trục chính là **sưởi** (暖房機能・暖房制御), kèm 照明アドバイス※, liên kết điểm thưởng, gom nhóm & report. *※nguyên văn ghi 「照明アドバイス」 (tư vấn chiếu sáng) — nghi là lỗi gõ của 「省エネアドバイス」, xem [Phụ lục B.2](#b2-điểm-thưởng-và-tư-vấn-tiết-kiệm)* |
 | **2026-06-23~25** | Trại tập trung 3 ngày của mui — nhiều tiền đề mới xuất hiện |
-| **2026-08-06** | *(mốc repo mà tài liệu này đối chiếu — commit `460c671`)* |
+| **2026-08-12** | *(mốc repo mà tài liệu này đối chiếu — commit `1100487`)* — cùng ngày có hai việc: đợt 「要件fix」 phản ánh review 北ガス, và **mở tầng 機能仕様 app** |
 
 🔍 Nguồn: `eminel_gw_project/docs/eminel/2_management/22_decisions.md`
 → bảng 「意思決定ログ」, dòng 11–31
@@ -1788,6 +1792,8 @@ Lưu lại
 
 ⚠️ **Đừng coi "không cần xem lỗi quá khứ" là đã chốt.** Phần ngoặc （→改めて北ガス側で検討を実施） cho biết yêu cầu này đang được 北ガス **xem xét lại**: slide 28 vẫn có flow màn hình エラー履歴, và bảng slide 32 (dòng 662) ghi rõ đang tái xét 要否 của màn hình lịch sử lỗi.
 
+📌 **Diễn biến 2026-08-12 — nghiêng hẳn về phía "không làm".** Requirement `E01_system_error.md` bị cắt **−124 dòng** trong đợt 「要件fix」: bỏ hẳn cụm requirement 「機器エラーを一覧・履歴で確認できる」 cùng cơ chế **未読/既読** (chưa đọc/đã đọc), và bỏ cả cụm 「操作の抑止」 (*chặn thao tác nguy hiểm khi đang có lỗi*). Phần còn lại chỉ là một cụm 「エラー共通」 ba mục: hiện lỗi của GW/thiết bị/mạng/server ・ lúc nào cũng xem được lỗi **chưa xử lý xong** ・ xem chi tiết (nội dung · thiết bị · nơi liên hệ). ⚠️ Đây là **thay đổi phía requirement**, chưa phải câu trả lời chính thức của 北ガス — nơi chốt cuối cùng sẽ là spec `e04_システムエラー.md` (nằm trong kế hoạch 30 tài liệu ở [§7.5](#75-機能仕様-app--tầng-vừa-mở), hiện chưa viết).
+
 ![Hiển thị lỗi đang xảy ra](assets/02_business_flow/slide-27.png)
 
 💡 **Lý do thiết kế**: lỗi thiết bị có thể kéo dài nhiều ngày và lặp lại liên tục. Nếu Push mỗi lần, người dùng sẽ tắt thông báo — rồi bỏ lỡ luôn cả những thông báo quan trọng khác.
@@ -2501,17 +2507,21 @@ Ba tài liệu nói ba kiểu về cùng một nhóm chức năng:
 🔍 Dẫn chứng ba phía:
 - `docs/eminel/2_management/22_decisions.md` dòng 31: 「ポイント連携…を必須、…バッジ等は劣後」
 - `docs/eminel/1_product/10_feature_list.md` dòng 90, 93, 95, 130: cột 劣後 = ✅
-- `docs/eminel/3_requirements/app/A04_badge_rank.md` dòng 35–75: toàn bộ nằm trong 「要件案：26年対応スコープ」, mục 「それ以降スコープ」ghi 「- なし」
+- `docs/eminel/3_requirements/app/A04_badge_rank.md` dòng 35–71: toàn bộ nằm trong 「要件案：26年対応スコープ」, mục 「それ以降スコープ」 (dòng 73–75) ghi 「- なし」
 
-**Huy hiệu (A4) là ca rõ nhất**: bị lùi trong **cả hai** tài liệu quản lý, nhưng requirement lại viết toàn bộ vào phạm vi 2026. File này mới được tách khỏi A3 ngày **2026-07-27**:
+**Huy hiệu (A4) là ca rõ nhất**: bị lùi trong **cả hai** tài liệu quản lý, nhưng requirement lại viết toàn bộ vào phạm vi 2026. File này tách khỏi A3 ngày **2026-07-27**, và **đã được rà lại sau buổi review với khách ngày 2026-08-07** (phản ánh vào repo 08-12):
 
 🔍 Nguồn: `eminel_gw_project/docs/eminel/3_requirements/app/A04_badge_rank.md`
 → bảng đầu file, dòng 8
-→ nguyên văn: 「経緯 | [A3 ポイント][a3]からバッジ・ランクを分離して新設（2026-07-27）」
+→ nguyên văn: 「経緯 | [A3 ポイント][a3]からバッジ・ランクを分離して新設（2026-07-27）／先方レビューの結果をスライドから反映（2026-08-07）」
 
-⇒ Nhiều khả năng là **sót khi tách file**, chứ không phải quyết định đổi phạm vi. Nhưng **phải hỏi lại**, không được tự kết luận. Xem [Phụ lục B](#phụ-lục-b--bảng-mâu-thuẫn-giữa-các-tài-liệu) và `qa_kitagas.md` câu 1.
+⇒ Đây mới là điểm đáng chú ý: **file đã được sờ vào sau khi khách review, nội dung bị sửa khá mạnh** — ランク nay lên theo **số huy hiệu** thay vì số điểm *(dòng 24, 41)*, huy hiệu gắn với 省エネアドバイス *(dòng 32, 58)*, và câu 要確認事項 「バッジの内容・要否」 (*nội dung huy hiệu và có làm hay không*) **đã bị gỡ hẳn** *(dòng 99–107 nay đều ghi 「なし」)* — **nhưng phạm vi vẫn nguyên là 2026**. Tức không thể coi đây là "quên sửa cho xong".
 
-**Diễn biến (2026-08-03)**: câu hỏi này đã được đăng lên QAデータベース Notion (trang 「バッジ・ランクは2026年度対応スコープでしょうか」) và có trả lời tạm từ phía mui — masao takahashi: 「今の所、2026年スコープ外です」 (*hiện tại nằm ngoài scope 2026*), trạng thái còn **回答中** (kiểm tra 2026-08-04). Nghiêng về phía 劣後 — củng cố nghi ngờ "sót khi tách file". ⚠️ Đây là trả lời của mui, **chưa phải xác nhận cuối** (chưa rõ đã qua 北ガス chưa); A04 trên repo cũng chưa được sửa — bảng ước lượng vẫn phải coi đây là điểm treo cho tới khi QA chuyển 回答済.
+🔸 **Giả thuyết — CHƯA kiểm chứng**: nhiều khả năng slide phạm vi (quản lý) và requirement (kỹ thuật) đang **chưa đồng bộ với nhau**, chứ không phải sót khi tách file như suy đoán trước đây. **Vẫn phải hỏi lại**, không được tự kết luận. Xem [Phụ lục B](#phụ-lục-b--bảng-mâu-thuẫn-giữa-các-tài-liệu) và `qa_kitagas.md` câu 1.
+
+**Diễn biến (2026-08-03)**: câu hỏi này đã được đăng lên QAデータベース Notion (trang 「バッジ・ランクは2026年度対応スコープでしょうか」) và có trả lời tạm từ phía mui — masao takahashi: 「今の所、2026年スコープ外です」 (*hiện tại nằm ngoài scope 2026*), trạng thái còn **回答中** (kiểm tra 2026-08-04). ⚠️ Đây là trả lời của mui, **chưa phải xác nhận cuối** (chưa rõ đã qua 北ガス chưa).
+
+**Diễn biến (2026-08-12)**: A04 **đã được sửa** — nhưng chỉ sửa nội dung, **không đụng phạm vi**, và câu 要確認事項 về huy hiệu thì bị gỡ. Nghĩa là hai nguồn nay **càng lệch nhau hơn** chứ không tự khép lại: phía QA nói *ngoài phạm vi 2026*, phía requirement vừa rà xong vẫn để *trong phạm vi 2026*. ⇒ Bảng ước lượng vẫn phải coi đây là **điểm treo**, và câu hỏi cần được hỏi lại cho dứt điểm thay vì chờ nó tự hết.
 
 ---
 
@@ -2615,7 +2625,7 @@ docs/eminel/
 | `1_product` | Vừa | Khi cần biết bức tranh chức năng và tiền |
 | `2_management` | **Cao nhất** | **Hằng tuần** — đây là nơi biết chuyện gì đang xảy ra |
 | `3_requirements` | Đang viết | Khi làm một chức năng cụ thể |
-| `4_spec` | Đang viết | Khi code màn hình quản trị |
+| `4_spec` | Đang viết | Khi code màn hình quản trị (`admin/`) **hoặc app** (`app/` — mở từ 2026-08-12, xem [§7.5](#75-機能仕様-app--tầng-vừa-mở)) |
 | `5_design` | Bản nháp | Khi cần hình dung giao diện |
 
 ---
@@ -2664,7 +2674,8 @@ Học một lần là đọc được cả 23 file:
 ┌─ Bảng đầu file
 │   状態          → tiến độ NỘI BỘ của bản nháp
 │                   ドラフト済（レビュー待ち） / レビュー中 / (fix済 — bậc cuối,
-│                   hiện CHƯA file nào đạt). Thực tế: 21/23 file đang là レビュー中
+│                   hiện CHƯA file nào đạt). Thực tế từ 2026-08-12: CẢ 23/23 file
+│                   đều là レビュー中 — bậc ドラフト済 hiện KHÔNG còn file nào
 │   ベース(現行機能) → tương ứng chức năng số mấy của app hiện hành
 │   踏襲元        → kế thừa từ đâu (統合要件 / 現行 / ESTA)
 │   経緯          → lịch sử sửa đổi ⚠️ có file chưa cập nhật kịp (B03) — mốc chắc chắn nằm ở git log
@@ -2682,6 +2693,8 @@ Học một lần là đọc được cả 23 file:
 └─ 要件・仕様・デザインの判断に迷うポイント
                  → chỗ người viết còn phân vân + cách đặt tạm
                    ⚠️ KHÔNG phải file nào cũng có: B02 không có, B03/B06/A04 có
+                   ⚠️ Có mục nhưng ruột rỗng: sau đợt 08-12, A04 và B06 chỉ còn
+                      ghi 「なし」 — mở ra thấy trống là ĐÚNG, không phải mất nội dung
 ```
 
 🔍 Nguồn ví dụ: `eminel_gw_project/docs/eminel/3_requirements/app/B02_heating_control.md`
@@ -2749,7 +2762,7 @@ Cột **ステータス** dưới đây là giá trị đối khách; cột **�
 
 ⚠️ **Hai thang trạng thái song song, đừng lẫn.** Mỗi file md vẫn giữ dòng `状態` riêng ở bảng đầu file *(vd `B05_dr.md` dòng 5 ghi 「レビュー中」 trong khi index ghi 「レビュー前」)*. Chúng **không mâu thuẫn** — một cái là tiến độ nội bộ của tài liệu, một cái là trạng thái trong mắt khách hàng. Đáng chú ý: **chữ 「レビュー中」 có mặt ở CẢ HAI thang** nhưng nghĩa khác nhau — ở cột đối khách nghĩa là *北ガス đang review*, ở dòng `状態` nghĩa là *người viết đã đưa bản nháp vào vòng review nội bộ*. Thấy chữ giống nhau đừng vội kết luận hai bên đã khớp.
 
-*Chi tiết + cách chọn thang khi báo cáo tiến độ: [Phụ lục B.4](#b4-trạng-thái-requirement-app--hai-thang-đo-song-song-đừng-lẫn) — bảng hai thang, ví dụ B5 và D3, và quy tắc: báo cho mui/北ガス thì dùng ステータス, tự tra file thì xem `状態`.*
+*Chi tiết + cách chọn thang khi báo cáo tiến độ: [Phụ lục B.4](#b4-trạng-thái-tài-liệu-app--ba-thang-đo-song-song-đừng-lẫn) — bảng ba thang, ví dụ B5 và D3, và quy tắc: báo cho mui/北ガス thì dùng ステータス, tự tra file thì xem `状態`.*
 
 > **Nhóm C là nhóm duy nhất đã qua review của khách** (C1–C5 đều レビュー済). Không section nào đạt mức 「fix済」 — nghĩa là **chưa có gì được đóng băng**.
 >
@@ -2758,42 +2771,65 @@ Cột **ステータス** dưới đây là giá trị đối khách; cột **�
 
 ⚠️ Mục 「ローカル通信（2027/4〜）」 của B2 — *"mất internet vẫn tắt được sưởi từ trong nhà"* — **đã bị xoá khỏi requirement ngày 2026-08-05** cùng đợt gỡ các mô tả lấy biên bản trại tập trung làm nguồn. Yêu cầu gốc vẫn nằm ở biên bản `2_management/minutes/20260624_egw_camp_day2.md` mục 「ローカル通信（アプリ⇔GW）」 dòng 92–98 — 「ただしアプリからのローカル通信の口を全く作らないのはなし。最低限オフライン対応は要る」 *(vẫn phải chừa cửa giao tiếp nội bộ, tối thiểu là đối ứng offline)* — nhưng **không còn là requirement app**.
 
-### B6 マイホーム発電制御 — section trẻ nhất, đọc 5 phút là xong
+### B6 マイホーム発電制御 — section ngắn nhất, và là ví dụ sạch nhất về "requirement bị đảo"
 
-Section này tách khỏi B4 ngày 2026-07-30 và **nội dung mới được viết đầu tháng 8**. Gần như ngắn nhất bộ tài liệu (97 dòng, chỉ dài hơn C4 センサー情報 = 94 dòng), nhưng nên đọc vì nó là ví dụ sạch nhất về *"requirement bị chặn bởi một câu hỏi chưa ai trả lời"*.
+Section này tách khỏi B4 ngày 2026-07-30, nội dung viết đầu tháng 8, rồi **bị viết lại toàn bộ ngày 2026-08-12**. Chỉ 94 dòng (ngắn ngang C4 センサー情報; ngắn nhất bộ tài liệu hiện là E1 システムエラー = 80 dòng). Nên đọc vì nó cho thấy một câu requirement có thể **đảo nghĩa hoàn toàn** sau một buổi review với khách.
 
 **Chức năng — đúng một câu:**
 
 🔍 Nguồn: `eminel_gw_project/docs/eminel/3_requirements/app/B06_myhome_generation.md`
-→ mục 「要件案：26年対応スコープ」, dòng 40
-→ nguyên văn: 「PVの発電量が閾値に達したとき、コレモまたはエネファームの発電を停止するよう促す案内を受けられる 【新規】」
+→ mục 「要件概要」, dòng 31
+→ nguyên văn: 「PVの発電量に応じて、マイホーム発電（コレモ・エネファーム）の発電を自動で制御できる」
+
+*(マイホーム発電 = "phát điện tại nhà" — chỉ máy phát bằng gas コレモ/エネファーム, **không** tính PV. PV chỉ là thứ bị đo để lấy cớ dừng.)*
 
 ```
-Điện mặt trời (PV) phát nhiều, vượt ngưỡng
-        ↓  (E-GW theo dõi ngưỡng — phía gateway)
-App báo cho người dùng: "nên dừng phát điện コレモ / エネファーム đi"
+Người dùng cài NGƯỠNG trong app  (2 con số: ngưỡng DỪNG · ngưỡng CHẠY LẠI)
         ↓
-NGƯỜI DÙNG tự tắt  ← requirement hiện chỉ dừng ở mức GỢI Ý
+Điện mặt trời (PV) phát vượt ngưỡng DỪNG
+        ↓  (E-GW theo dõi — phía gateway)
+Máy phát gas コレモ / エネファーム TỰ ĐỘNG dừng
+        ↓
+PV tụt xuống dưới ngưỡng CHẠY LẠI → TỰ ĐỘNG chạy lại
 ```
 
-📖 **Vì sao lại khuyên dừng máy phát điện?** Nhà đã có điện mặt trời dư thì chạy thêm máy phát bằng gas (コレモ/エネファーム) là **đốt gas để tạo thứ đang thừa** — vừa tốn tiền vừa lãng phí.
+🔍 cùng file, mục 「要件案：26年対応スコープ」 → 「発電制御の閾値設定」, dòng 41–43
+→ nguyên văn: 「マイホーム発電を停止するPV発電量の閾値を設定できる」「マイホーム発電を再開するPV発電量の閾値を設定できる」「設定した閾値を確認できる」
 
-**Ba ranh giới cần nhớ** *(mục 「関連項目」, dòng 59–60)*:
+📖 **Vì sao lại dừng máy phát điện?** Nhà đã có điện mặt trời dư thì chạy thêm máy phát bằng gas (コレモ/エネファーム) là **đốt gas để tạo thứ đang thừa** — vừa tốn tiền vừa lãng phí.
+
+📌 **Phần việc của app chỉ là CÀI NGƯỠNG.** Việc canh ngưỡng và ra lệnh dừng/chạy nằm ở gateway. Bản thân app **không** có nút tự tay dừng máy phát trong section này, và **không** có Push báo "máy phát vừa bị dừng" — cả hai đều được chốt là ngoài phạm vi.
+
+**Ba ranh giới cần nhớ** *(mục 「関連項目」, dòng 51–54; đối chiếu B04 dòng 110)*:
 
 | Việc | Thuộc section nào |
 |---|---|
 | Bật/tắt phát điện **thủ công** | B4 家電操作 (thao tác thiết bị gia dụng) |
 | **Ép dừng** phát điện do lệnh DR | B5 DR |
-| **Gợi ý** dừng khi PV vượt ngưỡng | B6 — chính là section này |
+| **Cài ngưỡng + tự động dừng/chạy lại theo PV** | B6 — chính là section này |
 
-🔴 **Chỗ chưa quyết — và đây mới là phần đáng giá:**
+⚠️ **Câu hỏi lớn của section này đã được ĐÓNG ngày 2026-08-07 — và đóng theo hướng ngược với bản requirement cũ.**
 
-🔍 cùng file, mục 「要確認事項」, dòng 80–82
-→ nguyên văn: 「F-GW-07の閾値到達時の挙動は、案内（ユーザーによる手動の発電停止）どまりの想定で良いか（確認先：先方）」
+Trước 08-12, requirement viết rằng app **chỉ gợi ý** người dùng tự tắt máy phát, kèm một câu 要確認事項 hỏi khách: 「F-GW-07の閾値到達時の挙動は、案内…どまりの想定で良いか」 (*hành vi khi chạm ngưỡng chỉ dừng ở mức thông báo, đúng không?*) — vì mô tả chức năng gateway `F-GW-07` trong 統合要件 lại ghi 「ON/OFFの制御ができる」, đọc được thành gateway tự tắt. Câu hỏi đó nay **không còn**, thay bằng một dòng lịch sử:
 
-Nghĩa là: tài liệu yêu cầu tích hợp mô tả `F-GW-07` *(mã chức năng gateway số 07 — "điều khiển phát điện tự dùng theo giám sát lượng phát PV")* bằng chữ 「ON/OFFの制御ができる」, **đọc được thành gateway tự tắt máy phát**. Còn requirement app lại viết là **chỉ gợi ý**. Nếu là tự động dừng thì phải bổ sung cả một cụm requirement mới: (1) cho người dùng **bật/tắt chính tính năng tự động dừng**, (2) báo cho họ biết khi máy phát đã bị dừng, (3) cơ chế xin đồng ý trước.
+🔍 cùng file, bảng đầu file, dòng 8
+→ nguyên văn: 「先方確認（2026-08-07）でアプリ側の要件は発電制御の閾値設定と確定。手動での制御・Push通知は対象外」
 
-Kèm hai thứ chưa có *(bảng 「備考と出典」, dòng 47)*: **giá trị ngưỡng** PV vẫn đang bàn (`GW-07` — ⚠️ đây là **mã vấn đề đang mở**, không phải mã chức năng `F-GW-07` vừa nhắc ở trên: *"các ngưỡng của logic điều khiển"*), và **エネファーム có nằm trong đối tượng điều khiển hay không** vẫn treo (`GW-04` — *"có điều khiển エネファーム hay không"*, mức 🔴). Cả hai nằm ở [mục 8.3](#83-những-gì-đang-mở) — bảng liệt kê mọi vấn đề chưa quyết theo nhóm SVC/GW/CLD kèm mức cấp bách.
+Dịch: *"Xác nhận với phía khách ngày 2026-08-07: yêu cầu phía app được chốt là **cài ngưỡng điều khiển phát điện**. Điều khiển bằng tay và thông báo Push **nằm ngoài phạm vi**."*
+
+💡 **Bài học đọc tài liệu**: cùng một section, trong 5 ngày, đi từ *"chỉ gợi ý, người dùng tự tắt"* sang *"tự động dừng, app chỉ cài ngưỡng"*. Nếu bạn trích requirement app mà không kiểm dòng `経緯`, bạn sẽ báo cáo đúng cái đã bị bỏ. Đây chính là lý do có cảnh báo ở [§0.7 ④](#07-giới-hạn-của-tài-liệu-này).
+
+🔴 **Ba chỗ vẫn chưa quyết** *(mục 「要確認事項」, dòng 74–79 — thay cho câu hỏi cũ đã đóng)*:
+
+| Chưa quyết | Hỏi ai | Vì sao vướng |
+|---|---|---|
+| **エネファーム có nằm trong đối tượng điều khiển không** (`GW-04`) | 北ガス | Nếu CÓ: vướng ràng buộc lớp ECHONET Lite, phải làm thêm cả phần kiểm chứng kỹ thuật. Nếu KHÔNG: section này chỉ còn điều khiển コレモ |
+| Ngưỡng dùng **chung** cho コレモ và エネファーム, hay **tách theo từng máy** | 先方 (phía khách) | Quyết định này đổi cả màn hình cài đặt lẫn cấu trúc dữ liệu |
+| **Dải giá trị · giá trị mặc định · đơn vị** của ngưỡng (`GW-07`) | 先方 | Đang nằm trong cụm TBD của toàn bộ logic điều khiển |
+
+⚠️ Lưu ý mã số: `F-GW-07` là **mã chức năng** gateway (điều khiển phát điện tự dùng theo giám sát PV), còn `GW-04`/`GW-07` là **mã vấn đề đang mở** — hai hệ mã khác nhau, đừng lẫn. Cả hai vấn đề nằm ở [mục 8.3](#83-những-gì-đang-mở).
+
+📌 Bảng 「備考と出典」 (ghi chú + nguồn) của B06 **đã bị xoá sạch** trong đợt 08-12 — section này hiện là section hiếm hoi **không có dòng truy nguồn nào** cho requirement. Muốn truy về gốc phải đi vòng qua 統合要件 `F-GW-07`.
 
 ### ⚠️ Cấu trúc vẫn đang chuyển động
 
@@ -2811,13 +2847,14 @@ Chỉ trong tháng 7/2026 đã có **bốn** lần thay đổi:
 
 🔍 nguyên văn (dòng 86): 「**ホーム**:画面であって機能ではないため廃止(2026-07-15)」
 
-Và sang tháng 8, **nội dung** cũng bị sửa mạnh chứ không chỉ cấu trúc — **15 file bị đụng trong ba đợt liên tiếp**:
+Và sang tháng 8, **nội dung** cũng bị sửa mạnh chứ không chỉ cấu trúc — **20 file bị đụng trong bốn đợt liên tiếp** *(đếm bằng `git diff --name-only 9dc5e34^..1100487 -- docs/eminel/3_requirements/app` = 19 file requirement + `README.md`)*:
 
 | Ngày | Thay đổi | Nguồn |
 |---|---|---|
 | 2026-08-03 | **Phản ánh kết quả review của 北ガス từ slide đối khách** — chỉ đụng **B2**: bỏ 設定値運転, đổi sang trục 室温制御の有無 (*nhà có điều khiển theo nhiệt độ phòng hay không* — [§5.5](#55-điều-khiển-sưởi--phần-khó-nhất)), xoá section 機器構成とできること (*cấu hình thiết bị thì dùng được gì*) | `git show 9dc5e34` |
 | 2026-08-05 | • **Xoá mọi mô tả lấy biên bản trại tập trung (合宿議事) làm nguồn** — kéo theo mục 「ローカル通信（2027/4〜）」 của B2 và nhiều câu 要確認事項 biến mất<br>• **B3** đổi điều kiện 基本制御 sang 冷房スケジュール中 (*trong khung giờ được phép làm lạnh* — [§5.6](#56-điều-khiển-lạnh))<br>• **B6** マイホーム発電制御 được viết đầy đủ<br>• **Index** chuyển sang ba cột 内容・スコープ／ステータス／劣後 lấy từ slide đối khách | dòng `経緯`; `README.md` dòng 26 |
-| **2026-08-06** *(= commit `460c671` mà guide này đối chiếu)* | **E2 アプリログ và E3 ヘルプ**: dòng `状態` đổi từ 「ドラフト済（レビュー待ち）」 sang 「レビュー中」, cắt bớt 検討事項・関連項目 | `git show 460c671` |
+| 2026-08-06 | **E2 アプリログ và E3 ヘルプ**: dòng `状態` đổi từ 「ドラフト済（レビュー待ち）」 sang 「レビュー中」, cắt bớt 検討事項・関連項目 | `git show 460c671` |
+| **2026-08-12** *(= commit `1100487` mà guide này đối chiếu; đợt requirement là `57cd7be` 「要件fix」)* | **Đợt lớn nhất từ trước tới nay — 10 file cùng lúc** (A1–A4 · B1 · B4 · B6 · E1 · E4 · README), phản ánh kết quả **北ガス review slide đối khách ngày 08-07**:<br>• **B6 đảo kết luận**: từ "chỉ gợi ý người dùng tự tắt" sang **tự động điều khiển, app chỉ cài ngưỡng**<br>• **E1 bị cắt −124 dòng**: bỏ hẳn cụm 一覧・履歴・未読/既読 và cụm 操作の抑止<br>• **B1 đổi danh sách thiết bị**: gỡ マルチセンサー, thêm 人感センサー và 「Web API連携機器（給湯器リモコン）」, chốt **chỉ đăng ký được 1 E-GW**, đổi 初期化 → 登録解除<br>• **A4**: ランク nay lên theo **số huy hiệu** (trước là số điểm), huy hiệu gắn với 省エネアドバイス<br>• **A2 bỏ hẳn システム情報**; A1/A2/A3/A4/B1 **đóng hàng loạt câu 検討事項・要確認事項 về 「なし」**<br>• E1 và E4 lên `状態 = レビュー中` → **cả 23/23 file cùng bậc** | `git show 57cd7be` |
 
 ⚠️ **Đừng hardcode mã section vào ticket hay tên branch** — và **đừng trích requirement app mà không kiểm lại ngày sửa**: một câu bạn đọc tuần trước có thể đã bị xoá.
 
@@ -2928,7 +2965,93 @@ Regular → Bronze → Silver → Gold → Platinum → Diamond.
 
 ---
 
-## 7.5 Bản thiết kế nháp
+## 7.5 機能仕様 app — tầng vừa mở
+
+Ngày **2026-08-12**, thư mục `docs/eminel/4_spec/app/` xuất hiện lần đầu (commit `1100487`, tên commit 「機能仕様着手」 = *bắt tay vào làm đặc tả chức năng*). Đây là tầng tài liệu **mới nhất** của dự án, và người mới vào từ nay phải biết nó tồn tại — vì **một chức năng của app nay có tài liệu ở hai tầng**, đọc requirement thôi là thiếu.
+
+### Tầng này trả lời câu gì
+
+🔍 Nguồn: `eminel_gw_project/docs/eminel/4_spec/app/README.md`
+→ đầu file, mục 「位置づけ」, dòng 3
+→ nguyên văn: 「要件定義（3_requirements/app/＝What）を受けて、**画面に何が出るか・操作すると何が起こるか**を定義する。デザインラフを描くための入力」
+
+```
+3_requirements/app/   →   4_spec/app/          →   デザインラフ (bản vẽ giao diện)
+   "cần làm được gì"      "màn hình hiện cái gì,     "trông như thế nào"
+                           bấm vào thì xảy ra gì"
+```
+
+⚠️ **Không phải quan hệ 1:1.** Một tài liệu spec có thể gom nhiều section requirement, và một section requirement có thể bị xẻ ra nhiều tài liệu spec — ví dụ requirement `A2 設定` bị tách thành hai spec (`a04 お客さま情報` và `a05 通知設定`), còn spec `a05` lại gom thêm cả `D3 PUSH通知`. Muốn tra ánh xạ thì xem cột 「対応要件セクション」 của bảng索引.
+
+### Cách đặt tên — 5 ký hiệu tab
+
+Tên file là `<ký hiệu tab><số thứ tự>_<tên>.md`, trong đó số `01` luôn là **màn hình chủ của tab** (trang hub), từ `02` trở đi là các chức năng nằm dưới.
+
+| Ký hiệu | Tab trong app | Ứng với nhóm requirement |
+|---|---|---|
+| `a` | マイページ (trang cá nhân) | A ユーザー系 |
+| `b` | コントロール — *tên tạm* | B 機器制御系 |
+| `c` | エネルギー — *tên tạm* | C エネルギー系 |
+| `d` | お知らせ (thông báo) | D お知らせ系 |
+| `e` | Ngoài tab · xuyên suốt | E その他・横断 |
+
+⚠️ **Ký hiệu thường trùng nhóm requirement nhưng KHÔNG phải lúc nào cũng trùng** — ví dụ requirement nhóm B bị chia sang cả tab `a` lẫn `b`. Vì thế tài liệu quy ước cách gọi khi trao đổi: nói **「仕様b02」** (spec b02) và **「要件B02」** (requirement B02) — có tiền tố, không nói trống.
+
+📖 **Hai tên tab 「コントロール」 và 「エネルギー」 hiện là tên tạm**, chưa chốt với khách. Có hẳn một tài liệu riêng đang bàn cách xếp tab điều khiển: `Z_コントロールタブ構成検討.md` (tiền tố `Z_` = tài liệu đứng ngoài hệ đánh số tab; bên requirement cũng có một file kiểu này là `Z_old_mapping.md`).
+
+### Kế hoạch 30 tài liệu — mới viết được 2
+
+🔍 cùng file, mục 「一覧」, dòng 86–145 (5 bảng con: `a` dòng 90 · `b` 102 · `c` 118 · `d` 127 · `e` 135)
+→ nguyên văn (dòng 145): 「計30本（ハブ4・機能21・タブ外/共通5）」
+
+| Tab | Số tài liệu dự kiến | Đã có |
+|---|---|---|
+| `a` マイページ | 7 | — |
+| `b` コントロール | 11 | — |
+| `c` エネルギー | 4 | **2** — `c02_グラフ` · `c03_レポート` |
+| `d` お知らせ | 3 | — |
+| `e` ngoài tab | 5 | — |
+| **Tổng** | **30** | **2** |
+
+Hai bản đã viết đều đang ở bậc 「ドラフト済（レビュー待ち）」, và `c02 グラフ` được ghi chú là 「型作りの1本目」 (*bản đầu tiên, làm khuôn mẫu cho các bản sau*) — tức ai viết bản thứ ba sẽ phải bắt chước nó. 28 bản còn lại đều là 「未着手」 (chưa bắt đầu).
+
+**Hai section requirement KHÔNG có spec**: `E2 アプリログ収集・送信` và `E4 非機能` — lý do ghi thẳng trong tài liệu: chúng **không có màn hình cho người dùng thao tác** *(dòng 88 và bảng dòng 147–151)*.
+
+⚠️ **Một con số của tài liệu nguồn đang sai.** Câu mở đầu mục 「一覧」 (dòng 88) ghi 「要件**24**セクション…残る**22**セクション」, trong khi bảng index requirement chỉ có **23** section (A1–A4 · B1–B6 · C1–C5 · D1–D4 · E1–E4) — trừ 2 section không làm spec thì phải là **21**. Lệch 1. Đây là lỗi của nguồn (chưa hỏi lại được) — đừng bê con số 24/22 đi báo cáo.
+
+### Thang trạng thái — thang thứ BA, đừng lẫn với hai thang kia
+
+🔍 cùng file, mục 「位置づけ」, dòng 5
+→ nguyên văn: 「状態遷移：`未着手 → ドラフト作成中 → ドラフト済（レビュー待ち）→ レビュー中 → fix済`」
+
+Cộng với hai thang đã có ở [§7.3](#73-requirement-app-23-section) (dòng `状態` nội bộ của file requirement, và cột ステータス đối khách trong bảng index), **dự án nay có ba thang trạng thái dùng chung nhiều chữ giống nhau**. Bảng đối chiếu đầy đủ: [Phụ lục B.4](#b4-trạng-thái-tài-liệu-app--ba-thang-đo-song-song-đừng-lẫn).
+
+### Bốn kỷ luật viết mà người mới hay phạm
+
+1. **Cấm chép lại requirement vào mục 表示 (hiển thị).** Spec phải viết tới mức *phán định được*: thứ tự sắp xếp (vd "giảm dần theo ngày phát"), mỗi hạng mục hiển thị một dòng, các biến thể giá trị và quy tắc ghi có điều kiện, cách làm tròn · số chữ số · cách hiện khi thiếu dữ liệu.
+2. **Mỗi màn hình phải tính đủ trạng thái**: lúc 0 bản ghi hiện gì, và mỗi loại lỗi (nạp · thao tác · gửi) thì hiện gì, gỡ ra sao. Lý do: tài liệu này **sẽ thành đầu vào trực tiếp của spec kiểm thử kết hợp**.
+3. **検討事項 (bàn nội bộ) và 確認事項 (hỏi khách) loại trừ nhau** — một điểm chỉ được nằm ở một chỗ: bàn nội bộ xong thì chuyển sang 確認事項, chốt xong thì dồn về `2_management/22_decisions.md` và **xoá khỏi cả hai**. Ngoài ra 検討事項 **phải kèm phương án đề xuất**, không được để trống cho người đọc tự điền.
+4. **Câu 要確認事項 ở requirement mà thực chất thuộc mức spec thì bị CHUYỂN HẲN sang `確認事項` của spec** — không để lại bản sao bên requirement. ⚠️ Đây là lý do khiến nhiều mục 要確認事項 bên requirement 「biến mất」 mà không thấy dấu vết: hãy tìm sang tầng spec trước khi kết luận là bị bỏ quên.
+
+### Quy tắc ưu tiên nguồn — 要件 thắng 現行
+
+🔍 cùng file, mục 「要件と現行の優先関係」, dòng 71–76
+
+- **要件 là chuẩn.** Tài liệu hệ hiện hành chỉ dùng để lấp những chi tiết requirement không nói (lấy thẳng giá trị cũ vào, không phải hỏi lại từng cái).
+- **要件 và 現行 chọi nhau thì 要件 thắng** — và **không được lập việc đó thành điểm tranh luận** (không ghi vào 検討事項 lẫn 確認事項).
+- Trong chính requirement, nếu câu tổng và mục con chọi nhau thì **lấy mục con cụ thể hơn**.
+
+⚠️ **Điểm quan trọng nhất với người mới**: nguồn xếp **ưu tiên số 2** không nằm trong repo — đó là **các comment trong file PowerPoint đối khách** (`EMINEL-Gateway_要件.pptx`, bản chính trên OneDrive). Tài liệu ghi rõ: 「要件mdに落ちていない検討事項・確認事項・決着の方向」 (*có những điểm bàn, điểm hỏi và cả hướng đã ngã ngũ mà file requirement không chép lại*) và bắt buộc **phải mở comment của slide tương ứng**. Nghĩa là đọc hết repo vẫn có thể thiếu — khớp với cảnh báo ở [§0.7 ①](#07-giới-hạn-của-tài-liệu-này). Tài liệu cũng dặn: **pptx chỉ đọc, không sửa**.
+
+### Nguyên tắc xếp tab
+
+Xếp một chức năng vào tab nào là dựa trên **nội dung nó là thông tin gì**, chứ không dựa trên "nó được gửi tới" hay "nó có trạng thái chưa đọc/đã đọc". Lý do ghi kèm rất thực tế: nếu cứ cái gì nhận được cũng dồn vào tab お知らせ thì `d01` biến thành nơi phân loại toàn bộ hệ thống. Việc "làm người dùng để ý" được giao cho Push (`e05`) và phần hiện số chưa đọc ở đầu mỗi tab.
+
+Một hệ quả đáng nhớ: **spec dùng chung không được nhân bản** — `e04 システムエラー表示` là spec chung cho mọi màn hình, các tài liệu khác chỉ trỏ tới, không chép lại.
+
+---
+
+## 7.6 Bản thiết kế nháp
 
 ![Cấu trúc hệ thống màn hình quản trị](assets/01_architecture/8-4_admin_system.png)
 
@@ -3245,7 +3368,7 @@ Chương trình trợ cấp của Bộ Môi trường Nhật Bản cho các dự
 
 ## 9.2 Hôm nay đang đứng ở đâu
 
-Bản cập nhật này đối chiếu repo ngày **2026-08-06** (commit `460c671`).
+Bản cập nhật này đối chiếu repo ngày **2026-08-12** (commit `1100487`).
 
 ```
     7/2026        [8/2026] ←── ĐANG Ở ĐÂY        9/2026            10/2026
@@ -3703,7 +3826,9 @@ Sắp theo **nhóm chủ đề**, không theo bảng chữ cái — vì học th
 | **エネファーム** (Enefarm) | Thiết bị phát điện bằng pin nhiên liệu |
 | **エコキュート** (Ecocute) | Bình nước nóng dùng bơm nhiệt chạy điện |
 | **暖房制御ユニット** | Bộ điều khiển sưởi — thiết bị trung gian để gateway điều khiển nồi hơi |
-| **マルチセンサー** | Cảm biến đa năng — đo nhiệt độ, độ ẩm, phát hiện người |
+| **マルチセンサー** | Cảm biến đa năng — đo nhiệt độ, độ ẩm, phát hiện người. ⚠️ **Từ 2026-08-12 requirement B1 không còn đăng ký loại cảm biến này** (thay bằng 温湿度センサー + 人感センサー riêng), nhưng 統合要件 v1.2 và tài liệu luồng nghiệp vụ vẫn dùng — xem [Phụ lục B.5](#b5-マルチセンサー-còn-tồn-tại-hay-đã-bị-tách-đôi) |
+| **人感センサー** | Cảm biến phát hiện người (có người / không có người). Là nguồn dữ liệu cho chức năng 見守り (trông nom). ⚠️ Mới xuất hiện trong requirement B1 ngày 2026-08-12 và **định nghĩa trong repo đang để trống** |
+| **Web API連携機器** | Nhóm thiết bị nối vào E-GW qua Web API thay vì giao thức trong nhà. Requirement B1 (08-12) hiện chỉ liệt kê một thứ: **リモコン của máy nước nóng** (給湯器リモコン) |
 | **V2H** | *Vehicle to Home* — bộ sạc/xả cho xe điện, dùng pin xe cấp điện cho nhà |
 | **重点8機器** | 8 thiết bị trọng điểm phải kiểm chứng: đồng hồ điện · pin lưu trữ · エコキュート · pin mặt trời · điều hoà · đèn · EV/V2H · tủ điện |
 
@@ -3787,14 +3912,15 @@ Sắp theo **nhóm chủ đề**, không theo bảng chữ cái — vì học th
 
 # Phụ lục B — Bảng mâu thuẫn giữa các tài liệu
 
-Ba mâu thuẫn tìm được khi đối chiếu chéo, cộng **một cặp trạng thái hay bị đọc nhầm thành mâu thuẫn** (B.4). **Trình bày cả hai phía, không tự phán bên nào đúng** — việc kết luận thuộc về người có thẩm quyền.
+Bốn mâu thuẫn tìm được khi đối chiếu chéo (B.5 là mục mới, thêm 2026-08-18), cộng **một cặp trạng thái hay bị đọc nhầm thành mâu thuẫn** (B.4). **Trình bày cả hai phía, không tự phán bên nào đúng** — việc kết luận thuộc về người có thẩm quyền.
 
 | # | Mâu thuẫn | Mức độ | Cần hỏi ai |
 |---|---|---|---|
 | B.1 | Huy hiệu / xếp hạng thuộc năm nào | 🔴 Cao — ảnh hưởng ước lượng | 北ガス *(QA câu 1 — đã có trả lời tạm của mui 08-03; 回答中, đọc 08-04)* |
 | B.2 | Điểm thưởng và tư vấn tiết kiệm thuộc năm nào | 🔴 Cao — ~2 người-tháng | 北ガス *(QA câu 2)* |
 | B.3 | Thông báo trông nom có làm không | 🔴 Cao — ảnh hưởng firmware | 北ガス *(QA câu 3)* |
-| B.4 | Hai thang trạng thái song song (file md ↔ index đối khách) | 🟡 Thấp — chỉ cần đọc đúng thang | Không phải mâu thuẫn, chỉ cần biết |
+| B.4 | Ba thang trạng thái song song (file md requirement ↔ index đối khách ↔ index spec app) | 🟡 Thấp — chỉ cần đọc đúng thang | Không phải mâu thuẫn, chỉ cần biết |
+| B.5 | マルチセンサー còn tồn tại hay đã bị tách đôi *(mới 2026-08-12)* | 🟠 Vừa — ảnh hưởng danh sách thiết bị, màn hình đăng ký và chức năng 見守り | mui trước, rồi 北ガス *(chưa đưa vào `qa_kitagas.md`)* |
 
 ## B.1 Huy hiệu / xếp hạng thuộc phạm vi năm nào
 
@@ -3802,15 +3928,17 @@ Ba mâu thuẫn tìm được khi đối chiếu chéo, cộng **một cặp tr�
 |---|---|---|
 | `2_management/22_decisions.md` | 「バッジ等は**劣後**」 | dòng 31 |
 | `1_product/10_feature_list.md` | Cột 劣後 = **✅** (server 0.5 người-tháng, admin 0.25) | dòng 90, 115 |
-| `3_requirements/app/A04_badge_rank.md` | Toàn bộ nằm trong 「**26年対応スコープ**」, mục それ以降 ghi 「なし」 | dòng 35–75 |
+| `3_requirements/app/A04_badge_rank.md` | Toàn bộ nằm trong 「**26年対応スコープ**」, mục それ以降 ghi 「なし」 | dòng 35–71 (それ以降: 73–75) |
 
-**Nghi ngờ**: file A04 mới được tách khỏi A3 ngày **2026-07-27** *(dòng 8)*. Nhiều khả năng **sót khi tách**, chứ không phải quyết định đổi phạm vi.
+🔸 **Nghi ngờ (đã đổi sau 2026-08-12 — CHƯA kiểm chứng)**: trước đây guide này ngờ là **sót khi tách file** (A04 tách khỏi A3 ngày 2026-07-27, *dòng 8*). Nhưng ngày 08-12 A04 **đã được rà lại theo kết quả khách review 08-07** — nội dung sửa khá mạnh (ランク lên theo số huy hiệu thay vì số điểm) mà **phạm vi vẫn để nguyên 2026**, đồng thời câu 要確認事項 về huy hiệu bị gỡ. ⇒ Giả thuyết "sót khi tách" **yếu đi**; khả năng cao hơn là **slide phạm vi và requirement chưa đồng bộ**. Dù theo hướng nào, câu hỏi vẫn phải hỏi.
 
 **Hệ quả nếu không làm rõ**: ai đọc requirement để ước lượng công việc sẽ **tính dư** ít nhất phần huy hiệu + xếp hạng, ở cả app, server và màn hình quản trị H.
 
 → Đã đưa vào `qa_kitagas.md` **câu 1**.
 
-**Diễn biến (2026-08-03)**: câu 1 đã được đăng lên QAデータベース Notion (trang 「バッジ・ランクは2026年度対応スコープでしょうか」); masao takahashi (mui) trả lời tạm 「今の所、2026年スコープ外です」 — trạng thái còn **回答中** (kiểm tra 2026-08-04). Nghiêng về phía 劣後, củng cố nghi ngờ "sót khi tách file". Khi QA chuyển 回答済 và A04 được sửa trên repo: xử lý theo README §9 — chuyển mâu thuẫn này khỏi Phụ lục B, cập nhật `qa_kitagas.md`.
+**Diễn biến (2026-08-03)**: câu 1 đã được đăng lên QAデータベース Notion (trang 「バッジ・ランクは2026年度対応スコープでしょうか」); masao takahashi (mui) trả lời tạm 「今の所、2026年スコープ外です」 — trạng thái còn **回答中** (kiểm tra 2026-08-04).
+
+**Diễn biến (2026-08-12)**: A04 được sửa nội dung theo review của khách **nhưng phạm vi giữ nguyên** ⇒ mâu thuẫn **chưa khép lại, thậm chí rõ hơn**: một bên (QA) nói ngoài phạm vi 2026, một bên (requirement vừa rà xong) vẫn để trong phạm vi 2026. Điều kiện gỡ mục này khỏi Phụ lục B **không đổi**: QA chuyển 回答済 **và** phạm vi trên repo được sửa cho khớp — khi đó xử lý theo README §9 và cập nhật `qa_kitagas.md`.
 
 ## B.2 Điểm thưởng và tư vấn tiết kiệm
 
@@ -3842,18 +3970,19 @@ Ba mâu thuẫn tìm được khi đối chiếu chéo, cộng **một cặp tr�
 
 → Đã đưa vào `qa_kitagas.md` **câu 3**.
 
-## B.4 Trạng thái requirement app — hai thang đo song song, đừng lẫn
+## B.4 Trạng thái tài liệu app — ba thang đo song song, đừng lẫn
 
-Từ 2026-08-05, một section có **hai trạng thái khác nhau cùng lúc**, và chúng không phải lúc nào cũng trùng:
+Từ 2026-08-05, một section có **hai trạng thái khác nhau cùng lúc**, và chúng không phải lúc nào cũng trùng. Từ 2026-08-12 có thêm **thang thứ ba** cho tầng spec app — tổng cộng ba thang dùng chung nhiều chữ giống nhau:
 
 | Thang đo | Ghi ở đâu | Giá trị | Ý nghĩa |
 |---|---|---|---|
-| **Tiến độ tài liệu** (nội bộ) | dòng `状態` ở bảng đầu **mỗi file md** | ドラフト済（レビュー待ち） / レビュー中 / *(fix済 — bậc cuối theo quy trình, **hiện chưa file nào đạt**)* | Người viết requirement tự khai bản nháp đang ở bước nào |
+| **Tiến độ tài liệu** (nội bộ) | dòng `状態` ở bảng đầu **mỗi file md** requirement | ドラフト済（レビュー待ち） / レビュー中 / *(fix済 — bậc cuối theo quy trình, **hiện chưa file nào đạt**)* | Người viết requirement tự khai bản nháp đang ở bước nào. **Từ 08-12: cả 23/23 file đều là レビュー中**, không còn file nào ở bậc ドラフト済 |
 | **ステータス đối khách** | bảng index `app/README.md` | 未掲載 / ドラフト作成中 / ドラフト作成 / レビュー前 / レビュー中 / レビュー済 | Lấy nguyên từ slide 「要件一覧」 gửi 北ガス |
+| **Trạng thái spec app** *(mới 08-12)* | cột 状態 trong bảng索引 `4_spec/app/README.md` | 未着手 / ドラフト作成中 / ドラフト済（レビュー待ち） / レビュー中 / fix済 | Tiến độ của **tài liệu đặc tả**, không phải của requirement — xem [§7.5](#75-機能仕様-app--tầng-vừa-mở) |
 
-⚠️ Hai thang **dùng chung chữ 「レビュー中」** nhưng khác nghĩa: ở cột đối khách = *北ガス đang review*; ở dòng `状態` = *người viết đã đưa bản nháp vào vòng review nội bộ*. Thấy chữ giống nhau đừng vội kết luận hai bên đã khớp.
+⚠️ Hai thang đầu **dùng chung chữ 「レビュー中」** nhưng khác nghĩa: ở cột đối khách = *北ガス đang review*; ở dòng `状態` = *người viết đã đưa bản nháp vào vòng review nội bộ*. Thấy chữ giống nhau đừng vội kết luận hai bên đã khớp. Thang thứ ba lại **dùng chung chữ 「ドラフト済（レビュー待ち）」** với thang thứ nhất — nên khi ai đó nói "cái này đang ドラフト済", câu đầu tiên phải hỏi là **"requirement hay spec?"**.
 
-Ví dụ điển hình *(kiểm ngày 2026-08-12, commit `460c671`)*:
+Ví dụ điển hình *(kiểm ngày 2026-08-18, commit `1100487`)*:
 
 | Section | Trong file md | Trên index (đối khách) |
 |---|---|---|
@@ -3869,6 +3998,22 @@ Ví dụ điển hình *(kiểm ngày 2026-08-12, commit `460c671`)*:
 - Trạng thái review chi tiết nhất nằm ở `tasks/app_requirements_plan.md` — **không có trong repo local**, muốn xem phải hỏi mui.
 
 *(Không cần hỏi 北ガス. Đây không phải lỗi tài liệu — chỉ cần đọc đúng thang; thấy hai bên lệch là bình thường, không phải chỗ để báo lỗi.)*
+
+## B.5 マルチセンサー còn tồn tại hay đã bị tách đôi
+
+Xuất hiện sau đợt sửa requirement ngày **2026-08-12**. Ba tài liệu đang nói ba kiểu về cùng một thiết bị:
+
+| Tài liệu | Nói gì | Vị trí |
+|---|---|---|
+| `3_requirements/app/B01_setup_devices.md` | Cây thiết bị đăng ký được **không còn マルチセンサー**: Wi-SUN HAN chỉ còn 暖房制御ユニット + スマートリモコン; cảm biến tách thành 「温湿度センサー/**人感センサー**」; thêm nhóm mới 「Web API連携機器（給湯器リモコン）」 | dòng 25–38, 75–82 |
+| `3_requirements/00_integrated_requirements_v1.2.md` | **Vẫn giữ nguyên** マルチセンサー: có trong bảng phương thức kết nối (Wi-SUN HAN), có interface riêng `IF-08 マルチセンサーI/F` 「温湿度・人感」, và nằm trong các bảng cấu hình lắp đặt | dòng 166, 193, 136, 151 |
+| `1_product/11_business_process/readme.md` | Vẫn mô tả 「マルチセンサーで人感を検知」 trong luồng 見守り, và ghi cần thợ khi lắp マルチセンサー | dòng 38, 588, 620 |
+
+🔸 **Giả thuyết — CHƯA kiểm chứng**: マルチセンサー bị **tách đôi** thành cảm biến nhiệt-ẩm và cảm biến người, theo hướng chuyển sang dùng thiết bị Aqara. Căn cứ gián tiếp: biên bản trại tập trung `2_management/minutes/20260623_egw_camp_day1.md` dòng 92 ghi 「当初マルチセンサー想定 → Aqara（W100・FP2・P1）。温度=必須寄り、人感=オプション」 (*ban đầu dự kiến dùng マルチセンサー → chuyển sang Aqara; nhiệt độ thiên về bắt buộc, phát hiện người là tuỳ chọn*).
+
+**Hệ quả nếu không làm rõ**: ① không biết đơn hàng thiết bị và màn hình đăng ký phải theo danh sách nào ② chức năng 見守り (trông nom) lấy dữ liệu người từ thiết bị nào ③ bảng 9 cấu hình lắp đặt ở [§2.7](#27-chín-cấu-hình-lắp-đặt-trong-nhà) đang dựa trên 統合要件 — nếu danh sách thiết bị đổi thật thì bảng đó cũng phải rà lại.
+
+→ **Chưa đưa vào `qa_kitagas.md`.** Đây là ứng viên câu hỏi mới, cần chốt với mui trước xem là thay đổi có chủ đích hay tài liệu chưa đồng bộ.
 
 ---
 
@@ -4227,6 +4372,6 @@ Làm hết rồi mới xem [Phụ lục G](#phụ-lục-g--đáp-án). Đạt **
 |---|---|
 | Bộ khung và tiêu chuẩn review | [README.md](README.md) |
 | Bảng câu hỏi gửi khách hàng | [qa_kitagas.md](qa_kitagas.md) |
-| Đối chiếu với repo | `eminel_gw_project` commit **`460c671`** (2026-08-06) |
+| Đối chiếu với repo | `eminel_gw_project` commit **`1100487`** (2026-08-12) |
 
 ⚠️ Nếu bạn đọc tài liệu này sau nhiều tháng, hãy kiểm tra lại `最終更新` của các file gốc — dự án đang chuyển động nhanh.
