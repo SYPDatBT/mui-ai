@@ -63,3 +63,11 @@ Tóm tắt để tra ngược:
 3. Đã sửa trong báo cáo: §4.3 (+6 hàng căn cứ) ・ §5.3 (bảng 5 nhóm, bỏ hàng分類対象外 và câu漏れなく theo chỉ thị) ・ §5.1/§5.2 (thêm **`packages/data`**, gỡ REST client khỏi `utils`) ・ §7 câu 2 (chỉ hỏi applicationId Android).
 4. ⚠️ **Đính chính trong phiên**: AI từng báo "báo cáo ghi sai applicationId (`_gas` thay vì `-gas`)" — **sai, file vốn đúng**; đã xác nhận lại trên đĩa và báo user. Bài học: trích dẫn mã định danh phải `grep` chứ không đọc bằng mắt.
 
+### 7b. [19/08] Chốt bản nộp — sửa 2 mục, đóng 1 mục
+
+- **Tiêu chí user chốt 19/08**: *chỉ sửa cái sai đến mức **đổi quyết định của người đọc**, còn lại kệ* — "đừng bắt từng con kiến trong miếng bánh"; rà đến khi hết lỗi thì không bao giờ nộp được. Áp cho mọi đợt hoàn thiện tài liệu từ nay.
+- **Đã sửa vào `CLIENT_REPORT_APP_RESTRUCTURE_ja.md`**: ① §2.2 + §8.1 「24件」→**23件** requirement (đếm thật `docs/eminel/3_requirements/app/` @`1100487`: A01–A04·B01–B06·C01–C05·D01–D04·E01–E04) ② §4.1 ô 規模 lấy **481 file viết tay / ~74.000 dòng** làm số chính, 881 = số sau khi sinh code ③ §5.3 thêm ghi chú 「共通」の範囲 — chung là logic/state/data/部品, `features/common` **không chứa màn hình**, nên màn hình đăng nhập/お知らせ vẫn dựng lại ở từng app (chặn hiểu nhầm "dùng lại cả màn hình").
+- **Đóng vĩnh viễn**: *lệch phiên bản Riverpod kurashi 3.x ↔ E-Smart 2.x* **không phải việc** — kurashi chỉ là repo mẫu cấu trúc thư mục, đã chốt không dùng `kurashi_data`, báo cáo grep "riverpod" = 0. Ghi chú cũ nói nó "ảnh hưởng ước lượng 15–27 người-ngày" là **diễn đạt sai**: 15–27 người-ngày là ước lượng CẢ đợt tái cấu trúc (§5.7 báo cáo).
+- **Không đưa vào bản nộp** (quyết định): 2 kỷ luật bảo vệ goal 3 + "CI build cả 2 app mỗi PR" — kỷ luật nội bộ lúc implement.
+- ⚠️ **Bài học của AI trong phiên**: khi user phản biện, tôi đã **kết luận "không có gì phải vá" nhanh hơn mức bằng chứng cho phép** (chưa mở báo cáo đã khẳng định ý nghĩa con số 15–27). Phải kiểm trên đĩa TRƯỚC khi đồng ý hay bác bỏ — đồng ý vội cũng là một dạng hallucinate.
+- Việc còn treo rút còn 3 mục, xem mục 7 của `submit_folder/2026_08_18/output_schedule.md`.

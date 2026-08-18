@@ -85,7 +85,13 @@
 ---
 
 ## 🎯 TIẾN ĐỘ — HỎI "LÀM ĐẾN ĐÂU / HÔM NAY LÀM GÌ" LÀ ĐỌC Ở ĐÂY
-> Cập nhật lần cuối: **2026-08-18 — ✅ GUIDE LÊN v1.3, đối chiếu mốc `1100487`**. Đợt review tài liệu team `2026_08_13/` đã đóng từ 17/08 (bàn giao sẵn sàng, phần còn lại thuộc user/member — xem khối [08-17]). Phiên 18/08: rà `onboarding_guide.md` theo 2 commit mới (`57cd7be` 「要件fix」 + `1100487` 「機能仕様着手」) — **13 mục đã sửa, +194/−49 dòng**, vết đầy đủ ở `notes/guide_v13_mapping.md`.
+> Cập nhật lần cuối: **2026-08-19 — ✅ CHỐT bản nộp báo cáo tái cấu trúc source app**. (18/08: guide lên v1.3, đối chiếu mốc `1100487`.) Đợt review tài liệu team `2026_08_13/` đã đóng từ 17/08 (bàn giao sẵn sàng, phần còn lại thuộc user/member — xem khối [08-17]). Phiên 18/08: rà `onboarding_guide.md` theo 2 commit mới (`57cd7be` 「要件fix」 + `1100487` 「機能仕様着手」) — **13 mục đã sửa, +194/−49 dòng**, vết đầy đủ ở `notes/guide_v13_mapping.md`.
+
+**[08-19] ✅ CHỐT BẢN NỘP `CLIENT_REPORT_APP_RESTRUCTURE_ja.md` (task tái cấu trúc source app):**
+- **Tiêu chí user chốt 19/08 — áp cho MỌI đợt hoàn thiện tài liệu**: *chỉ sửa cái sai đến mức **đổi quyết định của người đọc**, còn lại kệ*. "Đừng bắt từng con kiến trong miếng bánh" — rà đến khi hết lỗi thì không bao giờ nộp được.
+- Sửa 3 chỗ: §2.2/§8.1 **23件** requirement (không phải 24) ・ §4.1 **481 file viết tay/~74.000 dòng** làm số chính (881 = sau khi sinh code) ・ §5.3 ghi chú 「共通」の範囲 (chung = logic/state/data/部品; `features/common` **không chứa màn hình** ⇒ màn hình đăng nhập/お知らせ vẫn dựng lại từng app).
+- Đóng vĩnh viễn: **lệch Riverpod kurashi 3.x ↔ E-Smart 2.x KHÔNG phải việc** (kurashi chỉ là repo mẫu cấu trúc; đã chốt không dùng `kurashi_data`). Không đưa vào bản nộp: 2 kỷ luật goal 3 + CI build 2 app/PR (nội bộ).
+- Việc còn treo của task rút còn **3 mục** — `submit_folder/2026_08_18/output_schedule.md` mục 7. Nhật ký phiên: memory `08_...` mục **7b**.
 
 **[08-18] ✅ GUIDE → **v1.3** (đối chiếu `1100487`, 2026-08-12) — quy trình 4 bước do user chốt:**
 - **Quy trình (nên tái dùng)**: rà+mapping → **review chính bản mapping** → sửa → **review CHỈ vùng sửa** (lấy `git diff` làm phạm vi, không quét lại cả guide). Chạy toàn bộ trong main loop, **không phóng agent/workflow**. Bước 2 bắt **5 lỗi của chính mapping** trước khi chúng kịp vào guide; bước 4 bắt **3 lỗi do đợt sửa sinh ra**.

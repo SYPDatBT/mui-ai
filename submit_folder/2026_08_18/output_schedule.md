@@ -1,4 +1,4 @@
-# Task tái cấu trúc source app — nhật ký điều tra & trạng thái (chốt 2026-08-18)
+# Task tái cấu trúc source app — nhật ký điều tra & trạng thái (chốt 2026-08-18, cập nhật 2026-08-19)
 
 > Mục đích của file: phiên sau (hoặc người khác) đọc file này là **làm tiếp được ngay**, không phải điều tra lại.
 > Tài liệu nộp khách là `CLIENT_REPORT_APP_RESTRUCTURE_ja.md` (tiếng Nhật). File này là **ghi chú nội bộ**.
@@ -104,7 +104,7 @@ Bốn kỷ luật để giữ goal 3 (áp cho **mọi** package chung, không ri
 1. Sửa package chung phải **cộng thêm, không đổi hành vi cũ**. *(chưa viết vào báo cáo)*
 2. Khác biệt giữa 2 app xử lý bằng **inject/override ở tầng app**, cấm `if (app == …)` bên trong package. *(đã có ở §5.4)*
 3. Cái gì chỉ 1 app cần thì **để trong app đó**, chỉ nâng lên `packages/` khi thật sự ≥2 app dùng. *(chưa viết vào báo cáo)*
-4. **CI build cả 2 app trên mỗi PR** — bù cho việc không có test. *(§5.5 mới nói CI có tham số chọn app, chưa nói "build cả hai mỗi PR")*
+3. **CI build cả 2 app trên mỗi PR** — bù cho việc không có test. *(§5.5 mới nói CI có tham số chọn app, chưa nói "build cả hai mỗi PR")*
 
 ---
 
@@ -116,17 +116,21 @@ Bốn kỷ luật để giữ goal 3 (áp cho **mọi** package chung, không ri
 | §5.3 | Viết lại bảng: 3 nhóm → **5 nhóm** (chung-logic / chung-UI / chung-hạ tầng / E-Smart riêng / Eminel riêng). Bỏ hàng 「本構成の分類対象外」 **và** bỏ luôn câu 「A〜E全セクションを漏れなく…」 (theo chỉ thị) |
 | §5.1 · §5.2 | Thêm **`packages/data`** vào sơ đồ và cây thư mục; gỡ "REST client dùng chung" khỏi `utils`; thêm đoạn giải thích **vì sao tách `packages/data`**; căn thẳng cột chú thích trong cây |
 | §7 câu 2 | Chỉ hỏi **applicationId phía Android**, nêu rõ iOS đã tự xác nhận từ repo |
+| §2.2 · §8.1 *(19/08)* | 「24件」 → **23件** tài liệu requirement; §8.1 liệt kê rõ A01–A04 · B01–B06 · C01–C05 · D01–D04 · E01–E04 (đếm trực tiếp `docs/eminel/3_requirements/app/` tại `1100487`) |
+| §4.1 *(19/08)* | Ô 「規模」 viết lại lấy **481 file viết tay / ~74.000 dòng** làm số chính, 881 chỉ là số **sau khi chạy sinh code** (file sinh ra không commit) — để mui tự clone đếm ra cùng con số |
+| §5.3 *(19/08)* | Thêm ghi chú 「共通」の範囲について: chung = **logic/state/data/部品 UI**, `features/common` **không có màn hình**, nên màn hình đăng nhập/お知らせ **vẫn dựng lại ở từng app** — chặn cách hiểu "dùng lại được cả màn hình" |
 
 ---
 
 ## 7. Việc còn treo — làm tiếp từ đây
 
-1. **Khoảng trống ④ — lệch phiên bản Riverpod**: kurashi 3.x ↔ E-Smart 2.5/2.6. Chưa viết vào báo cáo; ảnh hưởng ước lượng 15–27 người-ngày.
-2. **Khoảng trống ⑤ — "dùng chung UI" dễ hiểu nhầm**: theo chuẩn kurashi, `features/common` **không chứa UI** và `ui_components` chỉ là widget nền ⇒ **màn hình** đăng nhập/お知らせ vẫn phải dựng lại ở từng app. Báo cáo chưa nói thẳng, mui có thể đang hiểu là dùng lại được cả màn hình.
-3. **Hai kỷ luật bảo vệ goal 3 chưa vào §5.4** (mục 5-④ ở trên: "sửa chỉ cộng thêm" và "chỉ nâng lên packages khi ≥2 app dùng"), cộng với việc làm rõ CI phải build cả 2 app mỗi PR.
-4. **Hai lỗi nhẹ chưa sửa**: báo cáo ghi 「24件」 tài liệu requirement (thực tế **23** section: A1–A4 · B1–B6 · C1–C5 · D1–D4 · E1–E4) và 「881 file Dart」 (mui tự clone đếm sẽ ra **481**).
-5. **Chưa đọc**: `requirements/Eminelアプリ分割について.pdf` + 2 ảnh; nội dung 2 bản nháp spec `c02_グラフ.md`/`c03_レポート.md` bên `eminel_gw_project`; skill `draft-app-spec`.
-6. **Chưa quyết**: thư mục `2026_08_18/` này có nộp nguyên cho mui không.
+1. **Hai kỷ luật bảo vệ goal 3** (mục 5-④: "sửa chỉ cộng thêm" và "chỉ nâng lên `packages/` khi ≥2 app dùng") + "CI build cả 2 app mỗi PR" — **quyết định 19/08: KHÔNG đưa vào bản nộp**, đây là kỷ luật nội bộ lúc implement, không đổi quyết định của người đọc.
+2. **Chưa đọc**: `requirements/Eminelアプリ分割について.pdf` + 2 ảnh; nội dung 2 bản nháp spec `c02_グラフ.md`/`c03_レポート.md` bên `eminel_gw_project`; skill `draft-app-spec`.
+3. **Chưa quyết**: thư mục `2026_08_18/` này có nộp nguyên cho mui không.
+
+> **Đã đóng 19/08 — không mở lại:**
+> - *Lệch phiên bản Riverpod (kurashi 3.x ↔ E-Smart 2.5/2.6)*: **không phải việc**. Kurashi chỉ là repo mẫu về cách chia thư mục; đã chốt không dùng `kurashi_data` (mục 5-②) nên E-GW cứ dùng nguyên stack E-Smart (`hooks_riverpod ^2.5.1`). Báo cáo không nhắc chữ riverpod nào — không có gì phải vá. (Ghi chú cũ diễn đạt sai rằng nó "ảnh hưởng ước lượng 15–27 người-ngày"; **15–27 người-ngày là ước lượng CẢ đợt tái cấu trúc**, §5.7 báo cáo.)
+> - *Tiêu chí user chốt 19/08*: **chỉ sửa cái sai đến mức đổi quyết định của người đọc**; rà đến khi hết lỗi thì không bao giờ nộp được.
 
 ---
 
