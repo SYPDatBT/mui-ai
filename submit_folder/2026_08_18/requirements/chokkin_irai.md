@@ -40,7 +40,6 @@
 
 - LegacyEminelには定期処理(バッチ処理)がたくさんある。それぞれのタスクの処理概要について調査して、移行後の構成にとって必要かどうか判断してほしい
     
-    [](https://github.com/muilab/legacy_eminel_docs/tree/main/docs/02_%E8%A9%B3%E7%B4%B0%E8%A8%AD%E8%A8%88/10_%E3%83%90%E3%83%83%E3%83%81%E5%87%A6%E7%90%86)
-    
+    [legacy_eminel_docs](https://github.com/muilab/legacy_eminel_docs/tree/main/docs/02_%E8%A9%B3%E7%B4%B0%E8%A8%AD%E8%A8%88/10_%E3%83%90%E3%83%83%E3%83%81%E5%87%A6%E7%90%86)
     - EMINEL Gateway 統合要件定義書 v1.2
     - 04_バッチ一覧.md

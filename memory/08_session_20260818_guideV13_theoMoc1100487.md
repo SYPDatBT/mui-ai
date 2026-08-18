@@ -52,3 +52,14 @@
 - **Skill mới `.claude/skills/draft-app-spec/SKILL.md` (212 dòng) chưa đọc** — mới biết là nó tồn tại.
 - **Thư mục app trên máy này (`sources/syp-eminelstandard-app-syp-dev`) không phải git** — trong khi CLAUDE.md (sửa 16/08 trên máy cũ) khẳng định repo app là git thật `@41ee385` tên `syp-eminelstandard-app`. 🔸 Nhiều khả năng **hai máy khác nhau**; chưa xác nhận với user, chưa sửa CLAUDE.md.
 - Trạng thái QA trên Notion **vẫn là số liệu đọc ngày 2026-08-04** — chưa mở lại lần nào.
+
+## 7. [Cuối phiên] Task mới — tái cấu trúc source app (đang chạy)
+
+User chuyển sang task **tách/nhúng source E-GW vào repo app E-Smart**. **Toàn bộ nhật ký điều tra, số liệu đã kiểm chứng, kết luận và việc còn treo nằm ở `submit_folder/2026_08_18/output_schedule.md`** — phiên sau đọc file đó, không cần điều tra lại.
+
+Tóm tắt để tra ngược:
+1. Đề bài mui = `2026_08_18/requirements/app_source_change.md`; bản đã nộp = `CLIENT_REPORT_APP_RESTRUCTURE_ja.md`.
+2. Review của AI đối chiếu nguồn thật đã bắt: bản「全体表」thiếu **6/23 section** (A2・B5・E1–E4) — **đã vá**; còn 3 khoảng trống: phiên bản Riverpod (kurashi 3.x ↔ E-Smart 2.5/2.6), "dùng chung UI" dễ hiểu nhầm (màn hình vẫn phải dựng lại từng app), và 2 kỷ luật bảo vệ goal 3 chưa viết ra.
+3. Đã sửa trong báo cáo: §4.3 (+6 hàng căn cứ) ・ §5.3 (bảng 5 nhóm, bỏ hàng分類対象外 và câu漏れなく theo chỉ thị) ・ §5.1/§5.2 (thêm **`packages/data`**, gỡ REST client khỏi `utils`) ・ §7 câu 2 (chỉ hỏi applicationId Android).
+4. ⚠️ **Đính chính trong phiên**: AI từng báo "báo cáo ghi sai applicationId (`_gas` thay vì `-gas`)" — **sai, file vốn đúng**; đã xác nhận lại trên đĩa và báo user. Bài học: trích dẫn mã định danh phải `grep` chứ không đọc bằng mắt.
+
