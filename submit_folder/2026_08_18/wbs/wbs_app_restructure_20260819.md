@@ -1,0 +1,89 @@
+# WBS — Tái cấu trúc source app E-Smart / Eminel
+
+Nội bộ SYP · 2026-08-19 · MD = người-ngày · ngày làm việc T2–T6 (nghỉ 02/09)
+**Trả lời masao (mui)**: ① 内訳 của 15~27 người-ngày = bảng dưới, cột "Công dự kiến" của giai đoạn 1–5 cộng lại đúng **15,0**, trường hợp xấu nhất cộng lại **27,0** (ghi ở cột Ghi chú từng dòng). ② Rút về 1 tuần: **được, với 3 người**; SYP đề xuất **7 ngày làm việc — trọn tuần 24–28/08 cộng 31/08 và 01/09**, nhiều hơn mong muốn 2 ngày — lý do ở `wbs_app_restructure_20260819_giaithich.md` mục 4.
+Cơ sở: `CLIENT_REPORT_APP_RESTRUCTURE_ja.md` §5.6 và §5.7 · đề bài mui · số liệu source đếm trên `syp-eminelstandard-app@41ee385`.
+Ngoài phạm vi: refactor E-Smart, môi trường AWS, chiến lược branch, tính năng nghiệp vụ Eminel.
+
+| № | Hạng mục | Phụ trách | Công dự kiến (MD) | Công thực tế (MD) | Tiến độ (%) | Bắt đầu dự kiến | Kết thúc dự kiến | Bắt đầu thực tế | Kết thúc thực tế | Ghi chú |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 1 | **Đề xuất cấu trúc & làm việc với mui** | | 3,75 | 3,25 | 87 | 15/08 | 21/08 | 15/08 | | Đã tiêu 3,25/3,75 |
+| 2 | 　Khảo sát source E-Smart + repo mẫu kurashi | Lead | 1,5 | 1,5 | 100 | 15/08 | 17/08 | 15/08 | 17/08 | Số liệu ở `output_schedule.md` mục 4 |
+| 3 | 　Viết báo cáo đề xuất (8 chương) + nộp mui | Lead | 1,0 | 1,0 | 100 | 18/08 | 18/08 | 18/08 | 18/08 | `CLIENT_REPORT_APP_RESTRUCTURE_ja.md` |
+| 4 | 　Tự review + vá báo cáo | Lead | 0,5 | 0,5 | 100 | 19/08 | 19/08 | 19/08 | 19/08 | 23 section · 481 file · làm rõ phạm vi "dùng chung" |
+| 5 | 　Lập WBS + bảng 内訳 trả lời masao | Lead | 0,25 | 0,25 | 100 | 19/08 | 19/08 | 19/08 | 19/08 | Chính là bảng này |
+| 6 | 　Đọc `Eminelアプリ分割について.pdf` + chuẩn bị review | Lead | 0,25 | | 0 | 19/08 | 20/08 | | | Tài liệu duy nhất của mui còn chưa đọc |
+| 7 | 　Phản ánh feedback của mui + chốt phạm vi, lịch | Lead | 0,25 | | 0 | 20/08 | 21/08 | | | Chặn tuần implement |
+| 8 | **Giai đoạn 1 — Dựng workspace + dời E-Smart vào `apps/e-smart-app`** | | 2,0 | | 0 | 24/08 | 25/08 | | | Tối đa 3,5. Việc cơ học, ít rủi ro |
+| 9 | 　Chọn công cụ workspace (melos / pub workspace) + dựng khung | Dev1 | 0,5 | | 0 | 24/08 | 24/08 | | | Tối đa 1,0 — repo khai `sdk: ">=3.3.3"`, pub workspace đòi ≥3.6 nên có thể phải nâng SDK |
+| 10 | 　Dời `lib/` + `android/` + `ios/` + tài nguyên | Dev1 | 0,75 | | 0 | 24/08 | 24/08 | | | Tối đa 1,0 — 481 file Dart, dùng `git mv` giữ lịch sử |
+| 11 | 　Sửa đường dẫn `pubspec.yaml` · `l10n.yaml` · file cấu hình | Dev1 | 0,25 | | 0 | 25/08 | 25/08 | | | Tối đa 0,5 — sai đường dẫn asset không báo lỗi biên dịch, chỉ vỡ lúc chạy |
+| 12 | 　`analyze` sạch + build Android/iOS, kiểm định danh app | Dev1, Dev2 | 0,5 | | 0 | 25/08 | 25/08 | | | Tối đa 1,0 — file sinh không commit nên phải sinh lại được; bundle id `jp.co.hokkaido-gas.esta` |
+| 13 | **Giai đoạn 2 — Tách gói chung** | | 6,5 | | 0 | 24/08 | 28/08 | | | Tối đa 12,0. **Chiếm 43% ước lượng — chỗ tốn nhất** |
+| 14 | 　Chốt ranh giới: cái gì được lên gói chung | Lead | 0,75 | | 0 | 24/08 | 25/08 | | | Tối đa 1,0 — chốt sai là phải tách lại từ đầu |
+| 15 | 　`packages/theme` | Dev2 | 0,75 | | 0 | 26/08 | 26/08 | | | Tối đa 1,5 — 2 file theme + 6 extension màu/chữ, đổi màu cứng thành token |
+| 16 | 　`packages/ui_components` | Dev2 | 1,5 | | 0 | 27/08 | 28/08 | | | Tối đa 3,0 — 30 nhóm widget; phần lâu là cắt phụ thuộc ngược, không phải dời file |
+| 17 | 　`packages/utils` | Dev2 | 0,5 | | 0 | 25/08 | 25/08 | | | Tối đa 1,0 — `navigator_util` (33 chỗ `Navigator.push*`) giữ lại trong app |
+| 18 | 　`packages/data` | Dev1 | 2,0 | | 0 | 26/08 | 27/08 | | | Tối đa 3,5 — **gói nặng nhất**: `server/` 20 file + `data/` 131 file + sinh code xuyên gói |
+| 19 | 　`packages/features/common` | Lead | 1,0 | | 0 | 28/08 | 28/08 | | | Tối đa 2,0 — bóc usecase/state ra khỏi màn hình, không mang màn hình lên |
+| 20 | **Giai đoạn 3 — Khởi tạo app Eminel `apps/e-gw-app`** | | 1,5 | | 0 | 28/08 | 31/08 | | | Tối đa 3,0 |
+| 21 | 　Tạo app + định danh riêng + nối các gói chung | Dev1 | 0,5 | | 0 | 28/08 | 28/08 | | | Tối đa 1,0 — phép thử thật cho việc tách gói ở giai đoạn 2 |
+| 22 | 　`go_router` + `main.dart` + cơ chế override theo app | Dev1 | 0,5 | | 0 | 28/08 | 28/08 | | | Tối đa 1,0 |
+| 23 | 　Theme riêng + màn hình đăng nhập mẫu + build 2 app song song | Dev1 | 0,5 | | 0 | 31/08 | 31/08 | | | Tối đa 1,0 — chứng minh goal 2: 2 app build và cài riêng được |
+| 24 | **Giai đoạn 4 — CI/CD cho 2 app** | | 1,0 | | 0 | 31/08 | 31/08 | | | Tối đa 2,5 — biên độ rộng vì chưa nắm pipeline hiện tại |
+| 25 | 　Rà pipeline + thêm tham số chọn app | Dev2 | 0,5 | | 0 | 31/08 | 31/08 | | | Tối đa 1,5 |
+| 26 | 　Build cả 2 app mỗi PR + chạy thử 1 vòng | Dev2 | 0,5 | | 0 | 31/08 | 31/08 | | | Tối đa 1,0 — bù cho việc repo không có test tự động |
+| 27 | **Giai đoạn 5 — Hồi quy E-Smart** | | 4,0 | | 0 | 24/08 | 01/09 | | | Tối đa 6,0. **Chiếm 27% — tốn thứ nhì, AI không rút được** |
+| 28 | 　Lập checklist theo 23 nhóm màn hình | Dev2 | 0,5 | | 0 | 24/08 | 24/08 | | | Làm sớm để chạy song song với việc tách gói |
+| 29 | 　Hồi quy vòng 1 (ngay sau khi dời chỗ): nhóm chính + cảm biến | Lead | 1,0 | | 0 | 27/08 | 27/08 | | | Tối đa 1,5 — repo **0 file test** ⇒ mở tay từng màn hình |
+| 30 | 　Hồi quy vòng 2 (sau khi tách gói): người dùng + nội dung + DR | Lead | 1,0 | | 0 | 31/08 | 31/08 | | | Tối đa 1,5 — đăng nhập qua WebView, dễ vỡ khi dời tài nguyên |
+| 31 | 　Kiểm tài nguyên: font, ảnh, chuỗi đa ngữ, push | Dev2 | 0,5 | | 0 | 01/09 | 01/09 | | | Tối đa 1,0 |
+| 32 | 　Sửa lỗi phát hiện trong hồi quy | Dev1 | 1,0 | | 0 | 01/09 | 01/09 | | | Tối đa 1,5 — khoản khó đoán nhất |
+| 33 | **Bàn giao** | | 1,0 | | 0 | 01/09 | 01/09 | | | Tối đa 1,5. Nằm **ngoài** con số 15~27 (báo cáo chỉ tính giai đoạn 1–5) |
+| 34 | 　`README` cấu trúc mới + 3 kỷ luật giữ goal 3 | Lead | 0,5 | | 0 | 01/09 | 01/09 | | | Tối đa 1,0 — chỉ cộng thêm · override thay vì rẽ nhánh theo app · từ 2 app trở lên mới nâng lên `packages/` |
+| 35 | 　Bàn giao cho người viết tính năng Eminel | Lead, Dev2 | 0,5 | | 0 | 01/09 | 01/09 | | | |
+| | **Tổng** | | **19,75** | **3,25** | 16 | 15/08 | 01/09 | 15/08 | | Giai đoạn 1–5 = **15,0** (tối đa **27,0**) đúng con số đã báo mui; tối đa toàn bảng 32,25 |
+
+**Còn phải làm từ 20/08**: 16,5 người-ngày → **3 người × 7 ngày làm việc**: trọn tuần **24–28/08** cho giai đoạn 1–3 và hồi quy vòng 1, cộng **31/08 và 01/09** cho CI/CD, hồi quy vòng 2 và bàn giao.
+
+## Phân việc theo ngày
+
+| Ngày | Dev1 | Dev2 | Lead |
+|---|---|---|---|
+| **T2 24/08** | Dựng khung workspace (9) + bắt đầu dời `lib`, `android`, `ios` (10) | Lập checklist hồi quy 23 nhóm màn hình (28) | Chốt ranh giới gói chung (14) |
+| **T3 25/08** | Dời xong (10) + sửa đường dẫn (11) + `analyze`, build Android (12) | `packages/utils` (17) + build iOS (12) | Chốt xong ranh giới (14) |
+| **T4 26/08** | `packages/data` — nửa đầu (18) | `packages/theme` (15) | Review, gỡ vướng, trả lời câu hỏi của 2 dev |
+| **T5 27/08** | `packages/data` — xong (18) | `packages/ui_components` đợt 1 (16) | Hồi quy vòng 1 sau khi dời chỗ (29) |
+| **T6 28/08** | Tạo app Eminel (21) + `go_router`, override (22) | `ui_components` đợt 2 + cắt phụ thuộc ngược (16) | `packages/features/common` (19) |
+| **T2 31/08** | Theme riêng + build 2 app song song (23) | CI/CD 2 app (25, 26) | Hồi quy vòng 2 sau khi tách gói (30) |
+| **T3 01/09** | Sửa lỗi hồi quy (32) | Kiểm font, ảnh, chuỗi, push (31) + dự buổi bàn giao (35) | `README` cấu trúc + 3 kỷ luật (34) + bàn giao (35) |
+
+Không ngày nào vượt 1,0 người-ngày mỗi người. Tổng tải: Dev1 6,25 · Dev2 5,25 · Lead 4,5 (Lead còn dư để review và xử lý phát sinh).
+
+## Điều kiện để giữ được 7 ngày
+
+| # | Điều kiện | Vì sao |
+|---|---|---|
+| 1 | 3 người toàn thời gian | 16,5 người-ngày còn lại là khối lượng cố định, chỉ chia được bằng người |
+| 2 | mui review trong ngày, không để câu hỏi qua đêm | Ranh giới "cái gì là chung" phải chốt ngay 2 ngày đầu; chốt sai là tách lại từ đầu |
+| 3 | Chốt applicationId / bundle id app Eminel **trước** 24/08 | Có muộn thì phần app mới phải làm lại cấu hình |
+| 4 | Dùng AI cho phần cơ học: sửa import hàng loạt, dựng checklist, sinh khung file gói | Đúng chỗ AI rút được thời gian; phán đoán ranh giới và hồi quy tay thì không |
+| 5 | Chấp nhận hồi quy rút gọn theo 23 nhóm màn hình | Đây chính là phần chênh giữa 15 và 27 |
+
+## Rủi ro
+
+| # | Rủi ro | Hệ quả |
+|---|---|---|
+| 1 | `packages/data` (dòng 18) không chia nhỏ cho nhiều người được | Đây là **chuỗi việc dài nhất không thể rút ngắn** của cả kế hoạch; thêm người thứ 4 cũng không nhanh hơn |
+| 2 | Sinh code retrofit/freezed chạy xuyên gói | Một sự cố ở đây ăn hết ngày đệm |
+| 3 | Hồi quy rút gọn ⇒ lỗi có thể lọt sang bản phát hành E-Smart | Bù bằng CI build cả 2 app mỗi PR + một đợt hồi quy đầy đủ sau |
+| 4 | Repo không có test tự động | Mọi thứ kiểm bằng tay, AI không thay được |
+
+## ■ Chờ mui trả lời
+
+| # | Nội dung |
+|---|---|
+| 1 | Đồng ý 3 người × 7 ngày (24–28/08 + 31/08 + 01/09), hay ép đúng 5 ngày và đẩy CI/CD + hồi quy vòng 2 + bàn giao sang tuần sau |
+| 2 | applicationId và bundle id của app Eminel |
+| 3 | Ai làm Firebase project, keystore, bản ghi app trên store cho Eminel |
+| 4 | Tuần 24–28/08 chỉ gồm tái cấu trúc, hay có cả tính năng Eminel đầu tiên |
