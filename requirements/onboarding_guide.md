@@ -89,6 +89,7 @@
 - [7.4 Spec màn hình quản trị](#74-spec-màn-hình-quản-trị)
 - [7.5 機能仕様 app — tầng vừa mở](#75-機能仕様-app--tầng-vừa-mở)
 - [7.6 Bản thiết kế nháp](#76-bản-thiết-kế-nháp)
+- [7.7 設計書 — định dạng file của bản giao nộp](#77-設計書--định-dạng-file-của-bản-giao-nộp)
 - [Kiểm tra nhanh — Chương 7](#kiểm-tra-nhanh--chương-7)
 
 **[Chương 8 — Đã làm được đến đâu](#chương-8--đã-làm-được-đến-đâu)**
@@ -200,7 +201,7 @@ Mỗi khẳng định trong tài liệu này đều kèm nguồn theo định d�
 | Loại nguồn | Mốc | Nghĩa |
 |---|---|---|
 | Repo (`docs/`, code) | commit `1100487`, kiểm **2026-08-18** | Số dòng và nội dung đúng tại mốc này |
-| QAデータベース Notion | **kiểm 2026-08-20** — 6 phiếu (**No. 1 · 2 · 3 · 4 · 5 · 10**), **cả sáu ✅ 完了**. Phiếu ngoài danh sách này vẫn là **lần đọc 2026-08-04** | Notion là dữ liệu sống. Trạng thái `回答中` còn sót ở đâu trong tài liệu này thì ứng với **ngày 08-04** và **rất có thể đã lạc hậu** — cả 6 phiếu đã kiểm đều được mui đóng trong **cùng 2 phút** ngày 08-13. ⚠️ **Phiếu 完了 không có nghĩa là hết dè dặt**: đóng phiếu không thêm chữ nào vào câu trả lời, nên các chữ nhượng bộ (「基本的には」「今の所」) và chuyện "mui trả lời ≠ 北ガス xác nhận" vẫn còn nguyên. **Phải mở trang gốc trước khi trích lại**; cách đọc property và 4 cái bẫy: [Phụ lục E.2](#e2-bước-2--đi-theo-thứ-tự) |
+| QAデータベース Notion | **kiểm 2026-08-20** — 8 phiếu (**No. 1 · 2 · 3 · 4 · 5 · 7 · 9 · 10**), **cả tám ✅ 完了**. Phiếu ngoài danh sách này vẫn là **lần đọc 2026-08-04** | Notion là dữ liệu sống. Trạng thái `回答中` còn sót ở đâu trong tài liệu này thì ứng với **ngày 08-04** và **rất có thể đã lạc hậu** — cả 6 phiếu đã kiểm đều được mui đóng trong **cùng 2 phút** ngày 08-13. ⚠️ **Phiếu 完了 không có nghĩa là hết dè dặt**: đóng phiếu không thêm chữ nào vào câu trả lời, nên các chữ nhượng bộ (「基本的には」「今の所」) và chuyện "mui trả lời ≠ 北ガス xác nhận" vẫn còn nguyên. **Phải mở trang gốc trước khi trích lại**; cách đọc property và 4 cái bẫy: [Phụ lục E.2](#e2-bước-2--đi-theo-thứ-tự) |
 
 ---
 
@@ -2692,6 +2693,8 @@ docs/eminel/
 | `4_spec` | Đang viết | Khi code màn hình quản trị (`admin/`) **hoặc app** (`app/` — mở từ 2026-08-12, xem [§7.5](#75-機能仕様-app--tầng-vừa-mở)) |
 | `5_design` | Bản nháp | Khi cần hình dung giao diện |
 
+⚠️ **Sáu tầng trên là các tầng NẰM TRONG repo tài liệu.** Sau chúng còn một tầng nữa: **設計書** (*tài liệu thiết kế chi tiết*) — thứ **SYP phải giao nộp**, và **không nộp bằng markdown trong repo**: màn hình nộp **Excel**, API nộp **markdown**. Xem [§7.7](#77-設計書--định-dạng-file-của-bản-giao-nộp).
+
 ---
 
 ## 7.2 Ba hệ thống, ba thư mục
@@ -3164,6 +3167,29 @@ Sau khi chốt layout sẽ **chuyển ngược vào Figma** làm tài sản bàn
 4. **Không.** Các mục T.B.D được "tạm FIX" để vẽ được ra hình. Muốn biết đã chốt chưa phải xem mục 「明確な未決事項」 trong file spec tương ứng.
 
 </details>
+
+---
+
+## 7.7 設計書 — định dạng file của bản giao nộp
+
+Sau tầng 「機能仕様」 ([§7.5](#75-機能仕様-app--tầng-vừa-mở)) là tầng **設計書** (*sekkeisho — tài liệu thiết kế*): mô tả cụ thể để code được. Đây là **thứ SYP phải giao nộp**, nên định dạng file không phải chuyện hình thức.
+
+**Định dạng đã chốt — hai loại, khác nhau:**
+
+| Loại tài liệu thiết kế | Định dạng nộp |
+|---|---|
+| **画面** (*gamen* — màn hình) | **Excel** |
+| **API** | **markdown** |
+
+🔍 Nguồn: Notion — QAデータベース dự án, phiếu **No. 9** 「設計書の最終成果物のファイル形式について」
+→ 質問者 Nguyen Van Tung (SYP), 起票 2026-08-10 17:06 · phiếu **chốt 2026-08-13 12:34** (更新日時)
+→ nguyên văn (回答内容): 「画面：excel / API：markdown」
+→ trạng thái khi đọc (2026-08-20): **完了** (đã đóng)
+→ ⚠️ ô **回答者 để trống** — Notion không ghi ai trả lời, nên **đừng gán tên ai** khi trích lại
+
+💡 **Vì sao hai định dạng khác nhau**: tài liệu màn hình có nhiều bảng, nhiều thuộc tính từng phần tử, và người vận hành phía khách quen đọc Excel — đúng như bộ `batch_decision.xlsx` của đợt review batch. Còn tài liệu API thì phần lớn là danh sách endpoint, tham số, mẫu JSON — những thứ **diff được bằng git** và dán được vào code, nên markdown tiện hơn. *(🔸 đây là suy luận về lý do, câu trả lời gốc không nêu lý do.)*
+
+⚠️ **Đừng suy rộng ra tầng khác.** Câu trả lời này nói về **設計書**, không nói gì về `3_requirements` hay `4_spec` — hai tầng đó đang là **markdown trong repo git**, giữ nguyên như vậy.
 
 ---
 ---

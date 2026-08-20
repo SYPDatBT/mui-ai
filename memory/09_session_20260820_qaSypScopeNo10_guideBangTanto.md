@@ -295,6 +295,35 @@ Nhiều khả năng trùng 3 goal + ghi chú ⚠️ ở `output_schedule.md` m�
 📌 Ghi chú về nhịp: phiếu này chốt **12:34**, tức **sau** cụm 6 phiếu kia (12:27–12:28) **6 phút** — vẫn cùng
 một buổi dọn QA ngày 08-13, củng cố kết luận "mui dọn QA theo đợt".
 
+### 2.11 Phiếu QA **No. 9** — định dạng 設計書 ⇒ guide có mục MỚI §7.7
+
+| Ô | Giá trị |
+|---|---|
+| **No.** | **9** — 「設計書の最終成果物のファイル形式について」 |
+| ステータス | **完了**, chốt **2026-08-13 12:34** |
+| 回答内容 | 「**画面：excel / API：markdown**」 |
+| **回答者** | ⚠️ **Empty** (như phiếu No. 7) — không gán tên ai khi trích |
+| 質問者 | **Nguyen Van Tung**, 起票 **2026-08-10 17:06** |
+| 質問内容 | Empty (body chưa đọc, nhưng 回答内容 đã đủ tự thân) |
+
+**Đối chiếu trước khi sửa**: grep `設計書|成果物|excel` trên guide + `requirements/` + `memory/` → **không có
+chỗ nào** nói về định dạng bản giao nộp. Tức đây là **thông tin mới hoàn toàn**, không phải sửa chỗ sai.
+
+**Vá — 4 chỗ:**
+
+| Chỗ | Sửa gì |
+|---|---|
+| **§7.7 (MỤC MỚI)** | 「設計書 — định dạng file của bản giao nộp」: bảng 2 loại (画面→Excel ・ API→markdown) + dòng 🔍 đủ định danh (kèm ghi chú 回答者 trống) + 💡 suy luận vì sao 2 định dạng khác nhau (**gắn nhãn 🔸 vì câu trả lời gốc không nêu lý do**) + ⚠️ **cấm suy rộng** sang `3_requirements`/`4_spec` |
+| **Mục lục** | Thêm dòng 7.7 |
+| **§7.1 bản đồ 6 tầng** | Thêm ⚠️: sáu tầng đó là các tầng **NẰM TRONG repo**; sau chúng còn tầng **設計書** = thứ **SYP giao nộp**, **không nộp bằng markdown trong repo** → trỏ §7.7 |
+| **§0.3** bảng mốc kiểm | 6 → **8 phiếu** (thêm No. 7 và No. 9) |
+
+**Vì sao đặt ở Chương 7 mà không phải chỗ khác**: Chương 7 là 「Bộ tài liệu của dự án」, và 設計書 đúng là **tầng
+tiếp sau `4_spec`/機能仕様 (§7.5)**. Đặt ở đây thì người đọc thấy được **toàn bộ chuỗi tài liệu** từ
+requirement → spec → 設計書, và biết chỗ nào đổi định dạng.
+
+Kiểm cơ học sau lượt 8: **276 heading ・ 209 link, 0 hỏng ・ 70 fence** (heading và link đều tăng vì có mục mới).
+
 ## 3. QUYẾT ĐỊNH & PHÁT HIỆN
 
 ### 3.1 Điều quan trọng nhất: 完了 ≠ 回答中 → được phép ghi là ĐÃ CHỐT
