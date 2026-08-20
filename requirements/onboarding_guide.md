@@ -200,7 +200,7 @@ Mỗi khẳng định trong tài liệu này đều kèm nguồn theo định d�
 | Loại nguồn | Mốc | Nghĩa |
 |---|---|---|
 | Repo (`docs/`, code) | commit `1100487`, kiểm **2026-08-18** | Số dòng và nội dung đúng tại mốc này |
-| QAデータベース Notion | **kiểm một phần 2026-08-20** — 3 phiếu (**No. 1 · No. 2 · No. 10**, cả ba ✅ 完了). Các phiếu khác vẫn là **lần đọc 2026-08-04** | Notion là dữ liệu sống. Mọi trạng thái `回答中` còn lại trong tài liệu này ứng với **ngày 08-04**, và **rất có thể đã lạc hậu** — cả 3 phiếu đã kiểm đều được mui đóng trong **cùng 2 phút** ngày 08-13. **Phải mở trang gốc trước khi trích lại**; cách đọc property và 4 cái bẫy: [Phụ lục E.2](#e2-bước-2--đi-theo-thứ-tự) |
+| QAデータベース Notion | **kiểm một phần 2026-08-20** — 4 phiếu (**No. 1 · No. 2 · No. 3 · No. 10**, cả bốn ✅ 完了). Các phiếu khác vẫn là **lần đọc 2026-08-04** | Notion là dữ liệu sống. Mọi trạng thái `回答中` còn lại trong tài liệu này ứng với **ngày 08-04**, và **rất có thể đã lạc hậu** — cả 4 phiếu đã kiểm đều được mui đóng trong **cùng 2 phút** ngày 08-13. **Phải mở trang gốc trước khi trích lại**; cách đọc property và 4 cái bẫy: [Phụ lục E.2](#e2-bước-2--đi-theo-thứ-tự) |
 
 ---
 
@@ -465,7 +465,7 @@ Gateway giống **người quản gia**. Bạn không nói chuyện trực tiế
 ⚠️ **「統合される」 (được tích hợp) không có nghĩa là chạy chung một chỗ.** Theo hai trả lời trên QAデータベース Notion (cùng 起票 2026-08-03):
 
 - **Server E-GW** — swan (mui) trả lời — **về cơ bản (基本的には) phát triển theo hướng một hệ độc lập** với EMINEL-smart server đang chạy, kèm lời nhờ *"nếu có chức năng nên dùng tiếp hệ hiện hữu thì báo lại"*. Phiếu **No. 2, đã 完了** (chốt 08-13) ⇒ **hướng này đã chốt**; nhưng chữ 「基本的には」 vẫn nguyên trong câu trả lời và **mức độ** độc lập thì chưa nói.
-- **Màn hình quản trị** — masao takahashi (mui) trả lời — **chung source code, chung cả deploy** (*デプロイ/triển khai — bản chạy thật đưa lên server*) với E-Smart. 🔸 Phiếu này **chưa mở lại kiểm** (08-04 còn `回答中`).
+- **Màn hình quản trị** — masao takahashi (mui) trả lời — **chung source code, chung cả deploy** (*デプロイ/triển khai — bản chạy thật đưa lên server*) với E-Smart, lý do: **cùng một lớp người vận hành sử dụng**. Phiếu **No. 3, đã 完了** (chốt 08-13) ⇒ **đã chốt**, và câu trả lời này **không kèm chữ nhượng bộ nào** — khác với phiếu server ở trên.
 
 Chi tiết + nguyên văn + trạng thái từng phiếu: xem [9.4](#94-vai-trò-và-môi-trường-của-syp).
 
@@ -3520,26 +3520,27 @@ Dịch: *"SYP tham gia mỏng hơn dự kiến ban đầu → hướng giao mả
 
 Bốn câu trả lời của mui mới hơn biên bản 6/25 phía trên. 質問者 đều là Bui Trong Dat (SYP), 起票 2026-08-03; nội dung trả lời đều đã đọc được ngày 2026-08-04. Hai người trả lời đều thuộc **mui** — chú ý **masao takahashi (mui)** là người khác với 高橋 phía 北ガス ở [1.3](#13-bốn-bên-và-ai-làm-gì-cho-ai).
 
-**Cột trạng thái là phần dễ lạc hậu nhất của bảng này** — hồi 08-04 cả bốn phiếu đều còn `回答中`; đến 08-20 mở lại thì **2 phiếu đã 完了**, 2 phiếu chưa kiểm. Phải mở trang gốc mới biết:
+**Cột trạng thái là phần dễ lạc hậu nhất của bảng này** — hồi 08-04 cả bốn phiếu đều còn `回答中`; đến 08-20 mở lại thì **3 phiếu đã 完了**, còn 1 phiếu chưa kiểm. Phải mở trang gốc mới biết:
 
 | No. | Trang QA | Trả lời (nguyên văn 回答内容) | Người trả lời | ステータス |
 |---|---|---|---|---|
 | **1** | 「担当範囲（サーバー／管理画面）とアプリ対象外の確認」 | 「モバイルアプリは開発対象です。」 | masao takahashi (mui) | ✅ **完了** *(chốt 08-13 12:27; kiểm 08-20)* |
 | **2** | 「旧Eminel基盤継承＋EMINEL-smartサーバーは独立デプロイの確認」 | 「基本的には独立したシステムとして開発してもらう方向でお願いします。ただし既存システムを使い続けたほうがいい機能があれば教えてほしいです」 | swan (mui) | ✅ **完了** *(chốt 08-13 12:28; kiểm 08-20)* |
-| ? | 「管理画面は独立か共通か（切替モード追加）の確認」 | 「管理画面はE-Smartと共通のソースコード、デプロイも同一（同じ操作者が使う想定）」 | masao takahashi (mui) | 🔸 **chưa kiểm lại** *(08-04: 回答中)* |
+| **3** | 「管理画面は独立か共通か（切替モード追加）の確認」 | 「管理画面はE-Smartと共通のソースコード、デプロイも同一（同じ操作者が使う想定）」 | masao takahashi (mui) | ✅ **完了** *(chốt 08-13 12:28; kiểm 08-20)* |
 | ? | 「旧EMINEL調査範囲（conciergesv/eminelsv）とhemssv対象外の確認」 | 「おおよそその認識でOKです。HEMS-SV(m2-cloud)はmui側開発範囲で、GWとの通信はHEMS-SVを通して行っていただくことになります。ConciergeSV,EminelSVは密に関係しますが、SYPさん開発範囲ではないです。HEMS-SVの仕様等は別途共有します」 | swan (mui) | 🔸 **chưa kiểm lại** *(08-04: 回答中)* |
 
-*(Cột `No.` là số phiếu trong QAデータベース, dùng làm định danh khi trích. Hai phiếu chưa mở lại nên chưa biết số — điền vào khi kiểm.)*
+*(Cột `No.` là số phiếu trong QAデータベース, dùng làm định danh khi trích. Phiếu cuối chưa mở lại nên chưa biết số — điền vào khi kiểm.)*
 
-⚠️ **Hai phiếu `?` còn lại rất có thể cũng đã 完了.** Bằng chứng về nhịp làm việc của mui — ba phiếu đã kiểm đều được đóng trong **cùng hai phút** ngày 2026-08-13:
+⚠️ **Phiếu `?` cuối cùng rất có thể cũng đã 完了.** Bằng chứng về nhịp làm việc của mui — **bốn phiếu đã kiểm đều được đóng trong cùng hai phút** ngày 2026-08-13, trong khi chúng được lập cách nhau nhiều ngày:
 
 | Phiếu | 起票 | Chốt (更新日時) |
 |---|---|---|
-| No. 1 担当範囲…とアプリ対象外 | 08-03 17:30 | 08-13 **12:27** |
-| No. 2 独立デプロイ | 08-03 17:31 | 08-13 **12:28** |
+| No. 1 担当範囲…とアプリ対象外 | 08-03 **17:30** | 08-13 **12:27** |
+| No. 2 独立デプロイ | 08-03 **17:31** | 08-13 **12:28** |
+| No. 3 管理画面は独立か共通か | 08-03 **17:32** | 08-13 **12:28** |
 | No. 10 SYP開発範囲 | 08-12 16:17 | 08-13 **12:28** |
 
-⇒ mui **dọn QA theo đợt**, không trả lời rải rác. Mở lại hai phiếu còn lại là việc **rẻ và đáng làm ngay**: mỗi phiếu chuyển sang 完了 là một kết luận trong tài liệu này được nâng từ "định hướng" lên "đã chốt". Nhớ: **`完了` cũng nghĩa là đã trả lời** — grep riêng `回答済` sẽ sót ([Phụ lục E.2](#e2-bước-2--đi-theo-thứ-tự)).
+⇒ Hai điều thấy được từ bảng này: SYP lập ba phiếu No. 1–3 **liên tiếp từng phút** chiều 08-03; mui **để nguyên 10 ngày rồi đóng cả loạt** trong hai phút ngày 08-13. Tức mui **dọn QA theo đợt**, không trả lời rải rác. Mở lại phiếu cuối là việc **rẻ và đáng làm ngay**: mỗi phiếu chuyển sang 完了 là một kết luận trong tài liệu này được nâng từ "định hướng" lên "đã chốt". Nhớ: **`完了` cũng nghĩa là đã trả lời** — grep riêng `回答済` sẽ sót ([Phụ lục E.2](#e2-bước-2--đi-theo-thứ-tự)).
 
 ### ✅ Câu trả lời chốt phạm vi SYP (2026-08-13)
 
@@ -3564,7 +3565,8 @@ Bốn câu trả lời 08-03/04 ở trên hồi đó **đều còn 回答中**, 
    - ✅ **Đã chốt**: làm server E-GW thành **một hệ độc lập** với E-Smart hiện hành.
    - ⚠️ **Chữ 「基本的には」 (*về cơ bản là*) vẫn nằm trong nguyên văn** — nó là một chữ nhượng bộ, đóng phiếu không xoá nó. **Không được đọc thành "độc lập tuyệt đối".**
    - ❌ **Chưa nói**: độc lập **đến mức nào** (có chung library/source hay không). Trước đây chỗ này là *"chờ mui trả lời thêm"*; nay phiếu **đã đóng mà vẫn không nói** ⇒ muốn biết thì phải **mở phiếu QA mới**, chờ tiếp là chờ vô ích.
-3. **Màn hình quản trị: ngược với server — chung source code, chung deploy với E-Smart**, cùng người vận hành dùng. Tinh chỉnh thêm cho ghi chú camp 6/25 bên dưới (「環境変数／ビルド設定で切り替え」).
+3. **Màn hình quản trị: ngược hẳn với server — chung source code, chung cả deploy với E-Smart**, lý do là **cùng một lớp người vận hành sử dụng**. Phiếu No. 3 đã **完了** ⇒ đã chốt, và **không kèm chữ nhượng bộ nào** (khác điểm 2). Câu trả lời này **đè lên** ghi chú camp 6/25 bên dưới (「環境変数／ビルド設定で切り替え」 — tức hai bản deploy tách nhau chuyển bằng biến môi trường): cách hiểu đó **sai** với 管理画面.
+   💡 **Hệ quả thực tế**: bạn **thêm màn hình E-GW vào chính repo `syp-eminelstandard-web-admin`**, không dựng repo mới, không dựng deploy riêng.
 4. **Phạm vi điều tra hệ cũ của SYP = `conciergesv` + `eminelsv`** (khảo sát API・batch để di trú); `hemssv` không thuộc phạm vi — GW giao tiếp qua **HEMS-SV (m2-cloud)** do mui làm, spec sẽ chia sẻ riêng (chi tiết: [4.2](#42-bẫy-tên-gọi-lớn-nhất), ghi chú lệch `eminelsv`: [8.4](#84-ba-vấn-đề-chặn-syp)).
 
 ⇒ So với đánh giá 「関与が薄そう」 (*tham gia mỏng hơn dự kiến*, camp 6/25) ở đầu mục, bức tranh việc cho SYP **rộng hơn hẳn**: server E-GW độc lập + phần E-GW trong màn hình quản trị chung + app. Đánh giá 6/25 nay chỉ còn giá trị lịch sử — **QA No. 10 (完了, 08-13) đã vượt qua nó**, và đó cũng là câu trả lời trọn vẹn cho "danh sách phạm vi SYP đảm nhận" mà câu hỏi 1 hồi 08-03 nêu ra nhưng không được đáp.
@@ -3636,7 +3638,9 @@ Dịch: *"Spec quyết xong là SYP implement được gần hết."*
 
 Màn hình quản trị và app đều **chuyển đổi giữa ESTA và EMINEL bằng biến môi trường / cấu hình build**. Riêng app thì build hẳn thành **hai ứng dụng riêng biệt**.
 
-⚠️ **Với màn hình quản trị, QA Notion (回答中) nói khác ghi chú camp này**: masao takahashi (mui) trả lời rõ hơn — **chung source code và deploy cũng chung một chỗ** (「デプロイも同一（同じ操作者が使う想定）」), không phải hai bản deploy tách nhau chuyển bằng biến môi trường. Xem bảng QA ở đầu mục 9.4.
+⚠️ **Với màn hình quản trị, QA Notion nói khác ghi chú camp này — và QA mới là bản đúng.** masao takahashi (mui) trả lời rõ hơn: **chung source code và deploy cũng chung một chỗ** (「デプロイも同一（同じ操作者が使う想定）」), **không phải** hai bản deploy tách nhau chuyển bằng biến môi trường. Phiếu **No. 3, đã 完了** (chốt 2026-08-13) ⇒ ghi chú camp 6/25 về phần 管理画面 chỉ còn giá trị lịch sử. Xem bảng QA ở đầu mục 9.4.
+
+*(Phần nói về **app** của ghi chú camp thì vẫn đúng và còn hiệu lực: app build thành **hai ứng dụng riêng** — điều này về sau thành nền cho cả task tái cấu trúc source app.)*
 
 ---
 

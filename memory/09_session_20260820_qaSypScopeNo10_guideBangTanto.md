@@ -150,6 +150,41 @@ ngày 08-13. Củng cố bẫy ② ở mục 3.4 — và khiến 2 phiếu còn 
 Kiểm cơ học sau lượt 3: 275 heading ・ **206 link, 0 hỏng** ・ 70 fence (chẵn) ・ audit: không còn chỗ nào
 ghi phiếu No. 2 là 回答中.
 
+### 2.7 Đợt vá thứ tư — phiếu QA **No. 3** 管理画面 đã 完了 (+ 1 chỗ NGOÀI guide)
+
+| Ô | Giá trị | Guide trước đó ghi gì |
+|---|---|---|
+| **No.** | **3** | *(không ghi)* |
+| ステータス | **完了** | `回答中` ❌ SAI (2 chỗ) |
+| 回答内容 | 「管理画面はE-Smartと共通のソースコード、デプロイも同一（同じ操作者が使う想定）」 | ✅ khớp **nguyên văn, không đổi một chữ** |
+| 回答者 | masao takahashi | ✅ khớp |
+| 質問者 | Bui Trong Dat | ✅ khớp |
+| 起票日時 | 2026-08-03 **17:32** | ✅ khớp (thiếu giờ) |
+| 更新日時 | **2026-08-13 12:28** | *(không ghi)* |
+| 質問内容 | **Empty** | — |
+
+**Không có vế `ただし`** → khác phiếu No. 2, không phát sinh việc cho SYP.
+
+**⭐ Điểm đáng giá nhất của lượt này: 1 chỗ nằm NGOÀI guide.**
+`requirements/self_study_plan.md` **dòng 83** (Hạng mục 3 — 管理画面) còn ghi 「QA masao takahashi, 2026-08-03,
+**回答中**」. Nếu chỉ rà `onboarding_guide.md` thì **sót**. ⇒ **Từ nay mỗi lần một phiếu QA đổi trạng thái phải
+grep `回答中` trên CẢ `requirements/`, không chỉ guide.** (Đã grep xác nhận: sau khi sửa, `requirements/*.md`
+ngoài guide còn **0 chỗ** ghi 回答中.)
+
+**Vá lượt 4 — 6 chỗ:**
+
+| Chỗ | Sửa gì |
+|---|---|
+| **§0.3** bảng mốc kiểm | 3 → **4 phiếu** đã kiểm (No. 1 ・ 2 ・ 3 ・ 10) |
+| **§1.2** bullet 管理画面 | Bỏ 🔸 "chưa mở lại kiểm" → **No. 3 完了**; thêm lý do mui nêu (**cùng lớp người vận hành**) + nhấn **không kèm chữ nhượng bộ nào**, khác phiếu No. 2 |
+| **§9.4** bảng 4 QA | Hàng 3: `?` → **No. 3**, 🔸 → ✅ **完了** |
+| **§9.4** đoạn cảnh báo | "Hai phiếu `?`" → **một phiếu**; bảng nhịp đóng phiếu thêm hàng No. 3 + **2 nhận xét mới**: Dat lập No. 1–3 liên tiếp **từng phút** (17:30/31/32), mui **để 10 ngày rồi đóng cả loạt trong 2 phút** |
+| **§9.4 điểm 3** | Viết lại: đã chốt, không nhượng bộ, **đè lên** ghi chú camp 6/25; thêm 💡 hệ quả thực tế — **thêm màn hình vào chính repo `syp-eminelstandard-web-admin`**, không repo mới / không deploy riêng |
+| **§9.5-ish** (khối ghi chú camp 6/25) | *"QA Notion (回答中) nói khác"* → **"QA mới là bản đúng"**, camp 6/25 phần 管理画面 chỉ còn giá trị lịch sử; tách rõ **phần app của camp vẫn đúng** (build 2 app riêng — nền cho task tái cấu trúc app) |
+| **NGOÀI GUIDE**: `self_study_plan.md:83` | 「回答中」 → phiếu **No. 3 完了**; nêu cả cặp: No. 2 = server độc lập ・ No. 3 = admin dùng chung |
+
+Kiểm cơ học sau lượt 4: 275 heading ・ **206 link, 0 hỏng** ・ 70 fence ・ audit `管理画面は独立` không còn chỗ nào "chưa chốt".
+
 ## 3. QUYẾT ĐỊNH & PHÁT HIỆN
 
 ### 3.1 Điều quan trọng nhất: 完了 ≠ 回答中 → được phép ghi là ĐÃ CHỐT

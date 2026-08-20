@@ -80,7 +80,7 @@
 | 4 | `legacy_eminel_docs/docs/02_詳細設計/03_管理画面` | Màn quản trị hệ cũ (`eminelsv`) — đối chiếu chức năng vận hành cũ |
 | 5 | `eminel_gw_project/docs/eminel/3_requirements/00_integrated_requirements_v1.2.md` mục 8-4 (F-AD-xx) | Danh mục chức năng màn hình quản trị ở tầng yêu cầu |
 
-**Lưu ý quan trọng**: 管理画面 **chung source code và chung deploy với ESTA** (QA masao takahashi, 2026-08-03, 回答中) — khác với server (hướng độc lập). Nghĩa là bạn sẽ **thêm màn hình vào chính repo `syp-eminelstandard-web-admin`**, không dựng repo mới.
+**Lưu ý quan trọng**: 管理画面 **chung source code và chung deploy với ESTA** — QA masao takahashi (mui), phiếu **No. 3** 「管理画面は独立か共通か（切替モード追加）の確認」, **完了** (chốt 2026-08-13). Khác với server: phiếu **No. 2** chốt hướng **hệ độc lập**. Nghĩa là bạn sẽ **thêm màn hình vào chính repo `syp-eminelstandard-web-admin`**, không dựng repo mới. Cả hai phiếu nay **đã đóng**, không còn là định hướng tạm.
 
 **Tự kiểm**: ① 10 spec [A]–[J] tương ứng những màn hình nào? ② màn hình nào mới hoàn toàn, màn nào lùi 2027? ③ trang data-management hiện có mấy loại dữ liệu tải được?
 
