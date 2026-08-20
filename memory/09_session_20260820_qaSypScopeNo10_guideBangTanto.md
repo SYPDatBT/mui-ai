@@ -403,6 +403,59 @@ phụ thuộc phân loại lỗi**, vì màn hình **C (quản lý E-GW) thuộc
 
 Kiểm cơ học sau lượt 10: **277 heading ・ 215 link, 0 hỏng ・ 70 fence**.
 
+### 2.14 Phiếu QA **No. 8** — phiếu duy nhất mang NỘI DUNG NGHIỆP VỤ MỚI
+
+| Ô | Giá trị |
+|---|---|
+| **No.** | **8** — 「GW-IDと顧客・契約情報の連携方法について」 |
+| ステータス | 🟡 **回答中**, cập nhật **2026-08-19 10:58** |
+| 回答内容 | 「**コメントに記載**」 ← chính ô trả lời **trỏ sang Comments** |
+| 回答者 | ⚠️ Empty |
+| 質問者 | Bui Trong Dat, 起票 **2026-08-05 16:03** |
+
+**Nguyên văn comment — masao takahashi (mui), 08-19:**
+> 「1. GW-IDとTagTag IDを紐付けます。ユーザーがTagTag IDでログインしたアプリからGWをペアリング・登録した時点で紐付き、
+> EMINEL-smartサーバー側で管理します。2. **EMS-SPとパスワードによる認証・紐付けは利用しません。**」
+
+**Hai kết luận nghiệp vụ:**
+
+| | Nội dung |
+|---|---|
+| ✅ **Chốt** | Khoá gắn = **`GW-ID` ↔ `TagTag ID`** ・ thời điểm = **lúc pairing + đăng ký GW** từ app đã đăng nhập TagTag ・ ai giữ = **EMINEL-smartサーバー**, v1.2 L124 gọi là **マスター** ⇒ **việc của SYP** |
+| ⛔ **LOẠI BỎ** | **KHÔNG dùng `EMS-SP番号` + mật khẩu**. Đó là cách **hệ cũ** ⇒ thiết kế onboarding **không được mang bước đó sang** |
+
+**⛔ là phần đáng giá nhất**: guide §5.2 trước đó chỉ có băn khoăn của masao ở camp 6/25 (「なぜログイン後にそれぞれ
+EMS-SP番号を書き込むのか」順序が不自然 + chủ trương 「レガシーのやり方をそのまま写さず」). Nay **băn khoăn đó đã
+có câu trả lời**: bỏ hẳn. Trước hôm nay guide để nó ở dạng "điểm sẽ được bàn sớm".
+
+📌 **Chất lượng câu trả lời — đáng học**: masao dẫn **5 dòng file:dòng** làm căn cứ, kiểu "kết luận + dẫn chứng".
+Đã **kiểm lại cả 5 tại `1100487`, khớp hết** (⛔#1):
+
+| Dòng | Nói gì |
+|---|---|
+| v1.2 **L124** | 責任分解表: 「E-GW-顧客紐付け \| - \| **マスター**。GW IDとTagTag IDの紐付け」 |
+| v1.2 **L86** | GW管理クラウド quản theo GW ID, **không giữ** thông tin khách |
+| v1.2 **L531** | F-GW-10: app tìm → pairing → đăng ký lên GW管理クラウド |
+| v1.2 **L117** | Server nhận 登録通知 rồi quản lý việc gắn với khách |
+| `11_business_process/readme.md` **L83** | Onboarding: 登録情報 lưu ở **双方** (cả GW管理クラウド và E-smartサーバー) |
+
+**Vá — 3 chỗ:**
+
+| Chỗ | Sửa gì |
+|---|---|
+| **§5.2** | Thêm mục ✅ 「Điểm này ĐÃ ĐƯỢC CHỐT — cách gắn GW với khách hàng」 ngay sau đoạn băn khoăn camp 6/25: dòng 🔍 + nguyên văn comment + dịch 2 điểm + bảng 3 điều rút ra + khối ❗ về quyết định loại bỏ + bảng 5 dòng căn cứ + **sơ đồ ASCII luồng đăng ký** (App → E-GW → GW管理クラウド → EMINEL-smartサーバー) |
+| **Phụ lục A** entry `EMS-SP番号` | Thêm ⛔ **「E-GW KHÔNG dùng nữa」** + trỏ §5.2 |
+| **§0.3** bảng mốc kiểm | 10 → **11 phiếu**; No. 6 **và No. 8** đều `回答中` với comment mới 08-19 |
+
+📌 **Nhịp: 08-19 là một đợt hoạt động MỚI của mui**, sau đợt đóng hàng loạt 08-13. Hai phiếu được comment cách
+nhau 15 phút: **No. 6 lúc 10:43** ・ **No. 8 lúc 10:58**. Cả hai đều **回答中** (không đóng) nhưng **có nội dung
+thật trong Comments** — trong đó No. 8 là nội dung dùng được ngay, No. 6 là lời cảnh báo về lịch.
+
+⚠️ Phiếu No. 8 vẫn **回答中**, chưa 完了 — nội dung comment đủ cụ thể và có dẫn chứng nên dùng được cho tài liệu
+nội bộ, nhưng **mở lại kiểm trước khi trích vào bản gửi ra ngoài**.
+
+Kiểm cơ học sau lượt 11: **278 heading ・ 217 link, 0 hỏng ・ 72 fence** (thêm 1 code block sơ đồ ASCII).
+
 ## 3. QUYẾT ĐỊNH & PHÁT HIỆN
 
 ### 3.1 Điều quan trọng nhất: 完了 ≠ 回答中 → được phép ghi là ĐÃ CHỐT

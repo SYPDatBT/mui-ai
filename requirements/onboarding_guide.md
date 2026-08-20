@@ -201,7 +201,7 @@ Mỗi khẳng định trong tài liệu này đều kèm nguồn theo định d�
 | Loại nguồn | Mốc | Nghĩa |
 |---|---|---|
 | Repo (`docs/`, code) | commit `1100487`, kiểm **2026-08-18** | Số dòng và nội dung đúng tại mốc này |
-| QAデータベース Notion | **kiểm 2026-08-20** — 10 phiếu: **No. 1 · 2 · 3 · 4 · 5 · 7 · 9 · 10** đều ✅ **完了**; **No. 6** còn 🟡 **回答中** (có comment mới 08-19); **No. 12** còn 🔶 **確認中, chưa có câu trả lời**. Phiếu ngoài danh sách này vẫn là **lần đọc 2026-08-04** | Notion là dữ liệu sống. Trạng thái `回答中` còn sót ở đâu trong tài liệu này thì ứng với **ngày 08-04** và **rất có thể đã lạc hậu** — cả 6 phiếu đã kiểm đều được mui đóng trong **cùng 2 phút** ngày 08-13. ⚠️ **Phiếu 完了 không có nghĩa là hết dè dặt**: đóng phiếu không thêm chữ nào vào câu trả lời, nên các chữ nhượng bộ (「基本的には」「今の所」) và chuyện "mui trả lời ≠ 北ガス xác nhận" vẫn còn nguyên. **Phải mở trang gốc trước khi trích lại**; cách đọc property và 4 cái bẫy: [Phụ lục E.2](#e2-bước-2--đi-theo-thứ-tự) |
+| QAデータベース Notion | **kiểm 2026-08-20** — 11 phiếu: **No. 1 · 2 · 3 · 4 · 5 · 7 · 9 · 10** đều ✅ **完了**; **No. 6 và No. 8** còn 🟡 **回答中** (đều có comment mới **08-19**); **No. 12** còn 🔶 **確認中, chưa có câu trả lời**. Phiếu ngoài danh sách này vẫn là **lần đọc 2026-08-04** | Notion là dữ liệu sống. Trạng thái `回答中` còn sót ở đâu trong tài liệu này thì ứng với **ngày 08-04** và **rất có thể đã lạc hậu** — cả 6 phiếu đã kiểm đều được mui đóng trong **cùng 2 phút** ngày 08-13. ⚠️ **Phiếu 完了 không có nghĩa là hết dè dặt**: đóng phiếu không thêm chữ nào vào câu trả lời, nên các chữ nhượng bộ (「基本的には」「今の所」) và chuyện "mui trả lời ≠ 北ガス xác nhận" vẫn còn nguyên. **Phải mở trang gốc trước khi trích lại**; cách đọc property và 4 cái bẫy: [Phụ lục E.2](#e2-bước-2--đi-theo-thứ-tự) |
 
 ---
 
@@ -1748,7 +1748,60 @@ Dịch: *"Cần bàn thêm: khi có điều khiển nhiều mạch, lúc đăng 
 → mục 「GW認証（オンボーディングの順序）」, dòng 68–72
 → nguyên văn: 「masaoの違和感：「ログインしてからプロビジョニングすればいいのに、なぜログイン後にそれぞれEMS-SP番号を書き込むのか」順序が不自然」「方針：最初の方に詰める。レガシーのやり方をそのまま写さず、いけてる形にする」
 
-Dịch: kiến trúc sư tổng thấy **thứ tự xác thực gateway của hệ cũ không tự nhiên**, và chủ trương **thiết kế lại chứ không copy**. Đây là điểm sẽ được bàn sớm.
+Dịch: kiến trúc sư tổng thấy **thứ tự xác thực gateway của hệ cũ không tự nhiên**, và chủ trương **thiết kế lại chứ không copy**.
+
+### ✅ Điểm này ĐÃ ĐƯỢC CHỐT — cách gắn GW với khách hàng
+
+Băn khoăn ở trên nay có câu trả lời: **không dùng cách của hệ cũ nữa.**
+
+🔍 Nguồn: Notion — QAデータベース dự án, phiếu **No. 8** 「GW-IDと顧客・契約情報の連携方法について」
+→ 質問者 Bui Trong Dat (SYP), 起票 **2026-08-05 16:03** · trạng thái khi đọc (2026-08-20): **回答中**, cập nhật **2026-08-19 10:58**
+→ ô `回答内容` chỉ ghi 「**コメントに記載**」 (*đã ghi trong comment*) — **nội dung thật nằm ở Comments**
+→ ⚠️ ô `回答者` để trống; tên người trả lời chỉ có trong Comments
+
+**Nguyên văn comment — masao takahashi (mui), 2026-08-19:**
+
+> 「1. GW-IDとTagTag IDを紐付けます。ユーザーがTagTag IDでログインしたアプリからGWをペアリング・登録した時点で紐付き、EMINEL-smartサーバー側で管理します。
+> 2. **EMS-SPとパスワードによる認証・紐付けは利用しません。**」
+
+Dịch:
+1. **Gắn `GW-ID` với `TagTag ID`.** Việc gắn xảy ra **đúng lúc** người dùng — từ app đã đăng nhập bằng TagTag ID — **ghép đôi (pairing) và đăng ký gateway**; và do **EMINEL-smartサーバー** quản lý.
+2. **KHÔNG dùng cách xác thực / gắn bằng `EMS-SP番号` + mật khẩu.**
+
+⇒ **Ba điều rút ra:**
+
+| | Nội dung |
+|---|---|
+| **Khoá gắn kết** | `GW-ID` ↔ `TagTag ID` — không phải EMS-SP番号, không phải お客さま番号 |
+| **Thời điểm gắn** | Ngay lúc pairing + đăng ký gateway từ app đã đăng nhập. Không có bước ghi số riêng như hệ cũ |
+| **Ai giữ** | **EMINEL-smartサーバー** — và v1.2 gọi thẳng là **マスター** (bản gốc chuẩn), tức phần việc của SYP |
+
+❗ **Điểm ② là một quyết định LOẠI BỎ, đáng nhớ riêng**: `EMS-SP番号` là cách hệ cũ gắn gateway với người ký hợp đồng (xem [Phụ lục A](#phụ-lục-a--từ-điển-thuật-ngữ)). Nay **bỏ hẳn**. Nghĩa là mọi thiết kế onboarding **không được** mang bước "ghi EMS-SP番号 + mật khẩu" từ hệ cũ sang — đúng như chủ trương 「レガシーのやり方をそのまま写さず」 (*không copy y nguyên cách của hệ cũ*) ở trên.
+
+🔍 Bốn dòng trong tài liệu dự án mà chính masao dẫn ra làm căn cứ *(đã kiểm lại tại commit `1100487`, khớp cả bốn)*:
+
+| Dòng | Nguyên văn | Nói gì |
+|---|---|---|
+| `00_integrated_requirements_v1.2.md` **124** | 「E-GW-顧客紐付け \| - \| **マスター**。GW IDとTagTag IDの紐付け」 | Bảng phân chia trách nhiệm: server EMINEL-smart là **bản gốc chuẩn** của việc gắn GW ↔ khách |
+| cùng file **86** | 「GW管理クラウドはGW IDベースで管理し、顧客情報を持たない」 | GW管理クラウド **không giữ** thông tin khách |
+| cùng file **531** | 「E-GWの新規認証：アプリからE-GWを検索・ペアリングし、GW管理クラウドに登録する」 | F-GW-10: app tìm → pairing → đăng ký lên GW管理クラウド |
+| cùng file **117** | 「（EMINEL-smartサーバーは）登録通知を受領し、顧客との紐付けを管理」 | Server nhận thông báo đăng ký rồi quản lý việc gắn với khách |
+| `11_business_process/readme.md` **83** | 「GW登録 → GW管理クラウド連携／登録情報保存（GW管理クラウド・E-smartサーバー**双方に保存**）」 | Luồng onboarding: thông tin đăng ký lưu ở **cả hai** nơi |
+
+💡 **Ghép lại thành một mạch**: app (đã đăng nhập TagTag) tìm và pairing gateway → đăng ký lên **GW管理クラウド** (của mui) → GW管理クラウド gửi thông báo đăng ký sang **EMINEL-smartサーバー** (của SYP) → server gắn `GW-ID` ↔ `TagTag ID` và **giữ bản gốc chuẩn** của mối gắn đó. GW管理クラウド chỉ biết `GW-ID`, không biết khách là ai.
+
+```
+App (đăng nhập TagTag ID)
+      │ ① tìm + pairing
+      ▼
+   E-GW ──② đăng ký──▶ GW管理クラウド        (mui — chỉ biết GW-ID)
+                            │ ③ thông báo đăng ký
+                            ▼
+                    EMINEL-smartサーバー      (SYP — マスター)
+                       gắn GW-ID ↔ TagTag ID
+```
+
+⚠️ Phiếu này còn **回答中**, chưa `完了` — nhưng nội dung comment đã đủ cụ thể và có dẫn chứng, khác hẳn kiểu trả lời treo. Vẫn nên mở lại kiểm trước khi trích vào tài liệu gửi ra ngoài.
 
 ---
 
@@ -4055,7 +4108,7 @@ Sắp theo **nhóm chủ đề**, không theo bảng chữ cái — vì học th
 | **TagTag** | Nền tảng thành viên của 北ガス. E-GW dùng **TagTag ID** để đăng nhập |
 | **Xzilla** | Hệ thống nền tảng thông tin chung của 北ガス — khách hàng, hợp đồng, lượng điện 30 phút |
 | **Point Infinity (PI)** | Hệ thống điểm thưởng bên ngoài |
-| **EMS-SP番号** | Mã dùng để gắn gateway với người ký hợp đồng ở hệ cũ |
+| **EMS-SP番号** | Mã dùng để gắn gateway với người ký hợp đồng **ở hệ cũ**. ⛔ **E-GW KHÔNG dùng nữa** — chốt qua QA 08-19: gắn bằng `GW-ID` ↔ `TagTag ID`, xem [5.2](#52-onboarding-từ-mở-hộp-đến-thấy-dữ-liệu) |
 | **お客さま番号** | Mã khách hàng của 北ガス (11 chữ số, bắt đầu bằng 6) |
 
 ## A.7 Quản lý dự án
