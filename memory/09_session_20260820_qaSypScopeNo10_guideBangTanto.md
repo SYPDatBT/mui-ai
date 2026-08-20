@@ -1,0 +1,135 @@
+# SESSION 2026-08-20 — QA No.10 chốt phạm vi SYP → guide có bảng 担当 chính thức
+> Đọc SAU `00_INDEX.md`. ⭐ TRẠNG THÁI MỚI NHẤT (chưa có file nào thay).
+
+## 1. Bối cảnh & mục tiêu phiên
+
+User (Diệu Hiền / LTDH) mang tới **ảnh chụp một trang QAデータベース Notion** mà SYP đã hỏi và mui đã
+trả lời: bảng phân công 5 khối chức năng, mui đáp 「認識に相違ないです。」 (*cách hiểu không có gì sai lệch*).
+
+Câu hỏi của user: **memory có đang nhận thức như vậy không, `onboarding_guide.md` có đang như vậy
+không, nếu không thì cần sửa gì.** → phiên này là một đợt đối chiếu + vá tài liệu theo nguồn mới.
+
+## 2. ĐÃ LÀM
+
+### 2.1 Định danh nguồn (theo ⛔#8 — trích QA phải đủ định danh)
+
+Ảnh đầu tiên user gửi chỉ có phần body (bảng phân công), **thiếu 回答者/ngày/kênh** → đã yêu cầu user
+gửi phần property. Ảnh thứ hai đủ. Nguồn chốt:
+
+| Ô | Giá trị |
+|---|---|
+| Kênh | Notion — QAデータベース dự án, trang 「**SYP開発範囲の確認**」, **No. 10** |
+| ステータス | **完了** — user xác nhận 完了 ≡ 回答済 (đã trả lời xong) |
+| 回答内容 | 「認識に相違ないです。」 |
+| 回答者 | **swan (mui)** — cùng người trả lời QA 独立デプロイ và QA hemssv hồi 08-04 |
+| 質問者 | **Nguyen Van Tung (SYP)** — *không phải* Bui Trong Dat |
+| 起票日時 | 2026-08-12 16:17 |
+| 更新日時 (= ngày trả lời) | **2026-08-13** 12:28 (Notion hiện "Last Thursday", user xác nhận ngày tuyệt đối) |
+| 質問内容 (property) | **Empty** — nội dung câu hỏi nằm ở **body trang** |
+
+Nội dung bảng phân công được xác nhận (căn cứ user tự lập từ 「統合要件定義書および開発費見積もりの記載」):
+
+| 領域 | 担当 |
+|---|---|
+| 7-1. E-GW機能（ファームウェア） | mui Lab |
+| 7-2. GW管理クラウド機能 | mui Lab |
+| **7-3. EMINEL-smartサーバー機能** | **SYP** |
+| **7-4. 管理画面機能** | **SYP** |
+| **モバイルアプリ** | **SYP** |
+
+### 2.2 Kết quả đối chiếu trước khi sửa
+
+- **Auto-memory của Claude** (`~/.claude/projects/.../memory/`): **không có gì** về phạm vi SYP.
+- **Memory workspace**: `00_INDEX.md` + `02_session_20260804…` có ghi 4 QA ngày 08-03/04
+  (app là 開発対象 ・ server độc lập ・ admin chung source ・ conciergesv+eminelsv = phạm vi điều tra),
+  nhưng **đều ở mức 回答中 / chưa chốt**, và **chưa bao giờ ghi 7-1/7-2 là của mui Lab**.
+- **Guide**: đúng hướng nhưng còn treo nhãn 🔸 giả thuyết ở 2 chỗ, và **không có bảng 担当** ở đâu cả.
+
+### 2.3 Vá guide — 6 chỗ, `+93/−13` dòng
+
+Mốc guide: v1.3 / đối chiếu `1100487`. Repo `eminel_gw_project` kiểm `git log -1` = `1100487` (khớp, ⛔#14).
+
+| Chỗ | Sửa gì |
+|---|---|
+| **§1.6** (mở đầu) | Tách rành mạch **hai câu hỏi khác nhau**: 対象範囲 (*dự án có làm gì*) vs 担当 (*ai làm*) — trộn hai cái là hiểu sai. Bảng cũ thành bảng ① |
+| **§1.6 bảng ② (MỚI)** | Bảng 担当 5 hàng + dòng 🔍 đủ định danh + **3 cảnh báo cách đọc**: ① app 対象範囲 nói ❌ nhưng 担当 là SYP, không mâu thuẫn ② **GW管理クラウド là của mui Lab, KHÔNG phải SYP** (bảng ① gộp nó chung hàng với server EMINEL-smart vì v1.2 viết vậy) ③ firmware cũng của mui Lab |
+| **§1.6 cuối** | Viết lại đoạn "Hai điều QA này chưa chốt" thành **bảng 3 hàng "chỗ hở hồi 08-03 → nay ra sao"**. Giữ lại ghi chú số ①④ nhầm trong câu hỏi gốc. Giữ cảnh báo v1.2 §1-2 **vẫn còn chữ 「対象外」** (kiểm lại tại `1100487`) |
+| **§6.1** | Bảng 4 nhóm mã thêm **2 cột: 「Mục trong v1.2」 (7-1〜7-4) + 「担当」** → nhìn tiền tố là biết có phải việc của mình. Tách dòng 🔍 làm 2 (nguồn v1.2 cho các cột cũ / nguồn Notion cho cột 担当). Thêm cảnh báo **app dùng mã F-AP, không nằm trong 7-1〜7-4** nhưng vẫn do SYP làm |
+| **§9.4** | Thêm khối **✅ "Câu trả lời chốt phạm vi SYP (2026-08-13)"** trước phần "điều rút ra". Hạ nhãn 🔸: đoạn 「関与が薄そう」 (camp 6/25) nay ghi rõ **chỉ còn giá trị lịch sử**; điểm 1 sửa thành "app là đối tượng phát triển **và SYP là bên làm**". Thêm ⚠️ **cái vẫn chưa chốt là *mức độ* độc lập của server, không còn là *ai làm gì*** |
+| **§1.3 + Phụ lục E.2** | §1.3: ô SYP trong bảng 4 bên đổi từ *"dự kiến làm luôn server E-GW"* → 3 khối đã đảm nhận, kèm 1 dòng giải thích chữ 「担当想定」 trong nguyên văn `03_stakeholders.md` là cách viết **cũ** (giữ nguyên văn, không sửa nguồn). E.2: xem mục 3.2 dưới |
+
+### 2.4 Kiểm cơ học sau khi vá
+
+`4.457` dòng ・ `274` heading (273 slug duy nhất — trùng 1, có từ trước) ・ **0 liên kết nội bộ hỏng**
+(202 link) ・ `70` dấu ``` (chẵn) ・ **mọi bảng mới khớp số cột** (kiểm bằng `awk -F'|'` trên `git diff`).
+
+⚠️ **Bài học về chính công cụ kiểm**: checker anchor viết lần đầu báo **62 link hỏng** — SAI, do nó gộp
+`\s+` thành 1 gạch, trong khi GitHub biến **mỗi** khoảng trắng quanh dấu `—` thành 1 gạch (nên slug thật
+có `--`). Sửa thành `-replace '\s','-'` (không `+`) → 0 hỏng. **Cùng họ với ⛔#13: finding do tool sinh ra
+phải kiểm lại trước khi vá.** Suýt đi sửa 62 link đang đúng.
+
+## 3. QUYẾT ĐỊNH & PHÁT HIỆN
+
+### 3.1 Điều quan trọng nhất: 完了 ≠ 回答中 → được phép ghi là ĐÃ CHỐT
+
+Bốn QA hồi 08-04 đều 回答中 nên guide phải treo nhãn 🔸. QA No. 10 ở trạng thái **完了** → đây là **căn cứ
+mạnh nhất hiện có** về phạm vi SYP, và là thứ mở khoá cho toàn bộ đợt vá này. Nếu nó cũng 回答中 thì
+không được hạ nhãn.
+
+### 3.2 Property ステータス của QAデータベース có **ba** giá trị, guide chỉ liệt kê hai
+
+Guide (Phụ lục E.2) trước đây ghi ステータス chỉ có `回答中` / `回答済`. Thực tế còn **`完了`**.
+→ ai grep `回答済` để tìm phiếu đã đóng sẽ **sót**. Đã sửa: bảng 3 giá trị + cột "dùng được làm căn cứ chưa".
+Thêm 2 cảnh báo mới vào cùng mục: ① **質問内容 có thể Empty** dù câu hỏi vẫn tồn tại (nằm ở body trang —
+đúng ca No. 10), đừng kết luận "phiếu rỗng" ② **更新日時 hiển thị tương đối** ("Last Thursday"), phải trỏ
+chuột lấy ngày tuyệt đối trước khi trích. Cũng bổ sung property **No.** và tách 起票日時 / 更新日時.
+
+### 3.3 Lỗ hổng quy trình: đợt cập nhật guide chỉ rà git, KHÔNG rà Notion
+
+Câu trả lời này có từ **~13/08**, tức **trước** đợt nâng guide lên v1.3 ngày 18/08 — mà đợt đó bỏ sót.
+Nguyên nhân: quy trình 4 bước ngày 18/08 lấy **`git diff` của repo tài liệu** làm phạm vi, Notion nằm
+ngoài phạm vi đó. **Đây là lỗ hổng quy trình, không phải lỗi của lần đó.**
+→ Đề xuất chưa áp: mọi đợt cập nhật guide phải có **bước 0 = rà QAデータベース** các phiếu đổi trạng thái
+sang 完了/回答済 kể từ mốc lần trước. Chưa sửa vào SKILL nào (xem mục 5).
+
+### 3.4 Phát hiện phụ
+
+- **質問者 là Nguyen Van Tung**, không phải Bui Trong Dat — tức **SYP có nhiều người cùng đăng QA**.
+  Hệ quả: đọc QAデータベース không được lọc theo một người hỏi duy nhất, sẽ sót phiếu.
+- Câu hỏi No. 10 tự khai căn cứ là 「統合要件定義書**および開発費見積もり**」 — tức bảng **báo giá** cũng là
+  nguồn phân công. Guide hiện chỉ dùng `10_feature_list.md` (bám báo giá v0.3); 🔸 **chưa kiểm** bản
+  báo giá gốc có nói gì thêm về 担当 không.
+
+## 4. Thay đổi phía repo dự án
+
+Không pull trong phiên này. `eminel_gw_project` vẫn ở **`1100487`** (kiểm `git log -1`) — đúng mốc đối
+chiếu của guide v1.3, nên mọi số dòng trích trong guide vẫn hợp lệ.
+Workspace `mui-ai` HEAD trước phiên: `432867d`. Thay đổi của phiên (guide) **chưa commit** (⛔#8: không
+push/commit khi user chưa yêu cầu).
+
+## 5. VIỆC DỞ DANG / LÀM TIẾP
+
+1. **Chưa commit** thay đổi guide (`+93/−13`). Chờ user quyết. Guide đang là **v1.3 + đợt vá 08-20** —
+   🔸 chưa quyết có đánh số lên **v1.4** không (bảng meta đầu guide chưa sửa số phiên bản).
+2. **Chưa chạy review 3 vòng** theo `requirements/README.md` §8 / ⛔#5. Chỉ mới kiểm cơ học (mục 2.4).
+   Theo quy trình 4 bước hiệu quả của 18/08 thì bước còn thiếu là **"review CHỈ vùng sửa"** — lấy
+   `git diff requirements/onboarding_guide.md` làm phạm vi, không quét lại 4.457 dòng.
+3. **Chưa áp đề xuất "bước 0 = rà Notion"** (mục 3.3) vào SKILL nào. Nếu áp thì theo ⛔#11 phải đi qua
+   `analyze-change-request` trước, và sửa gốc ở `skillAI/3-step-review/` chứ không vá lẻ.
+4. **Chưa rà các tài liệu khác** theo bảng 担当 mới. Cần kiểm ít nhất: `requirements/README.md` ・
+   `requirements/self_study_plan.md` (4 hạng mục của nó đúng khớp 7-3/7-4/app + batch — có thể chỉ cần
+   thêm 1 câu dẫn nguồn) ・ `notes/guide_v13_mapping.md`.
+5. **Hàng đợi cũ chưa đụng** (giữ nguyên từ `00_INDEX` mục 🎯): 5 việc còn lại của guide v1.3 (N1–N6,
+   Phụ lục C thêm `GW-04`, Phụ lục D trỏ `4_spec/app/`, đọc `c02_グラフ`/`c03_レポート`) ・ điền 7 dòng
+   配信・通知系 + Xzilla vào `summary_batch_migration_ja.md` ・ điều tra nhóm 集計・計算系 ・
+   3 mục treo của task tái cấu trúc app (`submit_folder/2026_08_18/output_schedule.md` mục 7).
+
+## 6. CHƯA KIỂM
+
+- **Bản báo giá 開発費見積もり** — câu hỏi No. 10 trích nó làm căn cứ, mình chưa mở. Không biết nó có
+  nói gì về 担当 mà guide đang thiếu.
+- **Các phiếu QA khác trên Notion** đã đổi trạng thái sang 完了/回答済 từ 08-04 tới nay. Phiên này chỉ
+  xử lý đúng **1 phiếu** user mang tới. Đặc biệt: 4 QA hồi 08-03/04 (guide §9.4) **có thể đã 完了 hết**
+  mà guide vẫn ghi 回答中 — 🔸 chưa kiểm, và đây là việc đáng làm ngay vì rẻ.
+- **5 trang QA 回答中** ở hàng đợi cũ (`00_INDEX` việc số 8) — chưa mở lại lần nào trong phiên này.
+- Ngày `2026-08-13` lấy từ **user xác nhận bằng lời**, chưa tự thấy ngày tuyệt đối trên Notion.

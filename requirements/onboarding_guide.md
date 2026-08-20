@@ -507,12 +507,13 @@ mui Lab (nhà thầu chính)
 |---|---|---|
 | **北海道ガス** (北ガス / KG) | Công ty gas vùng Hokkaido. Có quan hệ **góp vốn và hợp tác kinh doanh** với mui Lab | Đặt hàng, trả tiền, quyết định mọi thứ về nghiệp vụ |
 | **mui Lab** | Công ty Nhật, nhà thầu chính | Thiết kế toàn bộ, làm firmware gateway, làm tầng quản lý thiết bị |
-| **SYP** | Công ty Việt Nam, vendor của mui Lab (email `@syp.vn`) | Hiện thực hoá — đã làm ESTA, dự kiến làm luôn server E-GW |
+| **SYP** | Công ty Việt Nam, vendor của mui Lab (email `@syp.vn`) | Hiện thực hoá — đã làm ESTA; ở E-GW đảm nhận **server EMINEL-smart + màn hình quản trị + mobile app** (mui xác nhận 2026-08-13, [§1.6](#16-phạm-vi-cái-gì-làm-cái-gì-không)) |
 | **Aqara** | Công ty Trung Quốc | Cung cấp phần cứng hub **M300**. Phần mềm thì mui tự làm |
 
 🔍 Nguồn: `eminel_gw_project/docs/eminel/0_foundation/03_stakeholders.md`
 → mục 「外部ベンダー」, dòng 43
 → nguyên văn: 「SYP | mui Lab の外部開発ベンダー（ベトナム拠点、`@syp.vn`）。EMINEL-Smart（ESTA）の実装・テスト・リリースの実働部隊。E-GWのサーバー開発も担当想定」
+→ ⚠️ chữ 「担当想定」 (*dự kiến đảm nhận*) trong nguyên văn là cách viết **cũ**, từ lúc phân công còn chưa chắc. Đến 2026-08-13 mui đã xác nhận dứt khoát — nên bảng trên ghi là đã đảm nhận, không còn "dự kiến"
 
 ### Những cái tên bạn sẽ gặp hằng ngày
 
@@ -586,6 +587,15 @@ Trong bảng chức năng, đây chính là cột **負担** (futan — *gánh c
 
 ## 1.6 Phạm vi: cái gì làm, cái gì không
 
+Có **hai câu hỏi khác nhau** rất dễ trộn vào nhau, và trộn là hiểu sai:
+
+- **対象範囲** (*taishō han'i — phạm vi đối tượng*): dự án này **có làm** cái đó hay không
+- **担当** (*tantō — đảm nhận*): trong những cái có làm, **ai** làm
+
+Mục này trả lời cả hai, theo thứ tự đó.
+
+### ① 対象範囲 — dự án có làm gì
+
 | Hạng mục | Trong phạm vi? |
 |---|---|
 | Firmware gateway | ✅ **Có** |
@@ -596,6 +606,30 @@ Trong bảng chức năng, đây chính là cột **負担** (futan — *gánh c
 
 🔍 Nguồn: `eminel_gw_project/docs/eminel/3_requirements/00_integrated_requirements_v1.2.md`
 → mục 「1-2. 対象範囲」, dòng 28–38
+
+### ② 担当 — mui Lab làm gì, SYP làm gì
+
+Bảng dưới đây **đã được phía mui xác nhận là đúng**, và là căn cứ mới nhất về phân công:
+
+| Khối chức năng | 担当 |
+|---|---|
+| **7-1. E-GW機能（ファームウェア）** — phần mềm nhúng chạy trong gateway | **mui Lab** |
+| **7-2. GW管理クラウド機能** — tầng quản lý thiết bị (sổ gateway, MQTT, dữ liệu thô) | **mui Lab** |
+| **7-3. EMINEL-smartサーバー機能** — server nghiệp vụ (hiển thị, thông báo, DR, liên kết ngoài) | **SYP** |
+| **7-4. 管理画面機能** — màn hình quản trị | **SYP** |
+| **モバイルアプリ** — app điện thoại | **SYP** |
+
+🔍 Nguồn: Notion — QAデータベース dự án, trang 「SYP開発範囲の確認」 (No. 10)
+→ 質問者 (*người hỏi*) Nguyen Van Tung (SYP, 起票/*tạo phiếu* 2026-08-12) · 回答者 (*người trả lời*) swan (mui, 2026-08-13)
+→ nguyên văn (回答内容): 「認識に相違ないです。」 (*"Cách hiểu không có gì sai lệch."*)
+→ trạng thái khi đọc (2026-08-20): **完了** (đã đóng — tương đương 回答済)
+→ câu hỏi trích căn cứ từ 「統合要件定義書および開発費見積もりの記載」 (*tài liệu yêu cầu tích hợp + bảng báo giá phát triển*); các số 7-1〜7-4 là **mục lục của chính tài liệu v1.2**, xem [§6.1](#61-bốn-nhóm-mã-chức-năng)
+
+⚠️ **Ba điều phải đọc kỹ ở bảng ②:**
+
+1. **Mobile app: 対象範囲 nói ❌, 担当 nói SYP làm.** Hai bảng không mâu thuẫn — chúng trả lời hai câu hỏi khác nhau, và chữ 「対象外」 của v1.2 đã lạc hậu (giải thích ngay dưới đây).
+2. **GW管理クラウド là của mui Lab, KHÔNG phải SYP.** Bảng ① gộp nó vào chung một hàng với server EMINEL-smart *(vì v1.2 viết vậy)*, nhưng về phân công thì hai thứ này **tách ra hai bên khác nhau**. Đây là chỗ dễ hiểu sai nhất của cả mục.
+3. **Firmware cũng là của mui Lab.** SYP không đụng tới phần mềm chạy trong gateway.
 
 ### ⚠️ Bẫy lớn: "mobile app ngoài phạm vi" **không có nghĩa là không làm app**
 
@@ -620,7 +654,17 @@ Nghĩa là: tài liệu v1.2 nói "chưa định nghĩa app", còn công việc 
 → nguyên văn (回答内容): 「モバイルアプリは開発対象です。」
 → trạng thái khi đọc (2026-08-04): **回答中** (đang trả lời) — *Notion là dữ liệu sống, trước khi trích lại phải mở trang gốc kiểm tra*
 
-⚠️ Hai điều QA này **chưa** chốt: ① trạng thái còn 回答中 nên câu trả lời có thể được bổ sung; ② vế hỏi kèm — *"phạm vi SYP đảm nhận = ① EMINEL-smartサーバー + ④ 管理画面 theo bảng 「3-3. コンポーネント一覧」, đúng không"* — **chưa được trả lời** *(số ①④ chép nguyên câu hỏi gốc; theo đánh số bảng 3-3 thì EMINEL-smartサーバー là component **3**, 管理画面 là **4** — nghi số ① trong câu hỏi là nhầm)*. Câu trả lời cũng không nói rõ **ai** phát triển app; trong ngữ cảnh câu hỏi về phạm vi SYP thì cách đọc tự nhiên là SYP làm cả app (khớp định hướng "đặt hàng SYP làm 管理画面・モバイルアプリ" ở [8.4](#84-ba-vấn-đề-chặn-syp)) — 🔸 giả thuyết, CHƯA kiểm chứng. Lưu ý: chữ trên giấy của v1.2 §1-2 hiện **vẫn ghi 「対象外」** — nếu sau này v1.2 được sửa, bảng phạm vi đầu mục 1.6 này phải cập nhật theo.
+Câu trả lời 08-03 này để hở hai chỗ, và **cả hai đã được lấp bằng QA 「SYP開発範囲の確認」 (No. 10, 回答 2026-08-13)** ở bảng ② phía trên:
+
+| Chỗ còn hở hồi 08-03 | Nay ra sao |
+|---|---|
+| Trạng thái còn **回答中** nên câu trả lời có thể được bổ sung | QA No. 10 ở trạng thái **完了** — đã đóng |
+| Vế hỏi kèm *"phạm vi SYP đảm nhận = EMINEL-smartサーバー + 管理画面, đúng không"* **chưa được trả lời** | Đã được trả lời, và **rộng hơn vế hỏi**: server + 管理画面 + **app** |
+| Câu 「モバイルアプリは開発対象です」 không nói rõ **ai** làm app | Đã rõ: **SYP** |
+
+*(Ghi chú cho ai đọc lại câu hỏi gốc 08-03: nó ghi *"① EMINEL-smartサーバー + ④ 管理画面 theo bảng 「3-3. コンポーネント一覧」"* — theo đánh số bảng 3-3 thì EMINEL-smartサーバー là component **3**, 管理画面 là **4**, nên số ① trong câu hỏi là nhầm.)*
+
+⚠️ **Nhưng chữ trên giấy của v1.2 §1-2 thì vẫn chưa sửa** — vẫn còn ghi 「対象外」 cho mobile app *(đã kiểm lại tại commit `1100487`)*. Nếu sau này v1.2 được cập nhật, bảng ① đầu mục 1.6 phải sửa theo.
 
 ---
 
@@ -2367,15 +2411,21 @@ GW管理クラウド → gateway đặt file vào chỗ
 
 Toàn dự án dùng một hệ mã thống nhất. Nhìn tiền tố là biết thuộc thành phần nào:
 
-| Tiền tố | Thành phần | Số lượng | Nội dung |
-|---|---|---|---|
-| **F-GW** | Firmware gateway | 01–16 | Thu dữ liệu · điều khiển sưởi/lạnh/phát điện · cài đặt & bảo trì · giao tiếp nội bộ |
-| **F-MC** | GW管理クラウド | 01–08 | Sổ gateway · danh sách thiết bị · MQTT · lưu dữ liệu thô · API + Webhook · cập nhật firmware |
-| **F-ES** | EMINEL-smart server | 01–15 | Hiển thị · thông báo · DR · liên kết ngoài · quản người dùng · giao tiếp app |
-| **F-AD** | Màn hình quản trị | 01–11 | Khách · thiết bị · lỗi · thông báo · khảo sát · Push · DR · tải dữ liệu · phân quyền · thống kê |
+| Tiền tố | Mục trong v1.2 | Thành phần | Số lượng | 担当 | Nội dung |
+|---|---|---|---|---|---|
+| **F-GW** | 7-1 | Firmware gateway | 01–16 | mui Lab | Thu dữ liệu · điều khiển sưởi/lạnh/phát điện · cài đặt & bảo trì · giao tiếp nội bộ |
+| **F-MC** | 7-2 | GW管理クラウド | 01–08 | mui Lab | Sổ gateway · danh sách thiết bị · MQTT · lưu dữ liệu thô · API + Webhook · cập nhật firmware |
+| **F-ES** | 7-3 | EMINEL-smart server | 01–15 | **SYP** | Hiển thị · thông báo · DR · liên kết ngoài · quản người dùng · giao tiếp app |
+| **F-AD** | 7-4 | Màn hình quản trị | 01–11 | **SYP** | Khách · thiết bị · lỗi · thông báo · khảo sát · Push · DR · tải dữ liệu · phân quyền · thống kê |
 
-🔍 Nguồn: `eminel_gw_project/docs/eminel/3_requirements/00_integrated_requirements_v1.2.md`
+🔍 Nguồn (cột 番号・thành phần・nội dung): `eminel_gw_project/docs/eminel/3_requirements/00_integrated_requirements_v1.2.md`
 → mục 「7-1」dòng 370–387 · 「7-2」dòng 391–400 · 「7-3」dòng 404–420 · 「7-4」dòng 424–436
+
+🔍 Nguồn (cột **担当**): Notion — QAデータベース, trang 「SYP開発範囲の確認」 (No. 10), 回答者 swan (mui, 2026-08-13), trạng thái **完了** — chi tiết và nguyên văn ở [§1.6 bảng ②](#16-phạm-vi-cái-gì-làm-cái-gì-không)
+
+⚠️ **Mobile app không có tiền tố trong hệ bốn mã này.** Nó dùng mã **F-AP** ở bảng chức năng `10_feature_list.md`, và requirement app được viết ở một bộ tài liệu riêng 23 section — xem [§7.3](#73-requirement-app-23-section). App **do SYP làm**, dù không nằm trong 7-1〜7-4.
+
+💡 **Vì sao cột 担当 đáng nhớ ngay từ đây**: nhìn tiền tố là biết **có phải việc của mình không**. Gặp `F-GW-xx` hay `F-MC-xx` trong một câu requirement — đó là phần mui Lab làm, bạn đọc để biết **giao diện tiếp giáp** (dữ liệu vào/ra) chứ không phải để hiện thực hoá.
 
 📖 **Mẹo nhớ**
 - **GW** = Gateway
@@ -3468,14 +3518,32 @@ Bốn câu trả lời của mui mới hơn biên bản 6/25 phía trên, **đ�
 | 3 | 「管理画面は独立か共通か（切替モード追加）の確認」 | 「管理画面はE-Smartと共通のソースコード、デプロイも同一（同じ操作者が使う想定）」 | masao takahashi (mui) |
 | 4 | 「旧EMINEL調査範囲（conciergesv/eminelsv）とhemssv対象外の確認」 | 「おおよそその認識でOKです。HEMS-SV(m2-cloud)はmui側開発範囲で、GWとの通信はHEMS-SVを通して行っていただくことになります。ConciergeSV,EminelSVは密に関係しますが、SYPさん開発範囲ではないです。HEMS-SVの仕様等は別途共有します」 | swan (mui) |
 
-Điều rút ra cho vai trò SYP (quan sát từ 4 câu trả lời):
+### ✅ Câu trả lời chốt phạm vi SYP (2026-08-13)
 
-1. **App là đối tượng phát triển** — không còn hiểu "app ngoài phạm vi" nữa (chi tiết + giới hạn câu trả lời: [1.6](#16-phạm-vi-cái-gì-làm-cái-gì-không)).
+Bốn câu trả lời 08-03/04 ở trên **đều còn 回答中**, nên hồi đó chưa được coi là phân công cuối cùng. Điều đó **đã thay đổi**: SYP hỏi lại một lần nữa, gửi kèm bảng phân công tự lập theo 統合要件定義書 + bảng báo giá, và mui **xác nhận là đúng**.
+
+🔍 Nguồn: Notion — QAデータベース dự án, trang 「SYP開発範囲の確認」 (No. 10)
+→ 質問者 Nguyen Van Tung (SYP, 起票 2026-08-12) · 回答者 **swan (mui)**, 回答 2026-08-13
+→ nguyên văn (回答内容): 「認識に相違ないです。」
+→ trạng thái khi đọc (2026-08-20): **完了** (đã đóng — tương đương 回答済)
+
+| Khối chức năng | 担当 |
+|---|---|
+| 7-1. E-GW機能（ファームウェア） · 7-2. GW管理クラウド機能 | mui Lab |
+| **7-3. EMINEL-smartサーバー機能 · 7-4. 管理画面機能 · モバイルアプリ** | **SYP** |
+
+⇒ Đây là **căn cứ mạnh nhất hiện có** về phạm vi SYP: đúng ba khối, trạng thái đã đóng. Bảng đầy đủ kèm cảnh báo cách đọc: [§1.6 bảng ②](#16-phạm-vi-cái-gì-làm-cái-gì-không). Ánh xạ sang bốn nhóm mã F-GW/F-MC/F-ES/F-AD: [§6.1](#61-bốn-nhóm-mã-chức-năng).
+
+Điều rút ra cho vai trò SYP (quan sát từ 4 câu trả lời 08-03/04, nay đã có QA No. 10 chốt lại):
+
+1. **App là đối tượng phát triển, và SYP là bên làm** — không còn hiểu "app ngoài phạm vi" nữa (chi tiết: [1.6](#16-phạm-vi-cái-gì-làm-cái-gì-không)).
 2. **Server E-GW: về cơ bản (基本的には) phát triển theo hướng hệ độc lập** với EMINEL-smart server đang chạy; mui nhờ SYP **báo lại nếu có chức năng nên dùng tiếp hệ hiện hữu** (một việc SYP cần chủ động làm khi điều tra). 🔸 "Độc lập" đến mức nào (có chung library/source không) — câu trả lời chưa nói, đừng suy ra "không chung gì".
 3. **Màn hình quản trị: ngược với server — chung source code, chung deploy với E-Smart**, cùng người vận hành dùng. Tinh chỉnh thêm cho ghi chú camp 6/25 bên dưới (「環境変数／ビルド設定で切り替え」).
 4. **Phạm vi điều tra hệ cũ của SYP = `conciergesv` + `eminelsv`** (khảo sát API・batch để di trú); `hemssv` không thuộc phạm vi — GW giao tiếp qua **HEMS-SV (m2-cloud)** do mui làm, spec sẽ chia sẻ riêng (chi tiết: [4.2](#42-bẫy-tên-gọi-lớn-nhất), ghi chú lệch `eminelsv`: [8.4](#84-ba-vấn-đề-chặn-syp)).
 
-⇒ So với đánh giá 「関与が薄そう」 (6/25) ở trên, bức tranh việc cho SYP theo các trả lời này **rộng hơn**: server E-GW độc lập + phần E-GW trong màn hình quản trị chung + app. 🔸 giả thuyết — CHƯA kiểm chứng: các câu trả lời đều 回答中 và chưa câu nào xác nhận trọn vẹn "danh sách phạm vi SYP đảm nhận" mà câu hỏi 1 nêu; chưa nên coi là phân công cuối cùng.
+⇒ So với đánh giá 「関与が薄そう」 (*tham gia mỏng hơn dự kiến*, camp 6/25) ở đầu mục, bức tranh việc cho SYP **rộng hơn hẳn**: server E-GW độc lập + phần E-GW trong màn hình quản trị chung + app. Đánh giá 6/25 nay chỉ còn giá trị lịch sử — **QA No. 10 (完了, 08-13) đã vượt qua nó**, và đó cũng là câu trả lời trọn vẹn cho "danh sách phạm vi SYP đảm nhận" mà câu hỏi 1 hồi 08-03 nêu ra nhưng không được đáp.
+
+⚠️ **Cái vẫn CHƯA chốt** là *mức độ* độc lập của server (chung library/source hay không — điểm 2 ở trên), chứ không còn là *ai làm cái gì*.
 
 ### Vì sao spec màn hình quản trị được ưu tiên viết
 
@@ -4123,7 +4191,19 @@ Câu hỏi của bạn
 
 🔍 Nguồn quy trình: `eminel_gw_project/.claude/skills/trace-source/SKILL.md`
 
-**Về QAデータベース (hàng 6)**: SYP đăng câu hỏi ở đây (khối 🇯🇵 trong `qa_kitagas.md` dán được nguyên vẹn) và phía mui trả lời trực tiếp. Mỗi trang có property: ステータス (*trạng thái* — 回答中 = đang trả lời, 回答済 = đã trả lời xong), 質問者 (*người hỏi*), 回答者 (*người trả lời*), 回答内容 (*nội dung trả lời*), 起票 (*ngày tạo phiếu*).
+**Về QAデータベース (hàng 6)**: SYP đăng câu hỏi ở đây (khối 🇯🇵 trong `qa_kitagas.md` dán được nguyên vẹn) và phía mui trả lời trực tiếp. Mỗi trang có property: **No.** (số phiếu — dùng làm định danh khi trích), ステータス (*trạng thái*), 質問者 (*người hỏi*), 回答者 (*người trả lời*), 回答内容 (*nội dung trả lời*), 起票日時 (*ngày tạo phiếu*), 更新日時 (*ngày cập nhật* — dùng làm ngày trả lời).
+
+**Giá trị của ステータス** — đã gặp ba giá trị, đừng chỉ grep một cái:
+
+| Giá trị | Nghĩa | Dùng được làm căn cứ chưa? |
+|---|---|---|
+| **回答中** | Đang trả lời | ❌ Chưa — câu trả lời còn có thể bị bổ sung hoặc đổi |
+| **回答済** | Đã trả lời xong | ✅ Được |
+| **完了** | Đã đóng phiếu — **cùng nghĩa với 回答済** | ✅ Được |
+
+⚠️ Ô 質問内容 **có thể để trống** dù câu hỏi vẫn tồn tại — nội dung thật nằm ở **body của trang** (ví dụ trang 「SYP開発範囲の確認」 No. 10: property trống, câu hỏi và bảng phân công nằm trong body). Thấy 質問内容 = Empty thì phải cuộn xuống đọc body, không kết luận "phiếu rỗng".
+
+⚠️ Ô 更新日時 hiển thị kiểu **tương đối** ("Last Thursday 12:28 PM"). Trỏ chuột vào để lấy ngày tuyệt đối trước khi trích — ghi ngày tương đối vào tài liệu là vài tuần sau không ai dịch lại được.
 
 ⚠️ Đây là **dữ liệu sống**: khi trích dẫn phải ghi kèm ngày đọc, và mở lại trang gốc kiểm tra trạng thái trước khi dùng.
 

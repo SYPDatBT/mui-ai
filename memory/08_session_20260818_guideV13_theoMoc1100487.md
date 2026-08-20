@@ -1,5 +1,6 @@
 # SESSION 2026-08-18 — Rà & cập nhật `onboarding_guide.md` lên **v1.3** theo mốc `1100487`
-> Đọc SAU `00_INDEX.md`. ⭐ TRẠNG THÁI MỚI NHẤT (chưa có file nào thay).
+> ⛔ KHÔNG CÒN LÀ TRẠNG THÁI MỚI NHẤT (2026-08-20) — xem `09_session_20260820_qaSypScopeNo10_guideBangTanto.md`. Nội dung dưới đây vẫn đúng về đợt v1.3, giữ làm vết. **Một điểm đã lộ ra là thiếu**: quy trình 4 bước của phiên này lấy `git diff` repo tài liệu làm phạm vi nên **bỏ sót QA đã đóng trên Notion** (phiếu No. 10 trả lời 08-13, guide chỉ phản ánh được ngày 08-20).
+> Đọc SAU `00_INDEX.md`.
 > ⚡ PHIÊN MỚI ĐỌC NHANH: việc kế tiếp = **mục 5**. Vết đầy đủ của đợt sửa (mapping + 2 lượt review) = `notes/guide_v13_mapping.md`.
 
 ## 1. Bối cảnh & mục tiêu phiên
