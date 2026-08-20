@@ -200,7 +200,7 @@ Mỗi khẳng định trong tài liệu này đều kèm nguồn theo định d�
 | Loại nguồn | Mốc | Nghĩa |
 |---|---|---|
 | Repo (`docs/`, code) | commit `1100487`, kiểm **2026-08-18** | Số dòng và nội dung đúng tại mốc này |
-| QAデータベース Notion | lần đọc **2026-08-04**, **chưa kiểm lại** | Notion là dữ liệu sống — mọi trạng thái 回答中 trong tài liệu này ứng với ngày đó, **phải mở trang gốc trước khi trích lại** |
+| QAデータベース Notion | **kiểm một phần 2026-08-20** — chỉ 2 phiếu (No. 1 và No. 10, đều ✅ 完了). Các phiếu khác vẫn là **lần đọc 2026-08-04** | Notion là dữ liệu sống. Mọi trạng thái `回答中` còn lại trong tài liệu này ứng với **ngày 08-04**, và **rất có thể đã lạc hậu** — mui đóng phiếu theo đợt. **Phải mở trang gốc trước khi trích lại**; cách đọc property và 4 cái bẫy: [Phụ lục E.2](#e2-bước-2--đi-theo-thứ-tự) |
 
 ---
 
@@ -620,7 +620,7 @@ Bảng dưới đây **đã được phía mui xác nhận là đúng**, và là
 | **モバイルアプリ** — app điện thoại | **SYP** |
 
 🔍 Nguồn: Notion — QAデータベース dự án, trang 「SYP開発範囲の確認」 (No. 10)
-→ 質問者 (*người hỏi*) Nguyen Van Tung (SYP, 起票/*tạo phiếu* 2026-08-12) · 回答者 (*người trả lời*) swan (mui, 2026-08-13)
+→ 質問者 (*người hỏi*) Nguyen Van Tung (SYP, 起票/*tạo phiếu* 2026-08-12 16:17) · 回答者 (*người trả lời*) swan (mui) · phiếu được **chốt 2026-08-13 12:28** (更新日時)
 → nguyên văn (回答内容): 「認識に相違ないです。」 (*"Cách hiểu không có gì sai lệch."*)
 → trạng thái khi đọc (2026-08-20): **完了** (đã đóng — tương đương 回答済)
 → câu hỏi trích căn cứ từ 「統合要件定義書および開発費見積もりの記載」 (*tài liệu yêu cầu tích hợp + bảng báo giá phát triển*); các số 7-1〜7-4 là **mục lục của chính tài liệu v1.2**, xem [§6.1](#61-bốn-nhóm-mã-chức-năng)
@@ -649,18 +649,22 @@ Nghĩa là: tài liệu v1.2 nói "chưa định nghĩa app", còn công việc 
 
 **Phía mui đã xác nhận trực tiếp cách đọc này.** Khi SYP hỏi trên QAデータベース của dự án (Notion) rằng *"mobile app (EMINEL-smart) nằm ngoài phạm vi đảm nhận, đúng không?"*, câu trả lời là ngược lại:
 
-🔍 Nguồn: Notion — QAデータベース dự án, trang 「担当範囲（サーバー／管理画面）とアプリ対象外の確認」
-→ 質問者 (*người hỏi*) Bui Trong Dat (SYP, 起票/*tạo phiếu* 2026-08-03) · 回答者 (*người trả lời*) masao takahashi (mui, 2026-08-03)
-→ nguyên văn (回答内容): 「モバイルアプリは開発対象です。」
-→ trạng thái khi đọc (2026-08-04): **回答中** (đang trả lời) — *Notion là dữ liệu sống, trước khi trích lại phải mở trang gốc kiểm tra*
+🔍 Nguồn: Notion — QAデータベース dự án, trang 「担当範囲（サーバー／管理画面）とアプリ対象外の確認」 (**No. 1**)
+→ 質問者 (*người hỏi*) Bui Trong Dat (SYP, 起票/*tạo phiếu* 2026-08-03 17:30) · 回答者 (*người trả lời*) masao takahashi (mui)
+→ nguyên văn (回答内容): 「モバイルアプリは開発対象です。」 — nội dung này **đã có từ 2026-08-03/04**
+→ trạng thái khi đọc (2026-08-20): **完了** (đã đóng) — phiếu được chốt ngày **2026-08-13 12:27** (更新日時), tức **10 ngày sau khi câu trả lời được viết**
 
-Câu trả lời 08-03 này để hở hai chỗ, và **cả hai đã được lấp bằng QA 「SYP開発範囲の確認」 (No. 10, 回答 2026-08-13)** ở bảng ② phía trên:
+⚠️ **Đọc kỹ hai mốc ngày ở trên, đừng gộp làm một**: câu trả lời có nội dung từ 08-03/04 nhưng lúc đó phiếu còn 回答中 (*chưa chốt, có thể bị bổ sung*); nó chỉ thành căn cứ dùng được khi chuyển sang 完了 ngày 08-13. Giải thích cơ chế: [Phụ lục E.2](#e2-bước-2--đi-theo-thứ-tự).
+
+Câu trả lời này để hở hai chỗ, và **cả hai đã được lấp bằng QA 「SYP開発範囲の確認」 (No. 10, chốt 2026-08-13 12:28 — chỉ sau phiếu No. 1 một phút)** ở bảng ② phía trên:
 
 | Chỗ còn hở hồi 08-03 | Nay ra sao |
 |---|---|
-| Trạng thái còn **回答中** nên câu trả lời có thể được bổ sung | QA No. 10 ở trạng thái **完了** — đã đóng |
-| Vế hỏi kèm *"phạm vi SYP đảm nhận = EMINEL-smartサーバー + 管理画面, đúng không"* **chưa được trả lời** | Đã được trả lời, và **rộng hơn vế hỏi**: server + 管理画面 + **app** |
-| Câu 「モバイルアプリは開発対象です」 không nói rõ **ai** làm app | Đã rõ: **SYP** |
+| Trạng thái còn **回答中** nên câu trả lời có thể được bổ sung | Phiếu No. 1 nay **完了** — câu 「モバイルアプリは開発対象です」 là **kết luận cuối**, không còn chờ bổ sung |
+| Vế hỏi kèm *"phạm vi SYP đảm nhận = EMINEL-smartサーバー + 管理画面, đúng không"* **chưa được trả lời** | Đã được trả lời bằng phiếu No. 10, và **rộng hơn vế hỏi**: server + 管理画面 + **app** |
+| Câu 「モバイルアプリは開発対象です」 không nói rõ **ai** làm app | Đã rõ: **SYP** (phiếu No. 10) |
+
+💡 **Vì sao chú ý chuyện "cách nhau một phút"**: hai phiếu No. 1 và No. 10 được mui đóng trong cùng một lượt dọn (12:27 và 12:28 ngày 08-13). Nghĩa là **đừng tin trạng thái đã đọc từ lâu** — mui xử lý QA theo đợt, một hôm đóng nhiều phiếu cùng lúc. 🔸 Kéo theo giả thuyết **chưa kiểm**: ba phiếu còn lại ở [§9.4](#94-vai-trò-và-môi-trường-của-syp) rất có thể cũng đã 完了 trong cùng đợt đó.
 
 *(Ghi chú cho ai đọc lại câu hỏi gốc 08-03: nó ghi *"① EMINEL-smartサーバー + ④ 管理画面 theo bảng 「3-3. コンポーネント一覧」"* — theo đánh số bảng 3-3 thì EMINEL-smartサーバー là component **3**, 管理画面 là **4**, nên số ① trong câu hỏi là nhầm.)*
 
@@ -3509,21 +3513,27 @@ Dịch: *"SYP tham gia mỏng hơn dự kiến ban đầu → hướng giao mả
 
 ### ⚠️ Bốn câu trả lời của mui về phạm vi SYP (QAデータベース Notion)
 
-Bốn câu trả lời của mui mới hơn biên bản 6/25 phía trên, **đều đang ở trạng thái 回答中** (đang trả lời — chưa chốt) tại thời điểm đọc 2026-08-04; 質問者 đều là Bui Trong Dat (SYP), 起票 2026-08-03. Hai người trả lời đều thuộc **mui** — chú ý **masao takahashi (mui)** là người khác với 高橋 phía 北ガス ở [1.3](#13-bốn-bên-và-ai-làm-gì-cho-ai). *Notion là dữ liệu sống — trước khi trích lại phải mở trang gốc kiểm tra.*
+Bốn câu trả lời của mui mới hơn biên bản 6/25 phía trên. 質問者 đều là Bui Trong Dat (SYP), 起票 2026-08-03; nội dung trả lời đều đã đọc được ngày 2026-08-04. Hai người trả lời đều thuộc **mui** — chú ý **masao takahashi (mui)** là người khác với 高橋 phía 北ガス ở [1.3](#13-bốn-bên-và-ai-làm-gì-cho-ai).
 
-| # | Trang QA | Trả lời (nguyên văn 回答内容) | Người trả lời |
-|---|---|---|---|
-| 1 | 「担当範囲（サーバー／管理画面）とアプリ対象外の確認」 | 「モバイルアプリは開発対象です。」 | masao takahashi (mui) |
-| 2 | 「旧Eminel基盤継承＋EMINEL-smartサーバーは独立デプロイの確認」 | 「基本的には独立したシステムとして開発してもらう方向でお願いします。ただし既存システムを使い続けたほうがいい機能があれば教えてほしいです」 | swan (mui) |
-| 3 | 「管理画面は独立か共通か（切替モード追加）の確認」 | 「管理画面はE-Smartと共通のソースコード、デプロイも同一（同じ操作者が使う想定）」 | masao takahashi (mui) |
-| 4 | 「旧EMINEL調査範囲（conciergesv/eminelsv）とhemssv対象外の確認」 | 「おおよそその認識でOKです。HEMS-SV(m2-cloud)はmui側開発範囲で、GWとの通信はHEMS-SVを通して行っていただくことになります。ConciergeSV,EminelSVは密に関係しますが、SYPさん開発範囲ではないです。HEMS-SVの仕様等は別途共有します」 | swan (mui) |
+**Cột trạng thái là phần dễ lạc hậu nhất của bảng này** — cả bốn phiếu hồi 08-04 đều còn `回答中`, nhưng mui đóng phiếu theo đợt, nên phải mở lại trang gốc kiểm mới biết:
+
+| No. | Trang QA | Trả lời (nguyên văn 回答内容) | Người trả lời | ステータス |
+|---|---|---|---|---|
+| **1** | 「担当範囲（サーバー／管理画面）とアプリ対象外の確認」 | 「モバイルアプリは開発対象です。」 | masao takahashi (mui) | ✅ **完了** *(chốt 08-13 12:27; kiểm 08-20)* |
+| ? | 「旧Eminel基盤継承＋EMINEL-smartサーバーは独立デプロイの確認」 | 「基本的には独立したシステムとして開発してもらう方向でお願いします。ただし既存システムを使い続けたほうがいい機能があれば教えてほしいです」 | swan (mui) | 🔸 **chưa kiểm lại** *(08-04: 回答中)* |
+| ? | 「管理画面は独立か共通か（切替モード追加）の確認」 | 「管理画面はE-Smartと共通のソースコード、デプロイも同一（同じ操作者が使う想定）」 | masao takahashi (mui) | 🔸 **chưa kiểm lại** *(08-04: 回答中)* |
+| ? | 「旧EMINEL調査範囲（conciergesv/eminelsv）とhemssv対象外の確認」 | 「おおよそその認識でOKです。HEMS-SV(m2-cloud)はmui側開発範囲で、GWとの通信はHEMS-SVを通して行っていただくことになります。ConciergeSV,EminelSVは密に関係しますが、SYPさん開発範囲ではないです。HEMS-SVの仕様等は別途共有します」 | swan (mui) | 🔸 **chưa kiểm lại** *(08-04: 回答中)* |
+
+*(Cột `No.` là số phiếu trong QAデータベース, dùng làm định danh khi trích. Ba phiếu chưa mở lại nên chưa biết số — điền vào khi kiểm.)*
+
+⚠️ **Ba phiếu `?` ở trên rất có thể đã 完了 rồi.** Phiếu No. 1 và phiếu No. 10 (「SYP開発範囲の確認」) được đóng cách nhau **một phút** ngày 08-13 — mui rõ ràng dọn QA theo đợt. Mở lại ba phiếu đó là việc **rẻ và đáng làm ngay**: mỗi phiếu chuyển sang 完了 là một kết luận trong tài liệu này được nâng từ "định hướng" lên "đã chốt". Nhớ: **`完了` cũng nghĩa là đã trả lời** — grep riêng `回答済` sẽ sót ([Phụ lục E.2](#e2-bước-2--đi-theo-thứ-tự)).
 
 ### ✅ Câu trả lời chốt phạm vi SYP (2026-08-13)
 
 Bốn câu trả lời 08-03/04 ở trên **đều còn 回答中**, nên hồi đó chưa được coi là phân công cuối cùng. Điều đó **đã thay đổi**: SYP hỏi lại một lần nữa, gửi kèm bảng phân công tự lập theo 統合要件定義書 + bảng báo giá, và mui **xác nhận là đúng**.
 
 🔍 Nguồn: Notion — QAデータベース dự án, trang 「SYP開発範囲の確認」 (No. 10)
-→ 質問者 Nguyen Van Tung (SYP, 起票 2026-08-12) · 回答者 **swan (mui)**, 回答 2026-08-13
+→ 質問者 Nguyen Van Tung (SYP, 起票 2026-08-12) · 回答者 **swan (mui)** · phiếu **chốt 2026-08-13** (更新日時 12:28)
 → nguyên văn (回答内容): 「認識に相違ないです。」
 → trạng thái khi đọc (2026-08-20): **完了** (đã đóng — tương đương 回答済)
 
@@ -4191,7 +4201,7 @@ Câu hỏi của bạn
 
 🔍 Nguồn quy trình: `eminel_gw_project/.claude/skills/trace-source/SKILL.md`
 
-**Về QAデータベース (hàng 6)**: SYP đăng câu hỏi ở đây (khối 🇯🇵 trong `qa_kitagas.md` dán được nguyên vẹn) và phía mui trả lời trực tiếp. Mỗi trang có property: **No.** (số phiếu — dùng làm định danh khi trích), ステータス (*trạng thái*), 質問者 (*người hỏi*), 回答者 (*người trả lời*), 回答内容 (*nội dung trả lời*), 起票日時 (*ngày tạo phiếu*), 更新日時 (*ngày cập nhật* — dùng làm ngày trả lời).
+**Về QAデータベース (hàng 6)**: SYP đăng câu hỏi ở đây (khối 🇯🇵 trong `qa_kitagas.md` dán được nguyên vẹn) và phía mui trả lời trực tiếp. Mỗi trang có property: **No.** (số phiếu — dùng làm định danh khi trích), ステータス (*trạng thái*), 質問者 (*người hỏi*), 回答者 (*người trả lời*), 回答内容 (*nội dung trả lời*), 起票日時 (*ngày tạo phiếu*), 更新日時 (*ngày sửa gần nhất*).
 
 **Giá trị của ステータス** — đã gặp ba giá trị, đừng chỉ grep một cái:
 
@@ -4201,9 +4211,15 @@ Câu hỏi của bạn
 | **回答済** | Đã trả lời xong | ✅ Được |
 | **完了** | Đã đóng phiếu — **cùng nghĩa với 回答済** | ✅ Được |
 
-⚠️ Ô 質問内容 **có thể để trống** dù câu hỏi vẫn tồn tại — nội dung thật nằm ở **body của trang** (ví dụ trang 「SYP開発範囲の確認」 No. 10: property trống, câu hỏi và bảng phân công nằm trong body). Thấy 質問内容 = Empty thì phải cuộn xuống đọc body, không kết luận "phiếu rỗng".
+### ⚠️ Bốn cái bẫy của QAデータベース
 
-⚠️ Ô 更新日時 hiển thị kiểu **tương đối** ("Last Thursday 12:28 PM"). Trỏ chuột vào để lấy ngày tuyệt đối trước khi trích — ghi ngày tương đối vào tài liệu là vài tuần sau không ai dịch lại được.
+**① `更新日時` KHÔNG phải ngày viết câu trả lời.** Nó là ngày sửa gần nhất — mà lần sửa cuối thường chỉ là *đổi trạng thái*. Ca thật: phiếu **No. 1** 「担当範囲…とアプリ対象外の確認」 có nội dung trả lời 「モバイルアプリは開発対象です。」 **từ 08-03/04**, nhưng 更新日時 là **08-13 12:27** — đó là lúc phiếu được đóng, cách 10 ngày. Khi trích, **ghi cả hai mốc** nếu biết: ngày có nội dung, và ngày chốt trạng thái.
+
+**② mui đóng phiếu theo ĐỢT.** Phiếu No. 1 chốt 12:27, phiếu No. 10 chốt 12:28 — cùng ngày 08-13. Hệ quả: **trạng thái đọc từ lâu là vô giá trị**; và nếu thấy một phiếu vừa chuyển 完了 thì nên mở luôn các phiếu cùng chủ đề, khả năng cao chúng cũng vừa được đóng.
+
+**③ `質問内容` có thể để trống** dù câu hỏi vẫn tồn tại — nội dung thật nằm ở **body của trang**. Cả hai phiếu No. 1 và No. 10 đều có property này Empty. Thấy Empty thì cuộn xuống đọc body, **không** kết luận "phiếu rỗng".
+
+**④ Ngày hiển thị kiểu tương đối** ("Last Thursday 12:28 PM"). Trỏ chuột vào để lấy ngày tuyệt đối trước khi trích — ghi ngày tương đối vào tài liệu thì vài tuần sau không ai dịch lại được.
 
 ⚠️ Đây là **dữ liệu sống**: khi trích dẫn phải ghi kèm ngày đọc, và mở lại trang gốc kiểm tra trạng thái trước khi dùng.
 

@@ -24,7 +24,7 @@ gửi phần property. Ảnh thứ hai đủ. Nguồn chốt:
 | 回答者 | **swan (mui)** — cùng người trả lời QA 独立デプロイ và QA hemssv hồi 08-04 |
 | 質問者 | **Nguyen Van Tung (SYP)** — *không phải* Bui Trong Dat |
 | 起票日時 | 2026-08-12 16:17 |
-| 更新日時 (= ngày trả lời) | **2026-08-13** 12:28 (Notion hiện "Last Thursday", user xác nhận ngày tuyệt đối) |
+| 更新日時 (= ngày **chốt** phiếu, xem 3.4) | **2026-08-13** 12:28 (Notion hiện "Last Thursday", user xác nhận ngày tuyệt đối) |
 | 質問内容 (property) | **Empty** — nội dung câu hỏi nằm ở **body trang** |
 
 Nội dung bảng phân công được xác nhận (căn cứ user tự lập từ 「統合要件定義書および開発費見積もりの記載」):
@@ -68,6 +68,43 @@ Mốc guide: v1.3 / đối chiếu `1100487`. Repo `eminel_gw_project` kiểm `g
 có `--`). Sửa thành `-replace '\s','-'` (không `+`) → 0 hỏng. **Cùng họ với ⛔#13: finding do tool sinh ra
 phải kiểm lại trước khi vá.** Suýt đi sửa 62 link đang đúng.
 
+### 2.5 Đợt vá thứ hai cùng ngày — phiếu QA **No. 1** cũng đã 完了
+
+User mang tiếp ảnh property của phiếu 「**担当範囲（サーバー／管理画面）とアプリ対象外の確認**」 — chính là
+QA #1 của bảng §9.4, và chính là **việc 1c** vừa ghi vào hàng đợi vài phút trước.
+
+| Ô | Giá trị | Guide trước đó ghi gì |
+|---|---|---|
+| **No.** | **1** | *(không ghi)* |
+| ステータス | **完了** | `回答中` ❌ **SAI** |
+| 回答内容 | 「モバイルアプリは開発対象です。」 | ✅ khớp |
+| 回答者 | masao takahashi | ✅ khớp |
+| 質問者 | Bui Trong Dat | ✅ khớp |
+| 起票日時 | 2026-08-03 **17:30** | ✅ khớp (thiếu giờ) |
+| 更新日時 | **2026-08-13 12:27** | *(không ghi)* |
+| 質問内容 | **Empty** | — |
+
+**⭐ Phát hiện giá trị nhất của cả ngày** (xem mục 3.4): 更新日時 của phiếu này là **08-13 12:27**, phiếu
+No. 10 là **08-13 12:28** — **cách nhau MỘT PHÚT**. Nhưng nội dung trả lời của No. 1 thì **đã đọc được
+từ 08-04**. ⇒ hai điều rút ra, cả hai đã ghi vào guide:
+
+1. **更新日時 = ngày ĐÓNG phiếu, KHÔNG phải ngày viết câu trả lời** (No. 1 lệch 10 ngày).
+2. **mui dọn QA theo ĐỢT** — trạng thái đọc từ lâu là vô giá trị.
+
+**Vá guide lượt 2 — 6 chỗ, `+40/−13` dòng:**
+
+| Chỗ | Sửa gì |
+|---|---|
+| **§0.3** bảng "hai mốc kiểm" | Hàng QAデータベース: từ *"lần đọc 08-04, chưa kiểm lại"* → **"kiểm một phần 08-20, chỉ 2 phiếu No. 1 + No. 10"**; nói rõ các trạng thái 回答中 còn lại **rất có thể đã lạc hậu** |
+| **§1.6** dòng 🔍 phiếu No. 1 | Thêm **No. 1** ・ 起票 kèm giờ ・ tách **2 mốc**: nội dung có từ 08-03/04, phiếu chốt **08-13 12:27** ・ trạng thái **完了** ・ thêm ⚠️ "đừng gộp hai mốc ngày" |
+| **§1.6** bảng "chỗ hở → nay ra sao" | Hàng 1 viết lại: không còn là *"No. 10 đã 完了"* mà là **chính phiếu No. 1 nay 完了** ⇒ 「モバイルアプリは開発対象です」 là **kết luận cuối** |
+| **§1.6** thêm 💡 | Giải thích chuyện "cách nhau một phút" + 🔸 giả thuyết 3 phiếu còn lại cũng đã 完了 |
+| **§9.4** bảng 4 QA | Đổi cột `#` → **`No.`** + thêm **cột ステータス**: No. 1 = ✅ 完了 (chốt 08-13, kiểm 08-20), 3 phiếu còn lại = 🔸 **chưa kiểm lại** (08-04: 回答中), số phiếu để `?`. Bỏ câu "đều đang ở trạng thái 回答中". Thêm ⚠️ 3 phiếu `?` rất có thể đã 完了 — việc rẻ, đáng làm ngay |
+| **Phụ lục E.2** | **Sửa lỗi của chính lượt 1** (xem 3.4) + dựng mục 「⚠️ Bốn cái bẫy của QAデータベース」: ① 更新日時 ≠ ngày trả lời ② mui đóng theo đợt ③ 質問内容 Empty (cả 2 phiếu đều vậy) ④ ngày hiển thị tương đối |
+
+Kiểm cơ học sau lượt 2: `4.474` dòng ・ 274 heading ・ **205 link, 0 hỏng** ・ 70 fence (chẵn).
+Đã audit toàn bộ chỗ còn chữ `回答中` — các chỗ còn lại đều là phiếu **thật sự chưa kiểm**, đúng.
+
 ## 3. QUYẾT ĐỊNH & PHÁT HIỆN
 
 ### 3.1 Điều quan trọng nhất: 完了 ≠ 回答中 → được phép ghi là ĐÃ CHỐT
@@ -79,10 +116,11 @@ không được hạ nhãn.
 ### 3.2 Property ステータス của QAデータベース có **ba** giá trị, guide chỉ liệt kê hai
 
 Guide (Phụ lục E.2) trước đây ghi ステータス chỉ có `回答中` / `回答済`. Thực tế còn **`完了`**.
-→ ai grep `回答済` để tìm phiếu đã đóng sẽ **sót**. Đã sửa: bảng 3 giá trị + cột "dùng được làm căn cứ chưa".
-Thêm 2 cảnh báo mới vào cùng mục: ① **質問内容 có thể Empty** dù câu hỏi vẫn tồn tại (nằm ở body trang —
-đúng ca No. 10), đừng kết luận "phiếu rỗng" ② **更新日時 hiển thị tương đối** ("Last Thursday"), phải trỏ
-chuột lấy ngày tuyệt đối trước khi trích. Cũng bổ sung property **No.** và tách 起票日時 / 更新日時.
+→ ai grep `回答済` để tìm phiếu đã đóng sẽ **sót**. Đã sửa: bảng 3 giá trị + cột "dùng được làm căn cứ chưa";
+bổ sung property **No.** và tách 起票日時 / 更新日時.
+
+Mục này về sau (lượt vá 2) được dựng thành 「**⚠️ Bốn cái bẫy của QAデータベース**」 — nội dung cuối cùng của
+nó, kể cả phần sửa lỗi 更新日時, xem **mục 3.4**. Đọc bản trong guide là đủ, đừng đọc lịch sử ở đây.
 
 ### 3.3 Lỗ hổng quy trình: đợt cập nhật guide chỉ rà git, KHÔNG rà Notion
 
@@ -92,7 +130,19 @@ ngoài phạm vi đó. **Đây là lỗ hổng quy trình, không phải lỗi c
 → Đề xuất chưa áp: mọi đợt cập nhật guide phải có **bước 0 = rà QAデータベース** các phiếu đổi trạng thái
 sang 完了/回答済 kể từ mốc lần trước. Chưa sửa vào SKILL nào (xem mục 5).
 
-### 3.4 Phát hiện phụ
+### 3.4 ⛔ TỰ MẮC LỖI TRONG PHIÊN, ĐÃ SỬA — 更新日時 không phải ngày trả lời
+
+Lượt vá 1 (buổi sáng) tôi viết vào Phụ lục E.2: 「更新日時 (*ngày cập nhật* — **dùng làm ngày trả lời**)」.
+Lượt vá 2 (phiếu No. 1) **bác bỏ chính câu đó**: nội dung trả lời có từ 08-03/04 mà 更新日時 = 08-13,
+lệch **10 ngày**. Đã sửa thành 「*ngày sửa gần nhất*」 + bẫy ① của mục 「Bốn cái bẫy」.
+
+**Nguyên nhân**: suy từ **một** mẫu (phiếu No. 10 có 起票 08-12 → 更新 08-13, chênh 1 ngày nên hai cách
+đọc trùng nhau) rồi phát biểu thành quy tắc chung. Đúng họ với ⛔#3 (không bịa nguyên nhân) — nhưng biến
+thể nguy hiểm hơn: **quy nạp từ 1 mẫu vào một khẳng định về CƠ CHẾ của công cụ**.
+**Bài học vận hành**: khi định viết một câu về *cách một hệ thống hoạt động* (property nghĩa là gì, cột
+nào tin được), phải có **≥2 mẫu lệch nhau** hoặc tài liệu chính thức — 1 mẫu chỉ đủ để tả mẫu đó.
+
+### 3.5 Phát hiện phụ
 
 - **質問者 là Nguyen Van Tung**, không phải Bui Trong Dat — tức **SYP có nhiều người cùng đăng QA**.
   Hệ quả: đọc QAデータベース không được lọc theo một người hỏi duy nhất, sẽ sót phiếu.
