@@ -201,7 +201,7 @@ Mỗi khẳng định trong tài liệu này đều kèm nguồn theo định d�
 | Loại nguồn | Mốc | Nghĩa |
 |---|---|---|
 | Repo (`docs/`, code) | commit `1100487`, kiểm **2026-08-18** | Số dòng và nội dung đúng tại mốc này |
-| QAデータベース Notion | **kiểm 2026-08-20** — 8 phiếu (**No. 1 · 2 · 3 · 4 · 5 · 7 · 9 · 10**), **cả tám ✅ 完了**. Phiếu ngoài danh sách này vẫn là **lần đọc 2026-08-04** | Notion là dữ liệu sống. Trạng thái `回答中` còn sót ở đâu trong tài liệu này thì ứng với **ngày 08-04** và **rất có thể đã lạc hậu** — cả 6 phiếu đã kiểm đều được mui đóng trong **cùng 2 phút** ngày 08-13. ⚠️ **Phiếu 完了 không có nghĩa là hết dè dặt**: đóng phiếu không thêm chữ nào vào câu trả lời, nên các chữ nhượng bộ (「基本的には」「今の所」) và chuyện "mui trả lời ≠ 北ガス xác nhận" vẫn còn nguyên. **Phải mở trang gốc trước khi trích lại**; cách đọc property và 4 cái bẫy: [Phụ lục E.2](#e2-bước-2--đi-theo-thứ-tự) |
+| QAデータベース Notion | **kiểm 2026-08-20** — 9 phiếu: **No. 1 · 2 · 3 · 4 · 5 · 7 · 9 · 10** đều ✅ **完了**; **No. 12** còn 🔶 **確認中, chưa có câu trả lời**. Phiếu ngoài danh sách này vẫn là **lần đọc 2026-08-04** | Notion là dữ liệu sống. Trạng thái `回答中` còn sót ở đâu trong tài liệu này thì ứng với **ngày 08-04** và **rất có thể đã lạc hậu** — cả 6 phiếu đã kiểm đều được mui đóng trong **cùng 2 phút** ngày 08-13. ⚠️ **Phiếu 完了 không có nghĩa là hết dè dặt**: đóng phiếu không thêm chữ nào vào câu trả lời, nên các chữ nhượng bộ (「基本的には」「今の所」) và chuyện "mui trả lời ≠ 北ガス xác nhận" vẫn còn nguyên. **Phải mở trang gốc trước khi trích lại**; cách đọc property và 4 cái bẫy: [Phụ lục E.2](#e2-bước-2--đi-theo-thứ-tự) |
 
 ---
 
@@ -4085,6 +4085,10 @@ Bốn mâu thuẫn tìm được khi đối chiếu chéo (B.5 là mục mới, 
 
 ⇒ **Mâu thuẫn này coi như đã ngả về phía 劣後** (lùi sang sau), khớp với cả hai tài liệu quản lý. Nhưng **chưa xoá khỏi bảng mâu thuẫn**, vì hai lý do: chữ 「今の所」 (*hiện tại thì*) trong nguyên văn, và đây là trả lời của **mui** chứ không phải của **北ガス** — người quyết phạm vi. Chừng nào `A04_badge_rank.md` còn viết toàn bộ vào 「26年対応スコープ」 thì chữ trên giấy vẫn còn vênh.
 
+**Diễn biến (2026-08-12) — câu hỏi rộng hơn đã được lập nhưng CHƯA có trả lời**: SYP lập tiếp phiếu **No. 12** 「2027年劣後機能の確認」 (質問者 Nguyen Van Tung, 起票 08-12 17:41) để hỏi **toàn bộ danh sách chức năng lùi sang 2027**, không chỉ riêng huy hiệu. Phiếu này ở trạng thái **確認中** và ô `回答内容` **trống** — kiểm 2026-08-20 vẫn vậy.
+
+⚠️ **Đáng chú ý**: ngày 08-13 mui đóng một loạt **tám** phiếu khác (xem [§9.4](#94-vai-trò-và-môi-trường-của-syp)) nhưng **để phiếu No. 12 lại**. Phiếu này lập 08-12, tức **trước** đợt dọn đó. Nên đây không phải "chưa tới lượt" — nó bị **bỏ qua có chọn lọc**. Việc cần làm: **thúc mui trả lời**, xem [Phụ lục C #13](#phụ-lục-c--danh-mục-tbd-đang-chặn-việc).
+
 **Diễn biến (2026-08-12)**: A04 được sửa nội dung theo review của khách **nhưng phạm vi giữ nguyên** ⇒ mâu thuẫn **chưa khép lại, thậm chí rõ hơn**: một bên (QA) nói ngoài phạm vi 2026, một bên (requirement vừa rà xong) vẫn để trong phạm vi 2026. Điều kiện gỡ mục này khỏi Phụ lục B **không đổi**: QA chuyển 回答済 **và** phạm vi trên repo được sửa cho khớp — khi đó xử lý theo README §9 và cập nhật `qa_kitagas.md`.
 
 ## B.2 Điểm thưởng và tư vấn tiết kiệm
@@ -4182,8 +4186,19 @@ Những chỗ **chưa quyết mà đang cản trở công việc**, xếp theo m
 | 10 | **Nội dung màn hình thống kê F-AD-11** | Màn hình thống kê — hoàn toàn trống | `20_open_issues.md` dòng 176 | 北ガス |
 | 11 | **Yêu cầu phi chức năng** (số kết nối đồng thời, SLA, thời hạn lưu, di trú 30.000 khách) | Chọn kiến trúc server, cấu hình dự phòng | `20_open_issues.md` dòng 86–88 | 北ガス |
 | 12 | **Tài khoản dev cho TagTag / PI / Xzilla** | `CLD-02` — quyết định chiến lược branch | `20_open_issues.md` dòng 158 | 北ガス / Aqara |
+| 13 | **Danh sách chức năng lùi sang 2027 (劣後)** — đã hỏi nhưng **chưa được trả lời** | Ước lượng công việc năm 2026: chức năng nào phải làm ngay, chức năng nào được lùi. Liên quan trực tiếp mâu thuẫn [B.1](#b1-huy-hiệu--xếp-hạng-thuộc-phạm-vi-năm-nào) | QAデータベース phiếu **No. 12** 「2027年劣後機能の確認」 | mui *(đã lập phiếu, đang chờ)* |
+| 14 | **Mức độ độc lập của server E-GW** — chung library/source hay không | Cách dựng server: dùng lại bao nhiêu từ E-Smart | QAデータベース phiếu No. 2 đã **完了** mà **không nói mức độ** ⇒ chờ tiếp là vô ích, phải mở phiếu mới | mui |
+| 15 | **Chức năng nào của hệ hiện hữu nên dùng tiếp** — mui đã hỏi SYP mà **SYP chưa trả lời** | Quyết định dựng lại bao nhiêu thứ từ đầu | Vế `ただし` của phiếu No. 2 (**完了**, đã mất kênh trả lời) — xem [9.4](#94-vai-trò-và-môi-trường-của-syp) | **SYP phải trả lời**, không phải chờ ai |
 
-⚠️ **Cả mười hai câu đều cần 北ガス**, trong đó **chín câu bóng nằm hoàn toàn ở phía họ**; ba câu còn lại phải quyết cùng một bên nữa (kihara ở #5 · oi ở #7 · Aqara ở #12). Nên gom vào **một bảng câu hỏi gửi một lần**, không hỏi lẻ — đúng cách 北ガス đang làm việc qua bảng QA.
+⚠️ **Mười hai câu đầu đều cần 北ガス**, trong đó **chín câu bóng nằm hoàn toàn ở phía họ**; ba câu còn lại phải quyết cùng một bên nữa (kihara ở #5 · oi ở #7 · Aqara ở #12). Nên gom vào **một bảng câu hỏi gửi một lần**, không hỏi lẻ — đúng cách 北ガス đang làm việc qua bảng QA.
+
+⚠️ **Ba câu #13–#15 thì khác: chúng nằm ở phía mui hoặc phía chính SYP**, không phải 北ガス — và mỗi câu bị chặn theo một kiểu khác nhau:
+
+| # | Kiểu bị chặn | Việc phải làm |
+|---|---|---|
+| 13 | **Đã hỏi, đang chờ** — phiếu No. 12 lập 2026-08-12, trạng thái `確認中`, ô trả lời **trống** | Thúc mui trả lời |
+| 14 | **Đã hỏi, đã đóng, nhưng câu trả lời không chứa thông tin cần** | Mở **phiếu QA mới** — chờ phiếu cũ là vô ích |
+| 15 | **Người phải trả lời là SYP**, và phiếu đã bị đóng mất kênh | Nêu lại bằng phiếu mới hoặc khi trình thiết kế |
 
 ---
 
@@ -4276,9 +4291,12 @@ Câu hỏi của bạn
 
 | Giá trị | Nghĩa | Dùng được làm căn cứ chưa? |
 |---|---|---|
-| **回答中** | Đang trả lời | ❌ Chưa — câu trả lời còn có thể bị bổ sung hoặc đổi |
+| **確認中** | Đang xác nhận — phiếu **mới lập, chưa ai trả lời** (ô `回答内容` trống) | ❌ **Chưa có gì để dùng** |
+| **回答中** | Đang trả lời — **đã có nội dung** nhưng phiếu chưa đóng | ❌ Chưa — câu trả lời còn có thể bị bổ sung hoặc đổi |
 | **回答済** | Đã trả lời xong | ✅ Được |
 | **完了** | Đã đóng phiếu — **cùng nghĩa với 回答済** | ✅ Được |
+
+⚠️ **Phân biệt `確認中` với `回答中`** — hai cái đều "chưa xong" nhưng khác nhau về việc bạn có gì trong tay: `回答中` thì **đã có nội dung trả lời** để đọc tham khảo (ví dụ bốn phiếu No. 1–4 hồi 08-04); `確認中` thì **trống hoàn toàn**, không có gì để đọc. Thấy `確認中` là biết **chưa ai bên mui chạm vào**.
 
 ### ⚠️ Bốn cái bẫy của QAデータベース
 

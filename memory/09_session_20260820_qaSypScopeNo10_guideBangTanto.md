@@ -324,6 +324,42 @@ requirement → spec → 設計書, và biết chỗ nào đổi định dạng.
 
 Kiểm cơ học sau lượt 8: **276 heading ・ 209 link, 0 hỏng ・ 70 fence** (heading và link đều tăng vì có mục mới).
 
+### 2.12 Phiếu QA **No. 12** — phiếu ĐẦU TIÊN chưa có trả lời, và giá trị ステータス thứ tư
+
+| Ô | Giá trị |
+|---|---|
+| **No.** | **12** — 「2027年劣後機能の確認」 |
+| **ステータス** | 🔶 **確認中** ← **giá trị thứ tư**, guide chưa có |
+| **回答内容** | ⚠️ **Empty** — chưa ai trả lời |
+| 回答者 | Empty |
+| 質問者 | **Nguyen Van Tung**, 起票 **2026-08-12 17:41** |
+| 更新日時 | **2026-08-12 17:46** (5 phút sau khi lập, **không đổi từ đó**) |
+
+**Hai phát hiện, cả hai đã vào guide:**
+
+**① `確認中` ≠ `回答中`.** Bảng ステータス ở Phụ lục E.2 nay có **4 giá trị**. Ranh giới quan trọng: `回答中` là
+**đã có nội dung trả lời** để đọc tham khảo (bốn phiếu No. 1–4 hồi 08-04 chính là vậy); `確認中` là **trống
+hoàn toàn** — chưa ai bên mui chạm vào. Trước đây tôi mặc định "chưa xong = 回答中"; sai.
+
+**② 🔴 NGOẠI LỆ của kết luận "mui dọn QA theo đợt" (mục 2.6/2.8).** Phiếu này lập **08-12**, tức **TRƯỚC**
+đợt mui đóng 8 phiếu ngày 08-13 — mà vẫn bị để lại nguyên. **Không phải "chưa tới lượt" mà là bỏ qua có
+chọn lọc.** Hệ quả hành động: các phiếu khác chỉ cần **chờ đợt dọn tiếp**; phiếu này phải **thúc**.
+
+**Vá — 4 chỗ:**
+
+| Chỗ | Sửa gì |
+|---|---|
+| **Phụ lục E.2** bảng ステータス | 3 → **4 giá trị**, thêm **確認中** ở đầu (❌ chưa có gì để dùng) + đoạn ⚠️ phân biệt 確認中 vs 回答中 |
+| **Phụ lục C** danh mục T.B.D | Thêm **3 hàng #13–#15** + **bảng phân loại "kiểu bị chặn"**. Quan trọng: 12 câu cũ đều hỏi 北ガス, còn **3 câu mới nằm ở phía mui hoặc chính SYP** — #13 đã hỏi đang chờ (No. 12) ・ #14 mức độ độc lập server (No. 2 đóng mà không nói ⇒ **mở phiếu MỚI**) ・ #15 vế `ただし` (**SYP** phải trả lời) |
+| **Phụ lục B.1** | Thêm khối 「Diễn biến (2026-08-12)」: No. 12 hỏi **toàn bộ danh sách 劣後 2027**, rộng hơn câu huy hiệu của No. 5; kèm ⚠️ chuyện bị bỏ qua có chọn lọc |
+| **§0.3** bảng mốc kiểm | 8 → **9 phiếu**, tách rõ 8 phiếu 完了 vs **No. 12 còn 確認中** |
+
+💡 **Giá trị lớn nhất của phiếu này**: nó biến hai việc trước đây nằm rải rác trong nhật ký (mức độ độc lập
+server ・ vế `ただし`) thành **mục có số trong Phụ lục C** — tức từ nay ai đọc guide đều thấy chúng là việc
+đang chặn, không phải ghi chú bên lề.
+
+Kiểm cơ học sau lượt 9: **276 heading ・ 213 link, 0 hỏng ・ 70 fence**.
+
 ## 3. QUYẾT ĐỊNH & PHÁT HIỆN
 
 ### 3.1 Điều quan trọng nhất: 完了 ≠ 回答中 → được phép ghi là ĐÃ CHỐT
