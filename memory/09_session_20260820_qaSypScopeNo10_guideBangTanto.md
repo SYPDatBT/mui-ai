@@ -185,6 +185,48 @@ ngoài guide còn **0 chỗ** ghi 回答中.)
 
 Kiểm cơ học sau lượt 4: 275 heading ・ **206 link, 0 hỏng** ・ 70 fence ・ audit `管理画面は独立` không còn chỗ nào "chưa chốt".
 
+### 2.8 Đợt vá thứ năm — phiếu QA **No. 4** hemssv đã 完了 ⇒ **bảng 4 phiếu §9.4 SẠCH**
+
+| Ô | Giá trị | Guide trước đó ghi gì |
+|---|---|---|
+| **No.** | **4** | *(không ghi)* |
+| ステータス | **完了** | `回答中` ❌ SAI (2 chỗ: §4.2 và bảng §9.4) |
+| 回答内容 | 「おおよそその認識でOKです。HEMS-SV(m2-cloud)はmui側開発範囲で…HEMS-SVの仕様等は別途共有します」 | ✅ khớp **nguyên văn, không đổi một chữ** |
+| 回答者 | swan | ✅ khớp (nhưng guide ghi 「cập nhật 2026-08-04」 → đã sửa thành chốt 08-13) |
+| 質問者 | Bui Trong Dat | ✅ khớp |
+| 起票日時 | 2026-08-03 **17:32** | ✅ khớp (thiếu giờ) |
+| 更新日時 | **2026-08-13 12:28** | *(không ghi)* |
+| 質問内容 | **Empty** | — |
+
+Không có vế `ただし` → không phát sinh việc cho SYP.
+
+**Vá lượt 5 — 5 chỗ:**
+
+| Chỗ | Sửa gì |
+|---|---|
+| **§4.2** dòng 🔍 (ba tên hemssv/conciergesv/eminelsv) | Thêm **No. 4** ・ 起票 kèm giờ ・ bỏ 「回答者 swan (cập nhật 2026-08-04)」 + 「trạng thái khi đọc (08-04): 回答中」 → **chốt 08-13 12:28**, trạng thái **完了** (kiểm 08-20) |
+| **§0.3** bảng mốc kiểm | 4 → **5 phiếu**, bỏ chữ "kiểm một phần" cho nhóm phạm vi |
+| **§9.4** bảng 4 QA | Hàng 4: `?` → **No. 4**, 🔸 → ✅ **完了** |
+| **§9.4** câu dẫn trên bảng | *"3 phiếu đã 完了, còn 1 chưa kiểm"* → **"cả bốn đều đã 完了"**, bốn câu trả lời là **kết luận đã đóng** |
+| **§9.4** đoạn dưới bảng | Bỏ hẳn ⚠️ "phiếu `?` cuối cùng rất có thể…" (không còn phiếu nào chờ) → đổi thành khối 📌 **「Nhịp làm việc của mui trên QAデータベース」** + bảng **5 phiếu × 起票/chốt**; kết luận: lập 4 phiếu trong **3 phút**, mui để **10 ngày** rồi đóng cả loạt trong **2 phút**; bài học: thấy 1 phiếu đổi trạng thái thì mở luôn phiếu cùng chủ đề |
+| **§7.x** (bản thiết kế nháp admin) | 1 chỗ **sót từ lượt 4**: 「Hướng "chung với E-Smart" đã được xác nhận qua QA Notion (**còn 回答中**)」 → ✅ **chốt qua phiếu No. 3 (完了 08-13)**. Bắt được vì audit toàn văn chữ `回答中`, không phải vì grep tên phiếu |
+
+**Trạng thái cuối của cả nhóm phiếu phạm vi (5/5 完了):**
+
+| No. | Phiếu | Kết luận đã đóng |
+|---|---|---|
+| 1 | 担当範囲…とアプリ対象外 | app là **開発対象** |
+| 2 | 独立デプロイ | server hướng **độc lập** (⚠️ còn chữ 「基本的には」; mức độ chưa nói) |
+| 3 | 管理画面は独立か共通か | admin **chung source + chung deploy** |
+| 4 | 旧EMINEL調査範囲…hemssv対象外 | phạm vi **điều tra** = conciergesv + eminelsv; **hemssv ngoài phạm vi** |
+| 10 | SYP開発範囲 | bảng 担当 5 khối (mui: 7-1/7-2 · SYP: 7-3/7-4/app) |
+
+🔸 **Nhãn giả thuyết CÒN GIỮ** (đóng phiếu không thêm thông tin nào): "m2-cloud" có phải tên hiện thực của
+`GW管理クラウド` ở hệ mới hay không — §4.2 vẫn ghi **CHƯA kiểm chứng**, chưa thấy tên này trong repo docs.
+
+Kiểm cơ học sau lượt 5: 275 heading ・ **206 link, 0 hỏng** ・ 70 fence ・ audit toàn văn `回答中`: các chỗ còn
+lại đều **hợp lệ** (mô tả lịch sử ・ phiếu 「バッジ・ランク」 khác nhóm ・ bảng 3 giá trị ở Phụ lục E.2).
+
 ## 3. QUYẾT ĐỊNH & PHÁT HIỆN
 
 ### 3.1 Điều quan trọng nhất: 完了 ≠ 回答中 → được phép ghi là ĐÃ CHỐT

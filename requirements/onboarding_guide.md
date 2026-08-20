@@ -200,7 +200,7 @@ Mỗi khẳng định trong tài liệu này đều kèm nguồn theo định d�
 | Loại nguồn | Mốc | Nghĩa |
 |---|---|---|
 | Repo (`docs/`, code) | commit `1100487`, kiểm **2026-08-18** | Số dòng và nội dung đúng tại mốc này |
-| QAデータベース Notion | **kiểm một phần 2026-08-20** — 4 phiếu (**No. 1 · No. 2 · No. 3 · No. 10**, cả bốn ✅ 完了). Các phiếu khác vẫn là **lần đọc 2026-08-04** | Notion là dữ liệu sống. Mọi trạng thái `回答中` còn lại trong tài liệu này ứng với **ngày 08-04**, và **rất có thể đã lạc hậu** — cả 4 phiếu đã kiểm đều được mui đóng trong **cùng 2 phút** ngày 08-13. **Phải mở trang gốc trước khi trích lại**; cách đọc property và 4 cái bẫy: [Phụ lục E.2](#e2-bước-2--đi-theo-thứ-tự) |
+| QAデータベース Notion | **kiểm 2026-08-20** — 5 phiếu về phạm vi (**No. 1 · 2 · 3 · 4 · 10**), **cả năm ✅ 完了**. Phiếu ngoài nhóm này vẫn là **lần đọc 2026-08-04** | Notion là dữ liệu sống. Trạng thái `回答中` còn sót ở đâu trong tài liệu này thì ứng với **ngày 08-04** và **rất có thể đã lạc hậu** — cả 5 phiếu đã kiểm đều được mui đóng trong **cùng 2 phút** ngày 08-13. **Phải mở trang gốc trước khi trích lại**; cách đọc property và 4 cái bẫy: [Phụ lục E.2](#e2-bước-2--đi-theo-thứ-tự) |
 
 ---
 
@@ -1363,8 +1363,9 @@ Khi trao đổi với mui qua QA (2026-08-03→04), hệ cũ được gọi theo
 | `conciergesv` | コンシェルジュサーバー — sinh dữ liệu + giao tiếp với **app** |
 | `eminelsv` | EMINELサーバー — màn hình quản trị **vận hành** |
 
-🔍 Nguồn: Notion — QAデータベース dự án, trang 「旧EMINEL調査範囲（conciergesv/eminelsv）とhemssv対象外の確認」
-→ 質問者 Bui Trong Dat (SYP, 起票 2026-08-03) · 回答者 swan (mui, cập nhật 2026-08-04) · trạng thái khi đọc (2026-08-04): **回答中**
+🔍 Nguồn: Notion — QAデータベース dự án, trang 「旧EMINEL調査範囲（conciergesv/eminelsv）とhemssv対象外の確認」 (**No. 4**)
+→ 質問者 Bui Trong Dat (SYP, 起票 2026-08-03 17:32) · 回答者 swan (mui) · phiếu **chốt 2026-08-13 12:28** (更新日時)
+→ trạng thái khi đọc (2026-08-20): **完了** (đã đóng)
 → nguyên văn (回答内容): 「おおよそその認識でOKです。HEMS-SV(m2-cloud)はmui側開発範囲で、GWとの通信はHEMS-SVを通して行っていただくことになります。ConciergeSV,EminelSVは密に関係しますが、SYPさん開発範囲ではないです。HEMS-SVの仕様等は別途共有します」
 
 Ba thông tin mới trong câu trả lời: ① **HEMS-SV (m2-cloud) do mui phát triển**, mọi giao tiếp với GW đi qua nó *(🔸 giả thuyết — CHƯA kiểm chứng: "m2-cloud" nhiều khả năng là tên hiện thực của `GW管理クラウド` ở hệ mới — chưa thấy tên này trong repo docs, cần hỏi xác nhận)*; ② `ConciergeSV`/`EminelSV` là đối tượng SYP **điều tra** (khảo sát API・batch để di trú) chứ **không phải phạm vi SYP phát triển**; ③ spec của HEMS-SV sẽ được mui chia sẻ riêng. Đối chiếu tên với bảng hợp nhất phía trên: `hemssv` ≒ phần kế thừa 旧HEMSサーバ, `conciergesv` ≒ 旧コンシェルジュSV. ⚠️ Ghi chú 内訳 trong CLD-01 lại chú thích `eminelsv` khác đi — xem [8.4](#84-ba-vấn-đề-chặn-syp).
@@ -3137,7 +3138,7 @@ Nguồn gốc thiết kế:
 
 Sau khi chốt layout sẽ **chuyển ngược vào Figma** làm tài sản bàn giao.
 
-⚠️ **Hướng "chung với E-Smart" đã được xác nhận qua QA Notion (còn 回答中)**: masao takahashi (mui) trả lời — màn hình quản trị **chung source code, deploy cũng chung** với E-Smart (cùng người vận hành dùng), khớp với cách bản nháp này thể hiện (một web, chuyển E-Smart / E-GW bằng thanh bên). Nguyên văn + các trả lời QA khác: xem bảng ở [9.4](#94-vai-trò-và-môi-trường-của-syp).
+✅ **Hướng "chung với E-Smart" đã được chốt qua QA Notion** (phiếu **No. 3**, **完了** 2026-08-13): masao takahashi (mui) trả lời — màn hình quản trị **chung source code, deploy cũng chung** với E-Smart (cùng người vận hành dùng), khớp với cách bản nháp này thể hiện (một web, chuyển E-Smart / E-GW bằng thanh bên). Nguyên văn + các trả lời QA khác: xem bảng ở [9.4](#94-vai-trò-và-môi-trường-của-syp).
 
 💡 **Cách dùng thực tế cho bạn**: khi đọc spec chữ thấy khó hình dung, mở màn hình tương ứng trong trình duyệt xem. Nhưng luôn nhớ **bản nháp không phải bản chốt**.
 
@@ -3520,27 +3521,28 @@ Dịch: *"SYP tham gia mỏng hơn dự kiến ban đầu → hướng giao mả
 
 Bốn câu trả lời của mui mới hơn biên bản 6/25 phía trên. 質問者 đều là Bui Trong Dat (SYP), 起票 2026-08-03; nội dung trả lời đều đã đọc được ngày 2026-08-04. Hai người trả lời đều thuộc **mui** — chú ý **masao takahashi (mui)** là người khác với 高橋 phía 北ガス ở [1.3](#13-bốn-bên-và-ai-làm-gì-cho-ai).
 
-**Cột trạng thái là phần dễ lạc hậu nhất của bảng này** — hồi 08-04 cả bốn phiếu đều còn `回答中`; đến 08-20 mở lại thì **3 phiếu đã 完了**, còn 1 phiếu chưa kiểm. Phải mở trang gốc mới biết:
+**Cột trạng thái là phần dễ lạc hậu nhất của bảng này** — hồi 08-04 cả bốn phiếu đều còn `回答中`; mở lại ngày **2026-08-20** thì **cả bốn đều đã 完了**. Tức bốn câu trả lời dưới đây **đều là kết luận đã đóng**, không còn là định hướng tạm:
 
 | No. | Trang QA | Trả lời (nguyên văn 回答内容) | Người trả lời | ステータス |
 |---|---|---|---|---|
 | **1** | 「担当範囲（サーバー／管理画面）とアプリ対象外の確認」 | 「モバイルアプリは開発対象です。」 | masao takahashi (mui) | ✅ **完了** *(chốt 08-13 12:27; kiểm 08-20)* |
 | **2** | 「旧Eminel基盤継承＋EMINEL-smartサーバーは独立デプロイの確認」 | 「基本的には独立したシステムとして開発してもらう方向でお願いします。ただし既存システムを使い続けたほうがいい機能があれば教えてほしいです」 | swan (mui) | ✅ **完了** *(chốt 08-13 12:28; kiểm 08-20)* |
 | **3** | 「管理画面は独立か共通か（切替モード追加）の確認」 | 「管理画面はE-Smartと共通のソースコード、デプロイも同一（同じ操作者が使う想定）」 | masao takahashi (mui) | ✅ **完了** *(chốt 08-13 12:28; kiểm 08-20)* |
-| ? | 「旧EMINEL調査範囲（conciergesv/eminelsv）とhemssv対象外の確認」 | 「おおよそその認識でOKです。HEMS-SV(m2-cloud)はmui側開発範囲で、GWとの通信はHEMS-SVを通して行っていただくことになります。ConciergeSV,EminelSVは密に関係しますが、SYPさん開発範囲ではないです。HEMS-SVの仕様等は別途共有します」 | swan (mui) | 🔸 **chưa kiểm lại** *(08-04: 回答中)* |
+| **4** | 「旧EMINEL調査範囲（conciergesv/eminelsv）とhemssv対象外の確認」 | 「おおよそその認識でOKです。HEMS-SV(m2-cloud)はmui側開発範囲で、GWとの通信はHEMS-SVを通して行っていただくことになります。ConciergeSV,EminelSVは密に関係しますが、SYPさん開発範囲ではないです。HEMS-SVの仕様等は別途共有します」 | swan (mui) | ✅ **完了** *(chốt 08-13 12:28; kiểm 08-20)* |
 
-*(Cột `No.` là số phiếu trong QAデータベース, dùng làm định danh khi trích. Phiếu cuối chưa mở lại nên chưa biết số — điền vào khi kiểm.)*
+*(Cột `No.` là số phiếu trong QAデータベース, dùng làm định danh khi trích.)*
 
-⚠️ **Phiếu `?` cuối cùng rất có thể cũng đã 完了.** Bằng chứng về nhịp làm việc của mui — **bốn phiếu đã kiểm đều được đóng trong cùng hai phút** ngày 2026-08-13, trong khi chúng được lập cách nhau nhiều ngày:
+📌 **Nhịp làm việc của mui trên QAデータベース** — cả năm phiếu đã kiểm đều được đóng trong **cùng hai phút** ngày 2026-08-13, dù được lập cách nhau nhiều ngày:
 
 | Phiếu | 起票 | Chốt (更新日時) |
 |---|---|---|
 | No. 1 担当範囲…とアプリ対象外 | 08-03 **17:30** | 08-13 **12:27** |
 | No. 2 独立デプロイ | 08-03 **17:31** | 08-13 **12:28** |
 | No. 3 管理画面は独立か共通か | 08-03 **17:32** | 08-13 **12:28** |
+| No. 4 旧EMINEL調査範囲…hemssv対象外 | 08-03 **17:32** | 08-13 **12:28** |
 | No. 10 SYP開発範囲 | 08-12 16:17 | 08-13 **12:28** |
 
-⇒ Hai điều thấy được từ bảng này: SYP lập ba phiếu No. 1–3 **liên tiếp từng phút** chiều 08-03; mui **để nguyên 10 ngày rồi đóng cả loạt** trong hai phút ngày 08-13. Tức mui **dọn QA theo đợt**, không trả lời rải rác. Mở lại phiếu cuối là việc **rẻ và đáng làm ngay**: mỗi phiếu chuyển sang 完了 là một kết luận trong tài liệu này được nâng từ "định hướng" lên "đã chốt". Nhớ: **`完了` cũng nghĩa là đã trả lời** — grep riêng `回答済` sẽ sót ([Phụ lục E.2](#e2-bước-2--đi-theo-thứ-tự)).
+⇒ SYP lập bốn phiếu No. 1–4 **liên tiếp trong ba phút** chiều 08-03; mui **để nguyên 10 ngày rồi đóng cả loạt** trong hai phút ngày 08-13. Tức mui **dọn QA theo đợt**, không trả lời rải rác. Bài học khi đọc tài liệu này về sau: thấy một phiếu vừa đổi trạng thái thì **mở luôn các phiếu cùng chủ đề** — khả năng cao chúng cũng vừa được đóng. Nhớ: **`完了` cũng nghĩa là đã trả lời** — grep riêng `回答済` sẽ sót ([Phụ lục E.2](#e2-bước-2--đi-theo-thứ-tự)).
 
 ### ✅ Câu trả lời chốt phạm vi SYP (2026-08-13)
 
