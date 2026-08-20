@@ -12,6 +12,12 @@
    (bản rút gọn của ⛔#11 — user KHÔNG muốn đọc kế hoạch dài).
    (Lỗi đã mắc 17/08: hiểu "đổi đường dẫn sang file `_ja`" thành "dịch toàn bộ ghi chú sang tiếng Nhật",
    viết lại 7 file rồi phải hoàn tác; và trả lời một câu xác nhận ngắn bằng cả bảng biểu dài.)
+   **0b. CA CỤ THỂ — user gửi ảnh phiếu QA + hỏi 3 câu ("memory có nhận thức vậy không / guide có vậy không /
+   cần sửa gì"): trả lời ĐÚNG 3 CÂU ĐÓ rồi DỪNG.** Có/không + chỗ nào ・ đã sửa gì. **CẤM thêm**: bảng so sánh
+   phiếu này với phiếu khác, mục "N điều đáng nói", đánh giá chất lượng câu trả lời của mui, suy ra hệ quả
+   nghiệp vụ, nhắc việc khác — user KHÔNG hỏi. Phát hiện phụ (nếu có giá trị thật) thì **ghi vào memory/guide**,
+   không đổ vào chat. (Lỗi đã mắc 20/08: 4 lượt liền trả lời 3 câu hỏi ngắn bằng báo cáo dài có mục "Ba điều
+   đáng nói" + bảng đối chiếu phiếu; user phải chặn: *"không cần đánh giá phiếu trả lời, chỉ cần làm đúng yêu cầu"*.)
 1. **`git fetch` + so `origin/main` TRƯỚC khi fact-check trích dẫn.** (Lỗi đã mắc 08-04: repo local cũ 11 ngày
    → review kết luận nhầm "file A04 không tồn tại", "số dòng B02 lệch hàng loạt" — thực ra tài liệu ĐÚNG,
    local SAI. Suýt bắt sửa hàng loạt chỗ không sai.)
