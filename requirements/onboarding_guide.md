@@ -200,7 +200,7 @@ Mỗi khẳng định trong tài liệu này đều kèm nguồn theo định d�
 | Loại nguồn | Mốc | Nghĩa |
 |---|---|---|
 | Repo (`docs/`, code) | commit `1100487`, kiểm **2026-08-18** | Số dòng và nội dung đúng tại mốc này |
-| QAデータベース Notion | **kiểm 2026-08-20** — 5 phiếu về phạm vi (**No. 1 · 2 · 3 · 4 · 10**), **cả năm ✅ 完了**. Phiếu ngoài nhóm này vẫn là **lần đọc 2026-08-04** | Notion là dữ liệu sống. Trạng thái `回答中` còn sót ở đâu trong tài liệu này thì ứng với **ngày 08-04** và **rất có thể đã lạc hậu** — cả 5 phiếu đã kiểm đều được mui đóng trong **cùng 2 phút** ngày 08-13. **Phải mở trang gốc trước khi trích lại**; cách đọc property và 4 cái bẫy: [Phụ lục E.2](#e2-bước-2--đi-theo-thứ-tự) |
+| QAデータベース Notion | **kiểm 2026-08-20** — 6 phiếu (**No. 1 · 2 · 3 · 4 · 5 · 10**), **cả sáu ✅ 完了**. Phiếu ngoài danh sách này vẫn là **lần đọc 2026-08-04** | Notion là dữ liệu sống. Trạng thái `回答中` còn sót ở đâu trong tài liệu này thì ứng với **ngày 08-04** và **rất có thể đã lạc hậu** — cả 6 phiếu đã kiểm đều được mui đóng trong **cùng 2 phút** ngày 08-13. ⚠️ **Phiếu 完了 không có nghĩa là hết dè dặt**: đóng phiếu không thêm chữ nào vào câu trả lời, nên các chữ nhượng bộ (「基本的には」「今の所」) và chuyện "mui trả lời ≠ 北ガス xác nhận" vẫn còn nguyên. **Phải mở trang gốc trước khi trích lại**; cách đọc property và 4 cái bẫy: [Phụ lục E.2](#e2-bước-2--đi-theo-thứ-tự) |
 
 ---
 
@@ -2579,7 +2579,11 @@ Ba tài liệu nói ba kiểu về cùng một nhóm chức năng:
 
 🔸 **Giả thuyết — CHƯA kiểm chứng**: nhiều khả năng slide phạm vi (quản lý) và requirement (kỹ thuật) đang **chưa đồng bộ với nhau**, chứ không phải sót khi tách file như suy đoán trước đây. **Vẫn phải hỏi lại**, không được tự kết luận. Xem [Phụ lục B](#phụ-lục-b--bảng-mâu-thuẫn-giữa-các-tài-liệu) và `qa_kitagas.md` câu 1.
 
-**Diễn biến (2026-08-03)**: câu hỏi này đã được đăng lên QAデータベース Notion (trang 「バッジ・ランクは2026年度対応スコープでしょうか」) và có trả lời tạm từ phía mui — masao takahashi: 「今の所、2026年スコープ外です」 (*hiện tại nằm ngoài scope 2026*), trạng thái còn **回答中** (kiểm tra 2026-08-04). ⚠️ Đây là trả lời của mui, **chưa phải xác nhận cuối** (chưa rõ đã qua 北ガス chưa).
+**Diễn biến (2026-08-03 → 08-13)**: câu hỏi này đã được đăng lên QAデータベース Notion — phiếu **No. 5** 「バッジ・ランクは2026年度対応スコープでしょうか」 (起票 08-03 17:33) — và masao takahashi (mui) trả lời 「今の所、2026年スコープ外です」 (*hiện tại nằm ngoài scope 2026*). Phiếu đã **完了**, chốt **2026-08-13 12:28** (kiểm 08-20).
+
+⚠️ **Đóng phiếu rồi vẫn phải giữ hai điều dè dặt** — không được đọc thành "chốt xong, khỏi lo":
+- Chữ 「**今の所**」 (*hiện tại thì*) nằm trong nguyên văn. Nó là mốc thời điểm, không phải kết luận vĩnh viễn — cùng loại với 「基本的には」 ở phiếu No. 2.
+- Đây là trả lời **của mui**, **không phải xác nhận của 北ガス** — mà người quyết phạm vi là 北ガス. Chưa rõ câu này đã qua khách hay chưa.
 
 **Diễn biến (2026-08-12)**: A04 **đã được sửa** — nhưng chỉ sửa nội dung, **không đụng phạm vi**, và câu 要確認事項 về huy hiệu thì bị gỡ. Nghĩa là hai nguồn nay **càng lệch nhau hơn** chứ không tự khép lại: phía QA nói *ngoài phạm vi 2026*, phía requirement vừa rà xong vẫn để *trong phạm vi 2026*. ⇒ Bảng ước lượng vẫn phải coi đây là **điểm treo**, và câu hỏi cần được hỏi lại cho dứt điểm thay vì chờ nó tự hết.
 
@@ -4031,7 +4035,7 @@ Bốn mâu thuẫn tìm được khi đối chiếu chéo (B.5 là mục mới, 
 
 | # | Mâu thuẫn | Mức độ | Cần hỏi ai |
 |---|---|---|---|
-| B.1 | Huy hiệu / xếp hạng thuộc năm nào | 🔴 Cao — ảnh hưởng ước lượng | 北ガス *(QA câu 1 — đã có trả lời tạm của mui 08-03; 回答中, đọc 08-04)* |
+| B.1 | Huy hiệu / xếp hạng thuộc năm nào | 🟠 Vừa — mui đã trả lời **ngoài scope 2026**, nhưng 北ガス chưa xác nhận | 北ガス *(QA phiếu No. 5 — mui trả lời, **完了** 08-13; kiểm 08-20)* |
 | B.2 | Điểm thưởng và tư vấn tiết kiệm thuộc năm nào | 🔴 Cao — ~2 người-tháng | 北ガス *(QA câu 2)* |
 | B.3 | Thông báo trông nom có làm không | 🔴 Cao — ảnh hưởng firmware | 北ガス *(QA câu 3)* |
 | B.4 | Ba thang trạng thái song song (file md requirement ↔ index đối khách ↔ index spec app) | 🟡 Thấp — chỉ cần đọc đúng thang | Không phải mâu thuẫn, chỉ cần biết |
@@ -4051,7 +4055,9 @@ Bốn mâu thuẫn tìm được khi đối chiếu chéo (B.5 là mục mới, 
 
 → Đã đưa vào `qa_kitagas.md` **câu 1**.
 
-**Diễn biến (2026-08-03)**: câu 1 đã được đăng lên QAデータベース Notion (trang 「バッジ・ランクは2026年度対応スコープでしょうか」); masao takahashi (mui) trả lời tạm 「今の所、2026年スコープ外です」 — trạng thái còn **回答中** (kiểm tra 2026-08-04).
+**Diễn biến (2026-08-03 → 08-13)**: câu 1 đã được đăng lên QAデータベース Notion — phiếu **No. 5** 「バッジ・ランクは2026年度対応スコープでしょうか」; masao takahashi (mui) trả lời 「今の所、2026年スコープ外です」; phiếu **完了**, chốt **2026-08-13 12:28** (kiểm 08-20).
+
+⇒ **Mâu thuẫn này coi như đã ngả về phía 劣後** (lùi sang sau), khớp với cả hai tài liệu quản lý. Nhưng **chưa xoá khỏi bảng mâu thuẫn**, vì hai lý do: chữ 「今の所」 (*hiện tại thì*) trong nguyên văn, và đây là trả lời của **mui** chứ không phải của **北ガス** — người quyết phạm vi. Chừng nào `A04_badge_rank.md` còn viết toàn bộ vào 「26年対応スコープ」 thì chữ trên giấy vẫn còn vênh.
 
 **Diễn biến (2026-08-12)**: A04 được sửa nội dung theo review của khách **nhưng phạm vi giữ nguyên** ⇒ mâu thuẫn **chưa khép lại, thậm chí rõ hơn**: một bên (QA) nói ngoài phạm vi 2026, một bên (requirement vừa rà xong) vẫn để trong phạm vi 2026. Điều kiện gỡ mục này khỏi Phụ lục B **không đổi**: QA chuyển 回答済 **và** phạm vi trên repo được sửa cho khớp — khi đó xử lý theo README §9 và cập nhật `qa_kitagas.md`.
 

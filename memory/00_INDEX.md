@@ -98,6 +98,9 @@
   **mui Lab** = 7-1 E-GW機能（ファームウェア） ・ 7-2 GW管理クラウド機能 │ **SYP** = 7-3 EMINEL-smartサーバー機能 ・ 7-4 管理画面機能 ・ **モバイルアプリ**.
 - ⚠️ **GW管理クラウド là của mui Lab, KHÔNG phải SYP** — chỗ dễ hiểu sai nhất, vì v1.2 §1-2 gộp nó chung một hàng với EMINEL-smartサーバー ("(GW管理クラウド含む)"). Phải tách: **対象範囲** (dự án có làm gì) ≠ **担当** (ai làm).
 - **Guide vá 6 chỗ, `+93/−13` dòng** (0 liên kết hỏng ・ 70 fence chẵn ・ bảng khớp cột): §1.6 tách bảng ①対象範囲 / **②担当 (mới)** + đóng đoạn "chưa chốt" ・ **§6.1 bảng 4 nhóm mã thêm cột 「7-x」+「担当」** (F-GW/F-MC = mui, F-ES/F-AD = SYP; app dùng mã **F-AP**, ngoài 7-1〜7-4 nhưng vẫn SYP làm) ・ §9.4 thêm khối ✅ chốt + hạ nhãn 🔸 (đánh giá 「関与が薄そう」 camp 6/25 nay chỉ còn giá trị lịch sử) ・ §1.3 + Phụ lục E.2.
+- **[08-20 lượt 6] Phiếu QA No. 5 「バッジ・ランクは2026年度対応スコープでしょうか」 đã 完了** (chốt 08-13 12:28, 回答者 masao takahashi, 起票 08-03 17:33; 回答内容 「今の所、2026年スコープ外です」 — không đổi một chữ). Đây là **câu 1 của `qa_kitagas.md`**. Vá **4 chỗ**: §6.x (mục huy hiệu A4) ・ **Phụ lục B bảng mâu thuẫn hàng B.1** (🔴 Cao → 🟠 Vừa, ghi phiếu No. 5 完了) ・ **Phụ lục B.1 phần Diễn biến** ・ §0.3 bảng mốc kiểm (5→**6 phiếu**).
+  - ⚠️ **KHÔNG xoá B.1 khỏi bảng mâu thuẫn**, dù phiếu đã đóng. Hai lý do phải giữ: ① chữ 「**今の所**」 (*hiện tại thì*) nằm trong nguyên văn — mốc thời điểm, không phải kết luận vĩnh viễn (cùng loại 「基本的には」 của phiếu No. 2) ② đây là trả lời của **mui**, **không phải 北ガス xác nhận** — mà người quyết phạm vi là 北ガス. Chữ trên giấy `A04_badge_rank.md` vẫn viết toàn bộ vào 「26年対応スコープ」.
+  - 📌 **Nguyên tắc rút ra, đã ghi vào §0.3**: **phiếu 完了 ≠ hết dè dặt.** Đóng phiếu không thêm chữ nào vào câu trả lời ⇒ chữ nhượng bộ và chuyện "mui trả lời ≠ khách xác nhận" vẫn còn nguyên.
 - **[08-20 lượt 5] Phiếu QA No. 4 「旧EMINEL調査範囲（conciergesv/eminelsv）とhemssv対象外の確認」 đã 完了** (chốt 08-13 12:28, 回答者 swan; `回答内容` **không đổi một chữ**, không có vế `ただし`). Vá **5 chỗ**: §4.2 dòng 🔍 (thêm No. 4, 回答中→完了) ・ §0.3 bảng mốc kiểm (4→**5 phiếu**) ・ §9.4 bảng hàng 4 ・ §9.4 đoạn dưới bảng (bỏ "phiếu ? cuối cùng", đổi thành khối 📌 **nhịp làm việc của mui** + bảng 5 phiếu × 起票/chốt) ・ §7.x bản nháp admin (dòng 「Hướng chung với E-Smart… (còn 回答中)」 → ✅ **chốt qua phiếu No. 3**).
   - ⇒ **BẢNG 4 PHIẾU CỦA §9.4 NAY SẠCH — cả bốn 完了.** Bốn kết luận đều là **kết luận đã đóng**: app là 開発対象 ・ server hướng độc lập (kèm 「基本的には」) ・ admin chung source+deploy ・ phạm vi điều tra hệ cũ = conciergesv+eminelsv, hemssv ngoài phạm vi.
   - 🔸 **Vẫn giữ nhãn giả thuyết** (đóng phiếu không thêm thông tin): "m2-cloud" có phải tên hiện thực của `GW管理クラウド` hay không — §4.2 vẫn ghi CHƯA kiểm chứng, cần hỏi.
@@ -167,7 +170,7 @@
 - `requirements/self_study_plan.md`: 4 hạng mục — **hạng mục 1 mới xong bước 1** (§8-3 F-ES của v1.2).
 
 **Đã xong (tích lũy):** bộ tài liệu học v1.1 (10 chương + 7 phụ lục, đối chiếu `788b438`, đã qua review nhiều vòng)
-・ `qa_kitagas.md` (8+4 câu; **câu 1 đã đăng QAデータベース Notion, có trả lời tạm của mui: badge ngoài scope 2026, 回答中**)
+・ `qa_kitagas.md` (8+4 câu; **câu 1 đã đăng QAデータベース Notion = phiếu No. 5, mui trả lời 「今の所、2026年スコープ外です」, ステータス 完了 chốt 08-13 — nhưng ⚠️ vẫn là trả lời của mui, 北ガス CHƯA xác nhận, và chữ 「今の所」 còn nguyên**)
 ・ **5 QA Notion đầu tiên (08-03→04) đã đọc & cập nhật vào guide/qa_kitagas + review §8 xong** — nội dung 5 QA: bảng ở guide 9.4
 ・ **báo cáo phán định 11 batch legacy (3 nhóm) vs e-smart/E-GW**: `submit_folder/2026_08_04/report_batch_3nhom_doichieu_esmart_egw.md`
 — tối 04/08 nâng cấp: user clone `syp-eminelstandard-backend` (@dc39aa39) + `-web-admin` (@e550326), đều branch

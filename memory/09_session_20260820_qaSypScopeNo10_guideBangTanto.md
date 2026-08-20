@@ -227,6 +227,46 @@ Không có vế `ただし` → không phát sinh việc cho SYP.
 Kiểm cơ học sau lượt 5: 275 heading ・ **206 link, 0 hỏng** ・ 70 fence ・ audit toàn văn `回答中`: các chỗ còn
 lại đều **hợp lệ** (mô tả lịch sử ・ phiếu 「バッジ・ランク」 khác nhóm ・ bảng 3 giá trị ở Phụ lục E.2).
 
+### 2.9 Đợt vá thứ sáu — phiếu QA **No. 5** バッジ・ランク đã 完了 (= câu 1 của `qa_kitagas.md`)
+
+| Ô | Giá trị | Guide trước đó ghi gì |
+|---|---|---|
+| **No.** | **5** | *(không ghi)* |
+| ステータス | **完了** | `回答中` ❌ SAI (3 chỗ) |
+| 回答内容 | 「今の所、2026年スコープ外です」 | ✅ khớp **nguyên văn** |
+| 回答者 | masao takahashi | ✅ khớp |
+| 質問者 | Bui Trong Dat | ✅ khớp |
+| 起票日時 | 2026-08-03 **17:33** | *(chỉ ghi 08-03)* |
+| 更新日時 | **2026-08-13 12:28** | *(không ghi)* |
+
+Phiếu này **khác 5 phiếu trước**: nó không thuộc nhóm "phạm vi SYP" mà là **câu 1 của bảng QA gửi khách**
+`submit_folder/qa/qa_kitagas.md`, và là mục **B.1** của Phụ lục B (bảng mâu thuẫn giữa các tài liệu).
+
+**⭐ Quyết định quan trọng nhất của lượt này: KHÔNG xoá B.1 khỏi bảng mâu thuẫn**, dù phiếu đã đóng. Hai lý do:
+
+1. Chữ 「**今の所**」 (*hiện tại thì*) nằm trong nguyên văn — là **mốc thời điểm**, không phải kết luận vĩnh
+   viễn. Cùng loại với 「基本的には」 của phiếu No. 2.
+2. Đây là trả lời của **mui**, **không phải xác nhận của 北ガス** — mà người quyết phạm vi là 北ガス. Chữ trên
+   giấy `A04_badge_rank.md` **vẫn** viết toàn bộ vào 「26年対応スコープ」.
+
+⇒ Chỉ **hạ mức độ**: hàng B.1 từ 🔴 Cao → 🟠 Vừa, ghi rõ "mui đã trả lời ngoài scope 2026 nhưng 北ガス chưa
+xác nhận". Đây là ranh giới đúng giữa "đã có tín hiệu" và "đã chốt" — xoá hẳn là **diễn giải vượt nguồn** (⛔#8).
+
+**Vá lượt 6 — 4 chỗ:**
+
+| Chỗ | Sửa gì |
+|---|---|
+| **§6.x** mục huy hiệu (A4) | Thêm **No. 5** + 起票 kèm giờ + **完了** chốt 08-13; dựng lại đoạn ⚠️ thành **2 gạch dè dặt** (「今の所」 ・ mui ≠ 北ガス) thay vì một câu gộp |
+| **Phụ lục B** bảng mâu thuẫn, hàng **B.1** | 🔴 Cao → **🟠 Vừa**; cột nguồn ghi phiếu **No. 5, 完了 08-13, kiểm 08-20** |
+| **Phụ lục B.1** phần 「Diễn biến」 | Ghi phiếu No. 5 完了; thêm kết luận **"mâu thuẫn đã ngả về phía 劣後"** + nêu rõ **vì sao chưa xoá** khỏi bảng |
+| **§0.3** bảng mốc kiểm | 5 → **6 phiếu**; thêm nguyên tắc ⚠️ **「phiếu 完了 KHÔNG có nghĩa là hết dè dặt」** — đóng phiếu không thêm chữ nào vào câu trả lời, nên chữ nhượng bộ và chuyện "mui trả lời ≠ khách xác nhận" vẫn còn nguyên |
+
+**Chưa sửa (cố ý)**: `submit_folder/qa/qa_kitagas.md` — file này là **bảng câu hỏi gửi khách**, nội dung câu hỏi
+vẫn đúng nguyên trạng; trạng thái trả lời không thuộc file đó. Nếu về sau gửi lại bảng cho khách thì cân nhắc
+ghi chú "câu 1 mui đã trả lời sơ bộ".
+
+Kiểm cơ học sau lượt 6: 275 heading ・ **206 link, 0 hỏng** ・ 70 fence ・ audit toàn văn `回答中`: các chỗ còn lại đều **hợp lệ** (mô tả lịch sử ・ bảng 3 giá trị ở Phụ lục E.2).
+
 ## 3. QUYẾT ĐỊNH & PHÁT HIỆN
 
 ### 3.1 Điều quan trọng nhất: 完了 ≠ 回答中 → được phép ghi là ĐÃ CHỐT
