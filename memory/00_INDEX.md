@@ -92,6 +92,10 @@
   **mui Lab** = 7-1 E-GW機能（ファームウェア） ・ 7-2 GW管理クラウド機能 │ **SYP** = 7-3 EMINEL-smartサーバー機能 ・ 7-4 管理画面機能 ・ **モバイルアプリ**.
 - ⚠️ **GW管理クラウド là của mui Lab, KHÔNG phải SYP** — chỗ dễ hiểu sai nhất, vì v1.2 §1-2 gộp nó chung một hàng với EMINEL-smartサーバー ("(GW管理クラウド含む)"). Phải tách: **対象範囲** (dự án có làm gì) ≠ **担当** (ai làm).
 - **Guide vá 6 chỗ, `+93/−13` dòng** (0 liên kết hỏng ・ 70 fence chẵn ・ bảng khớp cột): §1.6 tách bảng ①対象範囲 / **②担当 (mới)** + đóng đoạn "chưa chốt" ・ **§6.1 bảng 4 nhóm mã thêm cột 「7-x」+「担当」** (F-GW/F-MC = mui, F-ES/F-AD = SYP; app dùng mã **F-AP**, ngoài 7-1〜7-4 nhưng vẫn SYP làm) ・ §9.4 thêm khối ✅ chốt + hạ nhãn 🔸 (đánh giá 「関与が薄そう」 camp 6/25 nay chỉ còn giá trị lịch sử) ・ §1.3 + Phụ lục E.2.
+- **[08-20 lượt 3] Phiếu QA No. 2 「旧Eminel基盤継承＋…独立デプロイの確認」 đã 完了** (chốt 08-13 12:28, 回答者 swan). Guide vá **8 chỗ**: §0.2 ・ §0.3 ・ §1.2 ・ §8.x tiền đề 「同一コードベース」 ・ §9.4 (bảng + cảnh báo + điểm 2 viết lại 3 tầng + **mục mới**).
+  - ✅ **Hướng làm server E-GW thành hệ ĐỘC LẬP với E-Smart = ĐÃ CHỐT.** ⚠️ Nhưng chữ 「基本的には」 (*về cơ bản là*) vẫn nguyên trong nguyên văn — đóng phiếu không xoá nó, **cấm đọc thành "độc lập tuyệt đối"** (⛔#8). ❌ **Mức độ** độc lập (chung library/source?) vẫn chưa ai nói → xem việc **6b**.
+  - 🔴 **MỘT CÂU HỎI CỦA MUI ĐÃ RƠI MẤT**: vế `ただし` của phiếu này là mui hỏi ngược lại SYP; ô `回答内容` kiểm 08-20 **không thêm gì** ⇒ SYP không đáp, mui tự đóng. Việc số **6** đã viết lại hẳn theo phát hiện này — **cần user quyết kênh mới**.
+  - 📌 **Nhịp đóng phiếu của mui (3 mẫu, đủ kết luận)**: No. 1 → 08-13 **12:27** ・ No. 2 → **12:28** ・ No. 10 → **12:28**. **3 phiếu trong 2 phút** ⇒ mui dọn QA theo đợt; 2 phiếu §9.4 còn lại rất có thể cũng đã 完了.
 - **[08-20 lượt 2] Phiếu QA No. 1 「担当範囲…とアプリ対象外の確認」 cũng đã 完了** (chốt 08-13 12:27; 回答者 masao takahashi; nội dung 「モバイルアプリは開発対象です。」 thì có từ 08-03/04). Guide sửa thêm **6 chỗ, +40/−13**: §0.3 bảng mốc kiểm ・ §1.6 dòng 🔍 No. 1 + bảng "chỗ hở" ・ §9.4 bảng 4 QA **thêm cột ステータス** (No.1 ✅完了, 3 phiếu còn lại 🔸chưa kiểm) ・ Phụ lục E.2.
 - ⭐ **BÀI HỌC VỀ QAデータベース — quan trọng cho mọi lần trích sau này:**
   - **ステータス có BA giá trị**: `回答中` (chưa dùng làm căn cứ được) / `回答済` / **`完了`** (≡ 回答済). Guide trước chỉ liệt kê 2 → **grep `回答済` là sót phiếu đã đóng**.
@@ -176,14 +180,28 @@ và viết lại; CLAUDE.md mục SOURCES đã cập nhật 4 repo git + 1 snaps
 0. ✅ Xong 08-13: vá `new_2/` (user upload lại) ・ pull `1100487` ・ ⛔#12 QA folder ・ 4 link Notion vào bảng tổng hợp.
 1. ✅ **XONG 18/08: guide → v1.3 theo `1100487`** (§7.3 B6 viết lại ・ §7.5 mới về `4_spec/app/` ・ Phụ lục B.5 ・ 9 chỗ mốc đối chiếu). **Còn lại của hạng mục này**: ① quyết định có hỏi 6 phát hiện nguồn N1–N6 không ② Phụ lục C chưa thêm `GW-04` ③ Phụ lục D chưa trỏ `4_spec/app/` ④ `requirements/README.md` + `self_study_plan.md` chưa rà theo tầng spec app ⑤ **chưa đọc nội dung `c02_グラフ`/`c03_レポート` và skill `draft-app-spec`** (user chọn mức "Vừa" cho §7.5).
 1b. **Đuôi của đợt vá 08-20 (bảng 担当)** — theo thứ tự: ① **review CHỈ vùng sửa** (⛔#5; phạm vi = `git diff requirements/onboarding_guide.md`, đừng quét lại 4.457 dòng) ② quyết có đánh guide lên **v1.4** không + sửa bảng meta đầu guide ③ commit (chưa commit gì) ④ rà `requirements/README.md` + `self_study_plan.md` + `notes/guide_v13_mapping.md` theo bảng 担当 mới.
-1c. **MỞ LẠI QAデータベース KIỂM TRẠNG THÁI — đã làm 1/4, còn 3.** ✅ Phiếu **No. 1** 「担当範囲（サーバー／管理画面）とアプリ対象外の確認」 = **完了** (chốt 08-13 12:27, kiểm 08-20) → guide đã sửa. ⬜ Còn **3 phiếu** của bảng §9.4 vẫn ghi 「回答中」 (số phiếu chưa biết, để `?`): 独立デプロイ ・ 管理画面共通 ・ conciergesv/eminelsv+hemssv. **Rất có thể cả 3 cũng đã 完了** — vì No. 1 (12:27) và No. 10 (12:28) được đóng cách nhau MỘT PHÚT ⇒ mui dọn QA theo đợt. Cộng 5 trang 回答中 ở việc số 8. Nhớ: `完了` cũng là "đã trả lời" — **grep `回答済` sẽ sót**.
+1c. **MỞ LẠI QAデータベース KIỂM TRẠNG THÁI — đã làm 2/4, còn 2.** ✅ **No. 1** 「担当範囲…とアプリ対象外の確認」 = 完了 (chốt 08-13 **12:27**) ・ ✅ **No. 2** 「旧Eminel基盤継承＋…独立デプロイの確認」 = 完了 (chốt 08-13 **12:28**) — cả hai đã vào guide. ⬜ Còn **2 phiếu** của bảng §9.4 vẫn ghi 「回答中」 (số phiếu chưa biết): 「管理画面は独立か共通か（切替モード追加）の確認」 ・ 「旧EMINEL調査範囲（conciergesv/eminelsv）とhemssv対象外の確認」. **Rất có thể cả 2 cũng đã 完了** — 3 phiếu đã kiểm (No. 1 ・ No. 2 ・ No. 10) đều được đóng trong **cùng 2 phút** ngày 08-13 ⇒ mui dọn QA theo đợt. Cộng các trang 回答中 ở việc số 8. Nhớ: `完了` cũng là "đã trả lời" — **grep `回答済` sẽ sót**.
 1d. Áp đề xuất **"bước 0 = rà Notion"** vào `skillAI/3-step-review` (hoặc skill cập nhật guide) — theo ⛔#11 phải qua `analyze-change-request` trước, sửa gốc SKILL rồi mới áp. 🔸 CHƯA làm.
 2. **Điền 7 dòng 配信・通知系 (#1–#4) + Xzilla (#5–#7) vào `summary_batch_migration_ja.md`** — kết luận đã có sẵn trong `new_2/`; cần quyết: có tách thành file `legacy-batch_<Command>_{ja,vi}.md` theo format mới không.
 3. **Điều tra nhóm 集計・計算系** (17/19 dòng còn lại của nhóm; SYP còn ~30/43 batch chưa điều tra). ⚠️ Giả định cũ "e-smart không có gì dùng lại" **đã bị bác** — e-smart CÓ 3 bảng history (`template-dynamodb.yaml:1113/1145/1177`), ghi bởi 5 batch `batch-import-rinnai/noritz-*`. Dùng skill `create-investigation-report`.
 4. **`requirements/self_study_plan.md`** — hạng mục 1 tiếp bước 2–6; **sửa dòng 54** ("集計・計算系 — e-smart không có gì dùng lại") theo phát hiện trên (CHƯA làm).
 5. Findings [thấp]/[vừa] còn lại của 78 (đã mất danh sách) — user quyết có chạy lại một lượt review để dựng lại không.
-6. **Trả lời vế ただし của QA 独立デプロイ trên Notion** — danh sách "chức năng nên dùng tiếp": hệ cũ = không có;
-   ESTA = push/point-PI/Xzilla-import/data-export (xem báo cáo batch §1; xác nhận trước nghĩa 「既存システム」).
+6. ⚠️ **VIỆC NÀY ĐỔI BẢN CHẤT (phát hiện 08-20) — phiếu đã ĐÓNG mà SYP CHƯA trả lời.** Phiếu **No. 2** 独立デプロイ
+   (完了, chốt 08-13 12:28) có vế `ただし` = **mui hỏi ngược lại SYP**: 「ただし既存システムを使い続けたほうがいい機能が
+   あれば教えてほしいです」. Kiểm ô `回答内容` ngày 08-20: **không có nội dung nào thêm** ⇒ mui tự đóng, SYP không đáp.
+   Treo suốt từ 08-04 qua 5 phiên (`03_`→`06_`) nên đã rơi mất.
+   → **Nội dung trả lời thì đã soạn xong từ lâu**, nằm ở `submit_folder/2026_08_04/report_batch_3nhom_doichieu_esmart_egw.md`
+   **dòng 103** (mục 「Ba việc rút ra cần làm ngay」 #1), bản JP ở `2026_08_05/旧EMINELバッチ移行判定報告書_3グループ11本.md` §2.2-1:
+   **① hệ CŨ (旧EMINEL) = không batch nào đáng dùng tiếp nguyên trạng ② hệ ĐANG CHẠY (e-smart) = 4 ứng viên**:
+   hạ tầng Push (FCM) ・ hạ tầng point/badge + PI連携 ・ luồng nhận Xzilla SFTP→S3→DynamoDB ・ cơ chế admin download/export.
+   Tiền đề kèm theo (cùng báo cáo dòng 115): "dùng lại" = dùng lại **code/cơ chế/pattern**, deploy độc lập thì **vẫn phải
+   dựng lại môi trường chạy** — "dùng lại" ≠ "0 công".
+   → **CẦN USER QUYẾT**: phiếu cũ đã đóng nên phải chọn kênh mới — ⓐ mở **phiếu QA mới** trên QAデータベース, hay
+   ⓑ nêu khi trình thiết kế. Kèm cách gỡ điểm treo cũ: thay vì chờ xác nhận nghĩa 「既存システム」, **trả lời luôn cả hai vế**
+   + một câu mở đầu nói rõ "chúng tôi hiểu 「既存システム」 gồm cả hai nên xin trả lời cả hai" → đỡ mất một vòng hỏi lại.
+6b. **Mức độ độc lập của server E-GW vẫn CHƯA có ai nói** (chung library/source hay không). Phiếu No. 2 đã đóng mà không
+   nói ⇒ **chờ tiếp là chờ vô ích**, muốn biết phải mở phiếu QA mới. Lưu ý chữ 「基本的には」 (*về cơ bản là*) trong nguyên
+   văn là chữ nhượng bộ — đóng phiếu không xoá nó, **không được đọc thành "độc lập tuyệt đối"** (⛔#8).
 7. Chốt nội bộ với **kihara** về Q5 (GW giữ trạng thái DR — báo cáo batch #4 cũng treo vào đây) → gửi `qa_kitagas.md`
    qua PM mui (quyết kèm Dự phòng 3/4 không).
 8. **Theo dõi 5 trang QA đang 回答中** → khi 回答済: cập nhật các chỗ đánh dấu trong guide (grep "回答中") + B.1 theo README §9.

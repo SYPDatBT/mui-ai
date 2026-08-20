@@ -105,6 +105,51 @@ từ 08-04**. ⇒ hai điều rút ra, cả hai đã ghi vào guide:
 Kiểm cơ học sau lượt 2: `4.474` dòng ・ 274 heading ・ **205 link, 0 hỏng** ・ 70 fence (chẵn).
 Đã audit toàn bộ chỗ còn chữ `回答中` — các chỗ còn lại đều là phiếu **thật sự chưa kiểm**, đúng.
 
+### 2.6 Đợt vá thứ ba — phiếu QA **No. 2** 独立デプロイ đã 完了, và **một câu hỏi của mui đã rơi mất**
+
+| Ô | Giá trị | Guide trước đó ghi gì |
+|---|---|---|
+| **No.** | **2** | *(không ghi)* |
+| ステータス | **完了** | `回答中` ❌ **SAI** |
+| 回答内容 | 「基本的には独立したシステムとして開発してもらう方向でお願いします。ただし既存システムを使い続けたほうがいい機能があれば教えてほしいです」 | ✅ khớp **nguyên văn, không đổi một chữ** |
+| 回答者 | swan | ✅ khớp |
+| 質問者 | Bui Trong Dat | ✅ khớp |
+| 起票日時 | 2026-08-03 **17:31** | ✅ khớp (thiếu giờ) |
+| 更新日時 | **2026-08-13 12:28** | *(không ghi)* |
+| 質問内容 | **Empty** | — |
+
+**⭐ Phát hiện quan trọng nhất (đã thành mục riêng trong guide §9.4):** ô `回答内容` **không có nội dung nào thêm**
+so với bản đọc ngày 08-04 ⇒ **SYP chưa bao giờ trả lời vế `ただし`, mui tự đóng phiếu.** Đây là lời giải cho
+câu hỏi (a)/(b) đặt ra lúc rà: **là (b)**. Việc số 6 của hàng đợi (treo từ 08-04 qua 5 phiên) **đã rơi mất kênh
+trả lời** — nội dung thì vẫn cần cho công việc. Chi tiết + hướng gỡ: `00_INDEX` việc **6** (đã viết lại hẳn).
+
+**Nhịp đóng phiếu của mui — nay có 3 mẫu, đủ để kết luận:**
+
+| Phiếu | 起票 | Chốt (更新日時) |
+|---|---|---|
+| No. 1 担当範囲…とアプリ対象外 | 08-03 17:30 | 08-13 **12:27** |
+| No. 2 独立デプロイ | 08-03 17:31 | 08-13 **12:28** |
+| No. 10 SYP開発範囲 | 08-12 16:17 | 08-13 **12:28** |
+
+⇒ **3 phiếu đóng trong 2 phút.** Dat lập No.1 và No.2 cách nhau 1 phút (17:30/17:31), mui đóng cả loạt
+ngày 08-13. Củng cố bẫy ② ở mục 3.4 — và khiến 2 phiếu còn lại **rất có thể cũng đã 完了**.
+
+**Vá guide lượt 3 — 8 chỗ:**
+
+| Chỗ | Sửa gì |
+|---|---|
+| **§0.3** bảng mốc kiểm | 2 phiếu → **3 phiếu** đã kiểm (No. 1 ・ No. 2 ・ No. 10); nêu "cùng 2 phút" làm lý do các trạng thái cũ đáng ngờ |
+| **§0.2** (dòng 「Dời máy chủ」) | *"cách chạy cụ thể **đang chốt** qua QA 08/2026"* → **đã chốt** qua QA 08-13 |
+| **§1.2** (khối 「統合される」) | Đổi từ đoạn văn thành **2 bullet**: server = phiếu No. 2 **完了**, hướng độc lập đã chốt (kèm cảnh báo 「基本的には」 + mức độ chưa nói); 管理画面 = 🔸 **chưa kiểm lại** |
+| **§8.x** (tiền đề 「同一コードベース」) | *"**có thể thay đổi** theo trả lời QA2"* → **"đã bị vượt qua"** (QA No. 2 完了); giữ 🔸 chưa kiểm repo có cập nhật chưa |
+| **§9.4** bảng 4 QA | Hàng 2: `?` → **No. 2**, 🔸 → ✅ **完了** (chốt 08-13 12:28) |
+| **§9.4** đoạn cảnh báo dưới bảng | Từ "ba phiếu `?`" → **hai phiếu**; thay câu "cách nhau một phút" bằng **bảng 3 phiếu × 起票/chốt** |
+| **§9.4 điểm 2** | Viết lại thành **3 tầng**: ✅ đã chốt (hệ độc lập) / ⚠️ chữ 「基本的には」 vẫn nguyên, **không đọc thành "độc lập tuyệt đối"** / ❌ mức độ chưa nói, phiếu đã đóng ⇒ **phải mở phiếu QA MỚI**, chờ tiếp là vô ích |
+| **§9.4 mục MỚI** 「Một câu hỏi mui đặt cho SYP đã rơi mất」 | Tách 2 vế của câu trả lời ・ nêu rõ SYP không đáp mà phiếu vẫn đóng ・ hệ quả: mất **kênh** chứ không mất **việc** ・ 💡 bài học: **đọc câu trả lời của mui phải soi xem có câu hỏi ngược lại mình không** (dấu hiệu 「ただし…」「…があれば教えてほしい」); **phiếu đóng ≠ xong việc** |
+
+Kiểm cơ học sau lượt 3: 275 heading ・ **206 link, 0 hỏng** ・ 70 fence (chẵn) ・ audit: không còn chỗ nào
+ghi phiếu No. 2 là 回答中.
+
 ## 3. QUYẾT ĐỊNH & PHÁT HIỆN
 
 ### 3.1 Điều quan trọng nhất: 完了 ≠ 回答中 → được phép ghi là ĐÃ CHỐT
