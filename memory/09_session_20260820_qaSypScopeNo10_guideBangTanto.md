@@ -267,6 +267,34 @@ ghi chú "câu 1 mui đã trả lời sơ bộ".
 
 Kiểm cơ học sau lượt 6: 275 heading ・ **206 link, 0 hỏng** ・ 70 fence ・ audit toàn văn `回答中`: các chỗ còn lại đều **hợp lệ** (mô tả lịch sử ・ bảng 3 giá trị ở Phụ lục E.2).
 
+### 2.10 Phiếu QA **No. 7** — thuộc task tái cấu trúc app, KHÔNG thuộc guide
+
+| Ô | Giá trị |
+|---|---|
+| **No.** | **7** — 「「依頼: モバイルアプリ構成の変更」について確認」 |
+| ステータス | **完了**, chốt **2026-08-13 12:34** |
+| 回答内容 | 「**認識に相違ない**」 |
+| **回答者** | ⚠️ **Empty** — Notion không ghi ai trả lời (user: *"chắc họ quên thêm vào, nhưng có câu trả lời là được"*) |
+| 質問者 | Bui Trong Dat, 起票 **2026-08-03 19:22** |
+| 質問内容 | **Empty** (nội dung ở body trang — **chưa đọc**) |
+
+**Ghi vào đâu**: phiếu này **không liên quan `onboarding_guide.md`** — guide là tài liệu học về requirement,
+còn đây là task tái cấu trúc source app. Đã ghi vào **`submit_folder/2026_08_18/output_schedule.md` mục 1**
+(nơi chứa đề bài + cách hiểu) và `00_INDEX` khối [08-18].
+
+**Hai điều phải giữ khi trích về sau:**
+1. **Không gán tên người trả lời.** Ô 回答者 trống thật; user chấp nhận dùng câu trả lời nhưng điều đó không
+   tạo ra một cái tên. Trọng lượng phiếu này **thấp hơn** các phiếu có tên (No. 1–5, No. 10).
+2. **Đây là chốt phần *hiểu đề bài*, không phải chốt bản đề xuất.** 起票 08-03 19:22 = cùng ngày nhận đề bài;
+   bản `CLIENT_REPORT_APP_RESTRUCTURE_ja.md` nộp 18/08 vẫn ở bước ② của lịch (mui review 17–19/8 →
+   phản ánh 20–21/8 → implement 24–28/8).
+
+🔸 **CHƯA kiểm chứng**: body phiếu chưa đọc nên chưa biết "cách hiểu" được xác nhận gồm chính xác những gì.
+Nhiều khả năng trùng 3 goal + ghi chú ⚠️ ở `output_schedule.md` mục 1, nhưng **chưa đối chiếu từng câu**.
+
+📌 Ghi chú về nhịp: phiếu này chốt **12:34**, tức **sau** cụm 6 phiếu kia (12:27–12:28) **6 phút** — vẫn cùng
+một buổi dọn QA ngày 08-13, củng cố kết luận "mui dọn QA theo đợt".
+
 ## 3. QUYẾT ĐỊNH & PHÁT HIỆN
 
 ### 3.1 Điều quan trọng nhất: 完了 ≠ 回答中 → được phép ghi là ĐÃ CHỐT

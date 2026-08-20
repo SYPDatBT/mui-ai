@@ -21,6 +21,18 @@ Nguồn: `requirements/app_source_change.md` — yêu cầu đổi cấu trúc t
 
 ⚠️ **Đọc kỹ chỗ này**: mui **không** yêu cầu "2 app không liên quan gì nhau". Mui yêu cầu **phải có tầng chung** và **muốn dùng lại**. Cái phải độc lập là **bản build** (goal 2) và **việc phát triển** (goal 3).
 
+### ✅ Cách hiểu đề bài đã được mui xác nhận (QA Notion, phát hiện 2026-08-20)
+
+🔍 Nguồn: Notion — QAデータベース, phiếu **No. 7** 「「依頼: モバイルアプリ構成の変更」について確認」
+→ 質問者 Bui Trong Dat (SYP), 起票 **2026-08-03 19:22** — tức **cùng ngày** mui giao đề bài
+→ nguyên văn (回答内容): 「**認識に相違ない**」 (*cách hiểu không có gì sai lệch*)
+→ ステータス **完了**, chốt **2026-08-13 12:34** (更新日時)
+→ ⚠️ ô **回答者 để trống** — Notion không ghi ai trả lời (theo user: phía mui quên điền). Nên khi trích **không gán tên ai**; trọng lượng câu này thấp hơn các phiếu có tên người trả lời.
+
+**Nghĩa**: phần **hiểu đề bài** đã được chốt — không phải chốt bản đề xuất. Bản `CLIENT_REPORT_APP_RESTRUCTURE_ja.md` nộp 18/08 vẫn đang ở bước ② của lịch (mui review 17–19/8 → phản ánh 20–21/8).
+
+🔸 **CHƯA kiểm chứng**: ô `質問内容` của phiếu để trống, nội dung "cách hiểu" nằm ở **body trang** mà chưa đọc. Nhiều khả năng nó trùng với 3 goal + ghi chú ⚠️ ở mục 1 này — nhưng **chưa đối chiếu**, đừng coi là đã xác minh từng câu.
+
 **Lịch mui đưa ra:** ① đề xuất cấu trúc (SYP) 8/3–8/14 → ② mui review 8/17–8/19, phản ánh 8/20–8/21 → ③ implement (SYP) tuần 8/24–8/28. Ta đang ở **cuối bước ①/đầu bước ②**.
 
 **File `requirements/chokkin_irai.md`** = chiến lược chia branch cho phase này — **đã làm xong, không cần quan tâm trong task này**.
