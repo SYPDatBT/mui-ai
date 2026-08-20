@@ -201,7 +201,7 @@ Mỗi khẳng định trong tài liệu này đều kèm nguồn theo định d�
 | Loại nguồn | Mốc | Nghĩa |
 |---|---|---|
 | Repo (`docs/`, code) | commit `1100487`, kiểm **2026-08-18** | Số dòng và nội dung đúng tại mốc này |
-| QAデータベース Notion | **kiểm 2026-08-20** — 9 phiếu: **No. 1 · 2 · 3 · 4 · 5 · 7 · 9 · 10** đều ✅ **完了**; **No. 12** còn 🔶 **確認中, chưa có câu trả lời**. Phiếu ngoài danh sách này vẫn là **lần đọc 2026-08-04** | Notion là dữ liệu sống. Trạng thái `回答中` còn sót ở đâu trong tài liệu này thì ứng với **ngày 08-04** và **rất có thể đã lạc hậu** — cả 6 phiếu đã kiểm đều được mui đóng trong **cùng 2 phút** ngày 08-13. ⚠️ **Phiếu 完了 không có nghĩa là hết dè dặt**: đóng phiếu không thêm chữ nào vào câu trả lời, nên các chữ nhượng bộ (「基本的には」「今の所」) và chuyện "mui trả lời ≠ 北ガス xác nhận" vẫn còn nguyên. **Phải mở trang gốc trước khi trích lại**; cách đọc property và 4 cái bẫy: [Phụ lục E.2](#e2-bước-2--đi-theo-thứ-tự) |
+| QAデータベース Notion | **kiểm 2026-08-20** — 10 phiếu: **No. 1 · 2 · 3 · 4 · 5 · 7 · 9 · 10** đều ✅ **完了**; **No. 6** còn 🟡 **回答中** (có comment mới 08-19); **No. 12** còn 🔶 **確認中, chưa có câu trả lời**. Phiếu ngoài danh sách này vẫn là **lần đọc 2026-08-04** | Notion là dữ liệu sống. Trạng thái `回答中` còn sót ở đâu trong tài liệu này thì ứng với **ngày 08-04** và **rất có thể đã lạc hậu** — cả 6 phiếu đã kiểm đều được mui đóng trong **cùng 2 phút** ngày 08-13. ⚠️ **Phiếu 完了 không có nghĩa là hết dè dặt**: đóng phiếu không thêm chữ nào vào câu trả lời, nên các chữ nhượng bộ (「基本的には」「今の所」) và chuyện "mui trả lời ≠ 北ガス xác nhận" vẫn còn nguyên. **Phải mở trang gốc trước khi trích lại**; cách đọc property và 4 cái bẫy: [Phụ lục E.2](#e2-bước-2--đi-theo-thứ-tự) |
 
 ---
 
@@ -3005,6 +3005,27 @@ Chỉ có gợi ý từ hệ cũ, theo mã hãng + mã lỗi:
 
 🔍 Nguồn: `eminel_gw_project/docs/eminel/4_spec/admin/D_dashboard.md`
 → D-C-08, dòng 37
+
+### ⏳ Đã hỏi rồi — và mui trả lời là "còn lâu"
+
+Đây là chỗ **quan trọng nhất phải biết** về mục này: câu hỏi **đã được gửi từ 2026-08-03**, nhưng đến nay vẫn chưa có điều kiện phân loại, và phía mui nói rõ là sẽ còn lâu.
+
+🔍 Nguồn: Notion — QAデータベース dự án, phiếu **No. 6** 「エラー種別（重篤／軽微）の判定条件についてご教示ください」
+→ 質問者 Bui Trong Dat (SYP), 起票 **2026-08-03 17:33**
+→ nguyên văn (回答内容): 「**要仕様検討中**」 (*còn đang phải xem xét đặc tả*)
+→ trạng thái khi đọc (2026-08-20): **回答中** — cập nhật gần nhất **2026-08-19 10:43**
+→ ⚠️ ô **回答者 để trống**; tên người trả lời **chỉ có trong phần Comments**
+
+**Comment quyết định — masao takahashi (mui), 2026-08-19:**
+
+> 「まだ、エラー内容を洗い出せていないですので、結構後になるかと思います。」
+> *"Bên chúng tôi còn chưa liệt kê ra được các nội dung lỗi, nên tôi nghĩ việc này sẽ khá muộn."*
+
+⇒ **Ba điều rút ra:**
+
+1. **Điểm nghẽn không nằm ở 北ガス mà ở chính mui** — họ chưa lập được danh mục lỗi. Trước khi có danh mục thì không thể bàn điều kiện phân loại.
+2. **Đừng lên kế hoạch dựa vào chỗ này.** 「結構後になる」 (*sẽ khá muộn*) là lời cảnh báo về lịch. Màn hình **C (quản lý E-GW)** thuộc phạm vi 2026 mà bị chặn ở đây — cần bàn phương án làm trước phần không phụ thuộc phân loại lỗi.
+3. **Câu trả lời thực chất nằm ở Comments, không phải ở ô `回答内容`.** Ô đó chỉ ghi 「要仕様検討中」 — đọc riêng nó thì không biết "còn lâu". Xem [Phụ lục E.2](#e2-bước-2--đi-theo-thứ-tự) bẫy ⑤.
 → nguyên văn: 「🔴機器エラーの種別および判定はC-B-12に従う」
 
 **④ Dashboard hiển thị 5 con số**
@@ -4174,7 +4195,7 @@ Những chỗ **chưa quyết mà đang cản trở công việc**, xếp theo m
 
 | # | Chưa quyết | Chặn ai / cái gì | Nguồn | Hỏi ai |
 |---|---|---|---|---|
-| 1 | **Điều kiện phân loại lỗi 重篤 / 軽微** | **Hai màn hình mới hoàn toàn** — C (quản lý E-GW) và D (dashboard), vì D-C-08 tham chiếu C-B-12 | `4_spec/admin/C_egw_management.md` dòng 44 · `D_dashboard.md` dòng 37 | 北ガス |
+| 1 | **Điều kiện phân loại lỗi 重篤 / 軽微** — ⏳ **đã hỏi 08-03, mui nói "còn lâu"** | **Hai màn hình mới hoàn toàn** — C (quản lý E-GW) và D (dashboard), vì D-C-08 tham chiếu C-B-12 | `4_spec/admin/C_egw_management.md` dòng 44 · `D_dashboard.md` dòng 37 · QA phiếu **No. 6** (`回答中`, 回答内容 「要仕様検討中」, comment masao takahashi 08-19: 「結構後になる」) | **mui trước** *(chưa liệt kê được danh mục lỗi)*, rồi 北ガス — xem [§7.4③](#74-spec-màn-hình-quản-trị) |
 | 2 | **「無効」 chặn những gì** | Hành vi ở **cả ba tầng**: gateway ngừng đến đâu, server chặn API nào, app hiển thị gì | `4_spec/admin/C_egw_management.md` dòng 38 | 北ガス |
 | 3 | **Spec chi tiết logic sưởi** (2 mạch, điều khiển phức hợp) | `GW-01` — firmware không viết được, **lan sang cả phần đám mây** | `20_open_issues.md` dòng 94–97 | 北ガス |
 | 4 | **Gán cảm biến ↔ thiết bị ở nhà nhiều mạch** | Giao diện onboarding + cấu trúc dữ liệu + logic điều khiển | `11_business_process/readme.md` dòng 107 · `minutes/day1` dòng 213–215 | 北ガス |
@@ -4190,7 +4211,8 @@ Những chỗ **chưa quyết mà đang cản trở công việc**, xếp theo m
 | 14 | **Mức độ độc lập của server E-GW** — chung library/source hay không | Cách dựng server: dùng lại bao nhiêu từ E-Smart | QAデータベース phiếu No. 2 đã **完了** mà **không nói mức độ** ⇒ chờ tiếp là vô ích, phải mở phiếu mới | mui |
 | 15 | **Chức năng nào của hệ hiện hữu nên dùng tiếp** — mui đã hỏi SYP mà **SYP chưa trả lời** | Quyết định dựng lại bao nhiêu thứ từ đầu | Vế `ただし` của phiếu No. 2 (**完了**, đã mất kênh trả lời) — xem [9.4](#94-vai-trò-và-môi-trường-của-syp) | **SYP phải trả lời**, không phải chờ ai |
 
-⚠️ **Mười hai câu đầu đều cần 北ガス**, trong đó **chín câu bóng nằm hoàn toàn ở phía họ**; ba câu còn lại phải quyết cùng một bên nữa (kihara ở #5 · oi ở #7 · Aqara ở #12). Nên gom vào **một bảng câu hỏi gửi một lần**, không hỏi lẻ — đúng cách 北ガス đang làm việc qua bảng QA.
+⚠️ **Mười hai câu đầu phần lớn cần 北ガス** — chín câu bóng nằm hoàn toàn ở phía họ, ba câu phải quyết cùng một bên nữa (kihara ở #5 · oi ở #7 · Aqara ở #12). Nên gom vào **một bảng câu hỏi gửi một lần**, không hỏi lẻ — đúng cách 北ガス đang làm việc qua bảng QA.
+**Ngoại lệ là #1**: câu này **đã gửi từ 08-03** và hoá ra điểm nghẽn **nằm ở mui**, không phải 北ガス — mui chưa liệt kê được danh mục lỗi, và nói rõ 「結構後になる」 (*sẽ khá muộn*). Không gộp nó vào bảng gửi khách nữa; việc cần làm là **bàn phương án làm trước phần không phụ thuộc phân loại lỗi**, vì màn hình C thuộc phạm vi 2026.
 
 ⚠️ **Ba câu #13–#15 thì khác: chúng nằm ở phía mui hoặc phía chính SYP**, không phải 北ガス — và mỗi câu bị chặn theo một kiểu khác nhau:
 
@@ -4307,6 +4329,9 @@ Câu hỏi của bạn
 **③ `質問内容` có thể để trống** dù câu hỏi vẫn tồn tại — nội dung thật nằm ở **body của trang**. Cả hai phiếu No. 1 và No. 10 đều có property này Empty. Thấy Empty thì cuộn xuống đọc body, **không** kết luận "phiếu rỗng".
 
 **④ Ngày hiển thị kiểu tương đối** ("Last Thursday 12:28 PM"). Trỏ chuột vào để lấy ngày tuyệt đối trước khi trích — ghi ngày tương đối vào tài liệu thì vài tuần sau không ai dịch lại được.
+
+**⑤ ⭐ PHẢI ĐỌC CẢ PHẦN `Comments` — câu trả lời thực chất có thể nằm ở đó.** Ca thật: phiếu **No. 6** (điều kiện phân loại lỗi 重篤/軽微) có ô `回答内容` chỉ ghi 「要仕様検討中」 — đọc riêng nó thì tưởng đơn giản là "đang xem xét". Nhưng trong Comments, masao takahashi (mui) viết ngày 08-19: 「まだ、エラー内容を洗い出せていないですので、**結構後になる**かと思います」 — *"chưa liệt kê được nội dung lỗi nên sẽ khá muộn"*. **Đó mới là thông tin dùng để lập kế hoạch.** Bỏ qua Comments là bỏ qua nửa câu trả lời.
+Kèm theo: **tên người trả lời có thể chỉ xuất hiện trong Comments** trong khi ô `回答者` trống — như đúng phiếu No. 6. Khi trích thì ghi rõ *"theo comment của <tên> ngày <ngày>"*, đừng gán vào ô 回答者.
 
 ⚠️ Đây là **dữ liệu sống**: khi trích dẫn phải ghi kèm ngày đọc, và mở lại trang gốc kiểm tra trạng thái trước khi dùng.
 

@@ -360,6 +360,49 @@ server ・ vế `ただし`) thành **mục có số trong Phụ lục C** — t
 
 Kiểm cơ học sau lượt 9: **276 heading ・ 213 link, 0 hỏng ・ 70 fence**.
 
+### 2.13 Phiếu QA **No. 6** — phiếu đáng giá nhất trong 10 phiếu (Comments có nội dung)
+
+| Ô | Giá trị |
+|---|---|
+| **No.** | **6** — 「エラー種別（重篤／軽微）の判定条件についてご教示ください」 |
+| ステータス | 🟡 **回答中** |
+| 回答内容 | 「**要仕様検討中**」 — chỉ có vậy |
+| 回答者 | ⚠️ **Empty** |
+| 質問者 | Bui Trong Dat, 起票 **2026-08-03 17:33** |
+| 更新日時 | **2026-08-19 10:43** ← **mới nhất trong cả 10 phiếu** |
+| **Comments** | ⭐ **masao takahashi (mui), 08-19**: 「まだ、エラー内容を洗い出せていないですので、**結構後になる**かと思います。」 |
+
+**Hai phát hiện, cả hai quan trọng:**
+
+**① ⭐ Câu trả lời thật nằm ở `Comments`, không ở ô `回答内容`.** Đây là phiếu **đầu tiên** trong 10 phiếu có
+Comments có nội dung. Ô `回答内容` ghi 「要仕様検討中」 — đọc riêng nó thì tưởng "đang xem xét, chờ chút".
+Comment mới cho biết **chưa liệt kê được danh mục lỗi** và **「結構後になる」** (*sẽ khá muộn*) — **đó mới là
+thông tin lập kế hoạch**. Kèm theo: **tên người trả lời chỉ có trong Comments** trong khi ô `回答者` trống
+⇒ khi trích phải ghi *"theo comment của <tên> ngày <ngày>"*, **không** gán vào ô 回答者 (⛔#8).
+→ Đã thành **bẫy ⑤** của Phụ lục E.2.
+
+**② 🔴 Đảo một giả định của guide.** Phụ lục C **#1** — **mục chặn việc SỐ MỘT** của cả dự án — trước ghi cột
+「Hỏi ai: **北ガス**」. Thực tế: **điểm nghẽn ở chính mui**, họ chưa lập được danh mục lỗi. Trước khi có danh
+mục thì không thể bàn điều kiện phân loại, nên **hỏi 北ガス cũng vô nghĩa**.
+Hệ quả hành động: **① không gộp câu này vào bảng QA gửi khách nữa** ② **bàn phương án làm trước phần không
+phụ thuộc phân loại lỗi**, vì màn hình **C (quản lý E-GW) thuộc phạm vi 2026** mà đang bị chặn ở đây.
+
+**Vá — 4 chỗ:**
+
+| Chỗ | Sửa gì |
+|---|---|
+| **§7.4** (spec màn hình quản trị, mục ③ 重篤/軽微) | Thêm tiểu mục **⏳「Đã hỏi rồi — và mui trả lời là 'còn lâu'」**: dòng 🔍 đủ định danh phiếu No. 6 + **trích nguyên văn comment** kèm dịch + **3 điều rút ra** (nghẽn ở mui không phải 北ガス ・ đừng lên kế hoạch dựa vào đây ・ câu trả lời thật ở Comments) |
+| **Phụ lục E.2** | **Bẫy ⑤ MỚI**: phải đọc cả `Comments`; tên người trả lời có thể chỉ có ở đó khi 回答者 trống |
+| **Phụ lục C #1** | Thêm ⏳ "đã hỏi 08-03, mui nói còn lâu" + nguồn phiếu No. 6 (kèm nguyên văn comment) + cột "Hỏi ai" đổi từ 北ガス → **「mui trước (chưa liệt kê được danh mục lỗi), rồi 北ガス」**; và sửa câu tổng kết dưới bảng (「Cả mười hai câu đều cần 北ガス」 → nêu **#1 là ngoại lệ**) |
+| **§0.3** bảng mốc kiểm | 9 → **10 phiếu**, tách 3 nhóm trạng thái: 8 phiếu 完了 ・ No. 6 `回答中` (có comment mới 08-19) ・ No. 12 `確認中` |
+
+📌 **Nhịp đóng phiếu — nay có ĐỦ 3 kiểu**, kết luận "mui dọn theo đợt" cần đọc kèm ngoại lệ:
+- **8 phiếu** đóng gọn trong 2 phút ngày 08-13 (No. 1·2·3·4·5·7·9·10)
+- **No. 6**: KHÔNG nằm trong đợt đó, nhưng **vẫn đang được xử lý** — cập nhật 08-19, có comment thật
+- **No. 12**: lập **trước** đợt 08-13 mà **bị để lại**, không ai chạm (mục 2.12)
+
+Kiểm cơ học sau lượt 10: **277 heading ・ 215 link, 0 hỏng ・ 70 fence**.
+
 ## 3. QUYẾT ĐỊNH & PHÁT HIỆN
 
 ### 3.1 Điều quan trọng nhất: 完了 ≠ 回答中 → được phép ghi là ĐÃ CHỐT
