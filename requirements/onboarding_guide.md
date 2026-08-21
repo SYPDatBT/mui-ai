@@ -201,7 +201,7 @@ Mỗi khẳng định trong tài liệu này đều kèm nguồn theo định d�
 | Loại nguồn | Mốc | Nghĩa |
 |---|---|---|
 | Repo (`docs/`, code) | commit `1100487`, kiểm **2026-08-18** | Số dòng và nội dung đúng tại mốc này |
-| QAデータベース Notion | **kiểm 2026-08-20** — 13 phiếu: **No. 1 · 2 · 3 · 4 · 5 · 7 · 9 · 10** đều ✅ **完了**; **No. 6 · 8 · 14** còn 🟡 **回答中**; **No. 12 · 19** còn 🔶 **確認中, ô trả lời trống**. *(No. 11 và No. 13 không tồn tại — đã bị xoá.)* Phiếu ngoài danh sách này vẫn là **lần đọc 2026-08-04** | Notion là dữ liệu sống. Trạng thái `回答中` còn sót ở đâu trong tài liệu này thì ứng với **ngày 08-04** và **rất có thể đã lạc hậu** — cả 6 phiếu đã kiểm đều được mui đóng trong **cùng 2 phút** ngày 08-13. ⚠️ **Phiếu 完了 không có nghĩa là hết dè dặt**: đóng phiếu không thêm chữ nào vào câu trả lời, nên các chữ nhượng bộ (「基本的には」「今の所」) và chuyện "mui trả lời ≠ 北ガス xác nhận" vẫn còn nguyên. **Phải mở trang gốc trước khi trích lại**; cách đọc property và 4 cái bẫy: [Phụ lục E.2](#e2-bước-2--đi-theo-thứ-tự) |
+| QAデータベース Notion | **kiểm 2026-08-20** — 14 phiếu: **No. 1 · 2 · 3 · 4 · 5 · 7 · 9 · 10** đều ✅ **完了**; **No. 6 · 8 · 14 · 24** còn 🟡 **回答中**; **No. 12 · 19** còn 🔶 **確認中, ô trả lời trống**. *(No. 11 và No. 13 không tồn tại — đã bị xoá.)* Phiếu ngoài danh sách này vẫn là **lần đọc 2026-08-04** | Notion là dữ liệu sống. Trạng thái `回答中` còn sót ở đâu trong tài liệu này thì ứng với **ngày 08-04** và **rất có thể đã lạc hậu** — cả 6 phiếu đã kiểm đều được mui đóng trong **cùng 2 phút** ngày 08-13. ⚠️ **Phiếu 完了 không có nghĩa là hết dè dặt**: đóng phiếu không thêm chữ nào vào câu trả lời, nên các chữ nhượng bộ (「基本的には」「今の所」) và chuyện "mui trả lời ≠ 北ガス xác nhận" vẫn còn nguyên. **Phải mở trang gốc trước khi trích lại**; cách đọc property và 4 cái bẫy: [Phụ lục E.2](#e2-bước-2--đi-theo-thứ-tự) |
 
 ---
 
@@ -1472,11 +1472,36 @@ Ba kiểu thông báo, dựa trên **chênh lệch của cảm biến phát hi�
 
 ⚠️ **Nguồn hệ cũ chỉ liệt kê ba cái tên** cộng câu 「人感センサ差分で判定」. Điều kiện cụ thể ở cột phải là **chiếu từ tài liệu hệ MỚI** (`11_business_process/readme.md` dòng 574–575 — ở đó kiểu thứ hai được gọi là 見守り) — hệ cũ *nhiều khả năng* chạy tương tự nhưng chưa được xác nhận.
 
-🔴 Ở hệ mới, việc **có làm hay không vẫn chưa quyết** — chênh 0 đến 1 người-tháng.
+Ở hệ mới, việc có làm hay không từng là điểm treo lớn — chênh **0 đến 1 người-tháng**:
 
 🔍 Nguồn: `eminel_gw_project/docs/eminel/2_management/20_open_issues.md`
 → mục 「CLD-05 見守り通知（F-ES-05）の実装要否」, dòng 171–173
 → nguyên văn: 「やる/やらないで0〜1人月丸ごと変動」
+
+### ✅ ĐÃ CHỐT: **PHẢI LÀM**
+
+🔍 Nguồn: Notion — QAデータベース dự án, phiếu **No. 24** 「見守り通知の実装要否、およびXzillaへのアプリログ送信の継続要否について」
+→ 質問者 Bui Trong Dat (SYP), 起票 **2026-08-17 13:24** · cập nhật **2026-08-19 18:06**
+→ nguyên văn (回答内容), câu 1: 「**１．実装する必要**」 (*cần phải triển khai*)
+→ trạng thái khi đọc (2026-08-20): **回答中** ・ ô `回答者` **để trống** ⇒ **không gán tên ai**
+
+⇒ **Hệ quả**: phần **0–1 người-tháng** kia **nằm trong phạm vi phải làm**, không còn là biến số. Và điều quan trọng hơn con số: **logic phán đoán trông nom nằm ở gateway** *(xem [5.4](#54-thông-báo-bốn-kênh-không-giống-nhau))* — nếu câu trả lời là "không làm" mà đến muộn thì phần firmware đã viết sẽ thành công bỏ. Nay không còn rủi ro đó.
+
+⚠️ Trạng thái phiếu mới là `回答中`, chưa `完了` — nên vẫn nên mở lại kiểm trước khi trích vào tài liệu gửi ra ngoài. Nhưng câu trả lời **dứt khoát, không kèm chữ nhượng bộ nào** (khác 「基本的には」 hay 「今の所」 ở các phiếu khác).
+
+### ✅ Cùng phiếu đó còn chốt một việc thứ hai: **BỎ chiều gửi log app lên Xzilla**
+
+Phiếu No. 24 hỏi **hai việc**, và việc thứ hai không liên quan trông nom:
+
+→ nguyên văn (回答内容), câu 2: 「**２．継続・利用しません**」 (*không tiếp tục / không dùng*)
+
+**Bối cảnh để hiểu câu này**: hệ cũ **có** một chiều **gửi ra ngoài** — đẩy log ứng dụng lên Xzilla qua SFTP *(hệ cũ chạy bằng `PutLogFileCommand`, cron 00:00 hằng ngày)*. Đây là chiều **ngược** với những gì [3.1 Chiều lên](#31-chiều-lên-từ-cảm-biến-đến-biểu-đồ) mô tả: mọi chỗ khác trong tài liệu này nói về việc **nhận** dữ liệu **từ** Xzilla (điện 30 phút, thông tin hợp đồng), còn đây là **gửi lên**.
+
+⇒ **E-GW không làm chiều này nữa.** Nghĩa là: không port `PutLogFileCommand`, không dựng đường SFTP xuất log, và khi đếm số batch phải làm thì **trừ hạng mục này ra**.
+
+💡 **Vì sao đáng ghi lại một quyết định "không làm"**: nếu chỉ ghi những thứ phải làm thì người sau **điều tra lại hệ cũ, thấy có luồng này, rồi tưởng là mình bỏ sót**. Ghi rõ "đã hỏi, và câu trả lời là bỏ" thì không ai phải điều tra lần hai. Cùng lý do như quyết định bỏ `EMS-SP番号` ở [5.2](#52-onboarding-từ-mở-hộp-đến-thấy-dữ-liệu).
+
+Liên quan tới section requirement **E2 アプリログ収集・送信** — section này **không có tài liệu spec** ([§7.4](#74-spec-màn-hình-quản-trị) giải thích vì sao: nó không có màn hình).
 
 ### ④ グルーピング — gom nhóm hộ tương tự
 
@@ -2925,7 +2950,7 @@ Cột **ステータス** dưới đây là giá trị đối khách; cột **�
 | | D3 | Push | レビュー前 | |
 | | D4 | Trông nom | レビュー前 | |
 | **E** その他 | E1 | Hiển thị lỗi hệ thống | 未掲載 | |
-| | E2 | Thu thập & gửi log app | 未掲載 | |
+| | E2 | Thu thập & gửi log app | 未掲載 | ⚠️ Chiều **gửi log lên Xzilla** của hệ cũ đã chốt là **BỎ** — xem [4.4③](#44-bốn-logic-nghiệp-vụ-đặc-thù) |
 | | E3 | Trợ giúp | 未掲載 | |
 | | E4 | Phi chức năng | 未掲載 | |
 
@@ -3488,7 +3513,7 @@ Hiện có **22 vấn đề** đang mở, chia theo 5 nhóm:
 | **CLD-02** | **Xung đột release tháng 11 giữa Stream 3 và 4, chiến lược branch** | 🔴 |
 | CLD-03 | Có phải sửa phía ESTA không | 🟡 |
 | CLD-04 | Phương thức liên kết TagTag *(phương án 1 hay 2, chênh 1–3 người-tháng)* | 🔴 |
-| **CLD-05** | **Thông báo trông nom có làm không** *(chênh 0–1 người-tháng)* | 🔴 |
+| **CLD-05** | **Thông báo trông nom có làm không** *(chênh 0–1 người-tháng)* — ✅ **đã trả lời 08-19: PHẢI LÀM** (QA phiếu No. 24, xem [4.4③](#44-bốn-logic-nghiệp-vụ-đặc-thù)); ⚠️ nhưng `20_open_issues.md` **chưa cập nhật trên giấy** | 🔴 *(trên giấy)* |
 | CLD-06 | Các hạng mục còn để tạm | 🔵 |
 | CLD-07 | ~10 chỗ 「要確認」 trong spec interface | 🔵 |
 
@@ -3754,6 +3779,7 @@ Bốn câu trả lời của mui mới hơn biên bản 6/25 phía trên. 質問
 | **No. 8** GW-IDと顧客情報の連携 → [§5.2](#52-onboarding-từ-mở-hộp-đến-thấy-dữ-liệu) | 08-05 16:03 | **08-19 10:58** | 🟡 回答中 |
 | **No. 6** エラー種別判定条件 → [§7.4](#74-spec-màn-hình-quản-trị) | 08-03 17:33 | **08-19 10:43** | 🟡 回答中 |
 | **No. 14** 過去データの必要遡及期間 → [§7.4⑦](#74-spec-màn-hình-quản-trị) | 08-13 12:29 | **08-19 18:02** | 🟡 回答中 |
+| **No. 24** 見守り実装要否 ＋ Xzillaへのアプリログ送信 → [§4.4③](#44-bốn-logic-nghiệp-vụ-đặc-thù) | 08-17 13:24 | **08-19 18:06** | 🟡 回答中 |
 | **No. 19** アドバイス19種→7種の統廃合 → [§4.4②](#44-bốn-logic-nghiệp-vụ-đặc-thù) | 08-13 17:22 | **08-19 18:02** | 🔶 確認中 |
 | **No. 12** 2027年劣後機能 → [§6.4](#64-danh-sách-bị-lùi-sang-2027) | 08-12 17:41 | **08-12 17:46** | 🔶 確認中 |
 
@@ -3762,7 +3788,7 @@ Bốn câu trả lời của mui mới hơn biên bản 6/25 phía trên. 質問
 | Kiểu | Phiếu | Việc phải làm |
 |---|---|---|
 | **Đóng cả loạt ngày 08-13** — 8 phiếu, gói trong 7 phút (12:27→12:34), sau khi để nguyên **10 ngày** | No. 1 · 2 · 3 · 4 · 5 · 7 · 9 · 10 | Xong. Với phiếu mới thì **chờ đợt dọn tiếp** là được |
-| **Ngoài đợt nhưng đang được xử lý thật** — cả ba đều có hoạt động ngày **08-19** | No. 6 · No. 8 · No. 14 | Theo dõi. Với No. 6 và No. 8 thì **đọc Comments** vì câu trả lời nằm ở đó; No. 14 thì trả lời nằm ở ô `回答内容` nhưng **chỉ đáp 1 trong 3 câu** |
+| **Ngoài đợt nhưng đang được xử lý thật** — cả bốn đều có hoạt động ngày **08-19** | No. 6 · No. 8 · No. 14 · No. 24 | Theo dõi. Với No. 6 và No. 8 thì **đọc Comments** vì câu trả lời nằm ở đó; No. 14 và No. 24 thì trả lời nằm ở ô `回答内容` — nhưng No. 14 **chỉ đáp 1 trong 3 câu**, còn No. 24 đáp **đủ cả 2** |
 | **`確認中` — chưa ai trả lời một chữ** | No. 12 *(lập 08-12, trước đợt 08-13 mà vẫn bị để lại)* · No. 19 *(lập 08-13, có sửa 08-19 nhưng ô trả lời vẫn trống)* | **Phải thúc**, chờ là vô ích ([Phụ lục C #13](#phụ-lục-c--danh-mục-tbd-đang-chặn-việc) và [#8](#phụ-lục-c--danh-mục-tbd-đang-chặn-việc)) |
 
 💡 **Bài học khi đọc tài liệu này về sau**: thấy một phiếu vừa đổi trạng thái thì **mở luôn các phiếu cùng chủ đề** — khả năng cao chúng cũng vừa được xử lý cùng lượt. Và nhớ hai điều: **`完了` cũng nghĩa là đã trả lời** (grep riêng `回答済` sẽ sót), **phải đọc cả `Comments`** — xem 5 cái bẫy ở [Phụ lục E.2](#e2-bước-2--đi-theo-thứ-tự).
@@ -4256,7 +4282,7 @@ Năm mâu thuẫn tìm được khi đối chiếu chéo (B.5 thêm 2026-08-18, 
 |---|---|---|---|
 | B.1 | Huy hiệu / xếp hạng thuộc năm nào | 🟠 Vừa — mui đã trả lời **ngoài scope 2026**, nhưng 北ガス chưa xác nhận | 北ガス *(QA phiếu No. 5 — mui trả lời, **完了** 08-13; kiểm 08-20)* |
 | B.2 | Điểm thưởng và tư vấn tiết kiệm thuộc năm nào | 🔴 Cao — ~2 người-tháng | 北ガス *(QA câu 2)* |
-| B.3 | Thông báo trông nom có làm không | 🔴 Cao — ảnh hưởng firmware | 北ガス *(QA câu 3)* |
+| B.3 | Thông báo trông nom có làm không | ✅ **ĐÃ ĐÓNG 08-19 — kết luận: PHẢI LÀM** *(giữ mục vì phiếu còn `回答中` và `CLD-05` trên giấy chưa cập nhật)* | — *(QA phiếu No. 24)* |
 | B.4 | Ba thang trạng thái song song (file md requirement ↔ index đối khách ↔ index spec app) | 🟡 Thấp — chỉ cần đọc đúng thang | Không phải mâu thuẫn, chỉ cần biết |
 | **B.6** | **Số loại tư vấn tiết kiệm: code 19 ↔ tài liệu quản lý ~15** *(mới 2026-08-20)* | 🟠 Vừa — lệch 4 loại, ai theo con số 15 sẽ **bỏ sót 4 loại** | 北ガス *(QA phiếu No. 19 — `確認中`, chưa có trả lời)* |
 | B.5 | マルチセンサー còn tồn tại hay đã bị tách đôi *(mới 2026-08-12)* | 🟠 Vừa — ảnh hưởng danh sách thiết bị, màn hình đăng ký và chức năng 見守り | mui trước, rồi 北ガス *(chưa đưa vào `qa_kitagas.md`)* |
@@ -4334,6 +4360,14 @@ Bốn mâu thuẫn trước đều là *tài liệu này nói khác tài liệu 
 **Hệ quả**: logic phán đoán trông nom **nằm ở gateway** *(xem [mục 5.4](#54-thông-báo-bốn-kênh-không-giống-nhau))*. Nếu quyết định "không làm" đến muộn, phần firmware đã viết sẽ thành lãng phí.
 
 → Đã đưa vào `qa_kitagas.md` **câu 3**.
+
+### ✅ Mâu thuẫn này ĐÃ ĐÓNG (2026-08-19) — kết luận: **PHẢI LÀM**
+
+Phiếu QA **No. 24** trả lời 「**１．実装する必要**」 (*cần phải triển khai*) — xem [§4.4③](#44-bốn-logic-nghiệp-vụ-đặc-thù) để có dòng nguồn đầy đủ.
+
+⇒ **Cách đọc ba tài liệu ở bảng trên nay đã rõ**, và phần "Nghi ngờ" phía trên **được xác nhận là đúng**: bảng chức năng (0.75 người-tháng, không đánh dấu 劣後) và requirement `D04_mimamori.md` (nội dung đầy đủ trong 26年対応スコープ) **không sai** — chúng giả định "sẽ làm", và giả định đó đúng. Chỉ có `CLD-05` là mục đang treo, và nay đã được trả lời.
+
+⚠️ **Giữ mục này trong bảng mâu thuẫn** vì hai lý do: phiếu còn `回答中` chưa `完了`, và `CLD-05` trong `20_open_issues.md` **vẫn chưa được cập nhật trên giấy** — ai đọc riêng file đó vẫn thấy 🔴 chưa quyết.
 
 ## B.4 Trạng thái tài liệu app — ba thang đo song song, đừng lẫn
 
