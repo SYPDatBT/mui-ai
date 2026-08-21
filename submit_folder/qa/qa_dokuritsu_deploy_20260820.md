@@ -1,81 +1,74 @@
-# QA — Server E-GW độc lập: trả lời vế `ただし` + hỏi mức độ độc lập
+# QA — Trả lời vế `ただし` của phiếu No. 2, kèm một câu hỏi lại
 
-> Phiếu QA **mới** để lập trên QAデータベース (Notion). Gộp 2 việc của Phụ lục C guide: **#15** (trả lời câu mui đã hỏi SYP) + **#14** (hỏi lại phần mui chưa nói).
+> **Đăng vào phần `Comments` của chính phiếu No. 2** 「旧Eminel基盤継承＋EMINEL-smartサーバーは独立デプロイの確認」 — nơi mui đã đặt câu hỏi. **Không lập phiếu mới.**
 > Người nhận: **mui**. Không đi qua 北ガス.
 
 | | |
 |---|---|
 | Ngày soạn | 2026-08-20 |
-| Lý do lập phiếu mới | Phiếu cũ **No. 2** 「旧Eminel基盤継承＋EMINEL-smartサーバーは独立デプロイの確認」 đã ở trạng thái **完了** (chốt 2026-08-13) ⇒ không trả lời vào đó được nữa |
-| Nguồn nội dung vế trả lời | `submit_folder/2026_08_04/report_batch_3nhom_doichieu_esmart_egw.md` dòng 103 (danh sách) + dòng 115 (tiền đề "dùng lại ≠ 0 công") |
-| Cách viết vế hỏi | **Cách ⓐ** — hỏi thẳng, không nêu phương án kèm ước lượng công *(vì ước lượng công là việc của dev, người soạn phiếu không tự thẩm định được)* |
+| Đăng ở đâu | `Comments` của phiếu **No. 2** (ステータス `完了` — **vẫn nhận comment bình thường**) |
+| Vì sao không lập phiếu mới | Câu hỏi `ただし` là của chính phiếu No. 2. Trả lời đúng chỗ thì mạch hội thoại nằm một nơi; lập phiếu mới sẽ tách làm hai chỗ |
+| Nguồn nội dung phần trả lời | `submit_folder/2026_08_04/report_batch_3nhom_doichieu_esmart_egw.md` dòng 103 (danh sách) + dòng 115 (tiền đề "dùng lại ≠ 0 công") |
+| Phạm vi câu hỏi lại | **Chỉ một câu**: bốn chức năng đó **bê sang E-GW chạy độc lập**, hay **làm package dùng chung**? |
 
 ---
 
-## 1. Bối cảnh — vì sao lập phiếu này
+## 1. Bối cảnh
 
 Câu trả lời của phiếu **No. 2** có **hai vế**:
 
 > 「基本的には独立したシステムとして開発してもらう方向でお願いします。**ただし既存システムを使い続けたほうがいい機能があれば教えてほしいです**」
 
 - **Vế đầu** = mui trả lời SYP → đã rõ: làm server E-GW thành hệ độc lập.
-- **Vế sau (`ただし`)** = **mui hỏi ngược lại SYP** → **SYP chưa bao giờ trả lời**, và phiếu đã bị đóng ngày 13/08.
+- **Vế sau (`ただし`)** = **mui hỏi ngược lại SYP** → SYP **chưa trả lời**. Phiếu được mui đóng ngày 13/08 mà ô `回答内容` không có thêm nội dung nào.
 
-Đồng thời câu trả lời **không nói mức độ độc lập** (chung library/source hay không). Phiếu đã đóng nên chờ thêm là vô ích.
-
-⇒ Phiếu này làm **hai việc cùng lúc**: trả lời phần SYP nợ, và hỏi phần còn thiếu. Hai việc đi cùng nhau có lý: **danh sách chức năng muốn dùng lại chính là lý do cần biết mức độ độc lập** — muốn dùng lại hạ tầng Push của EMINEL-smart thì phải biết được phép chung tới đâu.
+⇒ Comment này **trả lời vế đó**, và hỏi lại **đúng một câu** — câu mà nếu không hỏi thì không lập kế hoạch được.
 
 ---
 
-## 2. Bản tiếng Việt — để đọc và duyệt trước khi gửi
+## 2. Bản tiếng Việt — để đọc và duyệt trước khi đăng
 
-### Vế 1 — Trả lời câu 「既存システムを使い続けたほうがいい機能」
+### Phần trả lời
 
-**Lưu ý cách hiểu**: chữ 「既存システム」 (*hệ hiện hữu*) có thể chỉ **hệ EMINEL cũ** hoặc **EMINEL-smart (ESTA) đang chạy**. Thay vì hỏi lại cho rõ (mất thêm một vòng), phiếu trả lời **cả hai**, và nói rõ mình hiểu là cả hai.
+**Lưu ý cách hiểu**: chữ 「既存システム」 (*hệ hiện hữu*) có thể chỉ **hệ EMINEL cũ** hoặc **EMINEL-smart (ESTA) đang chạy**. Thay vì hỏi lại cho rõ (mất thêm một vòng), trả lời **cả hai** và nói rõ mình hiểu là cả hai.
 
 **① Hệ EMINEL cũ (旧EMINEL): không có chức năng nào nên dùng tiếp nguyên trạng.**
-Kết luận từ đợt điều tra 11 batch của hệ cũ. Các batch đó gắn chặt vào cấu trúc DB và cách vận hành cũ, dựng lại theo kiến trúc mới rẻ hơn là bê sang.
+Kết luận từ đợt điều tra 11 batch hệ cũ — chúng gắn chặt vào cấu trúc DB và cách vận hành cũ, dựng lại theo kiến trúc mới rẻ hơn là bê sang.
 
 **② EMINEL-smart (ESTA) đang chạy: 4 chức năng nên dùng tiếp.**
 
 | # | Chức năng | Vì sao nên dùng tiếp |
 |---|---|---|
-| 1 | **Hạ tầng Push (FCM)** — gồm bảng lưu token thiết bị và các luồng gửi thông báo | Đã chạy thật, đầy đủ. Hệ cũ dùng server trung gian riêng + hàng đợi trong DB + cron mỗi phút — dựng lại kiến trúc đó không có lợi |
+| 1 | **Hạ tầng Push (FCM)** — bảng lưu token thiết bị + các luồng gửi thông báo | Đã chạy thật, đầy đủ. Hệ cũ dùng server trung gian riêng + hàng đợi DB + cron mỗi phút — dựng lại kiến trúc đó không có lợi |
 | 2 | **Hạ tầng điểm / huy hiệu + liên kết PointInfinity** | Phần gọi sang PointInfinity đã có. Việc còn lại là quy tắc tính điểm của E-GW, không phải hạ tầng |
-| 3 | **Luồng nhận dữ liệu Xzilla: SFTP → S3 → DynamoDB** | Đường nhận đã có sẵn và đang chạy. Thêm loại dữ liệu mới thì thêm handler theo đúng pattern đó |
+| 3 | **Luồng nhận dữ liệu Xzilla: SFTP → S3 → DynamoDB** | Đường nhận đã có và đang chạy. Thêm loại dữ liệu mới thì thêm handler theo đúng pattern đó |
 | 4 | **Cơ chế tải / xuất dữ liệu của màn hình quản trị** | Màn hình quản trị đã chốt là **dùng chung** với EMINEL-smart, nên phần này đương nhiên nối tiếp |
 
-⚠️ **Tiền đề phải nói rõ, kẻo bị hiểu là "miễn phí"**: ở đây **"dùng tiếp" nghĩa là dùng lại code / cơ chế / pattern**. Nếu chốt là **deploy độc lập** thì **vẫn phải dựng lại môi trường chạy** trên hạ tầng mới (project riêng, bảng riêng, credential riêng). Tức **"dùng lại" ≠ "0 công"** — chỉ là rẻ hơn viết mới.
+⚠️ **Tiền đề phải nói rõ, kẻo bị hiểu là "miễn phí"**: "dùng tiếp" ở đây nghĩa là **dùng lại code / cơ chế / pattern**. Nếu deploy độc lập thì **vẫn phải dựng lại môi trường chạy** (project riêng, bảng riêng, credential riêng). Tức **"dùng lại" ≠ "0 công"** — chỉ là rẻ hơn viết mới.
 
-### Vế 2 — Hỏi mức độ độc lập
+### Phần hỏi lại — đúng một câu
 
-Câu trả lời trước ghi 「**基本的には**独立したシステムとして」 (*về cơ bản là hệ độc lập*). SYP hiểu là đã chốt hướng độc lập. Nhưng để lập kế hoạch thì cần biết **độc lập đến mức nào**, cụ thể:
+> **Bốn chức năng ở trên: bê sang E-GW để chạy độc lập, hay làm thành package dùng chung giữa hai hệ?**
 
-1. **Source code** — hai hệ dùng **chung repository** hay **tách repository riêng**?
-2. **Thư viện / thành phần dùng chung** — có được **chia sẻ library chung** giữa hai hệ không, hay mỗi hệ tự giữ bản của mình?
-3. **Bốn chức năng ở vế 1** — "dùng tiếp" ở đây mui hình dung là **gọi sang hệ đang chạy**, hay là **bê code sang dựng lại trên môi trường E-GW**?
+Đây là câu quyết định trực tiếp khối lượng công, vì hai cách làm khác nhau hẳn:
 
-Câu 3 là câu quan trọng nhất, vì nó quyết định trực tiếp khối lượng công.
+| Cách | Nghĩa | Đánh đổi |
+|---|---|---|
+| **Bê sang E-GW chạy độc lập** | Copy code sang, E-GW tự giữ bản của mình | Hai hệ hoàn toàn không ảnh hưởng nhau, nhưng **sửa lỗi phải sửa hai nơi** |
+| **Làm package dùng chung** | Tách phần chung thành package, hai hệ cùng dùng | Sửa một nơi ăn cả hai, nhưng **phải quản version và kiểm ảnh hưởng chéo** |
+
+*(Không nêu ước lượng công của từng cách trong comment — đó là việc cần dev thẩm định, và mui vốn nắm rõ hơn về định hướng nền tảng.)*
 
 ---
 
-## 3. 🇯🇵 【JP】Khối gửi mui — dán nguyên vẹn
-
-### Tiêu đề phiếu
-
-```
-EMINEL-smartサーバーの独立範囲について（「既存システムを使い続けたほうがいい機能」の回答を含む）
-```
-
-### Nội dung
+## 3. 🇯🇵 【JP】Khối gửi mui — dán nguyên vẹn vào `Comments` của phiếu No. 2
 
 ```
 お世話になっております。SYPです。
 
-「旧Eminel基盤継承＋EMINEL-smartサーバーは独立デプロイの確認」にてご回答いただいた
-「ただし既存システムを使い続けたほうがいい機能があれば教えてほしいです」について、
-調査結果をご報告いたします。あわせて、独立の範囲について1点ご教示いただきたく、
-本チケットを起票いたしました。
+ご回答いただいた「ただし既存システムを使い続けたほうがいい機能があれば教えて
+ほしいです」について、調査結果をご報告いたします。あわせて1点ご教示いただき
+たく存じます。
 
 ────────────────────────────────
 1. 「既存システムを使い続けたほうがいい機能」のご報告
@@ -115,42 +108,32 @@ EMINEL-smartサーバーの独立範囲について（「既存システムを�
 前提として認識しております。この認識に相違がございましたらご指摘ください。
 
 ────────────────────────────────
-2. 独立の範囲についてのご質問
+2. ご教示いただきたい点
 ────────────────────────────────
 
-「基本的には独立したシステムとして開発してもらう方向で」とのご回答をいただき、
-独立の方向性は承知いたしました。実装計画を立てるにあたり、その範囲について
-以下3点をご教示いただけますでしょうか。
+上記4機能について、下記のいずれを想定されておりますでしょうか。
 
-(1) ソースコードは、EMINEL-smartと同一リポジトリとするか、
-    別リポジトリに分離するか、いずれの想定でしょうか。
+　a. E-GW側へ移植し、E-GWとして独立して動作させる
+　b. 共通パッケージとして切り出し、両システムで共有する
 
-(2) 共通ライブラリ・共通コンポーネントを両システム間で共有することは
-    可能でしょうか。それとも各システムで個別に保持する想定でしょうか。
-
-(3) 上記1でご報告した4機能について、「使い続ける」とは
-    　a. 稼働中のEMINEL-smart側の機能を呼び出す形
-    　b. コードを移植しE-GW環境上に構築し直す形
-    のいずれを想定されておりますでしょうか。
-
-(3)が工数に最も影響いたしますため、可能でしたら優先的にご教示いただけますと
-幸いです。
+工数および実装方針に直接影響いたしますため、ご教示いただけますと幸いです。
 
 以上、よろしくお願いいたします。
 ```
 
 ---
 
-## 4. Kiểm trước khi gửi
+## 4. Kiểm trước khi đăng
 
 - [x] Không chứa mã quản lý nội bộ (`CLD-xx` / `GW-xx` / `F-ES-xx`) — đã rà
 - [x] Không chứa đường dẫn repo hay tên file nội bộ
 - [x] Không chứa ký hiệu trạng thái nội bộ (🔴 / 🔸 / mức [cao])
 - [x] Không xin lại thứ mui đã cung cấp
 - [x] Tiếng Nhật keigo, ngôi SYP
+- [x] Chỉ hỏi **một** câu — không nhồi thêm câu về repo / library như bản nháp trước
 - [ ] **Người duyệt đọc mục 2 (bản tiếng Việt) và xác nhận** ← chờ
-- [ ] **Lập phiếu trên QAデータベース và dán khối JP mục 3** ← chờ
+- [ ] **Dán khối JP mục 3 vào `Comments` của phiếu No. 2** ← chờ
 
-## 5. Sau khi gửi
+## 5. Sau khi đăng
 
-Ghi lại **số phiếu** Notion cấp vào file này, rồi cập nhật `memory/00_INDEX.md`: đóng việc **#15**, chuyển **#14** từ *"phải mở phiếu mới"* sang *"đã hỏi, đang chờ"*.
+Cập nhật `memory/00_INDEX.md`: đóng Phụ lục C **#15** (đã trả lời), chuyển **#14** sang *"đã hỏi lại, đang chờ"*. Ghi ngày đăng vào đây để lần sau biết đã gửi khi nào.

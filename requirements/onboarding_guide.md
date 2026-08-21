@@ -3816,7 +3816,8 @@ Bốn câu trả lời 08-03/04 ở trên hồi đó **đều còn 回答中**, 
 2. **Server E-GW: về cơ bản (基本的には) phát triển theo hướng hệ độc lập** với EMINEL-smart server đang chạy — phiếu No. 2 đã **完了** nên đây là **hướng đã chốt**, không còn là định hướng tạm. Nhưng phải đọc kỹ ba tầng dưới đây, vì đóng phiếu **không thêm chữ nào** vào câu trả lời:
    - ✅ **Đã chốt**: làm server E-GW thành **một hệ độc lập** với E-Smart hiện hành.
    - ⚠️ **Chữ 「基本的には」 (*về cơ bản là*) vẫn nằm trong nguyên văn** — nó là một chữ nhượng bộ, đóng phiếu không xoá nó. **Không được đọc thành "độc lập tuyệt đối".**
-   - ❌ **Chưa nói**: độc lập **đến mức nào** (có chung library/source hay không). Trước đây chỗ này là *"chờ mui trả lời thêm"*; nay phiếu **đã đóng mà vẫn không nói** ⇒ muốn biết thì phải **mở phiếu QA mới**, chờ tiếp là chờ vô ích.
+   - ❌ **Chưa nói**: độc lập **đến mức nào**. Phiếu **đã đóng mà vẫn không nói** ⇒ **chờ tiếp là vô ích, phải hỏi lại**. Hỏi vào **`Comments` của chính phiếu No. 2** *(phiếu `完了` vẫn nhận comment)*, không cần lập phiếu mới — như vậy câu hỏi nằm ngay cạnh câu trả lời gốc.
+     **Câu hỏi cụ thể nên hỏi**: *bốn chức năng dùng chung liệt kê ở [Phụ lục C #15](#phụ-lục-c--danh-mục-tbd-đang-chặn-việc) là **bê sang E-GW chạy độc lập**, hay **làm thành package dùng chung**?* Hỏi kiểu này cụ thể hơn hẳn "độc lập đến mức nào", vì nó buộc chọn giữa hai cách làm có khối lượng công khác nhau rõ rệt.
 3. **Màn hình quản trị: ngược hẳn với server — chung source code, chung cả deploy với E-Smart**, lý do là **cùng một lớp người vận hành sử dụng**. Phiếu No. 3 đã **完了** ⇒ đã chốt, và **không kèm chữ nhượng bộ nào** (khác điểm 2). Câu trả lời này **đè lên** ghi chú camp 6/25 bên dưới (「環境変数／ビルド設定で切り替え」 — tức hai bản deploy tách nhau chuyển bằng biến môi trường): cách hiểu đó **sai** với 管理画面.
    💡 **Hệ quả thực tế**: bạn **thêm màn hình E-GW vào chính repo `syp-eminelstandard-web-admin`**, không dựng repo mới, không dựng deploy riêng.
 4. **Phạm vi điều tra hệ cũ của SYP = `conciergesv` + `eminelsv`** (khảo sát API・batch để di trú); `hemssv` không thuộc phạm vi — GW giao tiếp qua **HEMS-SV (m2-cloud)** do mui làm, spec sẽ chia sẻ riêng (chi tiết: [4.2](#42-bẫy-tên-gọi-lớn-nhất), ghi chú lệch `eminelsv`: [8.4](#84-ba-vấn-đề-chặn-syp)).
@@ -3836,7 +3837,11 @@ Câu trả lời của phiếu No. 2 có **hai vế**. Vế đầu là trả l�
 
 **Điều đã xảy ra**: SYP **không trả lời** vế này. Phiếu vẫn được mui **đóng (完了) ngày 08-13** — ô `回答内容` khi kiểm lại ngày 08-20 vẫn đúng nguyên văn cũ, không có nội dung nào thêm. Nghĩa là **mui đóng phiếu mà không nhận được câu trả lời**.
 
-**Hệ quả cho người đọc**: câu hỏi này **không mất đi về mặt công việc** — nó chỉ mất **kênh** để trả lời. Danh sách "chức năng nên dùng tiếp" là một quyết định kỹ thuật thật, ảnh hưởng tới việc dựng lại bao nhiêu thứ từ đầu. Không nêu ra là **mất trắng một quyết định**. Muốn nêu thì phải mở **phiếu QA mới** hoặc nêu khi trình thiết kế, không thể trả lời vào phiếu đã đóng.
+**Hệ quả cho người đọc**: câu hỏi này **không mất đi**. Danh sách "chức năng nên dùng tiếp" là một quyết định kỹ thuật thật, ảnh hưởng tới việc dựng lại bao nhiêu thứ từ đầu — không nêu ra là **mất trắng một quyết định**.
+
+✅ **Và vẫn trả lời được vào chính phiếu đó**: phần **`Comments`** của một trang Notion **không bị khoá theo `ステータス`** — phiếu `完了` vẫn nhận comment bình thường *(bằng chứng: phiếu No. 6 và No. 8 đều có comment của mui, xem [Phụ lục E.2 bẫy ⑤](#e2-bước-2--đi-theo-thứ-tự))*. Nên **không cần mở phiếu mới**: trả lời thẳng vào Comments của phiếu No. 2, đúng nơi mui đặt câu hỏi.
+
+⚠️ Đây là chỗ dễ suy luận sai: `完了` nghĩa là **mui coi việc trao đổi đã xong**, chứ **không** phải "trang bị đóng, không ghi được nữa". Đừng vì thấy `完了` mà đi lập phiếu mới cho một câu hỏi vốn thuộc phiếu cũ — làm vậy mạch hội thoại bị tách làm hai chỗ.
 
 💡 **Bài học rút ra chung**: khi đọc câu trả lời của mui, phải soi xem trong đó **có câu hỏi ngược lại mình không** (dấu hiệu: 「ただし…」「…があれば教えてほしい」「…を確認してほしい」). Một phiếu QA **đóng** không có nghĩa là **xong việc** — nó có thể đóng lại trong khi phần việc của mình còn nguyên.
 
@@ -4453,7 +4458,7 @@ Những chỗ **chưa quyết mà đang cản trở công việc**, xếp theo m
 | 11b | ↳ **Riêng 「thời hạn lưu」 đã có trả lời một phần: 24 tháng** *(còn `回答中`)* | Cấu hình tự động xoá của DB ・ chi phí lưu trữ ・ kế hoạch di trú. Chặn việc **chốt spec** `F-AD-09` tải dữ liệu | QA phiếu **No. 14** 「過去データダウンロードの必要遡及期間」 — chi tiết + 2 câu chưa trả lời: [§7.4⑦](#74-spec-màn-hình-quản-trị) | 北ガス *(qua mui)* — **còn 2 câu**: quy định lưu quá 24 tháng? ・ ZIP quá khứ có phải di trú? |
 | 12 | **Tài khoản dev cho TagTag / PI / Xzilla** | `CLD-02` — quyết định chiến lược branch | `20_open_issues.md` dòng 158 | 北ガス / Aqara |
 | 13 | **Danh sách chức năng lùi sang 2027 (劣後)** — đã hỏi, câu hỏi viết đúng chuẩn, nhưng **mui chưa trả lời một chữ** | Ước lượng công việc năm 2026: chức năng nào phải làm ngay, chức năng nào được lùi. Kèm **2 dòng chính SYP cũng chưa chắc**: `F-AD-02` mở rộng (一部) và `B4 家電操作` (要確認) | QAデータベース phiếu **No. 12** 「2027年劣後機能の確認」 — `確認中`, bảng 12 dòng: [§6.4](#64-danh-sách-bị-lùi-sang-2027) | **Thúc mui** *(không phải viết lại câu hỏi)* |
-| 14 | **Mức độ độc lập của server E-GW** — chung library/source hay không | Cách dựng server: dùng lại bao nhiêu từ E-Smart | QAデータベース phiếu No. 2 đã **完了** mà **không nói mức độ** ⇒ chờ tiếp là vô ích, phải mở phiếu mới | mui |
+| 14 | **Bốn chức năng dùng chung: bê sang E-GW chạy độc lập, hay làm package dùng chung?** | Cách dựng server: dùng lại bao nhiêu từ E-Smart. Hai cách này **khác nhau rõ rệt về khối lượng công** | QAデータベース phiếu No. 2 đã **完了** mà **không nói mức độ** ⇒ chờ tiếp là vô ích | mui — hỏi vào **`Comments` phiếu No. 2**, cùng chỗ với câu trả lời của #15 |
 | 15 | **Chức năng nào của hệ hiện hữu nên dùng tiếp** — mui đã hỏi SYP mà **SYP chưa trả lời** | Quyết định dựng lại bao nhiêu thứ từ đầu | Vế `ただし` của phiếu No. 2 (**完了**, đã mất kênh trả lời) — xem [9.4](#94-vai-trò-và-môi-trường-của-syp) | **SYP phải trả lời**, không phải chờ ai |
 
 ⚠️ **Mười hai câu đầu phần lớn cần 北ガス** — chín câu bóng nằm hoàn toàn ở phía họ, ba câu phải quyết cùng một bên nữa (kihara ở #5 · oi ở #7 · Aqara ở #12). Nên gom vào **một bảng câu hỏi gửi một lần**, không hỏi lẻ — đúng cách 北ガス đang làm việc qua bảng QA.
@@ -4487,8 +4492,8 @@ Những chỗ **chưa quyết mà đang cản trở công việc**, xếp theo m
 🔸 **Chưa kiểm chứng — hai cách đọc, chưa biết cách nào đúng**: ① 北ガス/mui đánh giá firmware **thực ra không cần biết ngay**, tức lập luận "chặn 2026" của tài liệu này quá thận trọng; ② câu 「後回し」 được đưa ra **mà chưa để ý tới phụ thuộc firmware**. Nếu là ② thì đây là **rủi ro cần nêu lại**, không phải việc đã xong.
 
 ⇒ **Việc cụ thể**: chốt nội bộ với **kihara** (phụ trách gateway/firmware) xem tư thế nào, và nếu là cách đọc ② thì nêu lại phụ thuộc này cho mui trước khi tuần implement bắt đầu.
-| 14 | **Đã hỏi, đã đóng, nhưng câu trả lời không chứa thông tin cần** | Mở **phiếu QA mới** — chờ phiếu cũ là vô ích |
-| 15 | **Người phải trả lời là SYP**, và phiếu đã bị đóng mất kênh | Nêu lại bằng phiếu mới hoặc khi trình thiết kế |
+| 14 | **Đã hỏi, đã đóng, nhưng câu trả lời không chứa thông tin cần** | Hỏi lại vào **`Comments` của phiếu No. 2** — chờ là vô ích, nhưng **không cần lập phiếu mới** |
+| 15 | **Người phải trả lời là SYP** — không phải chờ ai | Trả lời vào **`Comments` của chính phiếu No. 2** *(phiếu `完了` vẫn nhận comment)* |
 
 ---
 
