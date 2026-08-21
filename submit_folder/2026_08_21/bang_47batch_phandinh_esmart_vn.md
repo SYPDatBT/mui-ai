@@ -6,6 +6,7 @@
 | | |
 |---|---|
 | Ngày lập | 2026-08-21 |
+| Cập nhật | 2026-08-22 — đính chính dòng `ControlDrOperationCommand`: DR cơ bản = FY26 (3 inline comment masao 08-20, phiếu No. 12) |
 | Nguồn danh mục batch | `legacy_eminel_docs/docs/03_API仕様/04_バッチ一覧.md` — repo tại `ccd8f56` |
 | Nguồn cột phán định | `submit_folder/2026_08_13/summary_batch_migration/summary_batch_migration_ja.md` — cột `新システムでの対応機能` · `結論` · `補足` |
 | Kiểm trực tiếp trên code | `syp-eminelstandard-backend` @ `dc39aa39` (branch `gw-syp-dev`) · `legacy_eminel_docs` @ `ccd8f56` |
@@ -87,7 +88,7 @@ Toàn bộ nhóm này phán định 「**新規追加が必要**」. Đây là n
 | `DistributeMonthlyEcoPointsCommand` | 月別エコポイント配布（PI連携） | ❌ | 新規追加が必要 | Nghiệp vụ của chính batch = `F-ES-04` エコ暖房ポイント; gián tiếp liên quan `F-ES-09` PI連携. Hệ cũ cấp **250 điểm/tháng** cho hộ có nhiệt độ cài đặt TB tháng **≤22℃** |
 | `PublishRegularEcoMissionsCommand` | 定期省エネアドバイス配信（11種Publisher） | ❌ | 新規追加が必要 | Nghiệp vụ của chính batch = `F-ES-03` tư vấn tiết kiệm; gián tiếp `F-ES-12` gom nhóm. ⚠️ **Chặn**: gom 19 loại còn 7 mà **chưa ai định nghĩa 7 loại là gì** |
 | `DispatchPushMessagesCommand` | Pushメッセージ配信 | ✅ | **新規追加不要 — 同等機能が既に存在** | Hệ cũ dùng server trung gian + hàng đợi DB + cron **mỗi phút**. e-smart làm thẳng bằng FCM và **chia mịn hơn hệ cũ**: kiểm 08-20 thấy `batch-push-notice` cùng 5 batch tiền xử lý theo loại (`-dr-start-`, `-dr-end-`, `-dr-new-`, `-news-new-`, `-survey-new-`) |
-| `ControlDrOperationCommand` | DR指令操作制御 | 🔶 | **同等機能が既に存在（対象範囲はより広い）— cần thêm nhánh cho thiết bị E-GW** | e-smart có chùm `api-dr` · `batch-end-dr` · `batch-end-dr-preprocessing` (kiểm 08-20). ⚠️ **Nhưng không phải việc 2026**: phiếu QA No. 12 xếp DR **toàn bộ vào 2027**, và phiếu No. 25 trả lời phương án kết thúc DR là 「**後回し**」 |
+| `ControlDrOperationCommand` | DR指令操作制御 | 🔶 | **同等機能が既に存在（対象範囲はより広い）— cần thêm nhánh cho thiết bị E-GW** | e-smart có chùm `api-dr` · `batch-end-dr` · `batch-end-dr-preprocessing` (kiểm 08-20). ⚠️ **Đây LÀ việc FY26** (đính chính 22/08 — bản trước ghi nhầm "lùi 2027" theo body phiếu No. 12 khi chưa có trả lời): 3 inline comment của masao (mui, 08-20) trên bảng phiếu No. 12 chốt server DR管理 (`F-ES-07,08`) 「基本機能はFY26スコープで、一部DR実施判定ロジックが劣後の予定」, admin (`F-AD-08`) và app (B5) đều 「FY26スコープです」; tiền đề kế hoạch nội bộ (user chốt 21/08): coi **toàn bộ** `F-ES-07,08` là FY26. Phương án kết thúc DR: phiếu No. 25 vẫn là 「**後回し**」 (chưa chọn A/B) |
 
 ### 外部連携・受信系（Xzilla取込）— **3 batch, đường ống có sẵn nhưng handler phải viết**
 
