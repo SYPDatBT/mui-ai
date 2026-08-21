@@ -5,7 +5,7 @@
 
 | | |
 |---|---|
-| Ngày lập | 2026-08-20 |
+| Ngày lập | 2026-08-21 |
 | Nguồn danh mục batch | `legacy_eminel_docs/docs/03_API仕様/04_バッチ一覧.md` — repo tại `ccd8f56` |
 | Nguồn cột phán định | `submit_folder/2026_08_13/summary_batch_migration/summary_batch_migration_ja.md` — cột `新システムでの対応機能` · `結論` · `補足` |
 | Kiểm trực tiếp trên code | `syp-eminelstandard-backend` @ `dc39aa39` (branch `gw-syp-dev`) · `legacy_eminel_docs` @ `ccd8f56` |
@@ -56,7 +56,7 @@
 
 Toàn bộ nhóm này phán định 「**新規追加が必要**」. Đây là nhóm nặng nhất trong 47 batch, và là nền của toàn bộ tầng hiển thị trên app.
 
-⚠️ **Đọc kỹ chỗ này**: 「新規追加が必要」 nói về **bản thân các batch**, **không** có nghĩa e-smart trắng tay ở mảng này. Kiểm trực tiếp 2026-08-20: e-smart **đã có ba bảng tích luỹ đang chạy** — `DeviceAccumulatedHistoryTable` · `DeviceDailyUsageHistoryTable` · `DeviceMonthlyUsageHistoryTable` (`template-dynamodb.yaml` dòng **1113 · 1145 · 1177**), cùng các batch nhập dữ liệu ghi vào chúng. Tức **cấu trúc lưu số liệu tích luỹ đã có**; phần phải làm mới là **logic tính toán** đặt lên trên. Giả định cũ *"nhóm 集計・計算系 không có gì dùng lại"* **đã bị bác từ 2026-08-12** — đừng dùng lại giả định đó khi ước lượng công.
+⚠️ **Đọc kỹ chỗ này**: 「新規追加が必要」 nói về **bản thân các batch**, **không** có nghĩa e-smart trắng tay ở mảng này. Kiểm trực tiếp 2026-08-21: e-smart **đã có ba bảng tích luỹ đang chạy** — `DeviceAccumulatedHistoryTable` · `DeviceDailyUsageHistoryTable` · `DeviceMonthlyUsageHistoryTable` (`template-dynamodb.yaml` dòng **1113 · 1145 · 1177**), cùng các batch nhập dữ liệu ghi vào chúng. Tức **cấu trúc lưu số liệu tích luỹ đã có**; phần phải làm mới là **logic tính toán** đặt lên trên. Giả định cũ *"nhóm 集計・計算系 không có gì dùng lại"* **đã bị bác từ 2026-08-12** — đừng dùng lại giả định đó khi ước lượng công.
 
 | クラス名 | 概要 | e-smart | Chức năng E-GW tương ứng | Phán định |
 |---|---|---|---|---|
@@ -166,4 +166,4 @@ Cột phán định **không phải do tôi tự điều tra** mà lấy lại t
 
 Nghĩa là: **nhóm 集計・計算系 19 batch — nhóm nặng nhất — SYP chưa tự điều tra**, nên các phán định 「新規追加が必要」 ở nhóm đó là trích lại, **chưa kiểm chứng độc lập trên code**.
 
-Riêng ba nhóm khẳng định về code e-smart trong bảng này thì **tôi kiểm trực tiếp ngày 2026-08-20** trên `syp-eminelstandard-backend` @ `dc39aa39`: ba bảng tích luỹ (`template-dynamodb.yaml` 1113/1145/1177) · họ batch push (`batch-push-notice*`, 6 batch) · chùm DR (`api-dr` · `batch-end-dr` · `batch-end-dr-preprocessing`). Và số lớp Publisher trên `legacy_eminel_docs` @ `ccd8f56`.
+Riêng ba nhóm khẳng định về code e-smart trong bảng này thì **tôi kiểm trực tiếp ngày 2026-08-21** trên `syp-eminelstandard-backend` @ `dc39aa39`: ba bảng tích luỹ (`template-dynamodb.yaml` 1113/1145/1177) · họ batch push (`batch-push-notice*`, 6 batch) · chùm DR (`api-dr` · `batch-end-dr` · `batch-end-dr-preprocessing`). Và số lớp Publisher trên `legacy_eminel_docs` @ `ccd8f56`.

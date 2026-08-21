@@ -5,7 +5,7 @@
 
 | | |
 |---|---|
-| Ngày soạn | 2026-08-20 |
+| Ngày soạn | 2026-08-21 |
 | Đăng ở đâu | **Body** phiếu **No. 2**, ngay dưới câu hỏi gốc, mở đầu bằng dòng ngày *(user chốt 08-20)* |
 | Vì sao không lập phiếu mới | Câu hỏi `ただし` là của chính phiếu No. 2. Ghi đúng chỗ thì mạch hội thoại nằm một nơi; lập phiếu mới sẽ tách làm hai chỗ. Phiếu ở `完了` **vẫn sửa/ghi thêm được** — `完了` chỉ nghĩa là mui coi việc trao đổi đã xong |
 | Vì sao phải có dòng ngày | Body phiếu vốn là câu hỏi viết ngày **08-05**. Phần thêm vào ngày **08-20** mà không ghi ngày thì người đọc sau **không phân biệt được đâu là câu hỏi gốc, đâu là phần bổ sung** |
@@ -66,7 +66,7 @@ Kết luận từ đợt điều tra 11 batch hệ cũ — chúng gắn chặt v
 
 ```
 ────────────────────────────────
-【2026/08/20 SYP追記】
+【2026/08/21 SYP追記】
 「ただし既存システムを使い続けたほうがいい機能があれば教えてほしいです」への回答
 ────────────────────────────────
 
@@ -137,7 +137,7 @@ Kết luận từ đợt điều tra 11 batch hệ cũ — chúng gắn chặt v
 - [x] Không xin lại thứ mui đã cung cấp
 - [x] Tiếng Nhật keigo, ngôi SYP
 - [x] Chỉ hỏi **một** câu — không nhồi thêm câu về repo / library như bản nháp trước
-- [x] Khối JP có **dòng ngày `【2026/08/20 SYP追記】`** ở đầu — để phân biệt với câu hỏi gốc viết ngày 08-05
+- [x] Khối JP có **dòng ngày `【2026/08/21 SYP追記】`** ở đầu — để phân biệt với câu hỏi gốc viết ngày 08-05
 - [ ] **Người duyệt đọc mục 2 (bản tiếng Việt) và xác nhận** ← chờ
 - [ ] **Dán khối JP mục 3 vào body phiếu No. 2, ngay dưới câu hỏi gốc** ← chờ
 
