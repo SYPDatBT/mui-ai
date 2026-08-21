@@ -9,8 +9,8 @@
 | Đăng ở đâu | **Body** phiếu **No. 2**, ngay dưới câu hỏi gốc, mở đầu bằng dòng ngày *(user chốt 08-20)* |
 | Vì sao không lập phiếu mới | Câu hỏi `ただし` là của chính phiếu No. 2. Ghi đúng chỗ thì mạch hội thoại nằm một nơi; lập phiếu mới sẽ tách làm hai chỗ. Phiếu ở `完了` **vẫn sửa/ghi thêm được** — `完了` chỉ nghĩa là mui coi việc trao đổi đã xong |
 | Vì sao phải có dòng ngày | Body phiếu vốn là câu hỏi viết ngày **08-05**. Phần thêm vào ngày **08-20** mà không ghi ngày thì người đọc sau **không phân biệt được đâu là câu hỏi gốc, đâu là phần bổ sung** |
-| Nguồn nội dung phần trả lời | `submit_folder/2026_08_04/report_batch_3nhom_doichieu_esmart_egw.md` dòng 103 (danh sách) + dòng 115 (tiền đề "dùng lại ≠ 0 công") |
-| Phạm vi câu hỏi lại | **Chỉ một câu**: bốn chức năng đó **bê sang E-GW chạy độc lập**, hay **làm package dùng chung**? |
+| Nguồn nội dung phần trả lời | `submit_folder/2026_08_04/report_batch_3nhom_doichieu_esmart_egw.md` dòng 103 (danh sách 4 mục đầu) + dòng 115 (tiền đề "dùng lại ≠ 0 công") ・ `submit_folder/2026_08_21/bang_47batch_phandinh_esmart_vn.md` (căn cứ mục ① "đủ 47/47, không giữ nguyên trạng" ・ mục 5: dòng 132 giám sát alert ・ mục 6: dòng 59 bảng tích luỹ) |
+| Phạm vi câu hỏi lại | **Chỉ một câu**: các chức năng đó **bê sang E-GW chạy độc lập**, hay **làm package dùng chung**? |
 
 ---
 
@@ -34,9 +34,9 @@ Câu trả lời của phiếu **No. 2** có **hai vế**:
 **Lưu ý cách hiểu**: chữ 「既存システム」 (*hệ hiện hữu*) có thể chỉ **hệ EMINEL cũ** hoặc **EMINEL-smart (ESTA) đang chạy**. Thay vì hỏi lại cho rõ (mất thêm một vòng), trả lời **cả hai** và nói rõ mình hiểu là cả hai.
 
 **① Hệ EMINEL cũ (旧EMINEL): không có chức năng nào nên dùng tiếp nguyên trạng.**
-Kết luận từ đợt điều tra 11 batch hệ cũ — chúng gắn chặt vào cấu trúc DB và cách vận hành cũ, dựng lại theo kiến trúc mới rẻ hơn là bê sang.
+Kết luận từ bảng phán định di trú **đủ 47/47 batch** của hệ cũ: không batch nào được phán định "giữ nguyên trạng" — phần lớn gắn chặt vào cấu trúc DB và cách vận hành cũ, dựng lại theo kiến trúc mới (hoặc thay bằng cách làm mới) hợp lý hơn là bê sang. Riêng 4 batch nhóm hemssv (GW通信) thuộc phạm vi gateway của mui Lab nên để ngoài phán định.
 
-**② EMINEL-smart (ESTA) đang chạy: 4 chức năng nên dùng tiếp.**
+**② EMINEL-smart (ESTA) đang chạy: 6 chức năng nên dùng tiếp.**
 
 | # | Chức năng | Vì sao nên dùng tiếp |
 |---|---|---|
@@ -44,12 +44,14 @@ Kết luận từ đợt điều tra 11 batch hệ cũ — chúng gắn chặt v
 | 2 | **Hạ tầng điểm / huy hiệu + liên kết PointInfinity** | Phần gọi sang PointInfinity đã có. Việc còn lại là quy tắc tính điểm của E-GW, không phải hạ tầng |
 | 3 | **Luồng nhận dữ liệu Xzilla: SFTP → S3 → DynamoDB** | Đường nhận đã có và đang chạy. Thêm loại dữ liệu mới thì thêm handler theo đúng pattern đó |
 | 4 | **Cơ chế tải / xuất dữ liệu của màn hình quản trị** | Màn hình quản trị đã chốt là **dùng chung** với EMINEL-smart, nên phần này đương nhiên nối tiếp |
+| 5 | **Hạ tầng giám sát・cảnh báo lỗi** — phát hiện error log rồi tự gửi thông báo (CloudWatch Logs Subscription Filter + SNS) | Thay thế hoàn toàn batch gửi mail cảnh báo của hệ cũ, phạm vi phủ còn rộng hơn. Deploy độc lập thì dựng theo đúng pattern này ở môi trường mới |
+| 6 | **Cấu trúc bảng tích luỹ dữ liệu thiết bị + pattern batch nhập liệu** — bảng ngày / tháng / luỹ kế đang chạy thật | Là nền cho nhóm batch 集計・計算系 phải làm mới (19 batch — nhóm nặng nhất): cấu trúc lưu đã có sẵn, phần làm mới chỉ là logic tính toán đặt lên trên |
 
 ⚠️ **Tiền đề phải nói rõ, kẻo bị hiểu là "miễn phí"**: "dùng tiếp" ở đây nghĩa là **dùng lại code / cơ chế / pattern**. Nếu deploy độc lập thì **vẫn phải dựng lại môi trường chạy** (project riêng, bảng riêng, credential riêng). Tức **"dùng lại" ≠ "0 công"** — chỉ là rẻ hơn viết mới.
 
 ### Phần hỏi lại — đúng một câu
 
-> **Bốn chức năng ở trên: bê sang E-GW để chạy độc lập, hay làm thành package dùng chung giữa hai hệ?**
+> **Các chức năng ở trên: bê sang E-GW để chạy độc lập, hay làm thành package dùng chung giữa hai hệ?**
 
 Đây là câu quyết định trực tiếp khối lượng công, vì hai cách làm khác nhau hẳn:
 
@@ -85,10 +87,13 @@ Kết luận từ đợt điều tra 11 batch hệ cũ — chúng gắn chặt v
 
 ■ 旧EMINEL：そのまま使い続けるべき機能はございません。
 
-旧バッチ11本の調査結果に基づく判断です。いずれも旧DB構造・旧運用手順に強く
-依存しており、新アーキテクチャで作り直すほうが移植よりも合理的と考えます。
+旧バッチ一覧（全47本）に対する移行判定に基づく判断です。そのまま流用すべきと
+判定されたバッチは1本もなく、多くは旧DB構造・旧運用手順への依存が強いため、
+新アーキテクチャで作り直す、または新方式へ置き換えるほうが合理的と考えます。
+なお、HEMSサーバ（GW通信）系の4本は、ゲートウェイ側の刷新に伴い貴社ご担当
+範囲となるため、判定対象外としております。
 
-■ EMINEL-smart（ESTA）：以下4点は使い続けることを推奨いたします。
+■ EMINEL-smart（ESTA）：以下6点は使い続けることを推奨いたします。
 
 (1) Push基盤（FCM）
     デバイストークン管理テーブルおよび通知配信の各フローが既に稼働しております。
@@ -107,6 +112,18 @@ Kết luận từ đợt điều tra 11 batch hệ cũ — chúng gắn chặt v
     管理画面はEMINEL-smartと共通のソースコード・共通デプロイとのご回答を
     いただいておりますので、本機構はそのまま継続する前提で認識しております。
 
+(5) 監視・アラート基盤（エラーログ検知・通知）
+    旧EMINELのアラートログメール送信に相当する仕組みとして、CloudWatch Logs
+    Subscription Filter＋SNSによる通知が既に稼働しており、カバー範囲も旧方式
+    より広いと認識しております。独立デプロイの場合も、同じパターンで新環境に
+    構築することを想定しております。
+
+(6) 機器データ蓄積テーブルの構造およびデータ取込バッチのパターン
+    日次・月次・累積の蓄積テーブルと、そこへ書き込む取込バッチが既に稼働して
+    おります。新規実装が必要な集計・計算系バッチ群（最も本数の多いグループ）
+    は、この蓄積構造を土台とし、集計ロジック部分のみを新規実装する形が
+    合理的と考えます。
+
 【前提のご確認】
 上記の「使い続ける」は、コード・仕組み・パターンの再利用を指しております。
 独立デプロイとなる場合、実行環境（プロジェクト・テーブル・認証情報等）は
@@ -117,7 +134,7 @@ Kết luận từ đợt điều tra 11 batch hệ cũ — chúng gắn chặt v
 2. ご教示いただきたい点
 ────────────────────────────────
 
-上記4機能について、下記のいずれを想定されておりますでしょうか。
+上記の各機能について、下記のいずれを想定されておりますでしょうか。
 
 　a. E-GW側へ移植し、E-GWとして独立して動作させる
 　b. 共通パッケージとして切り出し、両システムで共有する
@@ -138,9 +155,10 @@ Kết luận từ đợt điều tra 11 batch hệ cũ — chúng gắn chặt v
 - [x] Tiếng Nhật keigo, ngôi SYP
 - [x] Chỉ hỏi **một** câu — không nhồi thêm câu về repo / library như bản nháp trước
 - [x] Khối JP có **dòng ngày `【2026/08/21 SYP追記】`** ở đầu — để phân biệt với câu hỏi gốc viết ngày 08-05
-- [ ] **Người duyệt đọc mục 2 (bản tiếng Việt) và xác nhận** ← chờ
-- [ ] **Dán khối JP mục 3 vào body phiếu No. 2, ngay dưới câu hỏi gốc** ← chờ
+- [x] **Người duyệt đọc mục 2 (bản tiếng Việt) và xác nhận** — xong 2026-08-21
+- [x] **Dán khối JP mục 3 vào body phiếu No. 2, ngay dưới câu hỏi gốc** — user tự đăng 2026-08-21
 
 ## 5. Sau khi đăng
 
-Cập nhật `memory/00_INDEX.md`: đóng Phụ lục C **#15** (đã trả lời), chuyển **#14** sang *"đã hỏi lại, đang chờ"*. Ghi ngày đăng vào đây để lần sau biết đã gửi khi nào.
+✅ **ĐÃ ĐĂNG 2026-08-21** — user dán khối JP mục 3 vào body phiếu No. 2 (dưới câu hỏi gốc). Đang chờ mui phản hồi câu a/b.
+Hậu kỳ đã làm cùng ngày: guide Phụ lục C **#15** → đã trả lời (đóng), **#14** → *"đã hỏi lại, đang chờ"*; §9.4 cập nhật tương ứng; `memory/00_INDEX.md` việc 1e/6/6b cập nhật.

@@ -245,11 +245,11 @@ và viết lại; CLAUDE.md mục SOURCES đã cập nhật 4 repo git + 1 snaps
 1. ✅ **XONG 18/08: guide → v1.3 theo `1100487`** (§7.3 B6 viết lại ・ §7.5 mới về `4_spec/app/` ・ Phụ lục B.5 ・ 9 chỗ mốc đối chiếu). **Còn lại của hạng mục này**: ① quyết định có hỏi 6 phát hiện nguồn N1–N6 không ② Phụ lục C chưa thêm `GW-04` ③ Phụ lục D chưa trỏ `4_spec/app/` ④ `requirements/README.md` + `self_study_plan.md` chưa rà theo tầng spec app ⑤ **chưa đọc nội dung `c02_グラフ`/`c03_レポート` và skill `draft-app-spec`** (user chọn mức "Vừa" cho §7.5).
 1b. **Đuôi của đợt vá 08-20** (11 lượt vá theo 11 phiếu QA): ① 🔴 **CHƯA làm — review CHỈ vùng sửa** (⛔#5 bắt buộc kể cả sửa nhỏ; phạm vi = `git diff 432867d..HEAD -- requirements/onboarding_guide.md`, **đừng quét lại 4.500 dòng**; quy trình 4 bước của 18/08 chứng minh bước này bắt được lỗi do chính đợt sửa sinh ra) ② **CHƯA quyết** guide có lên **v1.4** không — bảng meta đầu guide (dòng 8) vẫn ghi `1.3` ③ ✅ commit XONG (13 commit) ・ 🔴 **push CHƯA** — auto mode chặn `git push`, user tự chạy `git push origin main` ④ **CHƯA rà** `requirements/README.md` + `notes/guide_v13_mapping.md` theo bảng 担当 mới (`self_study_plan.md` đã sửa 1 chỗ ngày 08-20, nhưng **dòng 54 vẫn còn câu sai** — xem việc 4).
 1c. ✅ **XONG 20/08 — CẢ 4 PHIẾU của bảng §9.4 + phiếu No. 10 đều đã kiểm, TẤT CẢ 完了.** No. 1 担当範囲…とアプリ対象外 (起票 08-03 17:30 → chốt 08-13 **12:27**) ・ No. 2 独立デプロイ (17:31 → **12:28**) ・ No. 3 管理画面は独立か共通か (17:32 → **12:28**) ・ No. 4 旧EMINEL調査範囲…hemssv対象外 (17:32 → **12:28**) ・ No. 10 SYP開発範囲 (08-12 16:17 → **12:28**). Guide + `self_study_plan.md` đã sửa hết. **Nhịp mui: lập 4 phiếu trong 3 phút, mui để 10 ngày rồi đóng cả loạt trong 2 phút** — thấy 1 phiếu đổi trạng thái thì mở luôn phiếu cùng chủ đề. Nhớ: `完了` cũng là "đã trả lời" — **grep `回答済` sẽ sót**. ⬜ **Chưa kiểm**: các phiếu QA **ngoài** nhóm phạm vi (vd 「バッジ・ランクは2026年度対応スコープでしょうか」) — xem việc số 8.
-1e. **[08-20, user sửa yêu cầu] QA đã soạn xong, CHỜ DUYỆT + ĐĂNG**: `submit_folder/qa/qa_dokuritsu_deploy_20260821.md`.
+1e. ✅ **XONG 21/08 — QA ĐÃ ĐĂNG vào body phiếu No. 2** (`submit_folder/qa/qa_dokuritsu_deploy_20260821.md`, user tự dán khối JP). **Trước khi đăng, nội dung được nâng 2 lần cùng ngày (user duyệt từng bước)**: ① danh sách 4 → **6 chức năng** e-smart nên dùng tiếp (thêm: giám sát cảnh báo CloudWatch+SNS ・ bảng tích luỹ + pattern nhập liệu — soát đủ 47 dòng bảng phán định, 2 ứng viên loại có chủ đích: Cognito, chùm DR) ② căn cứ mục "hệ cũ không giữ gì" đổi từ 11 batch → **phán định đủ 47/47** (4 con hemssv ghi rõ là phạm vi mui). Hậu kỳ đã làm: guide §9.4 + Phụ lục C #14 (đã hỏi, chờ mui)/#15 (đã đóng). **Đang chờ mui trả lời câu a/b (bê sang độc lập hay package chung).**
    ⛔ **ĐÍNH CHÍNH MỘT KHẲNG ĐỊNH SAI CỦA AI**: bản đầu ghi *"phiếu No. 2 đã `完了` nên không trả lời vào đó được nữa, phải lập phiếu mới"* — **SAI**. Phần `Comments` của Notion **không bị khoá theo `ステータス`**; phiếu `完了` vẫn nhận comment (bằng chứng: No. 6 và No. 8 đều có comment của mui). `完了` = **mui coi việc trao đổi đã xong**, không phải "trang bị đóng".
    → **Cách làm đúng (user chốt)**: **ghi thêm vào BODY của chính phiếu No. 2, ngay dưới câu hỏi gốc, mở đầu bằng dòng ngày** (「【2026/08/20 SYP追記】」), KHÔNG lập phiếu mới — để mạch hội thoại nằm một chỗ.
    → **Phạm vi cũng rút lại (user chốt)**: phần trả lời giữ nguyên (#15); phần hỏi lại **chỉ MỘT câu** = *"4 chức năng đó **bê sang E-GW chạy độc lập** hay **làm package dùng chung**?"*. **Bỏ** 2 câu của bản nháp trước (chung repo hay tách / có chia sẻ library chung) — câu hỏi mới cụ thể hơn và buộc chọn giữa hai cách làm có khối lượng công khác nhau rõ rệt.
-   Có bản VN để duyệt + khối JP dán được nguyên vẹn, đã rà sạch mã nội bộ. **Trạng thái 08-20 (user chốt)**: ⏸ **CHỜ XÁC NHẬN NỘI BỘ trước khi đăng** — không phải chờ soạn, nội dung đã xong. Người duyệt đọc **mục 2** của file (bản tiếng Việt), khối JP ở **mục 3** dán được nguyên vẹn. Sau khi đăng: ghi số phiếu Notion vào mục 5 của file → đóng Phụ lục C **#15**, chuyển **#14** sang "đã hỏi, đang chờ".
+   Bản VN + khối JP đã rà sạch mã nội bộ. Việc "sau khi đăng" (mục 5 của file) đã hoàn tất 21/08 — xem dòng đầu mục 1e này.
 1f. **[08-20] Phiếu No. 12 — GIẢ THUYẾT CỦA AI ĐÃ SAI, chỉ cần THÚC.** Đã đọc body: câu hỏi **viết đúng chuẩn rồi** — bảng **12 dòng** (領域 × 機能 × 劣後の範囲) + 「内容に相違がないかご確認をお願いいたします」, mui chỉ cần đáp đúng/sai. Trước đó AI ngờ nó "hỏi kiểu mở nên bị bỏ lại" → **sai**. ⇒ **KHÔNG soạn lại câu hỏi**, chỉ thúc.
    - → Bảng 12 dòng đã vào guide **§6.4** dưới nhãn 🔸 「Bảng SYP tự lập — mui CHƯA trả lời」. Nó **chi tiết hơn** bảng cũ (lấy từ `10_feature_list.md`) ở 3 điểm: có **mã requirement/chức năng** ・ có cột **範囲 (全部/一部/要確認)** ・ **chỉ ra 2 chỗ chính SYP cũng chưa chắc**.
    - ⚠️ **2 mục còn mở lộ ra từ bảng này**: **#6** 制御状態確認 (`F-AD-02` mở rộng) = **一部**, chưa phân định phần nào lùi ・ **#12** 家電操作 (`B4`) = **要確認**, chưa biết 2026 hay 2027 (đáng chú ý vì B4 đã được viết nội dung requirement).
@@ -261,22 +261,13 @@ và viết lại; CLAUDE.md mục SOURCES đã cập nhật 4 repo git + 1 snaps
 3. **Điều tra nhóm 集計・計算系** (17/19 dòng còn lại của nhóm; SYP còn ~30/43 batch chưa điều tra). ⚠️ Giả định cũ "e-smart không có gì dùng lại" **đã bị bác** — e-smart CÓ 3 bảng history (`template-dynamodb.yaml:1113/1145/1177`), ghi bởi 5 batch `batch-import-rinnai/noritz-*`. Dùng skill `create-investigation-report`.
 4. **`requirements/self_study_plan.md`** — hạng mục 1 tiếp bước 2–6; **sửa dòng 54** ("集計・計算系 — e-smart không có gì dùng lại") theo phát hiện trên (CHƯA làm).
 5. Findings [thấp]/[vừa] còn lại của 78 (đã mất danh sách) — user quyết có chạy lại một lượt review để dựng lại không.
-6. ⚠️ **VIỆC NÀY ĐỔI BẢN CHẤT (phát hiện 08-20) — phiếu đã ĐÓNG mà SYP CHƯA trả lời.** Phiếu **No. 2** 独立デプロイ
-   (完了, chốt 08-13 12:28) có vế `ただし` = **mui hỏi ngược lại SYP**: 「ただし既存システムを使い続けたほうがいい機能が
-   あれば教えてほしいです」. Kiểm ô `回答内容` ngày 08-20: **không có nội dung nào thêm** ⇒ mui tự đóng, SYP không đáp.
-   Treo suốt từ 08-04 qua 5 phiên (`03_`→`06_`) nên đã rơi mất.
-   → **Nội dung trả lời thì đã soạn xong từ lâu**, nằm ở `submit_folder/2026_08_04/report_batch_3nhom_doichieu_esmart_egw.md`
-   **dòng 103** (mục 「Ba việc rút ra cần làm ngay」 #1), bản JP ở `2026_08_05/旧EMINELバッチ移行判定報告書_3グループ11本.md` §2.2-1:
-   **① hệ CŨ (旧EMINEL) = không batch nào đáng dùng tiếp nguyên trạng ② hệ ĐANG CHẠY (e-smart) = 4 ứng viên**:
-   hạ tầng Push (FCM) ・ hạ tầng point/badge + PI連携 ・ luồng nhận Xzilla SFTP→S3→DynamoDB ・ cơ chế admin download/export.
-   Tiền đề kèm theo (cùng báo cáo dòng 115): "dùng lại" = dùng lại **code/cơ chế/pattern**, deploy độc lập thì **vẫn phải
-   dựng lại môi trường chạy** — "dùng lại" ≠ "0 công".
-   → **CẦN USER QUYẾT**: phiếu cũ đã đóng nên phải chọn kênh mới — ⓐ mở **phiếu QA mới** trên QAデータベース, hay
-   ⓑ nêu khi trình thiết kế. Kèm cách gỡ điểm treo cũ: thay vì chờ xác nhận nghĩa 「既存システム」, **trả lời luôn cả hai vế**
-   + một câu mở đầu nói rõ "chúng tôi hiểu 「既存システム」 gồm cả hai nên xin trả lời cả hai" → đỡ mất một vòng hỏi lại.
-6b. **Mức độ độc lập của server E-GW vẫn CHƯA có ai nói** (chung library/source hay không). Phiếu No. 2 đã đóng mà không
-   nói ⇒ **chờ tiếp là chờ vô ích**, muốn biết phải mở phiếu QA mới. Lưu ý chữ 「基本的には」 (*về cơ bản là*) trong nguyên
-   văn là chữ nhượng bộ — đóng phiếu không xoá nó, **không được đọc thành "độc lập tuyệt đối"** (⛔#8).
+6. ✅ **XONG 21/08 — vế `ただし` của phiếu No. 2 ĐÃ ĐƯỢC TRẢ LỜI** (câu mui hỏi ngược SYP từ 08-05, treo 16 ngày qua 5 phiên).
+   Kênh user chốt: **ghi thêm vào body chính phiếu No. 2** kèm dòng ngày 「【2026/08/21 SYP追記】」 (không lập phiếu mới).
+   Nội dung đăng: trả lời **cả hai cách hiểu** của 「既存システム」 — ① hệ cũ: **0** (căn cứ phán định đủ **47/47** batch, không còn dựa 11 batch)
+   ② e-smart: **6 chức năng** nên dùng tiếp — kèm tiền đề "dùng lại ≠ 0 công". Toàn văn: `submit_folder/qa/qa_dokuritsu_deploy_20260821.md`. Chi tiết diễn biến: việc 1e.
+6b. ⏳ **Mức độ độc lập của server E-GW — ĐÃ HỎI 21/08, đang chờ mui** (câu a/b trong cùng bản 追記 phiếu No. 2: 6 chức năng
+   bê sang E-GW chạy độc lập hay tách package dùng chung). Lưu ý cũ vẫn giữ: chữ 「基本的には」 (*về cơ bản là*) trong nguyên
+   văn là chữ nhượng bộ — **không được đọc thành "độc lập tuyệt đối"** (⛔#8). Khi mui trả lời: cập nhật guide §9.4 điểm 2 + Phụ lục C #14.
 7. 🔴 **NAY CẤP HƠN (phát hiện 08-20)** — chốt nội bộ với **kihara** về Q5 (GW giữ trạng thái DR — báo cáo batch #4 cũng treo
    vào đây) → gửi `qa_kitagas.md` qua PM mui (quyết kèm Dự phòng 3/4 không).
    **Lý do cấp hơn**: phiếu QA **No. 25** đáp 「**後回し**」 cho phương án kết thúc DR ⇒ **北ガス sẽ không chọn A/B lúc này**,
