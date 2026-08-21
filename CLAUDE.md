@@ -25,10 +25,11 @@ là làm việc tiếp được**, chỉ cần trỏ lại vị trí các repo g
 | `../sources/` | **Các repo git của dự án** (xem dưới) | repo của dự án — không sửa trừ khi được giao |
 
 ## Quy tắc SOURCES (⚠️ bài học 2026-08-04 — đã suýt kết luận sai vì bỏ qua)
-- Repo nguồn nằm **ngoài** workspace, mặc định ở `../sources/`: **5 repo git** — `eminel_gw_project`
+- Repo nguồn nằm **ngoài** workspace, mặc định ở `../sources/`: **7 repo git** — `eminel_gw_project`
   (docs dự án — quan trọng nhất), `legacy_eminel_docs` (thiết kế + code hệ cũ),
   `syp-eminelstandard-backend` + `syp-eminelstandard-web-admin` (code e-smart, branch `gw-syp-dev`),
-  và `syp-eminelstandard-app` (Flutter app ESTA, branch `syp-dev`). *(Ghi chú lịch sử: tới 08-16 các
+  `syp-eminelstandard-app` (Flutter app ESTA, branch `syp-dev`), và `kurashi-for-energy` +
+  `kurashi-data-package` (repo mẫu mui chỉ định cho task tái cấu trúc app, thêm 08-18, branch `main`). *(Ghi chú lịch sử: tới 08-16 các
   file workspace còn mô tả repo app là "snapshot không git" với tên `syp-eminelstandard-app-syp-dev` —
   kiểm `git log -1` ngày 16/08 xác nhận đó là **git thật** @ `41ee385`, thư mục tên `syp-eminelstandard-app`.
   Tài liệu đã nộp trong `submit_folder/` giữ nguyên cách ghi cũ theo quy ước không sửa ngược.)*
@@ -36,7 +37,8 @@ là làm việc tiếp được**, chỉ cần trỏ lại vị trí các repo g
 - Đường dẫn trong tài liệu ghi `eminel_gw_project/...` = `<SOURCES>/eminel_gw_project/...`.
 - **Trước khi fact-check bất kỳ trích dẫn nào: `git fetch` và so với `origin/main`.** Bản clone local có thể
   cũ nhiều ngày — 04/08 từng vì thế mà tưởng nhầm file A04 "không tồn tại", số dòng "lệch hàng loạt".
-  Số dòng trích dẫn trong guide ứng với **commit ghi ở đầu guide** (hiện: `788b438` / 2026-08-03).
+  Số dòng trích dẫn trong guide ứng với **commit ghi ở bảng meta đầu guide** — đọc ở đó,
+  không nhớ số ở đây (⛔#6; số từng ghi cứng tại dòng này đã lạc hậu 2 lần).
 
 ## Quy ước giao tiếp
 - Trả lời **tiếng Việt**; giữ nguyên thuật ngữ tiếng Nhật (kèm giải thích ngắn lần đầu xuất hiện).

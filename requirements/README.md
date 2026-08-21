@@ -33,7 +33,7 @@ Nếu một chương không phục vụ trực tiếp một trong ba câu hỏi 
 requirements/                  ← bộ tài liệu mà khung này quản
 ├── README.md                  ← file này (bộ khung + tiêu chuẩn review)
 ├── onboarding_guide.md        ← TÀI LIỆU CHÍNH (một file, có mục lục ở đầu)
-├── qa_kitagas.md              ← 8 câu hỏi chính + 4 dự phòng (Việt–Nhật) gửi khách hàng
+├── self_study_plan.md         ← kế hoạch tự học 4 hạng mục
 └── assets/
     ├── 01_architecture/       ← ảnh copy từ docs/eminel/3_requirements/images/
     ├── 02_business_flow/      ← ảnh copy từ docs/eminel/1_product/11_business_process/captures/

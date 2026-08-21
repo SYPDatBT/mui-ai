@@ -6,7 +6,7 @@
 | Ngày lập | 2026-08-06 |
 | Mục tiêu | Nắm đủ để (a) điều tra tiếp ~35 batch còn lại, (b) đọc/viết requirement, (c) ước công khi spec chốt |
 | Phạm vi | 4 khối SYP đối ứng: server E-GW ・ batch + liên kết ngoài ・ 管理画面 ・ mobile app |
-| Ghi chú path | Mọi đường dẫn tính từ `sources/`. **5 repo git** — gồm cả repo app `syp-eminelstandard-app` (branch `syp-dev`); xem `CLAUDE.md` |
+| Ghi chú path | Mọi đường dẫn tính từ `sources/`. **7 repo git** — gồm cả repo app `syp-eminelstandard-app` (branch `syp-dev`) và 2 repo mẫu `kurashi-for-energy` + `kurashi-data-package` (thêm 08-18, cho task tái cấu trúc app); xem `CLAUDE.md` |
 
 ## Nguyên tắc chung khi tự học
 
@@ -51,7 +51,7 @@
 
 **Nhóm batch (theo danh mục gốc)** — đã điều tra 11/46:
 - ✅ 配信・通知系 (4) ・ 外部連携・受信系 Xzilla (3) ・ CSV/ZIPエクスポート系 (4)
-- ⬜ 集計・計算系 — **dự kiến nặng nhất**, e-smart không có gì dùng lại
+- ⬜ 集計・計算系 — **dự kiến nặng nhất**. ⚠️ Giả định cũ *"e-smart không có gì dùng lại"* **đã bị bác** (phát hiện 08-12, kiểm lại trên code 08-21 @`dc39aa39`): e-smart **có 3 bảng tích luỹ** `DeviceAccumulated/DeviceDailyUsage/DeviceMonthlyUsageHistoryTable` (`template-dynamodb.yaml`), được 5 batch `batch-import-rinnai/noritz-*` ghi vào — điều tra nhóm này phải đối chiếu với chúng trước khi kết luận "tạo mới"
 - ⬜ 暖房制御系 ・ アラート系 ・ DB保守系 ・ còn lại
 
 **Quy trình điều tra 1 batch** (rút từ 11 batch đã làm):
