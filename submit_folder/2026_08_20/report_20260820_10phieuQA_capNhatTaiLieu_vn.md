@@ -56,7 +56,7 @@ Phiếu No. 2 kèm vế `ただし` = mui hỏi ngược lại SYP. SYP không t
 | **10** | SYP開発範囲の確認 | ✅ 完了 | Bảng 担当 5 khối ở mục 1-① |
 | **12** | 2027年劣後機能の確認 | 🔶 **確認中** | **Chưa có câu trả lời nào** |
 
-*(Phiếu No. 8 và No. 11 không nằm trong đợt rà này — chưa mở.)*
+*(Bảng trên là 10 phiếu của đợt rà đầu. Cuối buổi rà thêm **No. 8** — chốt cách gắn `GW-ID` ↔ `TagTag ID`, bỏ `EMS-SP番号` — và **No. 14** — thời hạn truy ngược 24 tháng. **No. 11 và No. 13 không tồn tại** trên QAデータベース, có vẻ đã bị xoá. ⇒ **đã rà hết dãy: 12 phiếu**.)*
 
 ### Nhịp làm việc của mui trên QAデータベース
 
@@ -235,7 +235,7 @@ Cách gỡ điểm treo cũ *"chưa biết 「既存システム」 ý chỉ h�
 |---|---|---|
 | 1 | **Chạy review vùng sửa** của guide | Bắt buộc theo quy trình nội bộ (3 vòng). Phạm vi = `git diff 432867d..HEAD -- requirements/onboarding_guide.md`, không quét lại 4.400 dòng |
 | 2 | Quyết guide có đánh số lên **v1.4** không | Hiện là "v1.3 + đợt vá 20/08"; bảng meta đầu guide chưa sửa số |
-| 3 | Mở **phiếu No. 8 và No. 11** | Chưa rà — hai số này bị nhảy trong dãy |
+| 3 | ~~Mở phiếu No. 8 và No. 11~~ | ✅ **Xong cuối buổi**: No. 8 và No. 14 đã rà; **No. 11 và No. 13 không tồn tại** (đã bị xoá) ⇒ hết dãy |
 | 4 | Ba mục #13–#15 của Phụ lục C | Xem mục 5 |
 | 5 | Bàn phương án làm màn hình **C** không phụ thuộc phân loại lỗi | Vì mui nói "còn lâu" mà C thuộc phạm vi 2026 |
 

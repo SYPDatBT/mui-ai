@@ -254,7 +254,8 @@ và viết lại; CLAUDE.md mục SOURCES đã cập nhật 4 repo git + 1 snaps
    - 🟡 **No. 6** 「エラー種別（重篤／軽微）判定条件」 — `回答中`, comment masao 08-19: **「結構後になる」**, mui chưa liệt kê được danh mục lỗi. Nội dung đã vào guide §7.4③ + Phụ lục C #1. Theo dõi tiếp.
    - 🟡 **No. 8** 「GW-IDと顧客・契約情報の連携方法」 — `回答中`, comment masao 08-19 **đã đủ nội dung dùng được** (GW-ID↔TagTag ID, bỏ EMS-SP番号), đã vào guide §5.2. **Mở lại kiểm trước khi trích vào bản gửi ra ngoài.**
    - 🔶 **No. 12** 「2027年劣後機能の確認」 — `確認中`, **trống hoàn toàn**, bị bỏ qua có chọn lọc ⇒ **phải thúc** (Phụ lục C #13).
-   - ⬜ **CHƯA MỞ: No. 11**, và **chưa biết dãy có tới No. 13+ không** → **mở màn hình DANH SÁCH** của QAデータベース xem toàn bộ dòng, đừng mở lẻ từng trang. Bài học 08-20: phiếu chưa mở có thể chứa thứ không có ở đâu khác (No. 9 → sinh ra §7.7; No. 6 → đảo Phụ lục C #1; No. 8 → chốt cách gắn GW).
+   - ✅ **ĐÃ RÀ HẾT DÃY (user xác nhận 08-20)**: **12 phiếu** = No. 1–10 · 12 · 14. **No. 11 và No. 13 KHÔNG tồn tại** trên QAデータベース hiện tại — 🔸 user nhận định *"có vẻ đã bị xoá"*. ⇒ **Đừng đi tìm hai số đó nữa**; số phiếu có lỗ ≠ thiếu sót của mình.
+   - 📌 Bài học 08-20 vẫn giữ: phiếu chưa mở có thể chứa thứ **không có ở đâu khác** — No. 9 sinh ra guide §7.7 ・ No. 6 đảo Phụ lục C #1 ・ No. 8 chốt cách gắn GW ・ No. 14 sinh ra §7.4⑦. Nên **khi có phiếu mới thì mở màn hình DANH SÁCH**, đừng mở lẻ từng trang.
    - ⚠️ Khi lọc: **`完了` cũng là "đã trả lời"** — grep riêng `回答済` sẽ sót. Và **phải đọc cả `Comments`** (bẫy ⑤, Phụ lục E.2).
 9. Hỏi mui xác nhận **đích của luồng export SFTP `/EST`** trong backend e-smart (≒「EMINELデータの共有」 F-ES-10?) — xem báo cáo batch §6.
 10. Khi **IF-01/CLD-07** (định nghĩa 入出力 Xzilla) có spec → rà lại nhóm Xzilla của báo cáo batch (§4, gồm cả
