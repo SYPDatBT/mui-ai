@@ -1,5 +1,6 @@
 # SESSION 2026-08-20 — QA No.10 chốt phạm vi SYP → guide có bảng 担当 chính thức
-> Đọc SAU `00_INDEX.md`. ⭐ TRẠNG THÁI MỚI NHẤT (chưa có file nào thay).
+> ⛔ TRẠNG THÁI ĐÃ LỖI THỜI (2026-08-21) — xem `10_session_20260821_chieu_dongViec23_raTanto.md`.
+> Đọc SAU `00_INDEX.md`.
 
 ## 1. Bối cảnh & mục tiêu phiên
 
