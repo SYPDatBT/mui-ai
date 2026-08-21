@@ -18,6 +18,12 @@
    nghiệp vụ, nhắc việc khác — user KHÔNG hỏi. Phát hiện phụ (nếu có giá trị thật) thì **ghi vào memory/guide**,
    không đổ vào chat. (Lỗi đã mắc 20/08: 4 lượt liền trả lời 3 câu hỏi ngắn bằng báo cáo dài có mục "Ba điều
    đáng nói" + bảng đối chiếu phiếu; user phải chặn: *"không cần đánh giá phiếu trả lời, chỉ cần làm đúng yêu cầu"*.)
+   **0c. TRẢ LỜI TẦNG THÂN CÂY — áp từ 21/08 (phase WBS trở đi), user chốt + duyệt 2 quy tắc phụ.**
+   Mặc định ≤5 gạch khối to, không lá; một câu hỏi = một đối tượng; **trích dẫn trọn vẹn ngay lần đầu**
+   (`sources/<repo>/<path>` + dòng; điều chốt qua QA thì ghi phiếu No. + ngày + người); gạch có rủi ro giấu
+   ở tầng lá đánh cờ `(🔸 có treo)` không kể ra; **kết mỗi trả lời bằng đúng 1 câu gợi ý bước tiếp** cho tới
+   khi user bảo thôi. Toàn văn + mẫu đúng/sai: skill **`skillAI/trunk-first-answer/`** (portable, đem được
+   sang dự án khác).
 1. **`git fetch` + so `origin/main` TRƯỚC khi fact-check trích dẫn.** (Lỗi đã mắc 08-04: repo local cũ 11 ngày
    → review kết luận nhầm "file A04 không tồn tại", "số dòng B02 lệch hàng loạt" — thực ra tài liệu ĐÚNG,
    local SAI. Suýt bắt sửa hàng loạt chỗ không sai.)
