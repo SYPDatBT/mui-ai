@@ -3816,7 +3816,7 @@ Bốn câu trả lời 08-03/04 ở trên hồi đó **đều còn 回答中**, 
 2. **Server E-GW: về cơ bản (基本的には) phát triển theo hướng hệ độc lập** với EMINEL-smart server đang chạy — phiếu No. 2 đã **完了** nên đây là **hướng đã chốt**, không còn là định hướng tạm. Nhưng phải đọc kỹ ba tầng dưới đây, vì đóng phiếu **không thêm chữ nào** vào câu trả lời:
    - ✅ **Đã chốt**: làm server E-GW thành **một hệ độc lập** với E-Smart hiện hành.
    - ⚠️ **Chữ 「基本的には」 (*về cơ bản là*) vẫn nằm trong nguyên văn** — nó là một chữ nhượng bộ, đóng phiếu không xoá nó. **Không được đọc thành "độc lập tuyệt đối".**
-   - ❌ **Chưa nói**: độc lập **đến mức nào**. Phiếu **đã đóng mà vẫn không nói** ⇒ **chờ tiếp là vô ích, phải hỏi lại**. Hỏi vào **`Comments` của chính phiếu No. 2** *(phiếu `完了` vẫn nhận comment)*, không cần lập phiếu mới — như vậy câu hỏi nằm ngay cạnh câu trả lời gốc.
+   - ❌ **Chưa nói**: độc lập **đến mức nào**. Phiếu **đã đóng mà vẫn không nói** ⇒ **chờ tiếp là vô ích, phải hỏi lại**. Hỏi bằng cách **ghi thêm vào body chính phiếu No. 2, kèm dòng ngày** *(phiếu `完了` vẫn ghi được)*, không cần lập phiếu mới — như vậy câu hỏi nằm ngay cạnh câu trả lời gốc.
      **Câu hỏi cụ thể nên hỏi**: *bốn chức năng dùng chung liệt kê ở [Phụ lục C #15](#phụ-lục-c--danh-mục-tbd-đang-chặn-việc) là **bê sang E-GW chạy độc lập**, hay **làm thành package dùng chung**?* Hỏi kiểu này cụ thể hơn hẳn "độc lập đến mức nào", vì nó buộc chọn giữa hai cách làm có khối lượng công khác nhau rõ rệt.
 3. **Màn hình quản trị: ngược hẳn với server — chung source code, chung cả deploy với E-Smart**, lý do là **cùng một lớp người vận hành sử dụng**. Phiếu No. 3 đã **完了** ⇒ đã chốt, và **không kèm chữ nhượng bộ nào** (khác điểm 2). Câu trả lời này **đè lên** ghi chú camp 6/25 bên dưới (「環境変数／ビルド設定で切り替え」 — tức hai bản deploy tách nhau chuyển bằng biến môi trường): cách hiểu đó **sai** với 管理画面.
    💡 **Hệ quả thực tế**: bạn **thêm màn hình E-GW vào chính repo `syp-eminelstandard-web-admin`**, không dựng repo mới, không dựng deploy riêng.
@@ -3839,7 +3839,9 @@ Câu trả lời của phiếu No. 2 có **hai vế**. Vế đầu là trả l�
 
 **Hệ quả cho người đọc**: câu hỏi này **không mất đi**. Danh sách "chức năng nên dùng tiếp" là một quyết định kỹ thuật thật, ảnh hưởng tới việc dựng lại bao nhiêu thứ từ đầu — không nêu ra là **mất trắng một quyết định**.
 
-✅ **Và vẫn trả lời được vào chính phiếu đó**: phần **`Comments`** của một trang Notion **không bị khoá theo `ステータス`** — phiếu `完了` vẫn nhận comment bình thường *(bằng chứng: phiếu No. 6 và No. 8 đều có comment của mui, xem [Phụ lục E.2 bẫy ⑤](#e2-bước-2--đi-theo-thứ-tự))*. Nên **không cần mở phiếu mới**: trả lời thẳng vào Comments của phiếu No. 2, đúng nơi mui đặt câu hỏi.
+✅ **Và vẫn ghi được vào chính phiếu đó**: một trang Notion **không bị khoá theo `ステータス`** — phiếu `完了` vẫn sửa được body và vẫn nhận `Comments` *(bằng chứng: phiếu No. 6 và No. 8 đều có comment của mui, xem [Phụ lục E.2 bẫy ⑤](#e2-bước-2--đi-theo-thứ-tự))*. Nên **không cần mở phiếu mới**: ghi thẳng vào phiếu No. 2, đúng nơi mui đặt câu hỏi.
+
+📌 **Cách ghi (quy ước nội bộ, chốt 2026-08-20)**: ghi vào **body**, đặt **ngay dưới câu hỏi gốc**, và **mở đầu bằng dòng ngày** — ví dụ 「【2026/08/20 SYP追記】」. Lý do: body phiếu vốn là câu hỏi viết từ 08-05; phần thêm vào 15 ngày sau mà không ghi ngày thì người đọc sau **không phân biệt được đâu là câu hỏi gốc, đâu là phần bổ sung**. Đây đúng là cái bẫy 「更新日時 ≠ ngày viết nội dung」 ở [Phụ lục E.2 bẫy ①](#e2-bước-2--đi-theo-thứ-tự) — chỉ khác là lần này chính ta là người tạo ra nó.
 
 ⚠️ Đây là chỗ dễ suy luận sai: `完了` nghĩa là **mui coi việc trao đổi đã xong**, chứ **không** phải "trang bị đóng, không ghi được nữa". Đừng vì thấy `完了` mà đi lập phiếu mới cho một câu hỏi vốn thuộc phiếu cũ — làm vậy mạch hội thoại bị tách làm hai chỗ.
 
@@ -4492,8 +4494,8 @@ Những chỗ **chưa quyết mà đang cản trở công việc**, xếp theo m
 🔸 **Chưa kiểm chứng — hai cách đọc, chưa biết cách nào đúng**: ① 北ガス/mui đánh giá firmware **thực ra không cần biết ngay**, tức lập luận "chặn 2026" của tài liệu này quá thận trọng; ② câu 「後回し」 được đưa ra **mà chưa để ý tới phụ thuộc firmware**. Nếu là ② thì đây là **rủi ro cần nêu lại**, không phải việc đã xong.
 
 ⇒ **Việc cụ thể**: chốt nội bộ với **kihara** (phụ trách gateway/firmware) xem tư thế nào, và nếu là cách đọc ② thì nêu lại phụ thuộc này cho mui trước khi tuần implement bắt đầu.
-| 14 | **Đã hỏi, đã đóng, nhưng câu trả lời không chứa thông tin cần** | Hỏi lại vào **`Comments` của phiếu No. 2** — chờ là vô ích, nhưng **không cần lập phiếu mới** |
-| 15 | **Người phải trả lời là SYP** — không phải chờ ai | Trả lời vào **`Comments` của chính phiếu No. 2** *(phiếu `完了` vẫn nhận comment)* |
+| 14 | **Đã hỏi, đã đóng, nhưng câu trả lời không chứa thông tin cần** | Hỏi lại **ghi thêm vào body phiếu No. 2, kèm dòng ngày** — chờ là vô ích, nhưng **không cần lập phiếu mới** |
+| 15 | **Người phải trả lời là SYP** — không phải chờ ai | Trả lời **ghi thêm vào body chính phiếu No. 2, dưới câu hỏi gốc, kèm dòng ngày** *(phiếu `完了` vẫn nhận comment)* |
 
 ---
 

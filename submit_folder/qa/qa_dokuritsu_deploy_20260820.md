@@ -1,13 +1,14 @@
 # QA — Trả lời vế `ただし` của phiếu No. 2, kèm một câu hỏi lại
 
-> **Đăng vào phần `Comments` của chính phiếu No. 2** 「旧Eminel基盤継承＋EMINEL-smartサーバーは独立デプロイの確認」 — nơi mui đã đặt câu hỏi. **Không lập phiếu mới.**
+> **Ghi thêm vào BODY của chính phiếu No. 2** 「旧Eminel基盤継承＋EMINEL-smartサーバーは独立デプロイの確認」 — đặt **ngay dưới câu hỏi gốc**, kèm **ngày**. **Không lập phiếu mới.**
 > Người nhận: **mui**. Không đi qua 北ガス.
 
 | | |
 |---|---|
 | Ngày soạn | 2026-08-20 |
-| Đăng ở đâu | `Comments` của phiếu **No. 2** (ステータス `完了` — **vẫn nhận comment bình thường**) |
-| Vì sao không lập phiếu mới | Câu hỏi `ただし` là của chính phiếu No. 2. Trả lời đúng chỗ thì mạch hội thoại nằm một nơi; lập phiếu mới sẽ tách làm hai chỗ |
+| Đăng ở đâu | **Body** phiếu **No. 2**, ngay dưới câu hỏi gốc, mở đầu bằng dòng ngày *(user chốt 08-20)* |
+| Vì sao không lập phiếu mới | Câu hỏi `ただし` là của chính phiếu No. 2. Ghi đúng chỗ thì mạch hội thoại nằm một nơi; lập phiếu mới sẽ tách làm hai chỗ. Phiếu ở `完了` **vẫn sửa/ghi thêm được** — `完了` chỉ nghĩa là mui coi việc trao đổi đã xong |
+| Vì sao phải có dòng ngày | Body phiếu vốn là câu hỏi viết ngày **08-05**. Phần thêm vào ngày **08-20** mà không ghi ngày thì người đọc sau **không phân biệt được đâu là câu hỏi gốc, đâu là phần bổ sung** |
 | Nguồn nội dung phần trả lời | `submit_folder/2026_08_04/report_batch_3nhom_doichieu_esmart_egw.md` dòng 103 (danh sách) + dòng 115 (tiền đề "dùng lại ≠ 0 công") |
 | Phạm vi câu hỏi lại | **Chỉ một câu**: bốn chức năng đó **bê sang E-GW chạy độc lập**, hay **làm package dùng chung**? |
 
@@ -61,9 +62,14 @@ Kết luận từ đợt điều tra 11 batch hệ cũ — chúng gắn chặt v
 
 ---
 
-## 3. 🇯🇵 【JP】Khối gửi mui — dán nguyên vẹn vào `Comments` của phiếu No. 2
+## 3. 🇯🇵 【JP】Khối gửi mui — dán nguyên vẹn vào **body** phiếu No. 2, dưới câu hỏi gốc
 
 ```
+────────────────────────────────
+【2026/08/20 SYP追記】
+「ただし既存システムを使い続けたほうがいい機能があれば教えてほしいです」への回答
+────────────────────────────────
+
 お世話になっております。SYPです。
 
 ご回答いただいた「ただし既存システムを使い続けたほうがいい機能があれば教えて
@@ -131,8 +137,9 @@ Kết luận từ đợt điều tra 11 batch hệ cũ — chúng gắn chặt v
 - [x] Không xin lại thứ mui đã cung cấp
 - [x] Tiếng Nhật keigo, ngôi SYP
 - [x] Chỉ hỏi **một** câu — không nhồi thêm câu về repo / library như bản nháp trước
+- [x] Khối JP có **dòng ngày `【2026/08/20 SYP追記】`** ở đầu — để phân biệt với câu hỏi gốc viết ngày 08-05
 - [ ] **Người duyệt đọc mục 2 (bản tiếng Việt) và xác nhận** ← chờ
-- [ ] **Dán khối JP mục 3 vào `Comments` của phiếu No. 2** ← chờ
+- [ ] **Dán khối JP mục 3 vào body phiếu No. 2, ngay dưới câu hỏi gốc** ← chờ
 
 ## 5. Sau khi đăng
 
