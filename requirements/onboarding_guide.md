@@ -670,7 +670,7 @@ Câu trả lời này để hở hai chỗ, và **cả hai đã được lấp b
 | Vế hỏi kèm *"phạm vi SYP đảm nhận = EMINEL-smartサーバー + 管理画面, đúng không"* **chưa được trả lời** | Đã được trả lời bằng phiếu No. 10, và **rộng hơn vế hỏi**: server + 管理画面 + **app** |
 | Câu 「モバイルアプリは開発対象です」 không nói rõ **ai** làm app | Đã rõ: **SYP** (phiếu No. 10) |
 
-💡 **Vì sao chú ý chuyện "cách nhau một phút"**: hai phiếu No. 1 và No. 10 được mui đóng trong cùng một lượt dọn (12:27 và 12:28 ngày 08-13). Nghĩa là **đừng tin trạng thái đã đọc từ lâu** — mui xử lý QA theo đợt, một hôm đóng nhiều phiếu cùng lúc. 🔸 Kéo theo giả thuyết **chưa kiểm**: ba phiếu còn lại ở [§9.4](#94-vai-trò-và-môi-trường-của-syp) rất có thể cũng đã 完了 trong cùng đợt đó.
+💡 **Vì sao chú ý chuyện "cách nhau một phút"**: hai phiếu No. 1 và No. 10 được mui đóng trong cùng một lượt dọn (12:27 và 12:28 ngày 08-13). Nghĩa là **đừng tin trạng thái đã đọc từ lâu** — mui xử lý QA theo đợt, một hôm đóng nhiều phiếu cùng lúc. Suy luận đó **đã được kiểm và đúng**: mở lại toàn bộ ngày 08-20 thì thấy **8 phiếu cùng được đóng trong 7 phút** hôm ấy. Bảng đầy đủ + hai ngoại lệ: [§9.4](#94-vai-trò-và-môi-trường-của-syp).
 
 *(Ghi chú cho ai đọc lại câu hỏi gốc 08-03: nó ghi *"① EMINEL-smartサーバー + ④ 管理画面 theo bảng 「3-3. コンポーネント一覧」"* — theo đánh số bảng 3-3 thì EMINEL-smartサーバー là component **3**, 管理画面 là **4**, nên số ① trong câu hỏi là nhầm.)*
 
@@ -3636,17 +3636,31 @@ Bốn câu trả lời của mui mới hơn biên bản 6/25 phía trên. 質問
 
 *(Cột `No.` là số phiếu trong QAデータベース, dùng làm định danh khi trích.)*
 
-📌 **Nhịp làm việc của mui trên QAデータベース** — cả năm phiếu đã kiểm đều được đóng trong **cùng hai phút** ngày 2026-08-13, dù được lập cách nhau nhiều ngày:
+📌 **Nhịp làm việc của mui trên QAデータベース** — tính đến 2026-08-20 đã mở lại **11 phiếu**. Xếp theo ngày chốt thì thấy rất rõ mui làm việc theo đợt:
 
-| Phiếu | 起票 | Chốt (更新日時) |
+| Phiếu | 起票 | Chốt / cập nhật gần nhất | Trạng thái |
+|---|---|---|---|
+| No. 1 担当範囲…とアプリ対象外 | 08-03 **17:30** | 08-13 **12:27** | ✅ 完了 |
+| No. 2 独立デプロイ | 08-03 **17:31** | 08-13 **12:28** | ✅ 完了 |
+| No. 3 管理画面は独立か共通か | 08-03 **17:32** | 08-13 **12:28** | ✅ 完了 |
+| No. 4 旧EMINEL調査範囲…hemssv対象外 | 08-03 **17:32** | 08-13 **12:28** | ✅ 完了 |
+| No. 5 バッジ・ランク…スコープ | 08-03 **17:33** | 08-13 **12:28** | ✅ 完了 |
+| No. 10 SYP開発範囲 | 08-12 16:17 | 08-13 **12:28** | ✅ 完了 |
+| No. 7 モバイルアプリ構成の変更 *(ngoài phạm vi guide)* | 08-03 19:22 | 08-13 **12:34** | ✅ 完了 |
+| No. 9 設計書のファイル形式 → [§7.7](#77-設計書--định-dạng-file-của-bản-giao-nộp) | 08-10 17:06 | 08-13 **12:34** | ✅ 完了 |
+| **No. 8** GW-IDと顧客情報の連携 → [§5.2](#52-onboarding-từ-mở-hộp-đến-thấy-dữ-liệu) | 08-05 16:03 | **08-19 10:58** | 🟡 回答中 |
+| **No. 6** エラー種別判定条件 → [§7.4](#74-spec-màn-hình-quản-trị) | 08-03 17:33 | **08-19 10:43** | 🟡 回答中 |
+| **No. 12** 2027年劣後機能 | 08-12 17:41 | **08-12 17:46** | 🔶 確認中 |
+
+⇒ **Ba kiểu ứng xử khác nhau, và mỗi kiểu đòi một hành động khác nhau:**
+
+| Kiểu | Phiếu | Việc phải làm |
 |---|---|---|
-| No. 1 担当範囲…とアプリ対象外 | 08-03 **17:30** | 08-13 **12:27** |
-| No. 2 独立デプロイ | 08-03 **17:31** | 08-13 **12:28** |
-| No. 3 管理画面は独立か共通か | 08-03 **17:32** | 08-13 **12:28** |
-| No. 4 旧EMINEL調査範囲…hemssv対象外 | 08-03 **17:32** | 08-13 **12:28** |
-| No. 10 SYP開発範囲 | 08-12 16:17 | 08-13 **12:28** |
+| **Đóng cả loạt ngày 08-13** — 8 phiếu, gói trong 7 phút (12:27→12:34), sau khi để nguyên **10 ngày** | No. 1 · 2 · 3 · 4 · 5 · 7 · 9 · 10 | Xong. Với phiếu mới thì **chờ đợt dọn tiếp** là được |
+| **Ngoài đợt nhưng đang được xử lý thật** — cập nhật 08-19, có comment có nội dung | No. 6 · No. 8 | Theo dõi; **đọc Comments** vì câu trả lời nằm ở đó |
+| **Lập trước đợt 08-13 mà bị để lại** — không ai chạm từ 08-12 | No. 12 | **Phải thúc**, chờ là vô ích ([Phụ lục C #13](#phụ-lục-c--danh-mục-tbd-đang-chặn-việc)) |
 
-⇒ SYP lập bốn phiếu No. 1–4 **liên tiếp trong ba phút** chiều 08-03; mui **để nguyên 10 ngày rồi đóng cả loạt** trong hai phút ngày 08-13. Tức mui **dọn QA theo đợt**, không trả lời rải rác. Bài học khi đọc tài liệu này về sau: thấy một phiếu vừa đổi trạng thái thì **mở luôn các phiếu cùng chủ đề** — khả năng cao chúng cũng vừa được đóng. Nhớ: **`完了` cũng nghĩa là đã trả lời** — grep riêng `回答済` sẽ sót ([Phụ lục E.2](#e2-bước-2--đi-theo-thứ-tự)).
+💡 **Bài học khi đọc tài liệu này về sau**: thấy một phiếu vừa đổi trạng thái thì **mở luôn các phiếu cùng chủ đề** — khả năng cao chúng cũng vừa được xử lý cùng lượt. Và nhớ hai điều: **`完了` cũng nghĩa là đã trả lời** (grep riêng `回答済` sẽ sót), **phải đọc cả `Comments`** — xem 5 cái bẫy ở [Phụ lục E.2](#e2-bước-2--đi-theo-thứ-tự).
 
 ### ✅ Câu trả lời chốt phạm vi SYP (2026-08-13)
 
@@ -4373,13 +4387,23 @@ Câu hỏi của bạn
 
 ⚠️ **Phân biệt `確認中` với `回答中`** — hai cái đều "chưa xong" nhưng khác nhau về việc bạn có gì trong tay: `回答中` thì **đã có nội dung trả lời** để đọc tham khảo (ví dụ bốn phiếu No. 1–4 hồi 08-04); `確認中` thì **trống hoàn toàn**, không có gì để đọc. Thấy `確認中` là biết **chưa ai bên mui chạm vào**.
 
-### ⚠️ Bốn cái bẫy của QAデータベース
+⚠️ **Đừng lẫn `確認中` của QAデータベース với `確認中` của bảng vấn đề dự án.** Cùng một chữ, hai hệ thống khác nhau, hai nghĩa khác nhau:
+
+| Xuất hiện ở | Nguyên văn | Nghĩa ở đó |
+|---|---|---|
+| `20_open_issues.md` — bảng trạng thái vấn đề *(bảng ký hiệu ở [§0.2](#02-ký-hiệu-dùng-trong-tài-liệu))* | 🟣 **レビュー・確認中** | Vấn đề **đang được review / xác nhận** — tức có người đang làm |
+| QAデータベース — ô ステータス của phiếu QA | **確認中** | Phiếu **mới lập, chưa ai trả lời** — tức chưa ai làm |
+
+⇒ Ở bảng vấn đề dự án thì `確認中` là **tín hiệu tốt** (đang tiến triển); ở phiếu QA thì là **tín hiệu xấu** (chưa ai chạm).
+
+### ⚠️ Năm cái bẫy của QAデータベース
 
 **① `更新日時` KHÔNG phải ngày viết câu trả lời.** Nó là ngày sửa gần nhất — mà lần sửa cuối thường chỉ là *đổi trạng thái*. Ca thật: phiếu **No. 1** 「担当範囲…とアプリ対象外の確認」 có nội dung trả lời 「モバイルアプリは開発対象です。」 **từ 08-03/04**, nhưng 更新日時 là **08-13 12:27** — đó là lúc phiếu được đóng, cách 10 ngày. Khi trích, **ghi cả hai mốc** nếu biết: ngày có nội dung, và ngày chốt trạng thái.
 
-**② mui đóng phiếu theo ĐỢT.** Phiếu No. 1 chốt 12:27, phiếu No. 10 chốt 12:28 — cùng ngày 08-13. Hệ quả: **trạng thái đọc từ lâu là vô giá trị**; và nếu thấy một phiếu vừa chuyển 完了 thì nên mở luôn các phiếu cùng chủ đề, khả năng cao chúng cũng vừa được đóng.
+**② mui đóng phiếu theo ĐỢT.** Ngày 08-13, trong **7 phút** (12:27 → 12:34), mui đóng **8 phiếu** đã nằm im 10 ngày. Hệ quả: **trạng thái đọc từ lâu là vô giá trị**; thấy một phiếu vừa chuyển 完了 thì mở luôn các phiếu cùng chủ đề. Bảng đầy đủ: [§9.4](#94-vai-trò-và-môi-trường-của-syp).
+⚠️ Nhưng **"theo đợt" không có nghĩa là "cứ chờ rồi tới lượt"** — có hai ngoại lệ: **No. 6 và No. 8** không nằm trong đợt đó nhưng vẫn được xử lý riêng ngày 08-19; còn **No. 12** lập **trước** đợt 08-13 mà vẫn bị bỏ lại, không ai chạm. Phiếu bị bỏ lại thì phải **thúc**.
 
-**③ `質問内容` có thể để trống** dù câu hỏi vẫn tồn tại — nội dung thật nằm ở **body của trang**. Cả hai phiếu No. 1 và No. 10 đều có property này Empty. Thấy Empty thì cuộn xuống đọc body, **không** kết luận "phiếu rỗng".
+**③ `質問内容` có thể để trống** dù câu hỏi vẫn tồn tại — nội dung thật nằm ở **body của trang**. Đây không phải ngoại lệ mà là thường lệ: **cả 11 phiếu đã mở đều có ô này Empty**. Thấy Empty thì cuộn xuống đọc body, **không** kết luận "phiếu rỗng".
 
 **④ Ngày hiển thị kiểu tương đối** ("Last Thursday 12:28 PM"). Trỏ chuột vào để lấy ngày tuyệt đối trước khi trích — ghi ngày tương đối vào tài liệu thì vài tuần sau không ai dịch lại được.
 
