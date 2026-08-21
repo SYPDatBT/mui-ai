@@ -201,7 +201,7 @@ Mỗi khẳng định trong tài liệu này đều kèm nguồn theo định d�
 | Loại nguồn | Mốc | Nghĩa |
 |---|---|---|
 | Repo (`docs/`, code) | commit `1100487`, kiểm **2026-08-18** | Số dòng và nội dung đúng tại mốc này |
-| QAデータベース Notion | **kiểm 2026-08-20** — 12 phiếu: **No. 1 · 2 · 3 · 4 · 5 · 7 · 9 · 10** đều ✅ **完了**; **No. 6 · 8 · 14** còn 🟡 **回答中** (cả ba đều có hoạt động mới ngày **08-19**); **No. 12** còn 🔶 **確認中, chưa có câu trả lời**. Phiếu ngoài danh sách này vẫn là **lần đọc 2026-08-04** | Notion là dữ liệu sống. Trạng thái `回答中` còn sót ở đâu trong tài liệu này thì ứng với **ngày 08-04** và **rất có thể đã lạc hậu** — cả 6 phiếu đã kiểm đều được mui đóng trong **cùng 2 phút** ngày 08-13. ⚠️ **Phiếu 完了 không có nghĩa là hết dè dặt**: đóng phiếu không thêm chữ nào vào câu trả lời, nên các chữ nhượng bộ (「基本的には」「今の所」) và chuyện "mui trả lời ≠ 北ガス xác nhận" vẫn còn nguyên. **Phải mở trang gốc trước khi trích lại**; cách đọc property và 4 cái bẫy: [Phụ lục E.2](#e2-bước-2--đi-theo-thứ-tự) |
+| QAデータベース Notion | **kiểm 2026-08-20** — 13 phiếu: **No. 1 · 2 · 3 · 4 · 5 · 7 · 9 · 10** đều ✅ **完了**; **No. 6 · 8 · 14** còn 🟡 **回答中**; **No. 12 · 19** còn 🔶 **確認中, ô trả lời trống**. *(No. 11 và No. 13 không tồn tại — đã bị xoá.)* Phiếu ngoài danh sách này vẫn là **lần đọc 2026-08-04** | Notion là dữ liệu sống. Trạng thái `回答中` còn sót ở đâu trong tài liệu này thì ứng với **ngày 08-04** và **rất có thể đã lạc hậu** — cả 6 phiếu đã kiểm đều được mui đóng trong **cùng 2 phút** ngày 08-13. ⚠️ **Phiếu 完了 không có nghĩa là hết dè dặt**: đóng phiếu không thêm chữ nào vào câu trả lời, nên các chữ nhượng bộ (「基本的には」「今の所」) và chuyện "mui trả lời ≠ 北ガス xác nhận" vẫn còn nguyên. **Phải mở trang gốc trước khi trích lại**; cách đọc property và 4 cái bẫy: [Phụ lục E.2](#e2-bước-2--đi-theo-thứ-tự) |
 
 ---
 
@@ -1424,17 +1424,37 @@ Giống như bạn ở chung nhà với hai người, chỉ có một đồng h�
 
 ### ② 省エネアドバイス — tư vấn tiết kiệm năng lượng
 
-Hệ cũ có khoảng **15 loại** lời khuyên, mỗi loại một logic phán đoán riêng, dựa trên: cảm biến nhiệt độ, nhiệt độ ngoài trời, nhiệt độ phòng khách, trạng thái nồi hơi, chế độ ECO, so sánh với nhóm hộ tương tự.
+Hệ cũ có **19 loại** lời khuyên, mỗi loại một logic phán đoán riêng, dựa trên: cảm biến nhiệt độ, nhiệt độ ngoài trời, nhiệt độ phòng khách, trạng thái nồi hơi, chế độ ECO, so sánh với nhóm hộ tương tự.
 
 🔍 Nguồn: `eminel_gw_project/docs/old_eminel/01_overview.md`
 → mục 「02_データ生成・アプリ通信」, dòng 57
 → nguyên văn: 「**省エネアドバイス**：温度センサ/気温/リビング室温/熱源機動作/ECOモード/前月積算値グループ比較の各判定ロジック」
 
+⚠️ **Con số 19 lấy từ CODE, không lấy từ tài liệu quản lý — và hai nguồn lệch nhau.** Xem [Phụ lục B.6](#b6-số-loại-tư-vấn-tiết-kiệm-code-19-tài-liệu-quản-lý-15).
+
+🔍 Nguồn (đếm trực tiếp trên code, kiểm 2026-08-20): `legacy_eminel_docs/sources/conciergesv-develop/src/Command/PublishRegularEcoMissionsCommand.php` dòng 74–135 — tham số `--eco-mission-id` có **`case 1` đến `case 19`**; nội dung câu chữ và số điểm của từng loại nằm ở `sources/eminelsv-develop/config/Seeds/ConRegularEcoMissionsSeed.php` dòng 24–301, **đúng 19 bản ghi**
+
 🔴 Hệ mới định gom lại còn **7 loại + điểm sưởi eco**, nhưng **gom thế nào thì chưa quyết**.
 
 🔍 Nguồn: `eminel_gw_project/docs/eminel/2_management/20_open_issues.md`
 → mục 「CLD-06 細部の仮置き項目」, dòng 176
-→ nguyên văn: 「省エネアドバイスのパラメータ・統廃合（約15種→7種+エコ暖房ポイント）」
+→ nguyên văn: 「省エネアドバイスのパラメータ・統廃合（**約15種**→7種+エコ暖房ポイント）」
+
+⏳ **Đã hỏi mui, chưa có trả lời.**
+
+🔍 Nguồn: Notion — QAデータベース dự án, phiếu **No. 19** 「エネアドバイス（全19種）を「7種＋エコ暖房ポイント」へ統廃合する件」
+→ 質問者 Nguyen Van Tung (SYP), 起票 **2026-08-13 17:22** · cập nhật **2026-08-19 18:02**
+→ **ステータス `確認中`**, ô `回答内容` **trống** — chưa ai trả lời
+
+Phiếu hỏi **3 câu**, cả ba đều là thứ **không thể tự suy ra từ tài liệu hiện có**:
+
+| | Câu hỏi |
+|---|---|
+| 1 | **Danh sách 7 loại sau khi gom** — tên loại, điều kiện phát, câu chữ và số điểm dự kiến |
+| 2 | Trong 19 loại hiện hành, **loại nào bị bỏ**, loại nào **gộp vào loại mới nào** — và **tiêu chí gộp** là gì (theo mùa? theo thiết bị? theo mục đích?) |
+| 3 | Các loại dựa trên **so sánh với nhóm hộ tương tự** *(gom nhóm theo loại nhà / loại hợp đồng, tối thiểu **10 hộ** một nhóm)* — hệ mới có giữ nguyên ngưỡng và cách gom nhóm đó không? |
+
+⚠️ Phiếu này nêu rõ requirement app `C05_energy_advice.md` có ô 「要確認事項」 = 「なし」 (*không có gì cần xác nhận*), và **không tìm thấy tài liệu nào định nghĩa 7 loại mới**. Tức chỗ này **trên giấy trông như đã xong, thực tế còn trống** — đúng loại bẫy mà [⛔ cách đọc requirement](#03-quy-ước-trích-dẫn-nguồn) cảnh báo: ô 要確認事項 trống **không** đồng nghĩa đã chốt.
 
 ### ③ 見守り — trông nom người thân
 
@@ -3734,6 +3754,7 @@ Bốn câu trả lời của mui mới hơn biên bản 6/25 phía trên. 質問
 | **No. 8** GW-IDと顧客情報の連携 → [§5.2](#52-onboarding-từ-mở-hộp-đến-thấy-dữ-liệu) | 08-05 16:03 | **08-19 10:58** | 🟡 回答中 |
 | **No. 6** エラー種別判定条件 → [§7.4](#74-spec-màn-hình-quản-trị) | 08-03 17:33 | **08-19 10:43** | 🟡 回答中 |
 | **No. 14** 過去データの必要遡及期間 → [§7.4⑦](#74-spec-màn-hình-quản-trị) | 08-13 12:29 | **08-19 18:02** | 🟡 回答中 |
+| **No. 19** アドバイス19種→7種の統廃合 → [§4.4②](#44-bốn-logic-nghiệp-vụ-đặc-thù) | 08-13 17:22 | **08-19 18:02** | 🔶 確認中 |
 | **No. 12** 2027年劣後機能 → [§6.4](#64-danh-sách-bị-lùi-sang-2027) | 08-12 17:41 | **08-12 17:46** | 🔶 確認中 |
 
 ⇒ **Ba kiểu ứng xử khác nhau, và mỗi kiểu đòi một hành động khác nhau:**
@@ -3742,7 +3763,7 @@ Bốn câu trả lời của mui mới hơn biên bản 6/25 phía trên. 質問
 |---|---|---|
 | **Đóng cả loạt ngày 08-13** — 8 phiếu, gói trong 7 phút (12:27→12:34), sau khi để nguyên **10 ngày** | No. 1 · 2 · 3 · 4 · 5 · 7 · 9 · 10 | Xong. Với phiếu mới thì **chờ đợt dọn tiếp** là được |
 | **Ngoài đợt nhưng đang được xử lý thật** — cả ba đều có hoạt động ngày **08-19** | No. 6 · No. 8 · No. 14 | Theo dõi. Với No. 6 và No. 8 thì **đọc Comments** vì câu trả lời nằm ở đó; No. 14 thì trả lời nằm ở ô `回答内容` nhưng **chỉ đáp 1 trong 3 câu** |
-| **Lập trước đợt 08-13 mà bị để lại** — không ai chạm từ 08-12 | No. 12 | **Phải thúc**, chờ là vô ích ([Phụ lục C #13](#phụ-lục-c--danh-mục-tbd-đang-chặn-việc)) |
+| **`確認中` — chưa ai trả lời một chữ** | No. 12 *(lập 08-12, trước đợt 08-13 mà vẫn bị để lại)* · No. 19 *(lập 08-13, có sửa 08-19 nhưng ô trả lời vẫn trống)* | **Phải thúc**, chờ là vô ích ([Phụ lục C #13](#phụ-lục-c--danh-mục-tbd-đang-chặn-việc) và [#8](#phụ-lục-c--danh-mục-tbd-đang-chặn-việc)) |
 
 💡 **Bài học khi đọc tài liệu này về sau**: thấy một phiếu vừa đổi trạng thái thì **mở luôn các phiếu cùng chủ đề** — khả năng cao chúng cũng vừa được xử lý cùng lượt. Và nhớ hai điều: **`完了` cũng nghĩa là đã trả lời** (grep riêng `回答済` sẽ sót), **phải đọc cả `Comments`** — xem 5 cái bẫy ở [Phụ lục E.2](#e2-bước-2--đi-theo-thứ-tự).
 
@@ -4229,7 +4250,7 @@ Sắp theo **nhóm chủ đề**, không theo bảng chữ cái — vì học th
 
 # Phụ lục B — Bảng mâu thuẫn giữa các tài liệu
 
-Bốn mâu thuẫn tìm được khi đối chiếu chéo (B.5 là mục mới, thêm 2026-08-18), cộng **một cặp trạng thái hay bị đọc nhầm thành mâu thuẫn** (B.4). **Trình bày cả hai phía, không tự phán bên nào đúng** — việc kết luận thuộc về người có thẩm quyền.
+Năm mâu thuẫn tìm được khi đối chiếu chéo (B.5 thêm 2026-08-18, **B.6 thêm 2026-08-20 — mục duy nhất là "tài liệu ↔ CODE", không phải "tài liệu ↔ tài liệu"**), cộng **một cặp trạng thái hay bị đọc nhầm thành mâu thuẫn** (B.4). **Trình bày cả hai phía, không tự phán bên nào đúng** — việc kết luận thuộc về người có thẩm quyền.
 
 | # | Mâu thuẫn | Mức độ | Cần hỏi ai |
 |---|---|---|---|
@@ -4237,7 +4258,28 @@ Bốn mâu thuẫn tìm được khi đối chiếu chéo (B.5 là mục mới, 
 | B.2 | Điểm thưởng và tư vấn tiết kiệm thuộc năm nào | 🔴 Cao — ~2 người-tháng | 北ガス *(QA câu 2)* |
 | B.3 | Thông báo trông nom có làm không | 🔴 Cao — ảnh hưởng firmware | 北ガス *(QA câu 3)* |
 | B.4 | Ba thang trạng thái song song (file md requirement ↔ index đối khách ↔ index spec app) | 🟡 Thấp — chỉ cần đọc đúng thang | Không phải mâu thuẫn, chỉ cần biết |
+| **B.6** | **Số loại tư vấn tiết kiệm: code 19 ↔ tài liệu quản lý ~15** *(mới 2026-08-20)* | 🟠 Vừa — lệch 4 loại, ai theo con số 15 sẽ **bỏ sót 4 loại** | 北ガス *(QA phiếu No. 19 — `確認中`, chưa có trả lời)* |
 | B.5 | マルチセンサー còn tồn tại hay đã bị tách đôi *(mới 2026-08-12)* | 🟠 Vừa — ảnh hưởng danh sách thiết bị, màn hình đăng ký và chức năng 見守り | mui trước, rồi 北ガス *(chưa đưa vào `qa_kitagas.md`)* |
+
+## B.6 Số loại tư vấn tiết kiệm: code **19**, tài liệu quản lý **~15**
+
+Bốn mâu thuẫn trước đều là *tài liệu này nói khác tài liệu kia*. Mục này khác hẳn: **tài liệu quản lý nói khác CODE ĐANG CHẠY.**
+
+| Nguồn | Nói gì | Dòng |
+|---|---|---|
+| **Code hệ cũ** — `PublishRegularEcoMissionsCommand.php` | Tham số `--eco-mission-id` có **`case 1` → `case 19`** | 74–135 |
+| **Code hệ cũ** — `ConRegularEcoMissionsSeed.php` *(câu chữ + số điểm từng loại)* | **Đúng 19 bản ghi** | 24–301 |
+| **Tài liệu quản lý** — `20_open_issues.md`, mục CLD-06 | 「省エネアドバイスのパラメータ・統廃合（**約15種**→7種+エコ暖房ポイント）」 | 176 |
+
+*(Hai dòng code đếm trực tiếp trên repo `legacy_eminel_docs`, kiểm 2026-08-20.)*
+
+**Lệch 4 loại.** Chữ 「**約**」 (*khoảng*) trong CLD-06 cho thấy đó là **con số ước lượng**, không phải đếm chính xác — nên đây không hẳn là lỗi, nhưng vẫn là chỗ **không được lấy tài liệu quản lý làm căn cứ**.
+
+**Hệ quả nếu không làm rõ**: việc "gom **15** loại còn 7" và "gom **19** loại còn 7" là **hai khối lượng khác nhau** — và nguy hơn, ai lập kế hoạch theo con số 15 sẽ **bỏ sót 4 loại** không biết xử lý ra sao.
+
+⇒ **Quy tắc áp dụng ở đây: code thắng tài liệu.** Guide này ghi **19** và dẫn nguồn code, không dẫn CLD-06 — chi tiết ở [§4.4②](#44-bốn-logic-nghiệp-vụ-đặc-thù).
+
+**Đã hỏi, chưa có trả lời**: phiếu QA **No. 19** (`確認中`, ô trả lời trống) — câu 2 của phiếu hỏi thẳng *"trong **19** loại hiện hành, loại nào bỏ, loại nào gộp vào đâu"*, tức bên hỏi cũng đã dùng con số 19 chứ không dùng 15. Xem [Phụ lục C #8](#phụ-lục-c--danh-mục-tbd-đang-chặn-việc).
 
 ## B.1 Huy hiệu / xếp hạng thuộc phạm vi năm nào
 
@@ -4353,7 +4395,7 @@ Những chỗ **chưa quyết mà đang cản trở công việc**, xếp theo m
 | 5 | **Phương án kết thúc DR** | ⚠️ Quyết định **kiến trúc firmware 2026** (gateway có lưu trạng thái không) — dù DR thuộc 2027 | `11_business_process/readme.md` dòng 839 | kihara + 北ガス |
 | 6 | **Còn phải suy luận tách gas không** | Toàn bộ biểu đồ gas + report sưởi | `old_eminel/01_overview.md` dòng 59 · `IF-23` TBD | 北ガス |
 | 7 | **Nguồn dữ liệu gom nhóm** | Batch tổng hợp cho xếp hạng và so sánh | `00_integrated_requirements_v1.2.md` dòng 417 · `4_spec/admin/B_user_management.md` dòng 37 | oi / 北ガス |
-| 8 | **Gom 15 loại tư vấn còn 7** | Requirement C5 + màn hình quản trị G | `20_open_issues.md` dòng 176 | 北ガス |
+| 8 | **Gom 19 loại tư vấn còn 7** *(⚠️ tài liệu quản lý ghi 「約15種」 — code có 19, xem [B.6](#b6-số-loại-tư-vấn-tiết-kiệm-code-19-tài-liệu-quản-lý-15))* — ⏳ **đã hỏi 08-13, chưa có trả lời** | Requirement C5 + màn hình quản trị G. Cả **3 câu** của phiếu đều là thứ **không tự suy ra được**: danh sách 7 loại mới ・ loại nào bỏ/gộp vào đâu + tiêu chí gộp ・ có giữ ngưỡng gom nhóm 10 hộ không | `20_open_issues.md` dòng 176 (CLD-06) · QA phiếu **No. 19** (`確認中`, ô trả lời trống) — chi tiết: [§4.4②](#44-bốn-logic-nghiệp-vụ-đặc-thù) | 北ガス *(qua mui)* — **thúc**, phiếu nằm im từ 08-13 |
 | 9 | **Nấc thời gian của lịch sưởi** (`スケジュール刻み`) | Giao diện đặt lịch | `20_open_issues.md` dòng 176 *(bản 08-03 đã bỏ mục này khỏi 要確認事項 của B2)* | 北ガス |
 | 10 | **Nội dung màn hình thống kê F-AD-11** | Màn hình thống kê — hoàn toàn trống | `20_open_issues.md` dòng 176 | 北ガス |
 | 11 | **Yêu cầu phi chức năng** (số kết nối đồng thời, SLA, thời hạn lưu, di trú 30.000 khách) | Chọn kiến trúc server, cấu hình dự phòng | `20_open_issues.md` dòng 86–88 | 北ガス |
