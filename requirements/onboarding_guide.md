@@ -2378,15 +2378,27 @@ Và một quy tắc phụ:
 
 Dịch: **khởi động lại gateway → bỏ DR, quay về điều khiển sưởi thông thường.**
 
-⚠️ **Vì sao câu hỏi này gấp dù DR đã lùi sang 2027**: quyết định *"gateway có phải lưu trạng thái hay không"* là **quyết định kiến trúc firmware của năm 2026**. Chốt muộn thì phải sửa firmware đã ổn định.
+⚠️ **Vì sao câu hỏi này gấp**: quyết định *"gateway có phải lưu trạng thái hay không"* là **quyết định kiến trúc firmware của năm 2026**. Chốt muộn thì phải sửa firmware đã ổn định. Và từ 08-20, lý do gấp tăng thêm một bậc: **DR không còn là chuyện của riêng 2027 nữa** — xem 「Phạm vi của DR」 ngay dưới.
 
-### Phạm vi của DR
+### Phạm vi của DR — giấy ghi một đằng, lời mới nhất của mui nói một nẻo
 
 🔍 Nguồn: `eminel_gw_project/docs/eminel/3_requirements/app/B05_dr.md`
 → mục 「要件案：26年対応スコープ」, dòng 32–34
 → nguyên văn: 「## 要件案：26年対応スコープ」 / 「- なし」
 
-**DR nằm hoàn toàn ngoài phạm vi 2026.** Requirement được viết đầy đủ, spec màn hình quản trị F cũng có, nhưng code thuộc 2027.
+**Trên giấy**, requirement app B5 ghi phạm vi 2026 của DR là 「なし」 — đọc riêng nó sẽ kết luận "DR nằm hoàn toàn ngoài 2026, code thuộc 2027". Cách hiểu đó đúng đến 08-20.
+
+**Từ 08-20, mui nói khác**: masao takahashi (mui) comment thẳng vào 3 dòng DR của bảng 劣後 trong phiếu QA No. 12 (inline comment trong body, đọc 2026-08-21):
+
+| Dòng bảng No. 12 | Nguyên văn comment | Nghĩa |
+|---|---|---|
+| #1 server DR管理 (`F-ES-07,08`) | 「基本機能はFY26スコープで、一部DR実施判定ロジックが劣後の予定」 | **Chức năng cơ bản = FY26**; chỉ logic phán định thực thi DR *dự kiến* (予定) lùi |
+| #3 admin DR管理 (`F-AD-08`) | 「FY26スコープです」 | **Toàn bộ FY26** |
+| #10 app DR (`B5`) | 「FY26スコープです」 | **Toàn bộ FY26** |
+
+⇒ **Phần lớn DR quay lại phạm vi FY26** ở cả ba khối SYP làm; `B05_dr.md` và các bảng trên giấy **chưa cập nhật theo**. Chi tiết diễn biến phiếu + các dòng còn treo: [§6.4](#64-danh-sách-bị-lùi-sang-2027).
+
+📌 **Tiền đề kế hoạch nội bộ SYP (chốt 2026-08-21)**: khi lập kế hoạch phát triển E-GW, coi **toàn bộ** `F-ES-07,08` là FY26 — không trừ trước mảnh 判定ロジック. Vì sao: phần "lùi" mới ở mức 「予定」; kế hoạch trừ sẵn mà mui đổi ý thì phát sinh việc ngoài kế hoạch, còn giả định đủ rồi chốt lùi thật thì chỉ bớt việc — chiều sai lệch an toàn.
 
 Ngoài ra, có một thay đổi phương châm quan trọng:
 
@@ -2498,7 +2510,7 @@ GW管理クラウド → gateway đặt file vào chỗ
 2. Bốn loại thông báo, loại nào **không** dùng Push? Vì sao?
 3. Chế độ tiết kiệm hoạt động ở chế độ nào của lịch tuần? Nhiều chế độ tiết kiệm cùng bật thì tính thế nào?
 4. Nhà lắp スマリモ: vòng lặp điều khiển chạy ở đâu, và nhà đó cài lịch tuần bằng nhiệt độ hay bằng 温度レベル?
-5. Hai phương án kết thúc DR khác nhau chỗ nào? Vì sao phải chốt sớm dù DR đã lùi sang 2027?
+5. Hai phương án kết thúc DR khác nhau chỗ nào? Vì sao phải chốt sớm?
 
 <details>
 <summary>Đáp án</summary>
@@ -2507,7 +2519,7 @@ GW管理クラウド → gateway đặt file vào chỗ
 2. **Lỗi.** Chỉ hiện ở header app khi mở lên. Vì lỗi thiết bị kéo dài và lặp lại — Push mỗi lần thì người dùng sẽ tắt thông báo và bỏ lỡ cả những thứ quan trọng khác. *(dòng 522–526)*
 3. Chỉ ở chế độ **在宅 (ở nhà)**. Chế độ 外出 và 就寝 **không hiệu chỉnh gì**. Nhiều chế độ cùng bật thì **không cộng dồn** — chỉ áp dụng cái có mức hiệu chỉnh lớn nhất. *(`00_integrated_requirements_v1.2.md` dòng 484, 493)*
 4. Vòng lặp chạy ở **スマリモ**, gateway chỉ gửi xuống nhiệt độ cài đặt + nhiệt độ đo được. Nhà đó **luôn có 室温制御** nên cài bằng **nhiệt độ cụ thể**, không rơi vào nhánh 温度レベル. *(`11_business_process/readme.md` dòng 742–743, 761)*
-5. **Cách A**: server phát lệnh kết thúc đúng giờ, rủi ro mất mạng thì không dừng được. **Cách B**: gửi kèm giờ kết thúc từ đầu, nhưng gateway phải lưu trạng thái. Phải chốt sớm vì *"gateway có lưu trạng thái hay không"* là **quyết định kiến trúc firmware năm 2026**. *(dòng 839)*
+5. **Cách A**: server phát lệnh kết thúc đúng giờ, rủi ro mất mạng thì không dừng được. **Cách B**: gửi kèm giờ kết thúc từ đầu, nhưng gateway phải lưu trạng thái. Phải chốt sớm vì *"gateway có lưu trạng thái hay không"* là **quyết định kiến trúc firmware năm 2026** — và từ 08-20 DR phần lớn đã quay lại phạm vi FY26 (phiếu No. 12), càng không hoãn được. *(dòng 839)*
 
 </details>
 
@@ -2634,32 +2646,37 @@ Tức là: **mọi thứ không liên quan đến sưởi** *(theo cách `10_fea
 
 🔍 Nguồn: `eminel_gw_project/docs/eminel/1_product/10_feature_list.md`, cột 「劣後」 các dòng ghi trên
 
-### 🔸 Bảng SYP tự lập để xin xác nhận — **mui CHƯA trả lời**
+⚠️ **Ba chỗ DR trong bảng trên đã bị lời mui ngày 08-20 đảo lại** (quản DR server dòng 92 ・ DR màn hình quản trị dòng 116 ・ màn hình DR app dòng 133): theo comment trên phiếu No. 12 (xem bảng dưới), **chúng thuộc FY26**, không còn nằm trong danh sách lùi — `10_feature_list.md` trên giấy chưa cập nhật theo. Dòng "thực thi DR" phía firmware là việc của mui Lab (7-1), không bàn ở đây.
+
+### Bảng SYP tự lập để xin xác nhận — **mui đã trả lời 3/12 dòng bằng inline comment (08-20)**
 
 Bảng trên lấy từ **bảng chức năng** (`10_feature_list.md`). SYP còn tự lập một bảng thứ hai, dựa trên **biên bản họp định kỳ 10/06**, rồi gửi mui xin xác nhận. Bảng này **chi tiết hơn ở ba điểm** nên đáng đọc kèm: có **mã requirement/chức năng**, có cột **phạm vi bị lùi** (toàn bộ hay một phần), và **chỉ ra được hai chỗ chính SYP cũng chưa chắc**.
 
-⚠️ **Trạng thái: `確認中` — mui chưa trả lời một chữ nào** (lập 2026-08-12, kiểm lại 08-20 vẫn trống). Nên đọc bảng dưới đây là **cách hiểu của SYP**, không phải kết luận đã chốt.
+⚠️ **Trạng thái đọc 2026-08-21**: ステータス vẫn `確認中`, ô `回答内容` vẫn trống — nhưng **masao takahashi (mui) đã comment ngày 08-20 thẳng vào 3 ô của bảng** (inline comment, Notion tô vàng + gạch chân ô được comment; dòng #1 còn được sửa chữ thành 「全部（範囲内）」). **Cả 3 dòng được trả lời đều là DR, và đều đảo cách hiểu của SYP.** 9 dòng còn lại chưa ai xác nhận — **im lặng ≠ đồng ý**, vẫn phải đọc là cách hiểu của SYP.
 
-| # | 領域 (khối) | Chức năng | 劣後の範囲 (phạm vi bị lùi) |
-|---|---|---|---|
-| 1 | EMINEL-smartサーバー | DR管理 (`F-ES-07,08`) | 全部 — toàn bộ |
-| 2 | EMINEL-smartサーバー | バッジ管理・ポイント管理・PI連携 (`F-ES-09`) | 全部 |
-| 3 | 管理画面 | DR管理 (`F-AD-08`) | 全部 |
-| 4 | 管理画面 | 統計情報ダッシュボード (`F-AD-11`) | 全部 |
-| 5 | 管理画面 | バッジ管理 *(chưa có mã requirement)* | 全部 |
-| 6 | 管理画面 | 制御状態確認 (`F-AD-02` phần mở rộng) | ⚠️ **一部** — chỉ một phần |
-| 7 | モバイルアプリ | ポイント (`A3`) | 全部 |
-| 8 | モバイルアプリ | バッジ・ランク (`A4`) | 全部 |
-| 9 | モバイルアプリ | 冷房自動制御 (`B3`) | 全部 |
-| 10 | モバイルアプリ | DR (`B5`) | 全部 |
-| 11 | モバイルアプリ | ローカル通信 (app ⇄ E-GW) | 全部 — **phát triển 2027/4〜6** |
-| 12 | モバイルアプリ | 家電操作 (`B4`) | ⚠️ **要確認** — chưa xác định |
+| # | 領域 (khối) | Chức năng | 劣後の範囲 (SYP đề xuất) | Trả lời của mui (comment 08-20) |
+|---|---|---|---|---|
+| 1 | EMINEL-smartサーバー | DR管理 (`F-ES-07,08`) | 全部 — toàn bộ | ✅ **ĐẢO**: 「基本機能はFY26スコープで、一部DR実施判定ロジックが劣後の予定」 — cơ bản FY26, chỉ logic phán định thực thi *dự kiến* lùi |
+| 2 | EMINEL-smartサーバー | バッジ管理・ポイント管理・PI連携 (`F-ES-09`) | 全部 | — |
+| 3 | 管理画面 | DR管理 (`F-AD-08`) | 全部 | ✅ **ĐẢO**: 「FY26スコープです」 — toàn bộ FY26 |
+| 4 | 管理画面 | 統計情報ダッシュボード (`F-AD-11`) | 全部 | — |
+| 5 | 管理画面 | バッジ管理 *(chưa có mã requirement)* | 全部 | — |
+| 6 | 管理画面 | 制御状態確認 (`F-AD-02` phần mở rộng) | ⚠️ **一部** — chỉ một phần | — (phần nào lùi vẫn chưa phân định) |
+| 7 | モバイルアプリ | ポイント (`A3`) | 全部 | — |
+| 8 | モバイルアプリ | バッジ・ランク (`A4`) | 全部 | — |
+| 9 | モバイルアプリ | 冷房自動制御 (`B3`) | 全部 | — |
+| 10 | モバイルアプリ | DR (`B5`) | 全部 | ✅ **ĐẢO**: 「FY26スコープです」 — toàn bộ FY26 |
+| 11 | モバイルアプリ | ローカル通信 (app ⇄ E-GW) | 全部 — **phát triển 2027/4〜6** | — |
+| 12 | モバイルアプリ | 家電操作 (`B4`) | ⚠️ **要確認** — chưa xác định | — |
 
 🔍 Nguồn: Notion — QAデータベース dự án, phiếu **No. 12** 「2027年劣後機能の確認」
-→ 質問者 Nguyen Van Tung (SYP), 起票 2026-08-12 17:41 · **ステータス `確認中`**, ô `回答内容` **trống** (kiểm 2026-08-20)
+→ 質問者 Nguyen Van Tung (SYP), 起票 2026-08-12 17:41 · **ステータス `確認中`**, ô `回答内容` **trống**
 → nguyên văn câu hỏi: 「6/10定例議事録での決定に基づき、下記機能は第一段階（〜12月末）のスコープから除外し、2027年4月以降の開発と認識しております。内容に相違がないかご確認をお願いいたします。」
+→ 3 inline comment: **masao takahashi (mui), 2026-08-20** (đọc 2026-08-21; ngày theo hiển thị Notion do user xác nhận)
 
-⇒ **Ba điều rút ra:**
+📌 **Tiền đề kế hoạch nội bộ SYP (chốt 2026-08-21)**: khi lập kế hoạch phát triển E-GW, coi **toàn bộ dòng #1** (`F-ES-07,08`) là FY26, không trừ trước mảnh 判定ロジック — phần đó mới là 「予定」, lùi thật thì chỉ bớt việc, chiều sai lệch an toàn. *(Đây là giả định lập kế hoạch của SYP, KHÔNG phải lời mui.)*
+
+⇒ **Bốn điều rút ra:**
 
 **① Bảng này KHÔNG có dòng firmware nào** — trong khi bảng lấy từ `10_feature_list.md` phía trên có (エコキュート, thực thi DR, giao tiếp nội bộ…). Không phải bỏ sót: firmware là **7-1, thuộc 担当 của mui Lab** ([§6.1](#61-bốn-nhóm-mã-chức-năng)), nên bảng xin xác nhận của SYP chỉ liệt kê **ba khối SYP làm** — server, màn hình quản trị, app.
 
@@ -2672,13 +2689,13 @@ Bảng trên lấy từ **bảng chức năng** (`10_feature_list.md`). SYP còn
 
 **③ Dòng #8 khớp với câu trả lời riêng về huy hiệu.** `A4 バッジ・ランク = 全部 劣後` ở đây trùng với phiếu QA riêng về huy hiệu (mui trả lời 「今の所、2026年スコープ外です」, đã 完了) — xem [Phụ lục B.1](#b1-huy-hiệu--xếp-hạng-thuộc-phạm-vi-năm-nào). Tức riêng dòng này **có xác nhận độc lập**, không phụ thuộc phiếu No. 12.
 
-⚠️ **Vì sao phiếu này đáng thúc** *(chi tiết ở [Phụ lục C #13](#phụ-lục-c--danh-mục-tbd-đang-chặn-việc))*: câu hỏi đã viết đúng chuẩn — có bảng sẵn, chỉ cần mui đáp "đúng/sai". Vậy mà ngày 08-13 mui đóng **8 phiếu khác**, trong đó có phiếu lập **sớm hơn phiếu này cùng ngày 08-12**, mà vẫn để nó lại.
+**④ Ba dòng đầu tiên được mui rà thì cả ba đều bị đảo — và đều đảo theo hướng THÊM việc cho SYP.** Bảng do SYP lập từ biên bản 6/10, vậy mà 3/3 dòng có phản hồi đều sai so với nhận thức hiện tại của mui. Hệ quả đọc bảng: **9 dòng chưa có phản hồi không được coi là "chắc đúng vì lấy từ biên bản"** — biên bản 6/10 đã cũ hơn nhận thức của mui ít nhất ở mảng DR.
 
-### ⚠️ Nghịch lý cần hiểu đúng
+⚠️ **Việc còn lại với phiếu này** *(chi tiết ở [Phụ lục C #13](#phụ-lục-c--danh-mục-tbd-đang-chặn-việc))*: mui đã phản hồi 3 dòng DR ngày 08-20 (sau 8 ngày nằm im — trước đó phiếu bị bỏ lại ngoài đợt đóng 08-13). Còn phải xin mui: ① xác nhận nốt **9 dòng chưa có phản hồi** ② phân định **#6** (一部 — phần nào lùi) và **#12** (`B4` 要確認) ③ khi có kế hoạch chi tiết: làm rõ ranh giới mảnh 「DR実施判定ロジック」 được coi là lùi ở dòng #1.
 
-**DR bị lùi sang 2027, nhưng requirement B5 và spec màn hình F vẫn đang được viết ngay bây giờ.**
+### ⚠️ Nguyên tắc "viết trước, code sau" — và vì sao DR không còn là ví dụ của nó
 
-Không mâu thuẫn:
+Với chức năng 劣後 thật (huy hiệu, dashboard…), có một cặp không mâu thuẫn cần hiểu đúng:
 
 ```
 Viết requirement  →  thuộc năm 2026  (vì tháng 9 phải fix xong toàn bộ design + spec)
@@ -2689,7 +2706,7 @@ Viết code         →  thuộc năm 2027
 → bảng 「大枠スケジュール（デッドライン逆算「まずいメソッド」）」, dòng 148
 → nguyên văn: 「2026/9 | デザイン・仕様がすべてフィックス」
 
-⚠️ **Đừng thấy tài liệu DR dày mà tưởng DR nằm trong phạm vi năm nay.**
+⚠️ **Riêng DR thì cảnh báo cũ đã ĐẢO CHIỀU.** Bản trước của tài liệu này viết ở đúng chỗ này: *"Đừng thấy tài liệu DR dày mà tưởng DR nằm trong phạm vi năm nay"* — theo comment mui 08-20 trên phiếu No. 12, câu đó **không còn đúng**: DR phần lớn **thuộc FY26, cả code** (server trừ 判定ロジック ・ admin ・ app). Cảnh báo mới là chiều ngược lại: **đừng cầm tài liệu cũ (biên bản 6/10, `10_feature_list`, `B05_dr.md`) mà loại DR khỏi kế hoạch năm nay.**
 
 ### ❌ Và một mâu thuẫn thật sự
 
@@ -2782,7 +2799,7 @@ Cấu trúc **dự kiến**: **một hợp đồng mẹ (hợp tác kinh doanh) 
 1. **`GW管理クラウド`** (MC = Management Cloud). Nó là 「GW管理API提供」 — cung cấp API cho `EMINEL-smart server` gọi sang lấy dữ liệu và ra lệnh điều khiển (chính là IF-02). *(`00_integrated_requirements_v1.2.md` dòng 397)*
 2. **Kế thừa nguyên từ hệ cũ** — không phải mới, không phải mở rộng. *(`10_feature_list.md` dòng 8)*
 3. **Trục chính là nhóm sưởi** — kèm 照明アドバイス※, liên kết điểm thưởng, gom nhóm & report cũng bắt buộc. Cắt được **13 người-tháng**. *(`22_decisions.md` dòng 31, `10_feature_list.md` dòng 23)*
-4. **Không.** DR đã lùi sang sau 04/2027. Requirement được viết trong 2026 vì **tháng 9/2026 là hạn fix toàn bộ design + spec** *(lịch tính ngược trại tập trung, day2 dòng 148)*, còn code thì thuộc 2027.
+4. **Có (từ 08-20).** Trên giấy `B05_dr.md` vẫn ghi 「なし」 ở 26年対応スコープ, nhưng mui comment trên phiếu No. 12 (08-20): app DR (`B5`) 「FY26スコープです」 — cùng với DR server (trừ 判定ロジック) và DR màn hình quản trị. Giấy chưa cập nhật theo lời. *(Trước 08-20, câu trả lời đúng là "Không — lùi sau 04/2027"; xem [§6.4](#64-danh-sách-bị-lùi-sang-2027).)*
 
 </details>
 
@@ -2971,7 +2988,7 @@ Cột **ステータス** dưới đây là giá trị đối khách; cột **�
 
 > **Nhóm C là nhóm duy nhất đã qua review của khách** (C1–C5 đều レビュー済). Không section nào đạt mức 「fix済」 — nghĩa là **chưa có gì được đóng băng**.
 >
-> **Hai section B3 (lạnh) và B5 (DR) không làm gì trong 2026**: mục 「26年対応スコープ」 (*phạm vi làm trong 2026*) của chúng ghi 「- なし」 = không có gì, toàn bộ nội dung dồn xuống 「それ以降スコープ」 (*phạm vi làm sau đó*).
+> **Hai section B3 (lạnh) và B5 (DR) trên giấy ghi không làm gì trong 2026**: mục 「26年対応スコープ」 (*phạm vi làm trong 2026*) của chúng ghi 「- なし」 = không có gì, toàn bộ nội dung dồn xuống 「それ以降スコープ」 (*phạm vi làm sau đó*). ⚠️ **Riêng B5 (DR): giấy đã lạc hậu** — mui comment phiếu No. 12 (08-20): 「FY26スコープです」, xem [§6.4](#64-danh-sách-bị-lùi-sang-2027); B3 chưa có phản hồi tương tự.
 > **Ngược lại, 21 section còn lại không hoãn gì cả**: mục 「それ以降スコープ」 của chúng mới là chỗ ghi 「- なし」.
 
 ⚠️ Mục 「ローカル通信（2027/4〜）」 của B2 — *"mất internet vẫn tắt được sưởi từ trong nhà"* — **đã bị xoá khỏi requirement ngày 2026-08-05** cùng đợt gỡ các mô tả lấy biên bản trại tập trung làm nguồn. Yêu cầu gốc vẫn nằm ở biên bản `2_management/minutes/20260624_egw_camp_day2.md` mục 「ローカル通信（アプリ⇔GW）」 dòng 92–98 — 「ただしアプリからのローカル通信の口を全く作らないのはなし。最低限オフライン対応は要る」 *(vẫn phải chừa cửa giao tiếp nội bộ, tối thiểu là đối ứng offline)* — nhưng **không còn là requirement app**.
@@ -3792,7 +3809,7 @@ Bốn câu trả lời của mui mới hơn biên bản 6/25 phía trên. 質問
 | **Ngoài đợt nhưng đang được xử lý thật** — cả bốn đều có hoạt động ngày **08-19** | No. 6 · No. 8 · No. 14 · No. 24 | Theo dõi. Với No. 6 và No. 8 thì **đọc Comments** vì câu trả lời nằm ở đó; No. 14 và No. 24 thì trả lời nằm ở ô `回答内容` — nhưng No. 14 **chỉ đáp 1 trong 3 câu**, còn No. 24 đáp **đủ cả 2** |
 | **`確認中` — chưa ai trả lời một chữ** | No. 12 *(lập 08-12, trước đợt 08-13 mà vẫn bị để lại)* · No. 19 *(lập 08-13, có sửa 08-19 nhưng ô trả lời vẫn trống)* | **Phải thúc**, chờ là vô ích ([Phụ lục C #13](#phụ-lục-c--danh-mục-tbd-đang-chặn-việc) và [#8](#phụ-lục-c--danh-mục-tbd-đang-chặn-việc)) |
 
-💡 **Bài học khi đọc tài liệu này về sau**: thấy một phiếu vừa đổi trạng thái thì **mở luôn các phiếu cùng chủ đề** — khả năng cao chúng cũng vừa được xử lý cùng lượt. Và nhớ hai điều: **`完了` cũng nghĩa là đã trả lời** (grep riêng `回答済` sẽ sót), **phải đọc cả `Comments`** — xem 5 cái bẫy ở [Phụ lục E.2](#e2-bước-2--đi-theo-thứ-tự).
+💡 **Bài học khi đọc tài liệu này về sau**: thấy một phiếu vừa đổi trạng thái thì **mở luôn các phiếu cùng chủ đề** — khả năng cao chúng cũng vừa được xử lý cùng lượt. Và nhớ hai điều: **`完了` cũng nghĩa là đã trả lời** (grep riêng `回答済` sẽ sót), **phải đọc cả `Comments` lẫn inline comment trong body** — xem 6 cái bẫy ở [Phụ lục E.2](#e2-bước-2--đi-theo-thứ-tự).
 
 ### ✅ Câu trả lời chốt phạm vi SYP (2026-08-13)
 
@@ -4450,7 +4467,7 @@ Những chỗ **chưa quyết mà đang cản trở công việc**, xếp theo m
 | 2 | **「無効」 chặn những gì** | Hành vi ở **cả ba tầng**: gateway ngừng đến đâu, server chặn API nào, app hiển thị gì | `4_spec/admin/C_egw_management.md` dòng 38 | 北ガス |
 | 3 | **Spec chi tiết logic sưởi** (2 mạch, điều khiển phức hợp) | `GW-01` — firmware không viết được, **lan sang cả phần đám mây** | `20_open_issues.md` dòng 94–97 | 北ガス |
 | 4 | **Gán cảm biến ↔ thiết bị ở nhà nhiều mạch** | Giao diện onboarding + cấu trúc dữ liệu + logic điều khiển | `11_business_process/readme.md` dòng 107 · `minutes/day1` dòng 213–215 | 北ガス |
-| 5 | **Phương án kết thúc DR** — ⚠️ **đã hỏi, câu trả lời là 「後回し」 (để sau)** | ⚠️ Quyết định **kiến trúc firmware 2026** (gateway có lưu trạng thái không) — dù DR thuộc 2027. **Việc "để sau" KHÔNG làm mất phụ thuộc này**, xem khối ⚠️ dưới bảng | `11_business_process/readme.md` dòng 839 · QA phiếu **No. 25** (`回答中`) | **Nội bộ mui/SYP phải tự quyết tư thế firmware** — không còn chờ được 北ガス |
+| 5 | **Phương án kết thúc DR** — ⚠️ **đã hỏi, câu trả lời là 「後回し」 (để sau); từ 08-20 CẤP HƠN NỮA** | ⚠️ Quyết định **kiến trúc firmware 2026** (gateway có lưu trạng thái không) — và từ 08-20, **DR phần lớn quay lại FY26** (phiếu No. 12, comment masao — [§6.4](#64-danh-sách-bị-lùi-sang-2027)), tức phương án kết thúc không còn là chuyện "của 2027". **Việc "để sau" KHÔNG làm mất phụ thuộc này**, xem khối ⚠️ dưới bảng | `11_business_process/readme.md` dòng 839 · QA phiếu **No. 25** (`回答中`) · phiếu **No. 12** comment 08-20 | **Nội bộ mui/SYP phải tự quyết tư thế firmware** — không còn chờ được 北ガス |
 | 6 | **Còn phải suy luận tách gas không** | Toàn bộ biểu đồ gas + report sưởi | `old_eminel/01_overview.md` dòng 59 · `IF-23` TBD | 北ガス |
 | 7 | **Nguồn dữ liệu gom nhóm** | Batch tổng hợp cho xếp hạng và so sánh | `00_integrated_requirements_v1.2.md` dòng 417 · `4_spec/admin/B_user_management.md` dòng 37 | oi / 北ガス |
 | 8 | **Gom 19 loại tư vấn còn 7** *(⚠️ tài liệu quản lý ghi 「約15種」 — code có 19, xem [B.6](#b6-số-loại-tư-vấn-tiết-kiệm-code-19-tài-liệu-quản-lý-15))* — ⏳ **đã hỏi 08-13, chưa có trả lời** | Requirement C5 + màn hình quản trị G. Cả **3 câu** của phiếu đều là thứ **không tự suy ra được**: danh sách 7 loại mới ・ loại nào bỏ/gộp vào đâu + tiêu chí gộp ・ có giữ ngưỡng gom nhóm 10 hộ không | `20_open_issues.md` dòng 176 (CLD-06) · QA phiếu **No. 19** (`確認中`, ô trả lời trống) — chi tiết: [§4.4②](#44-bốn-logic-nghiệp-vụ-đặc-thù) | 北ガス *(qua mui)* — **thúc**, phiếu nằm im từ 08-13 |
@@ -4459,23 +4476,23 @@ Những chỗ **chưa quyết mà đang cản trở công việc**, xếp theo m
 | 11 | **Yêu cầu phi chức năng** (số kết nối đồng thời, SLA, thời hạn lưu, di trú 30.000 khách) | Chọn kiến trúc server, cấu hình dự phòng | `20_open_issues.md` dòng 86–88 | 北ガス |
 | 11b | ↳ **Riêng 「thời hạn lưu」 đã có trả lời một phần: 24 tháng** *(còn `回答中`)* | Cấu hình tự động xoá của DB ・ chi phí lưu trữ ・ kế hoạch di trú. Chặn việc **chốt spec** `F-AD-09` tải dữ liệu | QA phiếu **No. 14** 「過去データダウンロードの必要遡及期間」 — chi tiết + 2 câu chưa trả lời: [§7.4⑦](#74-spec-màn-hình-quản-trị) | 北ガス *(qua mui)* — **còn 2 câu**: quy định lưu quá 24 tháng? ・ ZIP quá khứ có phải di trú? |
 | 12 | **Tài khoản dev cho TagTag / PI / Xzilla** | `CLD-02` — quyết định chiến lược branch | `20_open_issues.md` dòng 158 | 北ガス / Aqara |
-| 13 | **Danh sách chức năng lùi sang 2027 (劣後)** — đã hỏi, câu hỏi viết đúng chuẩn, nhưng **mui chưa trả lời một chữ** | Ước lượng công việc năm 2026: chức năng nào phải làm ngay, chức năng nào được lùi. Kèm **2 dòng chính SYP cũng chưa chắc**: `F-AD-02` mở rộng (一部) và `B4 家電操作` (要確認) | QAデータベース phiếu **No. 12** 「2027年劣後機能の確認」 — `確認中`, bảng 12 dòng: [§6.4](#64-danh-sách-bị-lùi-sang-2027) | **Thúc mui** *(không phải viết lại câu hỏi)* |
+| 13 | **Danh sách chức năng lùi sang 2027 (劣後)** — ⏳ **mui đã trả lời 3/12 dòng bằng inline comment 08-20, cả 3 đều ĐẢO (DR = FY26)**; 9 dòng còn lại vẫn chưa ai xác nhận | Ước lượng công việc năm 2026 — và mức độ nghiêm trọng vừa tăng: 3 dòng được rà thì cả 3 sai theo hướng **thêm việc**. Còn treo: 9 dòng + **2 dòng chính SYP cũng chưa chắc**: `F-AD-02` mở rộng (一部) và `B4 家電操作` (要確認) | QAデータベース phiếu **No. 12** — `確認中` nhưng có **3 inline comment masao 08-20**, bảng 12 dòng + nguyên văn: [§6.4](#64-danh-sách-bị-lùi-sang-2027) | **Xin mui xác nhận nốt 9 dòng + phân định #6/#12** *(câu hỏi gốc vẫn dùng được, không phải viết lại)* |
 | 14 | **Sáu chức năng dùng chung: bê sang E-GW chạy độc lập, hay làm package dùng chung?** — ⏳ **đã hỏi 08-21**, ghi vào body phiếu No. 2 cùng câu trả lời của #15 | Cách dựng server: dùng lại bao nhiêu từ E-Smart. Hai cách này **khác nhau rõ rệt về khối lượng công** | Vế hỏi lại trong bản 追記 08-21 trên phiếu No. 2 — bản gửi: `submit_folder/qa/qa_dokuritsu_deploy_20260821.md` | mui — **đang chờ trả lời** |
 | 15 | **Chức năng nào của hệ hiện hữu nên dùng tiếp** — ✅ **SYP ĐÃ TRẢ LỜI 08-21** (追記 vào body phiếu No. 2: hệ cũ **0** — phán định 47/47 ・ e-smart **6 chức năng**) | ~~Quyết định dựng lại bao nhiêu thứ từ đầu~~ — hết chặn; phần còn chờ là #14 | Vế `ただし` của phiếu No. 2 — diễn biến đầy đủ: [9.4](#94-vai-trò-và-môi-trường-của-syp) ・ bản gửi: `submit_folder/qa/qa_dokuritsu_deploy_20260821.md` | — (việc của SYP đã xong) |
 
 ⚠️ **Mười hai câu đầu phần lớn cần 北ガス** — chín câu bóng nằm hoàn toàn ở phía họ, ba câu phải quyết cùng một bên nữa (kihara ở #5 · oi ở #7 · Aqara ở #12). Nên gom vào **một bảng câu hỏi gửi một lần**, không hỏi lẻ — đúng cách 北ガス đang làm việc qua bảng QA.
 **Ngoại lệ là #1**: câu này **đã gửi từ 08-03** và hoá ra điểm nghẽn **nằm ở mui**, không phải 北ガス — mui chưa liệt kê được danh mục lỗi, và nói rõ 「結構後になる」 (*sẽ khá muộn*). Không gộp nó vào bảng gửi khách nữa; việc cần làm là **bàn phương án làm trước phần không phụ thuộc phân loại lỗi**, vì màn hình C thuộc phạm vi 2026.
 
-⚠️ **Ba câu #13–#15 thì khác: chúng nằm ở phía mui hoặc phía chính SYP**, không phải 北ガス. Sau ngày 08-21: **#15 đã đóng** (SYP trả lời) ・ **#14 đã hỏi, đang chờ mui** ・ chỉ còn **#13 phải thúc**. Mỗi câu bị chặn theo một kiểu khác nhau:
+⚠️ **Ba câu #13–#15 thì khác: chúng nằm ở phía mui hoặc phía chính SYP**, không phải 北ガス. Sau ngày 08-21: **#15 đã đóng** (SYP trả lời) ・ **#14 đã hỏi, đang chờ mui** ・ **#13 đã có phản hồi một phần** (3/12 dòng, inline comment 08-20 — còn 9 dòng phải xin xác nhận nốt). Mỗi câu bị chặn theo một kiểu khác nhau:
 
 | # | Kiểu bị chặn | Việc phải làm |
 |---|---|---|
-| 13 | **Đã hỏi, đang chờ** — phiếu No. 12 lập 2026-08-12, trạng thái `確認中`, ô trả lời **trống**. Bản thân câu hỏi **không có vấn đề gì**: đã có bảng 12 dòng + câu 「内容に相違がないかご確認をお願いいたします」, mui chỉ cần đáp đúng/sai | **Thúc** — không phải soạn lại câu hỏi |
+| 13 | **Đã hỏi, được trả lời MỘT PHẦN qua inline comment (08-20)** — phiếu No. 12 bề ngoài vẫn `確認中`, ô trả lời **trống**, nhưng 3 dòng DR của bảng đã có comment masao, **cả 3 đều đảo cách hiểu của SYP** (DR = FY26). Bản thân câu hỏi **không có vấn đề gì** — bảng 12 dòng + 「内容に相違がないかご確認をお願いいたします」, mui chỉ cần đáp nốt | **Xin xác nhận 9 dòng còn lại + phân định #6/#12** — không phải soạn lại câu hỏi |
 | 5 | **Đã hỏi, và câu trả lời là "để sau"** — phiếu No. 25 đáp 「後回し」 cho phương án kết thúc DR | ⚠️ Kiểu này **nguy hơn "chưa trả lời"**: nó đóng cửa việc chờ mà **không gỡ được phụ thuộc kỹ thuật**. Xem khối ⚠️ ngay dưới |
 
 ⚠️ **Mục #5 — "để sau" không có nghĩa là hết việc.** Đây là chỗ **câu trả lời và lập luận của tài liệu này lệch nhau**, nên phải nói rõ:
 
-**Vì sao mục này từng được xếp là việc của năm 2026** dù bản thân DR thuộc 2027: tài liệu nghiệp vụ nêu hai phương án kết thúc DR, và mỗi phương án đòi một **năng lực khác nhau ở firmware**:
+**Vì sao mục này luôn là việc của năm 2026** *(khi lập luận này viết ra, DR còn được hiểu là "thuộc 2027" — nay chính DR cũng đã về FY26 theo phiếu No. 12, lập luận càng đứng vững)*: tài liệu nghiệp vụ nêu hai phương án kết thúc DR, và mỗi phương án đòi một **năng lực khác nhau ở firmware**:
 
 | Phương án | Cách kết thúc | Điểm lo được ghi trong tài liệu |
 |---|---|---|
@@ -4604,12 +4621,12 @@ Câu hỏi của bạn
 
 ⇒ Ở bảng vấn đề dự án thì `確認中` là **tín hiệu tốt** (đang tiến triển); ở phiếu QA thì là **tín hiệu xấu** (chưa ai chạm).
 
-### ⚠️ Năm cái bẫy của QAデータベース
+### ⚠️ Sáu cái bẫy của QAデータベース
 
 **① `更新日時` KHÔNG phải ngày viết câu trả lời.** Nó là ngày sửa gần nhất — mà lần sửa cuối thường chỉ là *đổi trạng thái*. Ca thật: phiếu **No. 1** 「担当範囲…とアプリ対象外の確認」 có nội dung trả lời 「モバイルアプリは開発対象です。」 **từ 08-03/04**, nhưng 更新日時 là **08-13 12:27** — đó là lúc phiếu được đóng, cách 10 ngày. Khi trích, **ghi cả hai mốc** nếu biết: ngày có nội dung, và ngày chốt trạng thái.
 
 **② mui đóng phiếu theo ĐỢT.** Ngày 08-13, trong **7 phút** (12:27 → 12:34), mui đóng **8 phiếu** đã nằm im 10 ngày. Hệ quả: **trạng thái đọc từ lâu là vô giá trị**; thấy một phiếu vừa chuyển 完了 thì mở luôn các phiếu cùng chủ đề. Bảng đầy đủ: [§9.4](#94-vai-trò-và-môi-trường-của-syp).
-⚠️ Nhưng **"theo đợt" không có nghĩa là "cứ chờ rồi tới lượt"** — có hai ngoại lệ: **No. 6 và No. 8** không nằm trong đợt đó nhưng vẫn được xử lý riêng ngày 08-19; còn **No. 12** lập **trước** đợt 08-13 mà vẫn bị bỏ lại, không ai chạm. Phiếu bị bỏ lại thì phải **thúc**.
+⚠️ Nhưng **"theo đợt" không có nghĩa là "cứ chờ rồi tới lượt"** — có hai ngoại lệ: **No. 6 và No. 8** không nằm trong đợt đó nhưng vẫn được xử lý riêng ngày 08-19; còn **No. 12** lập **trước** đợt 08-13 mà vẫn bị bỏ lại, không ai chạm suốt 8 ngày — rồi được trả lời **một phần** ngày 08-20 bằng **inline comment không đổi trạng thái** (bẫy ⑥). Phiếu bị bỏ lại thì phải **thúc**, và phiếu "chưa ai chạm" phải kiểm bằng mắt chứ đừng tin ステータス.
 
 **③ `質問内容` có thể để trống** dù câu hỏi vẫn tồn tại — nội dung thật nằm ở **body của trang**. Đây không phải ngoại lệ mà là thường lệ: **cả 11 phiếu đã mở đều có ô này Empty**. Thấy Empty thì cuộn xuống đọc body, **không** kết luận "phiếu rỗng".
 
@@ -4617,6 +4634,8 @@ Câu hỏi của bạn
 
 **⑤ ⭐ PHẢI ĐỌC CẢ PHẦN `Comments` — câu trả lời thực chất có thể nằm ở đó.** Ca thật: phiếu **No. 6** (điều kiện phân loại lỗi 重篤/軽微) có ô `回答内容` chỉ ghi 「要仕様検討中」 — đọc riêng nó thì tưởng đơn giản là "đang xem xét". Nhưng trong Comments, masao takahashi (mui) viết ngày 08-19: 「まだ、エラー内容を洗い出せていないですので、**結構後になる**かと思います」 — *"chưa liệt kê được nội dung lỗi nên sẽ khá muộn"*. **Đó mới là thông tin dùng để lập kế hoạch.** Bỏ qua Comments là bỏ qua nửa câu trả lời.
 Kèm theo: **tên người trả lời có thể chỉ xuất hiện trong Comments** trong khi ô `回答者` trống — như đúng phiếu No. 6. Khi trích thì ghi rõ *"theo comment của <tên> ngày <ngày>"*, đừng gán vào ô 回答者.
+
+**⑥ ⭐ CÒN MỘT TẦNG KHÓ THẤY HƠN: INLINE COMMENT GẮN VÀO CHỮ TRONG BODY.** Notion cho comment thẳng vào một đoạn text/ô bảng — đoạn đó chỉ được **tô vàng + gạch chân**, comment không hiện ở mục Comments cuối trang. Ca thật: phiếu **No. 12** (劣後 2027) bề ngoài vẫn `確認中`, ô `回答内容` trống, mục Comments trống — nhưng **3 ô của bảng trong body mang 3 inline comment của masao (08-20), đảo cả 3 dòng DR sang FY26**. Đọc kiểu grep/export hay chỉ nhìn trạng thái là **sót toàn bộ**. Quy tắc: mở trang bằng mắt, để ý mọi đoạn **gạch chân/tô vàng** trong body — bấm vào đọc từng cái; và một phiếu 確認中 với ô trả lời trống **vẫn có thể đã được trả lời một phần**.
 
 ⚠️ Đây là **dữ liệu sống**: khi trích dẫn phải ghi kèm ngày đọc, và mở lại trang gốc kiểm tra trạng thái trước khi dùng.
 
@@ -4835,7 +4854,7 @@ Làm hết rồi mới xem [Phụ lục G](#phụ-lục-g--đáp-án). Đạt **
 | 21 | **A** | Vì không đảo ngược được nên bắt buộc hỏi xác nhận trước khi tắt | [5.5](#55-điều-khiển-sưởi--phần-khó-nhất) |
 | 22 | **B** | Không có nhiệt độ phòng để so → mỗi chế độ đặt **温度レベル** thay cho nhiệt độ cụ thể | [5.5](#55-điều-khiển-sưởi--phần-khó-nhất) |
 | 23 | **C** | Requirement viết đầy đủ nhưng toàn bộ nằm ở 「それ以降スコープ」 | [7.3](#73-requirement-app-23-section) |
-| 24 | **A** | Chỉ B3 (lạnh) và B5 (DR) ghi 「- なし」 ở 26年対応スコープ; 21 section còn lại đều có nội dung thuộc phạm vi 2026 | [7.3](#73-requirement-app-23-section) |
+| 24 | **A** | Chỉ B3 (lạnh) và B5 (DR) ghi 「- なし」 ở 26年対応スコープ; 21 section còn lại đều có nội dung thuộc phạm vi 2026. *(⚠️ B5: đó là chữ trên giấy — mui đã chốt DR app = FY26 qua phiếu No. 12, giấy chưa cập nhật, xem [§6.4](#64-danh-sách-bị-lùi-sang-2027))* | [7.3](#73-requirement-app-23-section) |
 | 25 | **D** | Việc gom lên màn hình Home thuộc pha thiết kế | [7.3](#73-requirement-app-23-section) |
 | 26 | **B** | Đối chiếu tài liệu thiết kế bản thương mại V1.0.4 | [7.3](#73-requirement-app-23-section) |
 | 27 | **C** | Chỉ định nghĩa What; UI và How thuộc tài liệu khác | [7.1](#71-bản-đồ-sáu-tầng) |

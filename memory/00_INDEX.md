@@ -94,7 +94,7 @@
 
 > ⚠️ **Lưu ý về nhãn ngày trong khối `[08-20]` dưới đây**: đợt rà QA chạy **qua hai ngày**, các "lượt" được đánh số liền nên nhãn `[08-20]` dùng cho cả đợt. Phân chia thật theo mốc commit: **20/08 (Thứ 5) 15:55–18:02** = phiếu No. 10 · 1 · 2 · 3 · 4 · 5 · 7 · 9 · 12 · **6** · **8** + báo cáo ngày. **21/08 (Thứ 6) 10:05–12:44** = rà hàng đợi, review 3 vòng vùng sửa, soạn QA phiếu No. 2, phiếu **No. 14 · 19 · 24 · 25**, bảng 47 batch (VN + JP).
 > ✅ **Đã kiểm: mọi ngày suy từ nhãn tương đối của Notion đều ĐÚNG**, dù đọc ở hai ngày khác nhau — "Yesterday" đọc ngày 20/08 (phiếu No. 6 · 8) và "Wednesday" đọc ngày 21/08 (phiếu No. 14 · 24 · 25) **cùng trỏ về 08-19**; "Last Thursday" = 08-13; "Last Wednesday" = 08-12. Không có chỗ nào phải đính chính.
-> Cập nhật lần cuối: **2026-08-20 — ✅ PHẠM VI SYP ĐÃ CHỐT (QA Notion No. 10, 完了) → guide có bảng 担当 chính thức**. (19/08: chốt bản nộp báo cáo tái cấu trúc source app. 18/08: guide lên v1.3, đối chiếu mốc `1100487`.) Đợt review tài liệu team `2026_08_13/` đã đóng từ 17/08 (bàn giao sẵn sàng, phần còn lại thuộc user/member — xem khối [08-17]).
+> Cập nhật lần cuối: **2026-08-21 chiều — 🔴 DR ĐẢO VỀ FY26 (phiếu No. 12, 3 inline comment masao 08-20 — việc 1f) + ✅ vế `ただし` phiếu No. 2 đã trả lời & câu a/b đã hỏi (việc 1e/6/6b)**. Trước đó: 20/08 chốt phạm vi SYP (No. 10) → guide có bảng 担当; 19/08 chốt bản nộp báo cáo tái cấu trúc app; 18/08 guide v1.3 (`1100487`). Đợt review team `2026_08_13/` đã đóng từ 17/08 (phần còn lại thuộc user/member — khối [08-17]).
 
 **[08-20] ✅ CHỐT PHẠM VI ĐỐI ỨNG CỦA SYP — nguồn: Notion QAデータベース trang 「SYP開発範囲の確認」 (No. 10):**
 - **担当 đã được mui xác nhận** (回答者 **swan (mui)**, 回答 **2026-08-13**, ステータス **完了**; 質問者 **Nguyen Van Tung (SYP)**, 起票 08-12; 回答内容 nguyên văn 「認識に相違ないです。」):
@@ -250,12 +250,13 @@ và viết lại; CLAUDE.md mục SOURCES đã cập nhật 4 repo git + 1 snaps
    → **Cách làm đúng (user chốt)**: **ghi thêm vào BODY của chính phiếu No. 2, ngay dưới câu hỏi gốc, mở đầu bằng dòng ngày** (「【2026/08/20 SYP追記】」), KHÔNG lập phiếu mới — để mạch hội thoại nằm một chỗ.
    → **Phạm vi cũng rút lại (user chốt)**: phần trả lời giữ nguyên (#15); phần hỏi lại **chỉ MỘT câu** = *"4 chức năng đó **bê sang E-GW chạy độc lập** hay **làm package dùng chung**?"*. **Bỏ** 2 câu của bản nháp trước (chung repo hay tách / có chia sẻ library chung) — câu hỏi mới cụ thể hơn và buộc chọn giữa hai cách làm có khối lượng công khác nhau rõ rệt.
    Bản VN + khối JP đã rà sạch mã nội bộ. Việc "sau khi đăng" (mục 5 của file) đã hoàn tất 21/08 — xem dòng đầu mục 1e này.
-1f. **[08-20] Phiếu No. 12 — GIẢ THUYẾT CỦA AI ĐÃ SAI, chỉ cần THÚC.** Đã đọc body: câu hỏi **viết đúng chuẩn rồi** — bảng **12 dòng** (領域 × 機能 × 劣後の範囲) + 「内容に相違がないかご確認をお願いいたします」, mui chỉ cần đáp đúng/sai. Trước đó AI ngờ nó "hỏi kiểu mở nên bị bỏ lại" → **sai**. ⇒ **KHÔNG soạn lại câu hỏi**, chỉ thúc.
-   - → Bảng 12 dòng đã vào guide **§6.4** dưới nhãn 🔸 「Bảng SYP tự lập — mui CHƯA trả lời」. Nó **chi tiết hơn** bảng cũ (lấy từ `10_feature_list.md`) ở 3 điểm: có **mã requirement/chức năng** ・ có cột **範囲 (全部/一部/要確認)** ・ **chỉ ra 2 chỗ chính SYP cũng chưa chắc**.
-   - ⚠️ **2 mục còn mở lộ ra từ bảng này**: **#6** 制御状態確認 (`F-AD-02` mở rộng) = **一部**, chưa phân định phần nào lùi ・ **#12** 家電操作 (`B4`) = **要確認**, chưa biết 2026 hay 2027 (đáng chú ý vì B4 đã được viết nội dung requirement).
-   - 📌 **Bảng KHÔNG có dòng firmware nào** — không phải bỏ sót: firmware là **7-1, 担当 mui Lab**, nên bảng xin xác nhận của SYP chỉ gồm **3 khối SYP làm**. Đây là bằng chứng SYP đã dùng bảng 担当 đúng cách.
-   - **Trạng thái 08-20 (user chốt)**: ⏸ **việc thúc cũng CHỜ XÁC NHẬN NỘI BỘ**. Không cần soạn gì thêm — chỉ là một comment nhắc trên phiếu No. 12.
-   - 🔵 **`git push`: user tự làm CUỐI BUỔI** — auto mode chặn AI chạy `git push`. User **đã push tới `8ed8b89`** (báo cáo ngày) trong buổi; còn **5 commit** chưa lên: `38be179` (QA No.8) ・ `225bf94` (rà hàng đợi) ・ `89c6766` (review 3 vòng) ・ `ea8f50f` (phiếu A) ・ `11f2bd0`. Phiên sau kiểm `git log origin/main..HEAD --oneline`; còn commit thì nhắc user.
+1f. 🔴 **[CẬP NHẬT 21/08] Phiếu No. 12 — mui ĐÃ TRẢ LỜI 3/12 DÒNG BẰNG INLINE COMMENT (08-20), CẢ 3 ĐỀU ĐẢO: DR = FY26.**
+   - **Phát hiện 21/08 (user gửi ảnh + chép 3 comment)**: 3 ô cột 劣後の範囲 của bảng trong body được tô vàng/gạch chân (dòng #1 còn bị sửa chữ thành 「全部（範囲内）」) = **inline comment Notion** — masao takahashi (mui), comment **08-20** (ngày theo Notion, user xác nhận 08-21). Phiếu bề ngoài **vẫn `確認中`, ô 回答内容 vẫn trống** ⇒ thành **bẫy ⑥ MỚI của Phụ lục E.2** (trả lời nằm trong inline comment gắn vào chữ trong body — grep/nhìn trạng thái là sót sạch).
+   - **Nội dung 3 comment**: #1 server DR管理 (`F-ES-07,08`) 「基本機能はFY26スコープで、一部DR実施判定ロジックが劣後の予定」 ・ #3 admin DR管理 (`F-AD-08`) 「FY26スコープです」 ・ #10 app DR (`B5`) 「FY26スコープです」. ⇒ **"DR toàn bộ lùi 2027" SỤP** — cả biên bản 6/10 lẫn `10_feature_list`/`B05_dr.md` trên giấy đều lạc hậu ở mảng DR. Khối lượng FY26 của SYP **tăng thật** (server DR + F-AD-08 + màn hình DR app).
+   - 📌 **Tiền đề kế hoạch nội bộ (user chốt 21/08)**: lập kế hoạch E-GW coi **toàn bộ** `F-ES-07,08` là FY26, không trừ trước mảnh 判定ロジック (nó mới là 「予定」; chiều sai lệch an toàn). Ghi ở guide §6.4 + §5.x 「Phạm vi của DR」 — luôn tách "lời mui" khỏi "giả định SYP".
+   - ✅ **Guide đã vá 21/08 (10 chỗ)**: §5.x Phạm vi của DR viết lại (giấy ↔ lời) ・ quiz ch.5 câu 5 + đáp án ・ ghi chú dưới bảng lùi `10_feature_list` ・ §6.4 bảng thêm cột "Trả lời của mui" + Bốn điều rút ra (④ mới) + khối "việc còn lại" ・ khối nghịch lý → 「cảnh báo đảo chiều」 ・ đáp án ch.6 câu 4 ・ blockquote B3/B5 なし ・ quiz cuối câu 24 ・ Phụ lục C #5 (cấp hơn) + #13 + bảng kiểu-bị-chặn ・ E.2 bẫy ⑥ + bẫy ② cập nhật.
+   - ⚠️ **2 mục cũ còn mở nguyên**: **#6** 制御状態確認 (一部 — phần nào lùi chưa phân định) ・ **#12** 家電操作 (`B4` 要確認). **Việc thúc đổi nội dung**: không phải "nhắc trả lời" nữa mà là **xin xác nhận nốt 9 dòng chưa có phản hồi + phân định #6/#12** (im lặng ≠ đồng ý — 3 dòng đầu được rà thì cả 3 sai). ⏸ vẫn chờ user quyết lúc nào gửi.
+   - 🔍 **CHƯA KIỂM**: ảnh + 3 comment do user chép tay, chưa tự mở trang Notion đối chiếu nguyên văn/ngày; các dòng khác của bảng có inline comment nào nữa không cũng chưa soát bằng mắt.
 1d. Áp đề xuất **"bước 0 = rà Notion"** vào `skillAI/3-step-review` (hoặc skill cập nhật guide) — theo ⛔#11 phải qua `analyze-change-request` trước, sửa gốc SKILL rồi mới áp. 🔸 CHƯA làm.
 2. **Điền 7 dòng 配信・通知系 (#1–#4) + Xzilla (#5–#7) vào `summary_batch_migration_ja.md`** — kết luận đã có sẵn trong `new_2/`; cần quyết: có tách thành file `legacy-batch_<Command>_{ja,vi}.md` theo format mới không.
 3. **Điều tra nhóm 集計・計算系** (17/19 dòng còn lại của nhóm; SYP còn ~30/43 batch chưa điều tra). ⚠️ Giả định cũ "e-smart không có gì dùng lại" **đã bị bác** — e-smart CÓ 3 bảng history (`template-dynamodb.yaml:1113/1145/1177`), ghi bởi 5 batch `batch-import-rinnai/noritz-*`. Dùng skill `create-investigation-report`.
@@ -268,20 +269,21 @@ và viết lại; CLAUDE.md mục SOURCES đã cập nhật 4 repo git + 1 snaps
 6b. ⏳ **Mức độ độc lập của server E-GW — ĐÃ HỎI 21/08, đang chờ mui** (câu a/b trong cùng bản 追記 phiếu No. 2: 6 chức năng
    bê sang E-GW chạy độc lập hay tách package dùng chung). Lưu ý cũ vẫn giữ: chữ 「基本的には」 (*về cơ bản là*) trong nguyên
    văn là chữ nhượng bộ — **không được đọc thành "độc lập tuyệt đối"** (⛔#8). Khi mui trả lời: cập nhật guide §9.4 điểm 2 + Phụ lục C #14.
-7. 🔴 **NAY CẤP HƠN (phát hiện 08-20)** — chốt nội bộ với **kihara** về Q5 (GW giữ trạng thái DR — báo cáo batch #4 cũng treo
+7. 🔴🔴 **CẤP THÊM MỘT BẬC (21/08)** — chốt nội bộ với **kihara** về Q5 (GW giữ trạng thái DR — báo cáo batch #4 cũng treo
    vào đây) → gửi `qa_kitagas.md` qua PM mui (quyết kèm Dự phòng 3/4 không).
-   **Lý do cấp hơn**: phiếu QA **No. 25** đáp 「**後回し**」 cho phương án kết thúc DR ⇒ **北ガス sẽ không chọn A/B lúc này**,
-   nhưng firmware **vẫn phải viết trong 2026** và hai phương án đòi hai năng lực khác nhau (B đòi GW lưu trạng thái, mà tài
-   liệu ghi 「GW側で保存はしたくない」). ⇒ **mui/SYP phải tự quyết tư thế firmware**: xây sẵn năng lực lưu trạng thái (giữ
-   đường mở cho B) hay không xây (khoá vào A). Chi tiết + 2 cách đọc: guide Phụ lục C #5, khối ⚠️ dưới bảng.
+   **Lý do cấp (2 tầng)**: ① phiếu **No. 25** đáp 「**後回し**」 cho phương án kết thúc DR ⇒ 北ガス không chọn A/B lúc này,
+   nhưng hai phương án đòi hai năng lực firmware khác nhau (B đòi GW lưu trạng thái, mà tài liệu ghi 「GW側で保存はしたくない」)
+   ⇒ **mui/SYP phải tự quyết tư thế firmware** ② **[MỚI 21/08] DR phần lớn đã về FY26** (phiếu No. 12, 3 comment masao 08-20)
+   ⇒ DR **không còn là chuyện 2027**, chuỗi server–GW của DR phải chạy trong năm nay — phương án kết thúc càng không thể treo.
+   Chi tiết + 2 cách đọc: guide Phụ lục C #5, khối ⚠️ dưới bảng.
 8. **Theo dõi QAデータベース — trạng thái thật sau đợt rà 08-20** (thay hẳn ghi chú cũ "5 trang 回答中"):
    - ✅ **8 phiếu 完了, đã vào tài liệu**: No. 1 ・ 2 ・ 3 ・ 4 ・ 5 ・ 7 ・ 9 ・ 10.
    - 🟡 **No. 6** 「エラー種別（重篤／軽微）判定条件」 — `回答中`, comment masao 08-19: **「結構後になる」**, mui chưa liệt kê được danh mục lỗi. Nội dung đã vào guide §7.4③ + Phụ lục C #1. Theo dõi tiếp.
    - 🟡 **No. 8** 「GW-IDと顧客・契約情報の連携方法」 — `回答中`, comment masao 08-19 **đã đủ nội dung dùng được** (GW-ID↔TagTag ID, bỏ EMS-SP番号), đã vào guide §5.2. **Mở lại kiểm trước khi trích vào bản gửi ra ngoài.**
-   - 🔶 **No. 12** 「2027年劣後機能の確認」 — `確認中`, **trống hoàn toàn**, bị bỏ qua có chọn lọc ⇒ **phải thúc** (Phụ lục C #13).
+   - 🔶 **No. 12** 「2027年劣後機能の確認」 — `確認中` NHƯNG **đã có 3 inline comment masao 08-20 trong body (DR = FY26, cả 3 đảo)** — xem việc 1f. Còn xin xác nhận **9 dòng** + phân định #6/#12 (Phụ lục C #13).
    - ✅ **ĐÃ RÀ HẾT DÃY (user xác nhận 08-20)**: **12 phiếu** = No. 1–10 · 12 · 14. **No. 11 và No. 13 KHÔNG tồn tại** trên QAデータベース hiện tại — 🔸 user nhận định *"có vẻ đã bị xoá"*. ⇒ **Đừng đi tìm hai số đó nữa**; số phiếu có lỗ ≠ thiếu sót của mình.
    - 📌 Bài học 08-20 vẫn giữ: phiếu chưa mở có thể chứa thứ **không có ở đâu khác** — No. 9 sinh ra guide §7.7 ・ No. 6 đảo Phụ lục C #1 ・ No. 8 chốt cách gắn GW ・ No. 14 sinh ra §7.4⑦. Nên **khi có phiếu mới thì mở màn hình DANH SÁCH**, đừng mở lẻ từng trang.
-   - ⚠️ Khi lọc: **`完了` cũng là "đã trả lời"** — grep riêng `回答済` sẽ sót. Và **phải đọc cả `Comments`** (bẫy ⑤, Phụ lục E.2).
+   - ⚠️ Khi lọc: **`完了` cũng là "đã trả lời"** — grep riêng `回答済` sẽ sót. **Phải đọc cả `Comments`** (bẫy ⑤) **lẫn inline comment tô vàng trong body** (bẫy ⑥ — ca No. 12) — Phụ lục E.2.
 9. Hỏi mui xác nhận **đích của luồng export SFTP `/EST`** trong backend e-smart (≒「EMINELデータの共有」 F-ES-10?) — xem báo cáo batch §6.
 10. Khi **IF-01/CLD-07** (định nghĩa 入出力 Xzilla) có spec → rà lại nhóm Xzilla của báo cáo batch (§4, gồm cả
    chiều xuất); danh sách việc-cần-xác-nhận đầy đủ: bảng §6 của báo cáo batch (8 mục).
