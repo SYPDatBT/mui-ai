@@ -2589,6 +2589,46 @@ Tức là: **mọi thứ không liên quan đến sưởi** *(theo cách `10_fea
 
 🔍 Nguồn: `eminel_gw_project/docs/eminel/1_product/10_feature_list.md`, cột 「劣後」 các dòng ghi trên
 
+### 🔸 Bảng SYP tự lập để xin xác nhận — **mui CHƯA trả lời**
+
+Bảng trên lấy từ **bảng chức năng** (`10_feature_list.md`). SYP còn tự lập một bảng thứ hai, dựa trên **biên bản họp định kỳ 10/06**, rồi gửi mui xin xác nhận. Bảng này **chi tiết hơn ở ba điểm** nên đáng đọc kèm: có **mã requirement/chức năng**, có cột **phạm vi bị lùi** (toàn bộ hay một phần), và **chỉ ra được hai chỗ chính SYP cũng chưa chắc**.
+
+⚠️ **Trạng thái: `確認中` — mui chưa trả lời một chữ nào** (lập 2026-08-12, kiểm lại 08-20 vẫn trống). Nên đọc bảng dưới đây là **cách hiểu của SYP**, không phải kết luận đã chốt.
+
+| # | 領域 (khối) | Chức năng | 劣後の範囲 (phạm vi bị lùi) |
+|---|---|---|---|
+| 1 | EMINEL-smartサーバー | DR管理 (`F-ES-07,08`) | 全部 — toàn bộ |
+| 2 | EMINEL-smartサーバー | バッジ管理・ポイント管理・PI連携 (`F-ES-09`) | 全部 |
+| 3 | 管理画面 | DR管理 (`F-AD-08`) | 全部 |
+| 4 | 管理画面 | 統計情報ダッシュボード (`F-AD-11`) | 全部 |
+| 5 | 管理画面 | バッジ管理 *(chưa có mã requirement)* | 全部 |
+| 6 | 管理画面 | 制御状態確認 (`F-AD-02` phần mở rộng) | ⚠️ **一部** — chỉ một phần |
+| 7 | モバイルアプリ | ポイント (`A3`) | 全部 |
+| 8 | モバイルアプリ | バッジ・ランク (`A4`) | 全部 |
+| 9 | モバイルアプリ | 冷房自動制御 (`B3`) | 全部 |
+| 10 | モバイルアプリ | DR (`B5`) | 全部 |
+| 11 | モバイルアプリ | ローカル通信 (app ⇄ E-GW) | 全部 — **phát triển 2027/4〜6** |
+| 12 | モバイルアプリ | 家電操作 (`B4`) | ⚠️ **要確認** — chưa xác định |
+
+🔍 Nguồn: Notion — QAデータベース dự án, phiếu **No. 12** 「2027年劣後機能の確認」
+→ 質問者 Nguyen Van Tung (SYP), 起票 2026-08-12 17:41 · **ステータス `確認中`**, ô `回答内容` **trống** (kiểm 2026-08-20)
+→ nguyên văn câu hỏi: 「6/10定例議事録での決定に基づき、下記機能は第一段階（〜12月末）のスコープから除外し、2027年4月以降の開発と認識しております。内容に相違がないかご確認をお願いいたします。」
+
+⇒ **Ba điều rút ra:**
+
+**① Bảng này KHÔNG có dòng firmware nào** — trong khi bảng lấy từ `10_feature_list.md` phía trên có (エコキュート, thực thi DR, giao tiếp nội bộ…). Không phải bỏ sót: firmware là **7-1, thuộc 担当 của mui Lab** ([§6.1](#61-bốn-nhóm-mã-chức-năng)), nên bảng xin xác nhận của SYP chỉ liệt kê **ba khối SYP làm** — server, màn hình quản trị, app.
+
+**② Hai dòng chính SYP cũng chưa chắc** — đây là hai mục còn mở, đừng đọc bảng như thể tất cả đã rõ:
+
+| Dòng | Vấn đề |
+|---|---|
+| **#6** 制御状態確認 (`F-AD-02` mở rộng) | Chỉ **một phần** bị lùi. Phần nào lùi, phần nào phải làm trong 2026 — **chưa phân định** |
+| **#12** 家電操作 (`B4`) | **要確認** — chưa biết thuộc 2026 hay 2027. Đáng chú ý vì B4 là section requirement app đã được viết nội dung |
+
+**③ Dòng #8 khớp với câu trả lời riêng về huy hiệu.** `A4 バッジ・ランク = 全部 劣後` ở đây trùng với phiếu QA riêng về huy hiệu (mui trả lời 「今の所、2026年スコープ外です」, đã 完了) — xem [Phụ lục B.1](#b1-huy-hiệu--xếp-hạng-thuộc-phạm-vi-năm-nào). Tức riêng dòng này **có xác nhận độc lập**, không phụ thuộc phiếu No. 12.
+
+⚠️ **Vì sao phiếu này đáng thúc** *(chi tiết ở [Phụ lục C #13](#phụ-lục-c--danh-mục-tbd-đang-chặn-việc))*: câu hỏi đã viết đúng chuẩn — có bảng sẵn, chỉ cần mui đáp "đúng/sai". Vậy mà ngày 08-13 mui đóng **8 phiếu khác**, trong đó có phiếu lập **sớm hơn phiếu này cùng ngày 08-12**, mà vẫn để nó lại.
+
 ### ⚠️ Nghịch lý cần hiểu đúng
 
 **DR bị lùi sang 2027, nhưng requirement B5 và spec màn hình F vẫn đang được viết ngay bây giờ.**
@@ -4274,7 +4314,7 @@ Những chỗ **chưa quyết mà đang cản trở công việc**, xếp theo m
 | 10 | **Nội dung màn hình thống kê F-AD-11** | Màn hình thống kê — hoàn toàn trống | `20_open_issues.md` dòng 176 | 北ガス |
 | 11 | **Yêu cầu phi chức năng** (số kết nối đồng thời, SLA, thời hạn lưu, di trú 30.000 khách) | Chọn kiến trúc server, cấu hình dự phòng | `20_open_issues.md` dòng 86–88 | 北ガス |
 | 12 | **Tài khoản dev cho TagTag / PI / Xzilla** | `CLD-02` — quyết định chiến lược branch | `20_open_issues.md` dòng 158 | 北ガス / Aqara |
-| 13 | **Danh sách chức năng lùi sang 2027 (劣後)** — đã hỏi nhưng **chưa được trả lời** | Ước lượng công việc năm 2026: chức năng nào phải làm ngay, chức năng nào được lùi. Liên quan trực tiếp mâu thuẫn [B.1](#b1-huy-hiệu--xếp-hạng-thuộc-phạm-vi-năm-nào) | QAデータベース phiếu **No. 12** 「2027年劣後機能の確認」 | mui *(đã lập phiếu, đang chờ)* |
+| 13 | **Danh sách chức năng lùi sang 2027 (劣後)** — đã hỏi, câu hỏi viết đúng chuẩn, nhưng **mui chưa trả lời một chữ** | Ước lượng công việc năm 2026: chức năng nào phải làm ngay, chức năng nào được lùi. Kèm **2 dòng chính SYP cũng chưa chắc**: `F-AD-02` mở rộng (一部) và `B4 家電操作` (要確認) | QAデータベース phiếu **No. 12** 「2027年劣後機能の確認」 — `確認中`, bảng 12 dòng: [§6.4](#64-danh-sách-bị-lùi-sang-2027) | **Thúc mui** *(không phải viết lại câu hỏi)* |
 | 14 | **Mức độ độc lập của server E-GW** — chung library/source hay không | Cách dựng server: dùng lại bao nhiêu từ E-Smart | QAデータベース phiếu No. 2 đã **完了** mà **không nói mức độ** ⇒ chờ tiếp là vô ích, phải mở phiếu mới | mui |
 | 15 | **Chức năng nào của hệ hiện hữu nên dùng tiếp** — mui đã hỏi SYP mà **SYP chưa trả lời** | Quyết định dựng lại bao nhiêu thứ từ đầu | Vế `ただし` của phiếu No. 2 (**完了**, đã mất kênh trả lời) — xem [9.4](#94-vai-trò-và-môi-trường-của-syp) | **SYP phải trả lời**, không phải chờ ai |
 
@@ -4285,7 +4325,7 @@ Những chỗ **chưa quyết mà đang cản trở công việc**, xếp theo m
 
 | # | Kiểu bị chặn | Việc phải làm |
 |---|---|---|
-| 13 | **Đã hỏi, đang chờ** — phiếu No. 12 lập 2026-08-12, trạng thái `確認中`, ô trả lời **trống** | Thúc mui trả lời |
+| 13 | **Đã hỏi, đang chờ** — phiếu No. 12 lập 2026-08-12, trạng thái `確認中`, ô trả lời **trống**. Bản thân câu hỏi **không có vấn đề gì**: đã có bảng 12 dòng + câu 「内容に相違がないかご確認をお願いいたします」, mui chỉ cần đáp đúng/sai | **Thúc** — không phải soạn lại câu hỏi |
 | 14 | **Đã hỏi, đã đóng, nhưng câu trả lời không chứa thông tin cần** | Mở **phiếu QA mới** — chờ phiếu cũ là vô ích |
 | 15 | **Người phải trả lời là SYP**, và phiếu đã bị đóng mất kênh | Nêu lại bằng phiếu mới hoặc khi trình thiết kế |
 
