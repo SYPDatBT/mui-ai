@@ -201,7 +201,7 @@ Mỗi khẳng định trong tài liệu này đều kèm nguồn theo định d�
 | Loại nguồn | Mốc | Nghĩa |
 |---|---|---|
 | Repo (`docs/`, code) | commit `1100487`, kiểm **2026-08-18** | Số dòng và nội dung đúng tại mốc này |
-| QAデータベース Notion | **kiểm 2026-08-20** — 14 phiếu: **No. 1 · 2 · 3 · 4 · 5 · 7 · 9 · 10** đều ✅ **完了**; **No. 6 · 8 · 14 · 24** còn 🟡 **回答中**; **No. 12 · 19** còn 🔶 **確認中, ô trả lời trống**. *(No. 11 và No. 13 không tồn tại — đã bị xoá.)* Phiếu ngoài danh sách này vẫn là **lần đọc 2026-08-04** | Notion là dữ liệu sống. Trạng thái `回答中` còn sót ở đâu trong tài liệu này thì ứng với **ngày 08-04** và **rất có thể đã lạc hậu** — cả 6 phiếu đã kiểm đều được mui đóng trong **cùng 2 phút** ngày 08-13. ⚠️ **Phiếu 完了 không có nghĩa là hết dè dặt**: đóng phiếu không thêm chữ nào vào câu trả lời, nên các chữ nhượng bộ (「基本的には」「今の所」) và chuyện "mui trả lời ≠ 北ガス xác nhận" vẫn còn nguyên. **Phải mở trang gốc trước khi trích lại**; cách đọc property và 4 cái bẫy: [Phụ lục E.2](#e2-bước-2--đi-theo-thứ-tự) |
+| QAデータベース Notion | **kiểm 2026-08-20** — 15 phiếu: **No. 1 · 2 · 3 · 4 · 5 · 7 · 9 · 10** đều ✅ **完了**; **No. 6 · 8 · 14 · 24 · 25** còn 🟡 **回答中**; **No. 12 · 19** còn 🔶 **確認中, ô trả lời trống**. *(No. 11 và No. 13 không tồn tại — đã bị xoá.)* Phiếu ngoài danh sách này vẫn là **lần đọc 2026-08-04** | Notion là dữ liệu sống. Trạng thái `回答中` còn sót ở đâu trong tài liệu này thì ứng với **ngày 08-04** và **rất có thể đã lạc hậu** — cả 6 phiếu đã kiểm đều được mui đóng trong **cùng 2 phút** ngày 08-13. ⚠️ **Phiếu 完了 không có nghĩa là hết dè dặt**: đóng phiếu không thêm chữ nào vào câu trả lời, nên các chữ nhượng bộ (「基本的には」「今の所」) và chuyện "mui trả lời ≠ 北ガス xác nhận" vẫn còn nguyên. **Phải mở trang gốc trước khi trích lại**; cách đọc property và 4 cái bẫy: [Phụ lục E.2](#e2-bước-2--đi-theo-thứ-tự) |
 
 ---
 
@@ -3780,6 +3780,7 @@ Bốn câu trả lời của mui mới hơn biên bản 6/25 phía trên. 質問
 | **No. 6** エラー種別判定条件 → [§7.4](#74-spec-màn-hình-quản-trị) | 08-03 17:33 | **08-19 10:43** | 🟡 回答中 |
 | **No. 14** 過去データの必要遡及期間 → [§7.4⑦](#74-spec-màn-hình-quản-trị) | 08-13 12:29 | **08-19 18:02** | 🟡 回答中 |
 | **No. 24** 見守り実装要否 ＋ Xzillaへのアプリログ送信 → [§4.4③](#44-bốn-logic-nghiệp-vụ-đặc-thù) | 08-17 13:24 | **08-19 18:06** | 🟡 回答中 |
+| **No. 25** エコ暖房ポイントの実施範囲 ＋ DR終了方式 → [B.2](#b2-điểm-thưởng-và-tư-vấn-tiết-kiệm) · [Phụ lục C #5](#phụ-lục-c--danh-mục-tbd-đang-chặn-việc) | 08-17 13:24 | **08-19 18:07** | 🟡 回答中 |
 | **No. 19** アドバイス19種→7種の統廃合 → [§4.4②](#44-bốn-logic-nghiệp-vụ-đặc-thù) | 08-13 17:22 | **08-19 18:02** | 🔶 確認中 |
 | **No. 12** 2027年劣後機能 → [§6.4](#64-danh-sách-bị-lùi-sang-2027) | 08-12 17:41 | **08-12 17:46** | 🔶 確認中 |
 
@@ -4281,7 +4282,7 @@ Năm mâu thuẫn tìm được khi đối chiếu chéo (B.5 thêm 2026-08-18, 
 | # | Mâu thuẫn | Mức độ | Cần hỏi ai |
 |---|---|---|---|
 | B.1 | Huy hiệu / xếp hạng thuộc năm nào | 🟠 Vừa — mui đã trả lời **ngoài scope 2026**, nhưng 北ガス chưa xác nhận | 北ガス *(QA phiếu No. 5 — mui trả lời, **完了** 08-13; kiểm 08-20)* |
-| B.2 | Điểm thưởng và tư vấn tiết kiệm thuộc năm nào | 🔴 Cao — ~2 người-tháng | 北ガス *(QA câu 2)* |
+| B.2 | Điểm thưởng và tư vấn tiết kiệm thuộc năm nào | 🟠 Vừa — cột **tư vấn tiết kiệm** đã có dữ kiện (エコ暖房ポイント = 対応範囲内); cột **điểm thưởng** vẫn 🔴, ~2 người-tháng | 北ガス *(QA câu 2 · phiếu No. 25)* |
 | B.3 | Thông báo trông nom có làm không | ✅ **ĐÃ ĐÓNG 08-19 — kết luận: PHẢI LÀM** *(giữ mục vì phiếu còn `回答中` và `CLD-05` trên giấy chưa cập nhật)* | — *(QA phiếu No. 24)* |
 | B.4 | Ba thang trạng thái song song (file md requirement ↔ index đối khách ↔ index spec app) | 🟡 Thấp — chỉ cần đọc đúng thang | Không phải mâu thuẫn, chỉ cần biết |
 | **B.6** | **Số loại tư vấn tiết kiệm: code 19 ↔ tài liệu quản lý ~15** *(mới 2026-08-20)* | 🟠 Vừa — lệch 4 loại, ai theo con số 15 sẽ **bỏ sót 4 loại** | 北ガス *(QA phiếu No. 19 — `確認中`, chưa có trả lời)* |
@@ -4344,6 +4345,22 @@ Bốn mâu thuẫn trước đều là *tài liệu này nói khác tài liệu 
 **Hệ quả**: nếu điểm thưởng thực sự bắt buộc trong 2026, khối lượng phía server tăng thêm **~2 người-tháng** so với bảng hiện tại (điểm 1.0 + liên kết PointInfinity 1.0).
 
 → Đã đưa vào `qa_kitagas.md` **câu 2**.
+
+### 🟡 Có thêm một dữ kiện, nhưng chỉ cho MỘT phần
+
+🔍 Nguồn: Notion — QAデータベース dự án, phiếu **No. 25** 「エコ暖房ポイントの実施範囲、およびDR終了方式の確定について」
+→ 質問者 Bui Trong Dat (SYP), 起票 **2026-08-17 13:24** · cập nhật **2026-08-19 18:07** · **回答中**, ô `回答者` trống
+→ nguyên văn (回答内容), câu 1: 「**１．対応範囲内**」 (*nằm trong phạm vi phải làm*)
+
+⚠️ **Đọc đúng phạm vi của câu trả lời này**: nó nói về **エコ暖房ポイント** — cơ chế cấp điểm riêng cho việc sưởi tiết kiệm *(hệ cũ: cấp 250 điểm mỗi tháng cho hộ có nhiệt độ cài đặt trung bình tháng ≤ 22℃)*. Trong tài liệu quản lý, cơ chế này đi kèm nhóm **tư vấn tiết kiệm**, không đi kèm nhóm điểm thưởng chung: CLD-06 viết 「7種**＋エコ暖房ポイント**」 — xem [§4.4②](#44-bốn-logic-nghiệp-vụ-đặc-thù).
+
+⇒ Vậy câu trả lời này **củng cố cột "Tư vấn tiết kiệm" của bảng trên** (nghiêng về phía 必須 của `22_decisions`, tức bảng chức năng mới là cái lỗi thời). Nhưng nó **KHÔNG trả lời cột "Điểm thưởng"** — tức chức năng điểm nói chung (`A03`) vẫn chưa rõ.
+
+🔸 **Một chỗ cần làm rõ — CHƯA kiểm chứng**: bảng 劣後 mà SYP gửi mui *(phiếu No. 12, xem [§6.4](#64-danh-sách-bị-lùi-sang-2027))* có dòng **`A3 ポイント` = 全部 劣後**, tức toàn bộ chức năng điểm lùi sang 2027. Đặt cạnh câu trả lời 「エコ暖房ポイント＝対応範囲内」 thì **nhìn như lệch nhau**.
+
+Cách đọc khả dĩ nhất *(giả thuyết của tài liệu này, chưa được ai xác nhận)*: **hai thứ này là hai thứ khác nhau** — `A3 ポイント` là chức năng điểm tổng quát trên app, còn **エコ暖房ポイント** là một khoản thưởng thuộc mạch tư vấn tiết kiệm (`C05`). Nếu đúng thì không lệch. Nhưng vì phiếu No. 12 **chưa được trả lời**, chỗ này chưa đóng được.
+
+⚠️ **Nếu bạn phải giải thích cho người khác, đừng nói gộp "điểm thưởng đã trong phạm vi"** — hãy nói rõ *"エコ暖房ポイント thì trong phạm vi; còn chức năng điểm nói chung (`A3`) thì SYP đang hiểu là lùi 2027 và chưa được xác nhận"*.
 
 ## B.3 Thông báo trông nom — có làm hay không
 
@@ -4426,7 +4443,7 @@ Những chỗ **chưa quyết mà đang cản trở công việc**, xếp theo m
 | 2 | **「無効」 chặn những gì** | Hành vi ở **cả ba tầng**: gateway ngừng đến đâu, server chặn API nào, app hiển thị gì | `4_spec/admin/C_egw_management.md` dòng 38 | 北ガス |
 | 3 | **Spec chi tiết logic sưởi** (2 mạch, điều khiển phức hợp) | `GW-01` — firmware không viết được, **lan sang cả phần đám mây** | `20_open_issues.md` dòng 94–97 | 北ガス |
 | 4 | **Gán cảm biến ↔ thiết bị ở nhà nhiều mạch** | Giao diện onboarding + cấu trúc dữ liệu + logic điều khiển | `11_business_process/readme.md` dòng 107 · `minutes/day1` dòng 213–215 | 北ガス |
-| 5 | **Phương án kết thúc DR** | ⚠️ Quyết định **kiến trúc firmware 2026** (gateway có lưu trạng thái không) — dù DR thuộc 2027 | `11_business_process/readme.md` dòng 839 | kihara + 北ガス |
+| 5 | **Phương án kết thúc DR** — ⚠️ **đã hỏi, câu trả lời là 「後回し」 (để sau)** | ⚠️ Quyết định **kiến trúc firmware 2026** (gateway có lưu trạng thái không) — dù DR thuộc 2027. **Việc "để sau" KHÔNG làm mất phụ thuộc này**, xem khối ⚠️ dưới bảng | `11_business_process/readme.md` dòng 839 · QA phiếu **No. 25** (`回答中`) | **Nội bộ mui/SYP phải tự quyết tư thế firmware** — không còn chờ được 北ガス |
 | 6 | **Còn phải suy luận tách gas không** | Toàn bộ biểu đồ gas + report sưởi | `old_eminel/01_overview.md` dòng 59 · `IF-23` TBD | 北ガス |
 | 7 | **Nguồn dữ liệu gom nhóm** | Batch tổng hợp cho xếp hạng và so sánh | `00_integrated_requirements_v1.2.md` dòng 417 · `4_spec/admin/B_user_management.md` dòng 37 | oi / 北ガス |
 | 8 | **Gom 19 loại tư vấn còn 7** *(⚠️ tài liệu quản lý ghi 「約15種」 — code có 19, xem [B.6](#b6-số-loại-tư-vấn-tiết-kiệm-code-19-tài-liệu-quản-lý-15))* — ⏳ **đã hỏi 08-13, chưa có trả lời** | Requirement C5 + màn hình quản trị G. Cả **3 câu** của phiếu đều là thứ **không tự suy ra được**: danh sách 7 loại mới ・ loại nào bỏ/gộp vào đâu + tiêu chí gộp ・ có giữ ngưỡng gom nhóm 10 hộ không | `20_open_issues.md` dòng 176 (CLD-06) · QA phiếu **No. 19** (`確認中`, ô trả lời trống) — chi tiết: [§4.4②](#44-bốn-logic-nghiệp-vụ-đặc-thù) | 北ガス *(qua mui)* — **thúc**, phiếu nằm im từ 08-13 |
@@ -4447,6 +4464,29 @@ Những chỗ **chưa quyết mà đang cản trở công việc**, xếp theo m
 | # | Kiểu bị chặn | Việc phải làm |
 |---|---|---|
 | 13 | **Đã hỏi, đang chờ** — phiếu No. 12 lập 2026-08-12, trạng thái `確認中`, ô trả lời **trống**. Bản thân câu hỏi **không có vấn đề gì**: đã có bảng 12 dòng + câu 「内容に相違がないかご確認をお願いいたします」, mui chỉ cần đáp đúng/sai | **Thúc** — không phải soạn lại câu hỏi |
+| 5 | **Đã hỏi, và câu trả lời là "để sau"** — phiếu No. 25 đáp 「後回し」 cho phương án kết thúc DR | ⚠️ Kiểu này **nguy hơn "chưa trả lời"**: nó đóng cửa việc chờ mà **không gỡ được phụ thuộc kỹ thuật**. Xem khối ⚠️ ngay dưới |
+
+⚠️ **Mục #5 — "để sau" không có nghĩa là hết việc.** Đây là chỗ **câu trả lời và lập luận của tài liệu này lệch nhau**, nên phải nói rõ:
+
+**Vì sao mục này từng được xếp là việc của năm 2026** dù bản thân DR thuộc 2027: tài liệu nghiệp vụ nêu hai phương án kết thúc DR, và mỗi phương án đòi một **năng lực khác nhau ở firmware**:
+
+| Phương án | Cách kết thúc | Điểm lo được ghi trong tài liệu |
+|---|---|---|
+| **A** — server ra lệnh | Server gửi lệnh kết thúc vào đúng giờ | **Mất mạng thì không gửi được lệnh kết thúc** |
+| **B** — gateway tự kết thúc | Lúc bắt đầu gửi kèm luôn giờ kết thúc, gateway tự dừng | Gateway **phải lưu trạng thái** — mà tài liệu ghi rõ 「GW側で保存はしたくない」 (*không muốn lưu ở phía GW*) |
+
+🔍 Nguồn: `eminel_gw_project/docs/eminel/1_product/11_business_process/readme.md` dòng 839
+→ nguyên văn: 「※【懸念点】CS側から指令＝ネットワーク障害があった場合に終了指令を送信できない／GW側から指令＝再起動をした場合に終了時刻を保存（GW側で保存はしたくない…）」
+
+⇒ **Chọn A hay B quyết định firmware 2026 có phải xây năng lực lưu trạng thái hay không.** Câu trả lời 「後回し」 nghĩa là **北ガス chưa chọn** — nhưng firmware thì **vẫn phải viết trong 2026**. Nên việc cần làm **đổi chủ thể, không mất đi**:
+
+| Trước | Sau khi có câu trả lời 「後回し」 |
+|---|---|
+| Chờ 北ガス chọn A hay B | **Nội bộ mui/SYP tự quyết tư thế firmware**: xây sẵn năng lực lưu trạng thái (để sau chọn B vẫn được), hay không xây (khoá vào phương án A) |
+
+🔸 **Chưa kiểm chứng — hai cách đọc, chưa biết cách nào đúng**: ① 北ガス/mui đánh giá firmware **thực ra không cần biết ngay**, tức lập luận "chặn 2026" của tài liệu này quá thận trọng; ② câu 「後回し」 được đưa ra **mà chưa để ý tới phụ thuộc firmware**. Nếu là ② thì đây là **rủi ro cần nêu lại**, không phải việc đã xong.
+
+⇒ **Việc cụ thể**: chốt nội bộ với **kihara** (phụ trách gateway/firmware) xem tư thế nào, và nếu là cách đọc ② thì nêu lại phụ thuộc này cho mui trước khi tuần implement bắt đầu.
 | 14 | **Đã hỏi, đã đóng, nhưng câu trả lời không chứa thông tin cần** | Mở **phiếu QA mới** — chờ phiếu cũ là vô ích |
 | 15 | **Người phải trả lời là SYP**, và phiếu đã bị đóng mất kênh | Nêu lại bằng phiếu mới hoặc khi trình thiết kế |
 

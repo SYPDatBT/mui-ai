@@ -98,6 +98,13 @@
   **mui Lab** = 7-1 E-GW機能（ファームウェア） ・ 7-2 GW管理クラウド機能 │ **SYP** = 7-3 EMINEL-smartサーバー機能 ・ 7-4 管理画面機能 ・ **モバイルアプリ**.
 - ⚠️ **GW管理クラウド là của mui Lab, KHÔNG phải SYP** — chỗ dễ hiểu sai nhất, vì v1.2 §1-2 gộp nó chung một hàng với EMINEL-smartサーバー ("(GW管理クラウド含む)"). Phải tách: **対象範囲** (dự án có làm gì) ≠ **担当** (ai làm).
 - **Guide vá 6 chỗ, `+93/−13` dòng** (0 liên kết hỏng ・ 70 fence chẵn ・ bảng khớp cột): §1.6 tách bảng ①対象範囲 / **②担当 (mới)** + đóng đoạn "chưa chốt" ・ **§6.1 bảng 4 nhóm mã thêm cột 「7-x」+「担当」** (F-GW/F-MC = mui, F-ES/F-AD = SYP; app dùng mã **F-AP**, ngoài 7-1〜7-4 nhưng vẫn SYP làm) ・ §9.4 thêm khối ✅ chốt + hạ nhãn 🔸 (đánh giá 「関与が薄そう」 camp 6/25 nay chỉ còn giá trị lịch sử) ・ §1.3 + Phụ lục E.2.
+- ⚠️ **[08-20 lượt 15] Phiếu QA No. 25 「エコ暖房ポイントの実施範囲、およびDR終了方式の確定について」 — `回答中`, 回答内容 「１．対応範囲内 ２．後回し」.** 質問者 Bui Trong Dat, 起票 08-17 13:24 (**cùng lúc với No. 24**), cập nhật 08-19 18:07, 回答者 trống.
+  - 🔴 **CÂU 2 「後回し」 LÀ LOẠI CÂU TRẢ LỜI NGUY HƠN "CHƯA TRẢ LỜI"** — nó **đóng cửa việc chờ mà không gỡ được phụ thuộc kỹ thuật**. Phương án kết thúc DR (Phụ lục C **#5**) quyết định **firmware 2026 có phải xây năng lực lưu trạng thái hay không**: phương án A (server ra lệnh) lo **mất mạng không gửi được lệnh kết thúc**; phương án B (GW tự kết thúc) đòi **GW lưu trạng thái** — mà tài liệu ghi rõ 「GW側で保存はしたくない」 (`11_business_process/readme.md:839`, đã kiểm 08-20).
+    → **Việc ĐỔI CHỦ THỂ, không mất đi**: từ *"chờ 北ガス chọn A/B"* thành **"nội bộ mui/SYP tự quyết tư thế firmware"** — xây sẵn năng lực lưu trạng thái (giữ đường mở cho B) hay không xây (khoá vào A). **Chốt với kihara**, đây là việc số 7 của hàng đợi, nay càng cấp.
+    → 🔸 **Hai cách đọc, CHƯA biết cách nào đúng**: ① firmware thực ra không cần biết ngay ⇒ lập luận "chặn 2026" của guide quá thận trọng ② 「後回し」 được đưa ra **mà chưa để ý phụ thuộc firmware** ⇒ **rủi ro phải nêu lại trước tuần implement**.
+  - 🟡 **CÂU 1 「対応範囲内」 chỉ đóng MỘT NỬA Phụ lục B.2.** エコ暖房ポイント = cơ chế cấp điểm riêng cho sưởi tiết kiệm (hệ cũ: **250 điểm/tháng** cho hộ có nhiệt độ cài đặt TB tháng **≤22℃**), trong tài liệu quản lý nó đi kèm nhóm **tư vấn tiết kiệm** (CLD-06: 「7種**＋エコ暖房ポイント**」), **không** đi kèm nhóm điểm thưởng chung. ⇒ củng cố cột **tư vấn tiết kiệm** của B.2 (nghiêng về 必須 của `22_decisions`, tức bảng chức năng mới là cái lỗi thời), **KHÔNG** trả lời cột **điểm thưởng** (`A03`).
+  - 🔸 **CHỖ CẦN LÀM RÕ (chưa kiểm chứng)**: bảng 劣後 của phiếu No. 12 có dòng **`A3 ポイント` = 全部 劣後**, đặt cạnh 「エコ暖房ポイント＝対応範囲内」 thì **nhìn như lệch**. Giả thuyết: **hai thứ khác nhau** — `A3` là chức năng điểm tổng quát trên app, エコ暖房ポイント là khoản thưởng thuộc mạch tư vấn (`C05`). Chưa ai xác nhận, và phiếu No. 12 chưa được trả lời nên chưa đóng được. **Khi giải thích cho người khác: đừng nói gộp "điểm thưởng đã trong phạm vi".**
+  - → guide: **Phụ lục B.2 thêm mục 🟡** + hạ 🔴→🟠 ở bảng tóm tắt ・ **Phụ lục C #5 viết lại** + **khối ⚠️ MỚI dưới bảng** (bảng 2 phương án A/B + nguyên văn dòng 839 + bảng "trước/sau khi có 後回し" + 2 cách đọc) ・ §0.3 (14→**15 phiếu**) ・ §9.4 bảng nhịp thêm No. 25.
 - ⭐ **[08-20 lượt 14] Phiếu QA No. 24 「見守り通知の実装要否、およびXzillaへのアプリログ送信の継続要否について」 — `回答中`, ĐÁP ĐỦ CẢ 2 CÂU, dứt khoát.** 質問者 Bui Trong Dat, 起票 08-17 13:24, cập nhật 08-19 18:06, 回答者 trống. 回答内容: 「**１．実装する必要 ２．継続・利用しません**」.
   - ✅ **CÂU 1 ĐÓNG MỘT MỤC 🔴 CAO**: 見守り通知 = **PHẢI LÀM**. Đóng cả **Phụ lục B.3** (mâu thuẫn 🔴 Cao) lẫn **CLD-05** (chênh **0–1 người-tháng**). Quan trọng hơn con số: **logic phán đoán trông nom nằm ở GATEWAY** ⇒ nếu câu "không làm" đến muộn thì firmware đã viết sẽ thành công bỏ. Nay hết rủi ro đó. Phần "Nghi ngờ" cũ của B.3 (*bảng chức năng + requirement giả định "sẽ làm"*) **được xác nhận là đúng**.
   - ⛔ **CÂU 2 — QUYẾT ĐỊNH LOẠI BỎ**: **BỎ chiều gửi log app lên Xzilla** (hệ cũ chạy bằng `PutLogFileCommand`, cron 00:00). ⇒ **không port**, không dựng đường SFTP xuất log, **trừ hạng mục này khi đếm số batch phải làm**. Đây là chiều **NGƯỢC** với mọi chỗ khác trong guide (mọi chỗ khác là **nhận** từ Xzilla) — guide trước đó **không có một dòng nào** về chiều này.
@@ -259,8 +266,12 @@ và viết lại; CLAUDE.md mục SOURCES đã cập nhật 4 repo git + 1 snaps
 6b. **Mức độ độc lập của server E-GW vẫn CHƯA có ai nói** (chung library/source hay không). Phiếu No. 2 đã đóng mà không
    nói ⇒ **chờ tiếp là chờ vô ích**, muốn biết phải mở phiếu QA mới. Lưu ý chữ 「基本的には」 (*về cơ bản là*) trong nguyên
    văn là chữ nhượng bộ — đóng phiếu không xoá nó, **không được đọc thành "độc lập tuyệt đối"** (⛔#8).
-7. Chốt nội bộ với **kihara** về Q5 (GW giữ trạng thái DR — báo cáo batch #4 cũng treo vào đây) → gửi `qa_kitagas.md`
-   qua PM mui (quyết kèm Dự phòng 3/4 không).
+7. 🔴 **NAY CẤP HƠN (phát hiện 08-20)** — chốt nội bộ với **kihara** về Q5 (GW giữ trạng thái DR — báo cáo batch #4 cũng treo
+   vào đây) → gửi `qa_kitagas.md` qua PM mui (quyết kèm Dự phòng 3/4 không).
+   **Lý do cấp hơn**: phiếu QA **No. 25** đáp 「**後回し**」 cho phương án kết thúc DR ⇒ **北ガス sẽ không chọn A/B lúc này**,
+   nhưng firmware **vẫn phải viết trong 2026** và hai phương án đòi hai năng lực khác nhau (B đòi GW lưu trạng thái, mà tài
+   liệu ghi 「GW側で保存はしたくない」). ⇒ **mui/SYP phải tự quyết tư thế firmware**: xây sẵn năng lực lưu trạng thái (giữ
+   đường mở cho B) hay không xây (khoá vào A). Chi tiết + 2 cách đọc: guide Phụ lục C #5, khối ⚠️ dưới bảng.
 8. **Theo dõi QAデータベース — trạng thái thật sau đợt rà 08-20** (thay hẳn ghi chú cũ "5 trang 回答中"):
    - ✅ **8 phiếu 完了, đã vào tài liệu**: No. 1 ・ 2 ・ 3 ・ 4 ・ 5 ・ 7 ・ 9 ・ 10.
    - 🟡 **No. 6** 「エラー種別（重篤／軽微）判定条件」 — `回答中`, comment masao 08-19: **「結構後になる」**, mui chưa liệt kê được danh mục lỗi. Nội dung đã vào guide §7.4③ + Phụ lục C #1. Theo dõi tiếp.
