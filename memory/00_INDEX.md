@@ -98,6 +98,10 @@
   **mui Lab** = 7-1 E-GW機能（ファームウェア） ・ 7-2 GW管理クラウド機能 │ **SYP** = 7-3 EMINEL-smartサーバー機能 ・ 7-4 管理画面機能 ・ **モバイルアプリ**.
 - ⚠️ **GW管理クラウド là của mui Lab, KHÔNG phải SYP** — chỗ dễ hiểu sai nhất, vì v1.2 §1-2 gộp nó chung một hàng với EMINEL-smartサーバー ("(GW管理クラウド含む)"). Phải tách: **対象範囲** (dự án có làm gì) ≠ **担当** (ai làm).
 - **Guide vá 6 chỗ, `+93/−13` dòng** (0 liên kết hỏng ・ 70 fence chẵn ・ bảng khớp cột): §1.6 tách bảng ①対象範囲 / **②担当 (mới)** + đóng đoạn "chưa chốt" ・ **§6.1 bảng 4 nhóm mã thêm cột 「7-x」+「担当」** (F-GW/F-MC = mui, F-ES/F-AD = SYP; app dùng mã **F-AP**, ngoài 7-1〜7-4 nhưng vẫn SYP làm) ・ §9.4 thêm khối ✅ chốt + hạ nhãn 🔸 (đánh giá 「関与が薄そう」 camp 6/25 nay chỉ còn giá trị lịch sử) ・ §1.3 + Phụ lục E.2.
+- 🟡 **[08-20 lượt 12] Phiếu QA No. 14 「過去データダウンロードの必要遡及期間についてご確認」 — `回答中`, 回答内容 「24か月です」.** 質問者 Bui Trong Dat, 起票 08-13 12:29, cập nhật 08-19 18:02 (🔸 suy từ nhãn "Wednesday"), **回答者 trống**. **Guide trước đó gần như KHÔNG có gì** về chủ đề này (chỉ 1 chỗ nhắc `データ保持期間` trong danh sách phi chức năng SVC-03).
+  - ⭐ **Nội dung kiến trúc đáng nhớ nhất**: hệ **cũ** làm sẵn ZIP định kỳ đẩy ra server và **không có quy trình xoá ZIP** ⇒ thực tế truy ngược được **nhiều năm**, dù DB gốc xoá rất sớm (機器状態情報 **8 ngày** ・ 1時間値 **14 ngày** ・ 1日値 + 1日値平均 **2 tháng**). Hệ **mới** (`F-AD-09`) **sinh file từ DB lúc bấm**, không làm sẵn ⇒ **thời hạn lưu của DB thành TRẦN CỨNG**. Muốn xa hơn thì phải **thiết kế thêm cơ chế archive riêng** ⇒ đây là **tiền đề chốt spec**, không phải tham số chỉnh sau.
+  - ⚠️ **Đừng đọc 「24か月」 là đã xong**: ① trạng thái mới `回答中` ② con số 24 tháng **vốn do SYP tự đề xuất** kèm nhãn T.B.C — câu trả lời là **xác nhận giá trị tạm**, không phải số tính ra từ nghiệp vụ ③ **phiếu hỏi 3 câu, chỉ câu 1 được đáp**.
+  - → guide **§7.4⑦ (mục MỚI)** + **Phụ lục C #11b (hàng MỚI)** + §0.3 (11→**12 phiếu**) + §9.4 bảng nhịp thêm hàng No. 14 + sửa nhóm "ngoài đợt" thành 3 phiếu.
 - 🟡 **[08-20 lượt 11] Phiếu QA No. 8 「GW-IDと顧客・契約情報の連携方法について」 — `回答中`, comment masao 08-19, NỘI DUNG NGHIỆP VỤ MỚI.** 起票 08-05 16:03; ô `回答内容` chỉ ghi 「**コメントに記載**」 (ca mạnh nhất của bẫy ⑤ — chính ô trả lời trỏ sang Comments); **回答者 trống**.
   - ✅ **CHỐT cách gắn GW với khách**: **`GW-ID` ↔ `TagTag ID`**, gắn **đúng lúc pairing + đăng ký GW** từ app đã đăng nhập TagTag, do **EMINEL-smartサーバー** giữ và v1.2 L124 gọi thẳng là **マスター** (= việc của SYP).
   - ⛔ **QUYẾT ĐỊNH LOẠI BỎ**: **KHÔNG dùng `EMS-SP番号` + mật khẩu** để xác thực/gắn kết. Đây là cách của **hệ cũ** ⇒ thiết kế onboarding **không được** mang bước đó sang. Khớp chủ trương camp 6/25 「レガシーのやり方をそのまま写さず」. Guide: **Phụ lục A** entry `EMS-SP番号` đã thêm ⛔.
@@ -254,8 +258,12 @@ và viết lại; CLAUDE.md mục SOURCES đã cập nhật 4 repo git + 1 snaps
    - ⚠️ Khi lọc: **`完了` cũng là "đã trả lời"** — grep riêng `回答済` sẽ sót. Và **phải đọc cả `Comments`** (bẫy ⑤, Phụ lục E.2).
 9. Hỏi mui xác nhận **đích của luồng export SFTP `/EST`** trong backend e-smart (≒「EMINELデータの共有」 F-ES-10?) — xem báo cáo batch §6.
 10. Khi **IF-01/CLD-07** (định nghĩa 入出力 Xzilla) có spec → rà lại nhóm Xzilla của báo cáo batch (§4, gồm cả
-   chiều xuất); khi review **spec [I]** → nêu 保持期間/loại dữ liệu download (**chưa có trong bảng QA — cân nhắc
-   thêm câu hỏi**); danh sách việc-cần-xác-nhận đầy đủ: bảng §6 của báo cáo batch (8 mục).
+   chiều xuất); danh sách việc-cần-xác-nhận đầy đủ: bảng §6 của báo cáo batch (8 mục).
+   ✅ **[08-20] Phần 保持期間 của spec [I] KHÔNG CÒN là "chưa có trong bảng QA"** — ghi chú cũ đã lạc hậu. Đã hỏi bằng
+   **phiếu No. 14** 「過去データダウンロードの必要遡及期間についてご確認」 (起票 08-13 12:29) và **có trả lời: 「24か月です」**
+   (`回答中`, cập nhật 08-19 18:02, 回答者 trống). ⚠️ Nhưng **phiếu hỏi 3 câu, chỉ câu 1 được đáp** — còn: ② có quy định
+   nội bộ đòi lưu **quá 24 tháng** không (kiểm toán / bảo hành thiết bị) ③ **ZIP quá khứ đã tích trên server cũ** có
+   phải di trú sang hệ mới, hay giữ tiếp môi trường cũ. → Đã vào guide **§7.4⑦** + **Phụ lục C #11b**.
 11. **B06 マイホーム発電**: phần cập nhật guide §7.3 ✅ đã làm ở v1.2 (đã có mục B6). Còn lại: rà các mục guide trích **B04/B05/C01–C03** theo `1100487` (B04/B06 vừa bị sửa tiếp ngày 12/08); cân nhắc bổ sung guide 0.7 (`legacy_eminel_docs` đã có local).
 12. Bối cảnh: hạn **tháng 9/2026 fix design+spec** vẫn treo trên 23/23 section chưa chốt + 10/10 spec admin DRAFT;
    3 vấn đề chặn SYP = CLD-01 / CLD-02 / GW-01.

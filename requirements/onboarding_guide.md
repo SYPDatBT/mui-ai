@@ -201,7 +201,7 @@ Mỗi khẳng định trong tài liệu này đều kèm nguồn theo định d�
 | Loại nguồn | Mốc | Nghĩa |
 |---|---|---|
 | Repo (`docs/`, code) | commit `1100487`, kiểm **2026-08-18** | Số dòng và nội dung đúng tại mốc này |
-| QAデータベース Notion | **kiểm 2026-08-20** — 11 phiếu: **No. 1 · 2 · 3 · 4 · 5 · 7 · 9 · 10** đều ✅ **完了**; **No. 6 và No. 8** còn 🟡 **回答中** (đều có comment mới **08-19**); **No. 12** còn 🔶 **確認中, chưa có câu trả lời**. Phiếu ngoài danh sách này vẫn là **lần đọc 2026-08-04** | Notion là dữ liệu sống. Trạng thái `回答中` còn sót ở đâu trong tài liệu này thì ứng với **ngày 08-04** và **rất có thể đã lạc hậu** — cả 6 phiếu đã kiểm đều được mui đóng trong **cùng 2 phút** ngày 08-13. ⚠️ **Phiếu 完了 không có nghĩa là hết dè dặt**: đóng phiếu không thêm chữ nào vào câu trả lời, nên các chữ nhượng bộ (「基本的には」「今の所」) và chuyện "mui trả lời ≠ 北ガス xác nhận" vẫn còn nguyên. **Phải mở trang gốc trước khi trích lại**; cách đọc property và 4 cái bẫy: [Phụ lục E.2](#e2-bước-2--đi-theo-thứ-tự) |
+| QAデータベース Notion | **kiểm 2026-08-20** — 12 phiếu: **No. 1 · 2 · 3 · 4 · 5 · 7 · 9 · 10** đều ✅ **完了**; **No. 6 · 8 · 14** còn 🟡 **回答中** (cả ba đều có hoạt động mới ngày **08-19**); **No. 12** còn 🔶 **確認中, chưa có câu trả lời**. Phiếu ngoài danh sách này vẫn là **lần đọc 2026-08-04** | Notion là dữ liệu sống. Trạng thái `回答中` còn sót ở đâu trong tài liệu này thì ứng với **ngày 08-04** và **rất có thể đã lạc hậu** — cả 6 phiếu đã kiểm đều được mui đóng trong **cùng 2 phút** ngày 08-13. ⚠️ **Phiếu 完了 không có nghĩa là hết dè dặt**: đóng phiếu không thêm chữ nào vào câu trả lời, nên các chữ nhượng bộ (「基本的には」「今の所」) và chuyện "mui trả lời ≠ 北ガス xác nhận" vẫn còn nguyên. **Phải mở trang gốc trước khi trích lại**; cách đọc property và 4 cái bẫy: [Phụ lục E.2](#e2-bước-2--đi-theo-thứ-tự) |
 
 ---
 
@@ -3144,6 +3144,49 @@ Tổng số hoạt động · số chạy bình thường · số đang lỗi ·
 
 Regular → Bronze → Silver → Gold → Platinum → Diamond.
 
+**⑦ 🟡 Tải dữ liệu quá khứ (`F-AD-09`) — hệ mới đổi cơ chế, nên "lưu bao lâu" thành câu chặn spec**
+
+Đây là ca cho thấy **một thay đổi kiến trúc nhỏ biến một tham số vận hành thành điểm chặn**. Phải hiểu cả hai cơ chế mới thấy vấn đề.
+
+| | Hệ **cũ** (現行EMINEL) | Hệ **mới** (E-GW, `F-AD-09`) |
+|---|---|---|
+| Cách tạo file tải về | **Làm sẵn trước**: định kỳ tuần/tháng đóng gói thành file ZIP đặt trên server | **Sinh tại lúc bấm**: người quản trị chọn khoảng thời gian, hệ sinh file từ DB ngay lúc đó |
+| Hạn truy ngược thực tế | **Nhiều năm** — vì ZIP đã đẩy ra ngoài **không có quy trình xoá**, dù DB gốc thì xoá rất sớm | **Đúng bằng thời hạn lưu của DB**, không hơn |
+
+Thời hạn lưu trong DB của hệ cũ **rất ngắn** — chính vì vậy mới cần cơ chế ZIP:
+
+| Loại dữ liệu quá khứ | Thời hạn lưu trong DB (hệ cũ) |
+|---|---|
+| 機器状態情報 (*trạng thái thiết bị*) | **8 ngày** |
+| 1時間値 (*giá trị theo giờ*) | **14 ngày** |
+| 1日値 (*giá trị theo ngày*) | **2 tháng** |
+| 1日値（平均値）(*giá trị ngày, dạng trung bình*) | **2 tháng** |
+
+⇒ **Vấn đề**: hệ mới bỏ cách làm sẵn ZIP, nên **thời hạn lưu của DB trở thành trần cứng** của việc truy ngược. Nếu nghiệp vụ cần truy xa hơn trần đó thì **phải thiết kế thêm một cơ chế lưu trữ dài hạn (archive) riêng** — tức đây không phải tham số chỉnh sau, mà là **tiền đề để chốt spec**.
+
+**Câu trả lời đã có: 24 tháng.**
+
+🔍 Nguồn: Notion — QAデータベース dự án, phiếu **No. 14** 「過去データダウンロードの必要遡及期間についてご確認」
+→ 質問者 Bui Trong Dat (SYP), 起票 **2026-08-13 12:29** · cập nhật gần nhất **2026-08-19 18:02** *(🔸 suy từ nhãn tương đối "Wednesday" — Thứ Tư duy nhất sau ngày lập phiếu; nên trỏ chuột xác nhận lại)*
+→ nguyên văn (回答内容): 「**24か月です**」 (*là 24 tháng*)
+→ trạng thái khi đọc (2026-08-20): **回答中** ・ ô `回答者` **để trống** ⇒ **không gán tên ai**
+
+⚠️ **Ba điều phải đọc kỹ, đừng coi là đã xong:**
+
+1. **Trạng thái mới là `回答中`, chưa `完了`** — theo thang trạng thái ở [Phụ lục E.2](#e2-bước-2--đi-theo-thứ-tự) thì mức này **chưa dùng làm căn cứ chắc**; câu trả lời còn có thể bị bổ sung.
+2. **Con số 24 tháng vốn do chính SYP đề xuất.** Bản spec đang tạm đặt 24 tháng kèm nhãn **T.B.D**, và câu hỏi là *"24 tháng có đủ không?"*. Nên 「24か月です」 là **xác nhận giá trị tạm**, không phải một con số mới được tính ra từ nghiệp vụ.
+3. **Phiếu hỏi 3 câu, chỉ câu 1 được trả lời.** Hai câu còn lại vẫn trống:
+
+| | Câu hỏi | Trạng thái |
+|---|---|---|
+| 1 | Thực tế cần truy ngược xa nhất bao lâu? 24 tháng có đủ? | ✅ 「24か月です」 |
+| 2 | Có quy định nội bộ / yêu cầu nghiệp vụ nào đòi lưu **quá 24 tháng** không (đối ứng kiểm toán, bảo hành thiết bị)? | ❌ **chưa trả lời** |
+| 3 | Các file ZIP quá khứ **đã tích trên server hiện hành** — sau khi chuyển hệ có còn cần tra không? Nếu cần thì **di trú sang hệ mới** hay **giữ tiếp ở môi trường cũ**? | ❌ **chưa trả lời** |
+
+💡 **Vì sao câu 3 đáng theo tới cùng**: hệ cũ đã tích ZIP nhiều năm mà không xoá. Nếu khách nói "vẫn cần tra" thì đó là **một khối dữ liệu lịch sử phải di trú hoặc phải duy trì môi trường cũ** — ảnh hưởng chi phí lưu trữ và kế hoạch chuyển đổi, không chỉ ảnh hưởng một màn hình.
+
+⇒ Ba thứ bị ảnh hưởng trực tiếp bởi mục này, đúng như phiếu nêu: **cấu hình tự động xoá của DB** ・ **chi phí lưu trữ** ・ **kế hoạch di trú**. Xem thêm [Phụ lục C #11](#phụ-lục-c--danh-mục-tbd-đang-chặn-việc) *(yêu cầu phi chức năng — 「データ保持期間」 là một mục trong đó)*.
+
 ---
 
 ## 7.5 機能仕様 app — tầng vừa mở
@@ -3690,14 +3733,15 @@ Bốn câu trả lời của mui mới hơn biên bản 6/25 phía trên. 質問
 | No. 9 設計書のファイル形式 → [§7.7](#77-設計書--định-dạng-file-của-bản-giao-nộp) | 08-10 17:06 | 08-13 **12:34** | ✅ 完了 |
 | **No. 8** GW-IDと顧客情報の連携 → [§5.2](#52-onboarding-từ-mở-hộp-đến-thấy-dữ-liệu) | 08-05 16:03 | **08-19 10:58** | 🟡 回答中 |
 | **No. 6** エラー種別判定条件 → [§7.4](#74-spec-màn-hình-quản-trị) | 08-03 17:33 | **08-19 10:43** | 🟡 回答中 |
-| **No. 12** 2027年劣後機能 | 08-12 17:41 | **08-12 17:46** | 🔶 確認中 |
+| **No. 14** 過去データの必要遡及期間 → [§7.4⑦](#74-spec-màn-hình-quản-trị) | 08-13 12:29 | **08-19 18:02** | 🟡 回答中 |
+| **No. 12** 2027年劣後機能 → [§6.4](#64-danh-sách-bị-lùi-sang-2027) | 08-12 17:41 | **08-12 17:46** | 🔶 確認中 |
 
 ⇒ **Ba kiểu ứng xử khác nhau, và mỗi kiểu đòi một hành động khác nhau:**
 
 | Kiểu | Phiếu | Việc phải làm |
 |---|---|---|
 | **Đóng cả loạt ngày 08-13** — 8 phiếu, gói trong 7 phút (12:27→12:34), sau khi để nguyên **10 ngày** | No. 1 · 2 · 3 · 4 · 5 · 7 · 9 · 10 | Xong. Với phiếu mới thì **chờ đợt dọn tiếp** là được |
-| **Ngoài đợt nhưng đang được xử lý thật** — cập nhật 08-19, có comment có nội dung | No. 6 · No. 8 | Theo dõi; **đọc Comments** vì câu trả lời nằm ở đó |
+| **Ngoài đợt nhưng đang được xử lý thật** — cả ba đều có hoạt động ngày **08-19** | No. 6 · No. 8 · No. 14 | Theo dõi. Với No. 6 và No. 8 thì **đọc Comments** vì câu trả lời nằm ở đó; No. 14 thì trả lời nằm ở ô `回答内容` nhưng **chỉ đáp 1 trong 3 câu** |
 | **Lập trước đợt 08-13 mà bị để lại** — không ai chạm từ 08-12 | No. 12 | **Phải thúc**, chờ là vô ích ([Phụ lục C #13](#phụ-lục-c--danh-mục-tbd-đang-chặn-việc)) |
 
 💡 **Bài học khi đọc tài liệu này về sau**: thấy một phiếu vừa đổi trạng thái thì **mở luôn các phiếu cùng chủ đề** — khả năng cao chúng cũng vừa được xử lý cùng lượt. Và nhớ hai điều: **`完了` cũng nghĩa là đã trả lời** (grep riêng `回答済` sẽ sót), **phải đọc cả `Comments`** — xem 5 cái bẫy ở [Phụ lục E.2](#e2-bước-2--đi-theo-thứ-tự).
@@ -4313,6 +4357,7 @@ Những chỗ **chưa quyết mà đang cản trở công việc**, xếp theo m
 | 9 | **Nấc thời gian của lịch sưởi** (`スケジュール刻み`) | Giao diện đặt lịch | `20_open_issues.md` dòng 176 *(bản 08-03 đã bỏ mục này khỏi 要確認事項 của B2)* | 北ガス |
 | 10 | **Nội dung màn hình thống kê F-AD-11** | Màn hình thống kê — hoàn toàn trống | `20_open_issues.md` dòng 176 | 北ガス |
 | 11 | **Yêu cầu phi chức năng** (số kết nối đồng thời, SLA, thời hạn lưu, di trú 30.000 khách) | Chọn kiến trúc server, cấu hình dự phòng | `20_open_issues.md` dòng 86–88 | 北ガス |
+| 11b | ↳ **Riêng 「thời hạn lưu」 đã có trả lời một phần: 24 tháng** *(còn `回答中`)* | Cấu hình tự động xoá của DB ・ chi phí lưu trữ ・ kế hoạch di trú. Chặn việc **chốt spec** `F-AD-09` tải dữ liệu | QA phiếu **No. 14** 「過去データダウンロードの必要遡及期間」 — chi tiết + 2 câu chưa trả lời: [§7.4⑦](#74-spec-màn-hình-quản-trị) | 北ガス *(qua mui)* — **còn 2 câu**: quy định lưu quá 24 tháng? ・ ZIP quá khứ có phải di trú? |
 | 12 | **Tài khoản dev cho TagTag / PI / Xzilla** | `CLD-02` — quyết định chiến lược branch | `20_open_issues.md` dòng 158 | 北ガス / Aqara |
 | 13 | **Danh sách chức năng lùi sang 2027 (劣後)** — đã hỏi, câu hỏi viết đúng chuẩn, nhưng **mui chưa trả lời một chữ** | Ước lượng công việc năm 2026: chức năng nào phải làm ngay, chức năng nào được lùi. Kèm **2 dòng chính SYP cũng chưa chắc**: `F-AD-02` mở rộng (一部) và `B4 家電操作` (要確認) | QAデータベース phiếu **No. 12** 「2027年劣後機能の確認」 — `確認中`, bảng 12 dòng: [§6.4](#64-danh-sách-bị-lùi-sang-2027) | **Thúc mui** *(không phải viết lại câu hỏi)* |
 | 14 | **Mức độ độc lập của server E-GW** — chung library/source hay không | Cách dựng server: dùng lại bao nhiêu từ E-Smart | QAデータベース phiếu No. 2 đã **完了** mà **không nói mức độ** ⇒ chờ tiếp là vô ích, phải mở phiếu mới | mui |
